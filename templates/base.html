@@ -1,8 +1,18 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    {% block styles %}
+
+    <link href="{% static 'assets/css/modern.css' %}" rel="stylesheet">
+
+
+    {% endblock %}
+
 </head>
 <body>
 
