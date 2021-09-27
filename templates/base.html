@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
+	<meta name="author" content="Bootlab">
 
-{% include 'head.html' %}
+	<title>Spark - Responsive Admin &amp; Dashboard Template</title>
+
+    {% block stylesheets %}
+
+	<!-- PICK ONE OF THE STYLES BELOW -->
+	<link href="{% static '/assets/css/modern.css' %}" rel="stylesheet">
+	<!-- <link href="css/classic.css" rel="stylesheet"> -->
+	<!-- <link href="css/dark.css" rel="stylesheet"> -->
+	<!-- <link href="css/light.css" rel="stylesheet"> -->
+
+	<!-- BEGIN SETTINGS -->
+	<!-- You can remove this after picking a style -->
+
+<!--	<script src="{% static 'assets/js/settings.js'%}"></script>-->
+	<!-- END SETTINGS -->
+    {% endblock %}
+
+</head>
 
 <body>
-    {% include 'header.html' %}
-
-
-</body>
-</html>
+    {% block body %}
+    {% endblock %}
