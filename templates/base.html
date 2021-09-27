@@ -2,19 +2,12 @@
 {% load static %}
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 
-    {% block styles %}
+{% include 'head.html' %}
 
-    <link href="{% static 'assets/css/modern.css' %}" rel="stylesheet">
-
-
-    {% endblock %}
-
-</head>
 <body>
+    {% include 'header.html' %}
+
 
 </body>
 </html>
