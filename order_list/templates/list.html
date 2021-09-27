@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -11,7 +12,7 @@
 	<title>Spark - Responsive Admin &amp; Dashboard Template</title>
 
 	<!-- PICK ONE OF THE STYLES BELOW -->
-	<!-- <link href="css/modern.css" rel="stylesheet"> -->
+	<link href="{% static 'assets/css/modern.css' %}" rel="stylesheet">
 	<!-- <link href="css/classic.css" rel="stylesheet"> -->
 	<!-- <link href="css/dark.css" rel="stylesheet"> -->
 	<!-- <link href="css/light.css" rel="stylesheet"> -->
@@ -23,7 +24,7 @@
 			opacity: 0;
 		}
 	</style>
-	<script src="js/settings.js"></script>
+	<script src="{% static 'assets/js/settings.js'%}"></script>
 	<!-- END SETTINGS -->
 </head>
 
