@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'bootstrap4',
+    'order_list',
+    'order_sheet',
+    'information',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +84,9 @@ DATABASES = {
         'NAME': 'meehong',
         'USER': 'root',
         'PASSWORD': '000000',
-        'HOST': '127.0.0.1',
+        'HOST': '172.30.1.37',
         'PORT': '3306',
-
-    }
+    },
 }
 
 
