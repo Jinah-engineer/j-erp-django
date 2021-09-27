@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class OrderManagementConfig(AppConfig):
+class OrderSheetConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'order_management'
+    name = 'order_sheet'
