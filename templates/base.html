@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -8,25 +8,27 @@
 	<meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
 	<meta name="author" content="Bootlab">
 
-	<title>Spark - Responsive Admin &amp; Dashboard Template</title>
+	<title>
+		{% block title %}
+		MEEHONG
+		{% endblock %}
+	</title>
 
+	<!-- CSS -->
     {% block stylesheets %}
 
-	<!-- PICK ONE OF THE STYLES BELOW -->
 	<link href="{% static '/assets/css/modern.css' %}" rel="stylesheet">
-	<!-- <link href="css/classic.css" rel="stylesheet"> -->
-	<!-- <link href="css/dark.css" rel="stylesheet"> -->
-	<!-- <link href="css/light.css" rel="stylesheet"> -->
+<!--	<link href="{% static '/assets/css/class.css' %}" rel="stylesheet">-->
+<!--	<link href="{% static '/assets/css/dark.css' %}" rel="stylesheet">-->
+<!--	<link href="{% static '/assets/css/light.css' %}" rel="stylesheet">-->
 
-	<!-- BEGIN SETTINGS -->
-	<!-- You can remove this after picking a style -->
-
-<!--	<script src="{% static 'assets/js/settings.js'%}"></script>-->
-	<!-- END SETTINGS -->
     {% endblock %}
+
 
 </head>
 
 <body>
     {% block body %}
     {% endblock %}
+
+

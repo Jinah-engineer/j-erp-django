@@ -1,12 +1,37 @@
-{% extends "base.html" %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block body %}
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
+	<meta name="author" content="Bootlab">
 
-{% include "navigation.html" %}
+	<title>Spark - Responsive Admin &amp; Dashboard Template</title>
+
+	<link href="css/modern.css" rel="stylesheet">
+
+</head>
+
+<body>
 	<div class="splash active">
 		<div class="splash-icon"></div>
 	</div>
+
+	<nav class="navbar navbar-expand navbar-dark absolute-top w-100 py-2">
+		<div class="container">
+			<a class="navbar-brand font-weight-bold" href="#">
+				<svg>
+					<use xlink:href="#ion-ios-pulse-strong"></use>
+				</svg>
+				Spark
+			</a>
+			<a class="btn btn-success btn-pill my-2 ml-2" href="https://themes.getbootstrap.com/product/spark-responsive-admin-template/" target="_blank">
+				Purchase Now
+			</a>
+		</div>
+	</nav>
 
 	<section class="pt-7 pb-5 landing-bg text-white overflow-hidden">
 		<div class="container py-4">
@@ -17,7 +42,7 @@
 							<div class="d-block my-4">
 								<div class="my-4">
 									<a href="https://spark-bs5.bootlab.io/" target="_blank">
-										<img src="{% static '/assets/img/brands/bootstrap-5.png' %}" alt="Bootstrap" width="150" class="align-middle mr-2" />
+										<img src="img/brands/bootstrap-5.png" alt="Bootstrap" width="150" class="align-middle mr-2" />
 									</a>
 								</div>
 
@@ -27,11 +52,11 @@
 									Each one is fully customizable, responsive and easy to use.</p>
 
 								<div class="my-4">
-									<img src="{% static '/assets/img/brands/bootstrap.svg' %}" alt="Bootstrap" width="40" class="align-middle mr-2" />
-									<img src="{% static '/assets/img/brands/sass.svg' %}" alt="Sass" width="40" class="align-middle mr-2" />
-									<img src="{% static '/assets/img/brands/webpack.svg' %}" %} alt="Webpack" width="40" class="align-middle mr-2" />
-									<img src="{% static '/assets/img/brands/npm.svg' %}" alt="NPM" width="40" class="align-middle mr-2" />
-									<img src="{% static '/assets/img/brands/jquery.svg' %}" alt="jQuery" width="80" class="align-middle" />
+									<img src="img/brands/bootstrap.svg" alt="Bootstrap" width="40" class="align-middle mr-2" />
+									<img src="img/brands/sass.svg" alt="Sass" width="40" class="align-middle mr-2" />
+									<img src="img/brands/webpack.svg" alt="Webpack" width="40" class="align-middle mr-2" />
+									<img src="img/brands/npm.svg" alt="NPM" width="40" class="align-middle mr-2" />
+									<img src="img/brands/jquery.svg" alt="jQuery" width="80" class="align-middle" />
 								</div>
 							</div>
 						</div>
@@ -61,7 +86,7 @@
 				<div class="col-md-6 col-lg-4 text-center">
 					<a class="mb-3 card overflow-hidden" href="dashboard-default.html?theme=modern" target="_blank">
 						<div class="px-4 pt-4">
-							<img src="{% static '/img/screenshots/modern.png" class="img-fluid card-img-hover landing-img" alt="Modern Bootstrap 4 Dashboard Theme" />
+							<img src="img/screenshots/modern.png" class="img-fluid card-img-hover landing-img" alt="Modern Bootstrap 4 Dashboard Theme" />
 						</div>
 					</a>
 					<h4>Modern Theme</h4>
@@ -69,7 +94,7 @@
 				<div class="col-md-6 col-lg-4 text-center">
 					<a class="mb-3 card overflow-hidden" href="dashboard-default.html?theme=light" target="_blank">
 						<div class="px-4 pt-4">
-							<img src="{% static '/assets/img/screenshots/light.png' %}" class="img-fluid card-img-hover landing-img" alt="Light Bootstrap 4 Dashboard Theme" />
+							<img src="img/screenshots/light.png" class="img-fluid card-img-hover landing-img" alt="Light Bootstrap 4 Dashboard Theme" />
 						</div>
 					</a>
 					<h4>Light Theme</h4>
@@ -77,7 +102,7 @@
 				<div class="col-md-6 col-lg-4 text-center">
 					<a class="mb-3 card overflow-hidden" href="dashboard-default.html?theme=dark" target="_blank">
 						<div class="px-4 pt-4">
-							<img src="{% static '/assets/img/screenshots/dark.png' %}" class="img-fluid card-img-hover landing-img" alt="Dark Bootstrap 4 Dashboard Theme" />
+							<img src="img/screenshots/dark.png" class="img-fluid card-img-hover landing-img" alt="Dark Bootstrap 4 Dashboard Theme" />
 						</div>
 					</a>
 					<h4>Dark Theme</h4>
@@ -85,7 +110,7 @@
 				<div class="col-md-6 col-lg-4 text-center">
 					<a class="mb-3 card overflow-hidden" href="dashboard-default.html" target="_blank">
 						<div class="px-4 pt-4">
-							<img src="{% static '/assets/img/screenshots/dashboard-default.png' %}" class="img-fluid card-img-hover landing-img"
+							<img src="img/screenshots/dashboard-default.png" class="img-fluid card-img-hover landing-img"
 								alt="Default Bootstrap 4 Dashboard Theme" />
 						</div>
 					</a>
@@ -94,7 +119,7 @@
 				<div class="col-md-6 col-lg-4 text-center">
 					<a class="mb-3 card overflow-hidden" href="dashboard-analytics.html" target="_blank">
 						<div class="px-4 pt-4">
-							<img src="{% static '/assets/img/screenshots/dashboard-analytics.png' %}" class="img-fluid card-img-hover landing-img"
+							<img src="img/screenshots/dashboard-analytics.png" class="img-fluid card-img-hover landing-img"
 								alt="Analytics Bootstrap 4 Dashboard Theme" />
 						</div>
 					</a>
@@ -103,7 +128,7 @@
 				<div class="col-md-6 col-lg-4 text-center">
 					<a class="mb-3 card overflow-hidden" href="dashboard-e-commerce.html" target="_blank">
 						<div class="px-4 pt-4">
-							<img src="{% static '/assets/img/screenshots/dashboard-e-commerce.png' %}" class="img-fluid card-img-hover landing-img"
+							<img src="img/screenshots/dashboard-e-commerce.png" class="img-fluid card-img-hover landing-img"
 								alt="E-Commerce Bootstrap 4 Dashboard Theme" />
 						</div>
 					</a>
@@ -127,7 +152,7 @@
 						<div class="card-body p-4">
 							<div class="d-flex align-items-center mb-3">
 								<div>
-									<img src="{% static '/assets/img/brands/b.svg' %}" width="48" height="48" alt="Bootstrap" />
+									<img src="img/brands/b.svg" width="48" height="48" alt="Bootstrap" />
 								</div>
 								<div class="pl-3">
 									<h5 class="mb-1 mt-2">Nikita</h5><small class="d-block text-muted h5 font-weight-normal">Bootstrap Themes</small>
@@ -149,7 +174,7 @@
 						<div class="card-body p-4">
 							<div class="d-flex align-items-center mb-3">
 								<div>
-									<img src="{% static '/assets/img/brands/b.svg' %}" width="48" height="48" alt="Bootstrap" />
+									<img src="img/brands/b.svg" width="48" height="48" alt="Bootstrap" />
 								</div>
 								<div class="pl-3">
 									<h5 class="mb-1 mt-2">Jason</h5><small class="d-block text-muted h5 font-weight-normal">Bootstrap Themes</small>
@@ -173,7 +198,7 @@
 						<div class="card-body p-4">
 							<div class="d-flex align-items-center mb-3">
 								<div>
-									<img src="{% static '/assets/img/brands/b.svg' %}" width="48" height="48" alt="Bootstrap" />
+									<img src="img/brands/b.svg" width="48" height="48" alt="Bootstrap" />
 								</div>
 								<div class="pl-3">
 									<h5 class="mb-1 mt-2">Alejandro</h5><small class="d-block text-muted h5 font-weight-normal">Bootstrap Themes</small>
@@ -195,7 +220,7 @@
 						<div class="card-body p-4">
 							<div class="d-flex align-items-center mb-3">
 								<div>
-									<img src="{% static '/assets/img/brands/b.svg' %}" width="48" height="48" alt="Bootstrap" />
+									<img src="img/brands/b.svg" width="48" height="48" alt="Bootstrap" />
 								</div>
 								<div class="pl-3">
 									<h5 class="mb-1 mt-2">Richard</h5><small class="d-block text-muted h5 font-weight-normal">Bootstrap Themes</small>
@@ -219,7 +244,7 @@
 						<div class="card-body p-4">
 							<div class="d-flex align-items-center mb-3">
 								<div>
-									<img src="{% static '/assets/img/brands/b.svg' %}" width="48" height="48" alt="Bootstrap" />
+									<img src="img/brands/b.svg" width="48" height="48" alt="Bootstrap" />
 								</div>
 								<div class="pl-3">
 									<h5 class="mb-1 mt-2">Jordi</h5><small class="d-block text-muted h5 font-weight-normal">Bootstrap Themes</small>
@@ -241,7 +266,7 @@
 						<div class="card-body p-4">
 							<div class="d-flex align-items-center mb-3">
 								<div>
-									<img src="{% static '/assets/img/brands/b.svg' %}" width="48" height="48" alt="Bootstrap" />
+									<img src="img/brands/b.svg" width="48" height="48" alt="Bootstrap" />
 								</div>
 								<div class="pl-3">
 									<h5 class="mb-1 mt-2">Martin</h5><small class="d-block text-muted h5 font-weight-normal">Bootstrap Themes</small>
@@ -289,7 +314,8 @@
 			</symbol>
 		</defs>
 	</svg>
+	<script src="js/app.js"></script>
 
-{% include "footer.html" %}
+</body>
 
-{% endblock %}
+</html>

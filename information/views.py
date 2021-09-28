@@ -5,5 +5,5 @@ from django.shortcuts import render
 import information
 
 
-def first_test(request):
-    return render(request, 'information.html')
+def home(request):
+    return render(request, 'home.html')
