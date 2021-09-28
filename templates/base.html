@@ -17,9 +17,9 @@
 	<!-- CSS -->
     {% block stylesheets %}
 
-	<link href="{% static '/assets/css/modern.css' %}" rel="stylesheet">
+<!--	<link href="{% static '/assets/css/modern.css' %}" rel="stylesheet">-->
 <!--	<link href="{% static '/assets/css/class.css' %}" rel="stylesheet">-->
-<!--	<link href="{% static '/assets/css/dark.css' %}" rel="stylesheet">-->
+	<link href="{% static '/assets/css/dark.css' %}" rel="stylesheet">
 <!--	<link href="{% static '/assets/css/light.css' %}" rel="stylesheet">-->
 
     {% endblock %}
@@ -28,7 +28,18 @@
 </head>
 
 <body>
+	<div class="splash">
+		<div class="splash-icon"></div>
+	</div>
+
+	<div class="wrapper">
     {% block body %}
     {% endblock %}
+	</div>
 
+	<!-- JS -->
+	{% include 'scripts.html' %}
 
+</body>
+
+</html>
