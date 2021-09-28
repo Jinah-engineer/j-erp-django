@@ -8,7 +8,6 @@ from order_list import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls')),
     path('accounts/', include('accounts.urls')),
     path('sheet/', include('order_sheet.urls')),
     path('list/', include('order_list.urls')),
