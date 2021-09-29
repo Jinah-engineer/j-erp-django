@@ -57,7 +57,7 @@
                                     {#                                    </div>#}
                                     <div class="row col-12 col-xl-6">
                                         <div class="form-group" style="margin: 1rem;">
-                                            <label class="form-label">날짜만 표시</label>
+                                            <label class="form-label">날짜 보기</label>
                                             <div class="input-group date" id="datetimepicker-date" data-target-input="nearest">
                                                 <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-date" />
                                                 <div class="input-group-append" data-target="#datetimepicker-date" data-toggle="datetimepicker">
@@ -65,34 +65,51 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group" style="margin: 1rem;">
-                                            <label class="form-label">전체 보기</label>
-                                            <div class="input-group date" id="datetimepicker-view-mode" data-target-input="nearest">
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-view-mode" />
-                                                <div class="input-group-append" data-target="#datetimepicker-view-mode" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {#                                        <div class="form-group" style="margin: 1rem;">#}
+                                        {#                                            <label class="form-label">전체 보기</label>#}
+                                        {#                                            <div class="input-group date" id="datetimepicker-view-mode" data-target-input="nearest">#}
+                                        {#                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-view-mode" />#}
+                                        {#                                                <div class="input-group-append" data-target="#datetimepicker-view-mode" data-toggle="datetimepicker">#}
+                                        {#                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>#}
+                                        {#                                                </div>#}
+                                        {#                                            </div>#}
+                                        {#                                        </div>#}
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <!-- *** 버튼 바 *** -->
-                <style>
-                    .card {
-                        margin: 0 auto; /* Added */
-                        float: none; /* Added */
-                        margin-bottom: 10px; /* Added */
-                    }
-                </style>
 
-                <div class="row">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- *** 버튼 바 *** -->
+                    <style>
+                        .card {
+                            margin: 0 auto; /* Added */
+                            float: none; /* Added */
+                            margin-bottom: 10px; /* Added */
+                        }
+                    </style>
+
                     <div class="col-12">
                         <div class="card" style="height: 50px;">
                             <div class="card-body">
@@ -143,10 +160,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div class="row">
                     <div class="col-12 d-flex">
                         <div class="card flex-fill">
                             <div class="card-header">
@@ -170,338 +185,490 @@
                             </div>
 
                             <!-- *** 주문 목록 테이블 시작 *** -->
-                            <table id="datatables-dashboard-products" class="table cell-border my-0"
-                                   cellspacing="0" style="width: 100%;">
-                                <thead>
-                                <tr>
-                                    <th>주문 No.</th>
-                                    <th class="d-none d-xl-table-cell">주문일자</th>
-                                    <th class="d-none d-xl-table-cell">진행상태</th>
-                                    <th class="d-none d-xl-table-cell">고객명</th>
-                                    <th>품목</th>
-                                    <th>사이즈</th>
-                                    <th>시트</th>
-                                    <th>필링</th>
-                                    <th>포장</th>
-                                    <th>문구</th>
-                                    <th>수량</th>
-                                    <th>금액</th>
-                                    <th>주문경로</th>
-                                    <th>결제방법</th>
-                                    <th>결제여부</th>
-                                    <th>수령인</th>
-                                    <th>연락처</th>
-                                    <th>수령방법</th>
-                                    <th>수령주소</th>
-                                    <th>납품일자</th>
-                                    <th>주문메모</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                {#                                {% for order in orders %}#}
-                                {#                                    <tr>#}
-                                {#                                        <td>{{ order.id }}</td>#}
-                                {#                                        <td class="d-none d-xl-table-cell">{{ order.blah }}</td>#}
-                                {#                                        <td class="d-none d-xl-table-cell">{{ order.blah }}</td>#}
-                                {#                                        <td>{{ order.blh }}</td>#}
-                                {#                                        <td>{{ order.blh }}</td>#}
-                                {#                                        <td>{{ order.blh }}</td>#}
-                                {#                                    </tr>#}
-                                {#                                {% endfor %}#}
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-warning">주문완료</span></td>
-                                    <td class="d-none d-xl-table-cell">유지영</td>
-                                    <td class="d-none d-xl-table-cell">모듬돔형 앙금플라워 떡케이크</td>
-                                    <td class="d-none d-xl-table-cell">2호</td>
-                                    <td class="d-none d-xl-table-cell">자색고구마설기</td>
-                                    <td class="d-none d-xl-table-cell">꿀+견과류</td>
-                                    <td class="d-none d-xl-table-cell">보자기</td>
-                                    <td class="d-none d-xl-table-cell">있음</td>
-                                    <td class="d-none d-xl-table-cell">1</td>
-                                    <td class="d-none d-xl-table-cell">73000</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">완료</td>
-                                    <td class="d-none d-xl-table-cell">유지영</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">퀵</td>
-                                    <td class="d-none d-xl-table-cell">강원도 춘천시 석사동 현진에버빌 202동 204호</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-12</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                <tr>
-                                    <td>20210902_B_010</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-02</td>
-                                    <td><span class="badge badge-success">제작완료</span></td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell"></td>
-                                    <td class="d-none d-xl-table-cell">2</td>
-                                    <td class="d-none d-xl-table-cell">37800</td>
-                                    <td class="d-none d-xl-table-cell">카페24</td>
-                                    <td class="d-none d-xl-table-cell">카드</td>
-                                    <td class="d-none d-xl-table-cell">O</td>
-                                    <td class="d-none d-xl-table-cell">고기우</td>
-                                    <td class="d-none d-xl-table-cell">01012341213</td>
-                                    <td class="d-none d-xl-table-cell">택배</td>
-                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>
-                                    <td class="d-none d-xl-table-cell">2021-09-10</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            {#                            <table id="datatables-dashboard-products" class="table cell-border my-0"#}
+                            {#                                   cellspacing="0" style="width: 100%;">#}
+                            {#                                <thead>#}
+                            {#                                <tr>#}
+                            {#                                    <th>주문 No.</th>#}
+                            {#                                    <th class="d-none d-xl-table-cell">주문일자</th>#}
+                            {#                                    <th class="d-none d-xl-table-cell">진행상태</th>#}
+                            {#                                    <th class="d-none d-xl-table-cell">고객명</th>#}
+                            {#                                    <th>품목</th>#}
+                            {#                                    <th>사이즈</th>#}
+                            {#                                    <th>시트</th>#}
+                            {#                                    <th>필링</th>#}
+                            {#                                    <th>포장</th>#}
+                            {#                                    <th>문구</th>#}
+                            {#                                    <th>수량</th>#}
+                            {#                                    <th>금액</th>#}
+                            {#                                    <th>주문경로</th>#}
+                            {#                                    <th>결제방법</th>#}
+                            {#                                    <th>결제여부</th>#}
+                            {#                                    <th>수령인</th>#}
+                            {#                                    <th>연락처</th>#}
+                            {#                                    <th>수령방법</th>#}
+                            {#                                    <th>수령주소</th>#}
+                            {#                                    <th>납품일자</th>#}
+                            {#                                    <th>주문메모</th>#}
+                            {#                                </tr>#}
+                            {#                                </thead>#}
+                            {#                                <tbody>#}
+                            {#                                <tr>#}
+                            {#                                    <td>20210902_B_010</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">2021-09-02</td>#}
+                            {#                                    <td><span class="badge badge-success">제작완료</span></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">고기우</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">2</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">37800</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">카페24</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">카드</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">O</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">고기우</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">01012341213</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">택배</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">2021-09-10</td>#}
+                            {#                                </tr>#}
+                            {#                                {% for order in orders %}#}
+                            {#                                    <tr>#}
+                            {#                                        <td>{{ order.id }}</td>#}
+                            {#                                        <td class="d-none d-xl-table-cell">{{ order.blah }}</td>#}
+                            {#                                        <td class="d-none d-xl-table-cell">{{ order.blah }}</td>#}
+                            {#                                        <td>{{ order.blh }}</td>#}
+                            {#                                        <td>{{ order.blh }}</td>#}
+                            {#                                        <td>{{ order.blh }}</td>#}
+                            {#                                    </tr>#}
+                            {#                                {% endfor %}#}
+                            {#                                </tbody>#}
+                            {#                            </table>#}
+                            {#                        </div>#}
+                            {#                    </div>#}
+                            {#                </div>#}
+                            {#            </div>#}
+
+
+
+
+
+                            <!-- *** Bootstrap 테이블 *** -->
+                            <div class="col-12" style="padding: 0">
+                                <div class="card w-100" style="">
+                                    <table class="table table-bordered table-responsive table-sm"
+                                           id="bootstrap-table">
+                                        <thead>
+                                        <tr>
+                                            <th style="width:40%;">주문 No.</th>
+                                            <th style="width:25%">주문일자</th>
+                                            <th class="d-none d-md-table-cell" style="width:25%">진행상태</th>
+                                            <th>고객명</th>
+                                            <th>품목</th>
+                                            <th>사이즈</th>
+                                            <th>시트</th>
+                                            <th>필링</th>
+                                            <th>포장</th>
+                                            <th>문구</th>
+                                            <th>수량</th>
+                                            <th>금액</th>
+                                            <th>주문경로</th>
+                                            <th>결제방법</th>
+                                            <th>결제여부</th>
+                                            <th>수령인</th>
+                                            <th>연락처</th>
+                                            <th>수령방법</th>
+                                            <th>수령주소</th>
+                                            <th>납품일자</th>
+                                            <th>주문메모</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>20210902_B_010</td>
+                                            <td>2021-09-02</td>
+                                            <td><span class="badge badge-success">제작완료</span></td>
+                                            <td>고기우</td>
+                                            <td>흑임자알떡</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>X</td>
+                                            <td>2</td>
+                                            <td>37800</td>
+                                            <td>카페24</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>고기우</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 관악구 봉천동 1690-149</td>
+                                            <td>2021-09-10</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_B_010</td>
+                                            <td>2021-09-02</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>고기우</td>
+                                            <td>모듬돔형 앙금플라워 떡케이크</td>
+                                            <td>2호</td>
+                                            <td>자색고구마설기</td>
+                                            <td>꿀+견과류</td>
+                                            <td>보자기</td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>73000</td>
+                                            <td>카페24</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>고기우</td>
+                                            <td>01012341234</td>
+                                            <td>퀵</td>
+                                            <td>서울특별시 관악구 봉천동 1690-149</td>
+                                            <td>2021-09-19</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_009</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-success">제작완료</span></td>
+                                            <td>유지영</td>
+                                            <td>오색 알송편</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>X</td>
+                                            <td>1</td>
+                                            <td>38000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>유지영</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_008</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>장민수</td>
+                                            <td>포토 떡 케이크 미니</td>
+                                            <td>2호</td>
+                                            <td>백설기</td>
+                                            <td>꿀+견과류</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>45000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>장민수</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-primary">출고완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-primary">출고완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-primary">출고완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-        </main>
+        </div>
+
+
+
+
+
+
+        <!-- *** footer *** -->
         {% include 'footer.html' %}
     </div>
 
@@ -518,52 +685,48 @@
     </svg>
 
     <style>
-        #datatables-dashboard-products {
+        #bootstrap-table {
             overflow-x: scroll;
             overflow-y: scroll;
-            max-width: 40%;
+        {#max-width: 100%;#}
             display: block;
             white-space: nowrap;
-        }
-        table tr {
-            border: 1px solid gray;
         }
     </style>
 
     {% block scripts %}
+        <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.js"></script>
+
         <script src="{% static 'assets/js/jquery.min.js' %}"></script>
         <script src="{% static 'assets/js/app.js' %}"></script>
         <script src="{% static 'assets/js/settings.js' %}"></script>
 
-{#        <script>#}
-{#            $(document).ready(function() {#}
-{#                $('#datatables-dashboard-products').DataTable();#}
-{#            } );#}
-{#        </script>#}
-
         <!-- *** 페이지네이션 *** -->
         <script>
             $(function() {
-                $('#datatables-dashboard-products').DataTable({
-                    pageLength: 10,
-                    lengthChange: false,
-                    bFilter: false,
-                    autoWidth: false,
+                $('#bootstrap-table').DataTable({
+                    pageLength: 25,
+                    lengthChange: true,
+                    bFilter: true,
+                    autoWidth: true,
                     {#autoAdjustHeight: true;#}
-                    {#autoplay: true,#}
-                    lengthAdjust: false,
+                    autoplay: true,
+                    {#lengthAdjust: false,#}
                     scrollY: "60vh",
-                    {#sScrollX: "100%",#}
-                    {#sScrollXInner: "110%",#}
-                    scrollCollapse: true,
+                    sScrollX: "100%",
+                    sScrollXInner: "50%",
+                    scrollCollapse: false,
                     paging: true,
-                    {#responsive: false,#}
+                    responsive: true,
                 });
                 {#$('#datatables-dashboard-products').closest('.dataTables_scrollBody').css('max-height', '100%');#}
-                $('#datatables-dashboard-products').DataTable().draw();
+                $('#bootstrap-table').DataTable().draw();
             });
         </script>
+
         <script>
+            /// 원본 API
             $(function() {
                 // Daterangepicker
                 $("input[name=\"daterange\"]").daterangepicker({
@@ -575,7 +738,7 @@
                     startDate: moment().startOf("hour"),
                     endDate: moment().startOf("hour").add(32, "hour"),
                     locale: {
-                        format: "M/DD hh:mm A"
+                        format: "M/DD"
                     }
                 });
                 $("input[name=\"datesingle\"]").daterangepicker({
@@ -588,6 +751,7 @@
                 function cb(start, end) {
                     $("#reportrange span").html(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
                 }
+
                 $("#reportrange").daterangepicker({
                     startDate: start,
                     endDate: end,
@@ -602,16 +766,11 @@
                 }, cb);
                 cb(start, end);
                 // Datetimepicker
-                $('#datetimepicker-minimum').datetimepicker();
-                $('#datetimepicker-view-mode').datetimepicker({
-                    viewMode: 'years'
-                });
-                $('#datetimepicker-time').datetimepicker({
-                    format: 'LT'
-                });
                 $('#datetimepicker-date').datetimepicker({
                     format: 'L'
                 });
             });
+
         </script>
     {% endblock %}
+{% endblock %}

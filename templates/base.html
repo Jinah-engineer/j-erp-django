@@ -2,43 +2,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
-	<meta name="author" content="Bootlab">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
+    <meta name="author" content="Bootlab">
 
-	<title>
-		{% block title %}
-		MEEHONG
-		{% endblock %}
-	</title>
+    <title>
+        {% block title %}
+            MEEHONG
+        {% endblock %}
+    </title>
 
-	<!-- CSS -->
+    <!-- CSS -->
     {% block sheets %}
 
-<!--	<link href="{% static '/assets/css/class.css' %}" rel="stylesheet">-->
-<!--	<link href="{% static '/assets/css/dark.css' %}" rel="stylesheet">-->
-	<link href="{% static '/assets/css/modern.css' %}" rel="stylesheet">
-<!--	<link href="{% static '/assets/css/light.css' %}" rel="stylesheet">-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
+        <link href="{% static '/assets/css/modern.css' %}" rel="stylesheet">
+        <!--	<link href="{% static '/assets/css/class.css' %}" rel="stylesheet">-->
+        <!--	<link href="{% static '/assets/css/dark.css' %}" rel="stylesheet">-->
+        <!--	<link href="{% static '/assets/css/light.css' %}" rel="stylesheet">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
     {% endblock %}
 
+    <!-- JS -->
+    {% include 'scripts.html' %}
 
 </head>
 
 <body>
-	<div class="splash">
-		<div class="splash-icon"></div>
-	</div>
+<div class="splash">
+    <div class="splash-icon"></div>
+</div>
 
-	<div class="wrapper">
-    {% block body %}
-    {% endblock %}
-	</div>
+<div class="wrapper">
+        {% block body %}
+        {% endblock %}
+</div>
 
-	<!-- JS -->
-	{% include 'scripts.html' %}
+
 
 </body>
 
