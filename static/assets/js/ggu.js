@@ -19,3 +19,4 @@ for(var i = 0; i < click.length; i++) {
         }
     }
 }
+

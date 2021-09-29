@@ -81,76 +81,148 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Category</h5>
 
-                                    <h3>카테고리 등록하세요</h3>
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Empty card</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="tree"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
 
                         </div>
+                        <script>
+                            window.onload = function() {
+                                $('#tree').jstree({
+                                    'core' : {
+                                        'data' : [
+                                            {"id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+                                            {"id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+                                            {"id" : "ajson3", "parent" : "ajson2", "text" : "Child1" },
+                                            {"id" : "ajson4", "parent" : "ajson2", "text" : "Child2" },
+                                        ]
+                                    }
+                                });
+                            }
+                        </script>
                         <div class="tab-pane fade" id="product" role="tabpanel">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Product</h5>
+                                    <h5 class="card-title">Product info</h5>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-product">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-product" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="card">
+                                        <!--
                                         <div class="card-header">
                                             <h5 class="card-title">Basic Table</h5>
                                             <h6 class="card-subtitle text-muted">Using the most basic table markup, here’s how .table-based tables look in Bootstrap.
                                             </h6>
                                         </div>
+                                        -->
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th style="width:40%;">Name</th>
-                                                <th style="width:25%">Phone Number</th>
-                                                <th class="d-none d-md-table-cell" style="width:25%">Date of Birth</th>
-                                                <th>Actions</th>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:5%;">번호</th>
+                                                <th style="width:15%">대분류</th>
+                                                <th style="width:15%">중분류</th>
+                                                <th class="d-none d-md-table-cell" style="width:25%">제품명</th>
+                                                <th class="d-none d-md-table-cell" style="width:25%">가격</th>
+                                                <th style="width:10%;"></th>
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
                                             <tr>
-                                                <td>Michelle Bilodeau</td>
-                                                <td>864-348-0485</td>
-                                                <td class="d-none d-md-table-cell">June 21, 1961</td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>2</td>
+                                                <td>
+                                                    <select>
+                                                        <option>떡</option>
+                                                        <option>케이크</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select>
+                                                        <option>찹쌀떡</option>
+                                                        <option>앙금플라워</option>
+                                                        <option>망개떡케이크</option>
+                                                        <option>포토앙금</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
                                                 </td>
                                             </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
                                             <tr>
-                                                <td>Alexander Groves</td>
-                                                <td>914-939-2458</td>
-                                                <td class="d-none d-md-table-cell">May 15, 1948</td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td class="d-none d-md-table-cell">떡</td>
+                                                <td class="d-none d-md-table-cell">설기떡</td>
+                                                <td class="d-none d-md-table-cell">흑임자꿀설기</td>
+                                                <td class="d-none d-md-table-cell">170000000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
                                                 </td>
                                             </tr>
+                                            <!-- 수정버튼 클릭시 -->
                                             <tr>
-                                                <td>Kathie Burton</td>
-                                                <td>704-993-5435</td>
-                                                <td class="d-none d-md-table-cell">September 14, 1965</td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td>
+                                                    <select>
+                                                        <option>떡</option>
+                                                        <option>케이크</option>
+                                                    </select>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Daisy Seger</td>
-                                                <td>765-382-8195</td>
-                                                <td class="d-none d-md-table-cell">April 2, 1971</td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                <td>
+                                                    <select>
+                                                        <option>설기떡</option>
+                                                        <option>찹쌀떡</option>
+                                                        <option>앙금플라워</option>
+                                                        <option>망개떡케이크</option>
+                                                        <option>포토앙금</option>
+                                                    </select>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Amanda Jones</td>
-                                                <td>202-672-1407</td>
-                                                <td class="d-none d-md-table-cell">October 12, 1966</td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="#"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                <td><input type="text" placeholder="흑임자꿀설기"></td>
+                                                <td><input type="text" placeholder="170000000"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -163,9 +235,105 @@
                         <div class="tab-pane fade" id="product-size" role="tabpanel">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Size</h5>
+                                    <h5 class="card-title">Size info</h5>
 
-                                    <h3>사이즈 등록하세요</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-size">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-size" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:5%;">번호</th>
+                                                <th class="d-none d-md-table-cell" style="width:25%">제품명</th>
+                                                <th class="d-none d-md-table-cell" style="width:25%">사이즈</th>
+                                                <th class="d-none d-md-table-cell" style="width:25%">추가금액</th>
+                                                <th style="width:15%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>3</td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
+                                                </td>
+                                            </tr>
+                                            <!-- 수정버튼 클릭 예시 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>2</td>
+                                                <td><input type="text" placeholder="모듬돔형"></td>
+                                                <td><input type="text" placeholder="4호"></td>
+                                                <td><input type="text" placeholder="65000"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td>모둠돔형</td>
+                                                <td>3호</td>
+                                                <td>30000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td>모둠돔형</td>
+                                                <td>2호</td>
+                                                <td>10000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td>모둠돔형</td>
+                                                <td>1호</td>
+                                                <td>0</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -175,7 +343,97 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Sheet</h5>
 
-                                    <h3>시트 등록하세요</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-sheet">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-sheet" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:15%;">번호</th>
+                                                <th style="width:30%">시트</th>
+                                                <th class="d-none d-md-table-cell" style="width:30%">가격</th>
+                                                <th style="width:20%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>5</td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
+                                                </td>
+                                            </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>4</td>
+                                                <td class="d-none d-md-table-cell">자색고구마설기</td>
+                                                <td class="d-none d-md-table-cell">0</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>3</td>
+                                                <td class="d-none d-md-table-cell">단호박설기</td>
+                                                <td class="d-none d-md-table-cell">0</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>2</td>
+                                                <td class="d-none d-md-table-cell">흑임자설기</td>
+                                                <td class="d-none d-md-table-cell">0</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <!-- 수정버튼 클릭시 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td><input type="text" placeholder="백설기"></td>
+                                                <td><input type="text" placeholder="0"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -185,7 +443,106 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Filling</h5>
 
-                                    <h3>필링 등록하세요</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-filling">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-filling" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:15%;">번호</th>
+                                                <th style="width:30%">필링</th>
+                                                <th class="d-none d-md-table-cell" style="width:30%">가격</th>
+                                                <th style="width:20%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>6</td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
+                                                </td>
+                                            </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>5</td>
+                                                <td class="d-none d-md-table-cell">블루베리</td>
+                                                <td class="d-none d-md-table-cell">5000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>4</td>
+                                                <td class="d-none d-md-table-cell">자색고구마</td>
+                                                <td class="d-none d-md-table-cell">5000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>3</td>
+                                                <td class="d-none d-md-table-cell">단호박</td>
+                                                <td class="d-none d-md-table-cell">5000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>2</td>
+                                                <td class="d-none d-md-table-cell">흑임자</td>
+                                                <td class="d-none d-md-table-cell">5000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <!-- 수정버튼 클릭시 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td><input type="text" placeholder="꿀+견과류"></td>
+                                                <td><input type="text" placeholder="5000"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -195,7 +552,88 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Box</h5>
 
-                                    <h3>포장 등록하세요</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-box">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-box" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:15%;">번호</th>
+                                                <th style="width:30%">포장</th>
+                                                <th class="d-none d-md-table-cell" style="width:30%">가격</th>
+                                                <th style="width:20%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>4</td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
+                                                </td>
+                                            </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>3</td>
+                                                <td class="d-none d-md-table-cell">보자기</td>
+                                                <td class="d-none d-md-table-cell">3000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>4</td>
+                                                <td class="d-none d-md-table-cell">쇼핑백</td>
+                                                <td class="d-none d-md-table-cell">1000</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <!-- 수정버튼 클릭시 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td><input type="text" placeholder="선물박스"></td>
+                                                <td><input type="text" placeholder="500"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -203,9 +641,93 @@
                         <div class="tab-pane fade" id="order-path" role="tabpanel">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Order Path</h5>
+                                    <h5 class="card-title">주문 경로</h5>
 
-                                    <h3>주문 유입 경로 등록하세요</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-order">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-order" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:15%;">번호</th>
+                                                <th style="width:60%">주문 경로</th>
+                                                <th style="width:20%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>5</td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
+                                                </td>
+                                            </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>4</td>
+                                                <td class="d-none d-md-table-cell">메세나폴리스</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>3</td>
+                                                <td class="d-none d-md-table-cell">카페24</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>2</td>
+                                                <td class="d-none d-md-table-cell">스마트스토어</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <!-- 수정버튼 클릭시 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td><input type="text" placeholder="전화주문"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -213,9 +735,85 @@
                         <div class="tab-pane fade" id="pay-type" role="tabpanel">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Pay Type</h5>
+                                    <h5 class="card-title">결제 방법</h5>
 
-                                    <h3>결제 방법 등록하세요</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-pay">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-pay" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:15%;">번호</th>
+                                                <th style="width:60%">결제 유형</th>
+                                                <th style="width:20%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>4</td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
+                                                </td>
+                                            </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>3</td>
+                                                <td class="d-none d-md-table-cell">계좌입금</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>2</td>
+                                                <td class="d-none d-md-table-cell">현금</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <!-- 수정버튼 클릭시 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td><input type="text" placeholder="카드"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -223,9 +821,101 @@
                         <div class="tab-pane fade" id="deliver-type" role="tabpanel">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Delivery</h5>
+                                    <h5 class="card-title">배송 방법</h5>
 
-                                    <h3>배송 방법 등록하세요</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-delivery">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-delivery" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:15%;">번호</th>
+                                                <th style="width:60%">배송 방법</th>
+                                                <th style="width:20%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>6</td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
+                                                </td>
+                                            </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>5</td>
+                                                <td class="d-none d-md-table-cell">지하철 택배</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>4</td>
+                                                <td class="d-none d-md-table-cell">퀵 서비스</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>3</td>
+                                                <td class="d-none d-md-table-cell">작업장 픽업</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>2</td>
+                                                <td class="d-none d-md-table-cell">메세나 픽업</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <!-- 수정버튼 클릭시 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td><input type="text" placeholder="cj 택배"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -235,7 +925,122 @@
                                 <div class="card-body">
                                     <h5 class="card-title">직원</h5>
 
-                                    <h3>직원 등록하세요</h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="filter-employee">
+                                                <label>
+                                                    <select name="datatables-clients_length" aria-controls="datatables-clients" class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                    </select>
+                                                </label>
+                                                개씩 보기
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6" style="text-align:right">
+                                            <div id="search-employee" class="dataTables_filter">
+                                                <label>
+                                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-clients">
+                                                </label>
+                                                <button class="btn btn-primary">검색</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <table class="table">
+                                            <thead>
+                                            <!-- 표 양식 -->
+                                            <tr>
+                                                <th><input type="checkbox" name="allSelect"></th>
+                                                <th style="width:10%;">번호</th>
+                                                <th style="width:15%">이름</th>
+                                                <th style="width:15%">직급</th>
+                                                <th style="width:25%">입사일</th>
+                                                <th style="width:15%">권한</th>
+                                                <th style="width:15%;"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- 새로운 정보를 입력받을 공란 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>6</td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td><input type="text" placeholder="입력"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-primary">등록</button>
+                                                </td>
+                                            </tr>
+                                            <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>5</td>
+                                                <td class="d-none d-md-table-cell">고기우</td>
+                                                <td class="d-none d-md-table-cell">사원</td>
+                                                <td class="d-none d-md-table-cell">2021-09-29</td>
+                                                <td class="d-none d-md-table-cell">사원</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>4</td>
+                                                <td class="d-none d-md-table-cell">박진아</td>
+                                                <td class="d-none d-md-table-cell">사원</td>
+                                                <td class="d-none d-md-table-cell">2021-09-29</td>
+                                                <td class="d-none d-md-table-cell">사원</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>3</td>
+                                                <td class="d-none d-md-table-cell">최현진</td>
+                                                <td class="d-none d-md-table-cell">사원</td>
+                                                <td class="d-none d-md-table-cell">2021-09-29</td>
+                                                <td class="d-none d-md-table-cell">사원</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>2</td>
+                                                <td class="d-none d-md-table-cell">하승재</td>
+                                                <td class="d-none d-md-table-cell">사원</td>
+                                                <td class="d-none d-md-table-cell">2021-09-29</td>
+                                                <td class="d-none d-md-table-cell">사원</td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn mb-1 btn-danger">수정</button>
+                                                </td>
+                                            </tr>
+
+                                            <!-- 수정버튼 클릭시 -->
+                                            <tr>
+                                                <td><input type="checkbox" name="select"></td>
+                                                <td>1</td>
+                                                <td><input type="text" placeholder="하민채"></td>
+                                                <td><input type="text" placeholder="대표"></td>
+                                                <td><input type="text" placeholder="2021-09-29"></td>
+                                                <td><input type="text" placeholder="관리자"></td>
+                                                <td class="table-action" style="text-align: center;">
+                                                    <button class="btn btn-success">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -250,3 +1055,7 @@
 </div>
 
 {% endblock %}
+
+{% block javascripts %}
+
+{% endblock javascripts %}

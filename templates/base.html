@@ -15,31 +15,35 @@
 	</title>
 
 	<!-- CSS -->
-    {% block sheets %}
 
-<!--	<link href="{% static '/assets/css/class.css' %}" rel="stylesheet">-->
-<!--	<link href="{% static '/assets/css/dark.css' %}" rel="stylesheet">-->
-	<link href="{% static '/assets/css/modern.css' %}" rel="stylesheet">
-<!--	<link href="{% static '/assets/css/light.css' %}" rel="stylesheet">-->
+	{% block stylesheets %}
+	<!--	<link href="{% static 'assets/css/class.css' %}" rel="stylesheet">-->
+	<!--	<link href="{% static 'assets/css/dark.css' %}" rel="stylesheet">-->
+	<!--	<link rel="stylesheet" href="{% static 'assets/css/modern.css' %}">-->
+	<link href="{% static 'bootstrap4/dist/css/modern.css' %}" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
-    {% endblock %}
+	{% endblock stylesheets %}
+
+
 
 
 </head>
 
 <body>
-	<div class="splash">
-		<div class="splash-icon"></div>
-	</div>
+<div class="splash">
+	<div class="splash-icon"></div>
+</div>
 
-	<div class="wrapper">
-    {% block body %}
-    {% endblock %}
-	</div>
+<div class="wrapper">
+	{% block body %}
+	{% endblock %}
+</div>
 
-	<!-- JS -->
-	{% include 'scripts.html' %}
+<!-- JS -->
+{% include 'scripts.html' %}
 
+{% block javascripts %}
+{% endblock javascripts %}
 </body>
 
 </html>
