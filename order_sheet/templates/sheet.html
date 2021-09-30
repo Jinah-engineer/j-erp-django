@@ -2,26 +2,122 @@
 {% load static %}
 
 {% block body %}
-<div class="splash active">
-    <div class="splash-icon"></div>
-</div>
-<!-- side navbar -->
-{% include "navigation.html" %}
-<div class="main">
+    <div class="splash active">
+        <div class="splash-icon"></div>
+    </div>
+    <!-- side navbar -->
+    {% include "navigation.html" %}
+    <div class="main">
 
-    <!--  top navbar  -->
-    {% include "top-navigation.html" %}
+        <!--  top navbar  -->
+        {% include "top-navigation.html" %}
+        <main class="content">
+            <div class="container-fluid">
+
+                <div class="header">
+                    <h1 class="header-title">
+                        주문서 작성
+                    </h1>
+                    <p class="header-subtitle">경로 작성하기</p>
+                </div>
 
 
-    </main>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group row" style="margin-left: 10px; margin-right: 20px; width: 10%">
+                                        <label class="col-form-label col-sm-2 text-sm-left" for="order-person">주문 접수자</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control input-lg" id="order-person">
+                                        </div>
+                                        <i style="float: left;" class="align-middle mr-4 fas fa-fw fa-user-friends"></i>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-sm-2 text-sm-right">Email</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-left: 20px; margin-right: 20px; width: 20%">
+                                        <label>주문 No.</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group" style="margin-left: 20px; margin-right: 20px; width: 25%">
+                                        <label>주문일자</label>
+                                        <input type="text" class="form-control" data-mask="00/00/0000">
+                                        <span class="font-13 text-muted">(EX) 2021-00-00</span>
+                                    </div>
+                                    <div class="form-group" style="margin-left: 20px; margin-right: 20px; width: 25%">
+                                        <label>주문경로</label>
 
-    {% include "footer.html" %}
-</div>
+                                        <select class="form-control select2" data-toggle="select2"
+                                                style="">
+                                            <optgroup label="주문 경로를 선택해주세요.">
+                                                <option value="AK">전화</option>
+                                                <option value="HI">메세나폴리스 매장</option>
+                                                <option value="HI">스마트스토어</option>
+                                                <option value="HI">카페24</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group" style="margin-left: 10px; margin-right: 20px; width: 20%">
+                                        <label>주문 No.</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group" style="margin-left: 20px; margin-right: 20px; width: 25%">
+                                        <label>주문일자</label>
+                                        <input type="text" class="form-control" data-mask="00/00/0000">
+                                        <span class="font-13 text-muted">(EX) 2021-00-00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        {% include "footer.html" %}
+    </div>
 
 {% endblock %}
+
+<style>
+    .form-group {
+        margin: 0 0 10px 10px;
+    }
+    label {
+        float: left
+    }
+    span {
+        display: block;
+        overflow: hidden;
+        padding: 0 4px 0 6px
+    }
+    input {
+        width: 100%
+    }
+</style>
 
 {% block javascript %}
     <script src="{% static '/dist/js/app.js' %}"></script>
     <script src="{% static '/dist/js/settings.js' %}"></script>
-    
+
+    <script>
+        $(function() {
+            // Select2
+            $(".select2").each(function() {
+                $(this)
+                {#.wrap("<div class=\"position-relative\"></div>")#}
+                    .select2({
+                        placeholder: "Select value",
+                        dropdownParent: $(this).parent()
+                    });
+            })
+        });
+    </script>
 {% endblock javascript %}
