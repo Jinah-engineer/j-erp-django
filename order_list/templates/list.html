@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load bootstrap4 %}
+{#{% load bootstrap4 %}#}
 {% load static %}
 
 
@@ -258,7 +258,7 @@
                                     <table class="table table-bordered table-responsive table-sm"
                                            id="bootstrap-table">
                                         <thead>
-                                        <tr style="font-weight: bold">
+                                        <tr style="font-family: 'NanumSquareL'">
                                             <th style="width:40%;">주문 No.</th>
                                             <th style="width:25%">주문일자</th>
                                             <th class="d-none d-md-table-cell" style="width:25%">진행상태</th>
@@ -638,20 +638,20 @@
             </div>
         </main>
 
-{#        <div class="container">#}
-{#            <div class="row">#}
-{#                <div class="col-sm-6">#}
-{#                    <div class="form-group">#}
-{#                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">#}
-{#                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>#}
-{#                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">#}
-{#                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
+        {#        <div class="container">#}
+        {#            <div class="row">#}
+        {#                <div class="col-sm-6">#}
+        {#                    <div class="form-group">#}
+        {#                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">#}
+        {#                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>#}
+        {#                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">#}
+        {#                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>#}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </div>#}
 
 
 
@@ -671,42 +671,45 @@
             </symbol>
         </defs>
     </svg>
-{% block stylesheets %}
-    <style>
-        #bootstrap-table {
-            overflow-x: scroll;
-            overflow-y: scroll;
-        {#max-width: 100%;#}
-            display: block;
-            white-space: nowrap;
-        }
-        th, td{ text-align: center; }
+    {% block stylesheets %}
+        <style>
+            #bootstrap-table {
+                overflow-x: scroll;
+                overflow-y: scroll;
+            {#max-width: 100%;#}
+                display: block;
+                white-space: nowrap;
+            }
+            th, td{ text-align: center; }
 
-        th {
-            font-weight: bold;
-        }
-        .dataTables_length label {
+            th {
+                font-weight: bold;
+            }
+            .dataTables_length label {
             {#padding-left: 20px;#}
-        }
+            }
+            .sorting, .sorting_asc {
+                font-family: 'NanumSquareB';
+            }
 
-    </style>
-{% endblock stylesheets %}
+        </style>
+    {% endblock stylesheets %}
 {% endblock %}
 
 {% block javascript %}
 
-            <script src="{% static 'dist/js/app.js' %}"></script>
-            <script src="{% static 'dist/js/settings.js' %}"></script>
+    <script src="{% static 'dist/js/app.js' %}"></script>
+    <script src="{% static 'dist/js/settings.js' %}"></script>
 
-{#            <script src="{% static 'assets/js/jquery.min.js' %}"></script>#}
+    {#            <script src="{% static 'assets/js/jquery.min.js' %}"></script>#}
 
-            {# 이 친구를 키면 bootstrap이 켜진다! #}
-{#            <script src="{% static 'assets/js/app.js' %}"></script>#}
-{#            <script src="{% static 'assets/js/settings.js' %}"></script>#}
+    {# 이 친구를 키면 bootstrap이 켜진다! #}
+    {#            <script src="{% static 'assets/js/app.js' %}"></script>#}
+    {#            <script src="{% static 'assets/js/settings.js' %}"></script>#}
 
-            {# 이 친구를 키면 javascipt 작동된다! #}
-{#            <script src="{% static 'src/js/app.js' %}"></script>#}
-{#            <script src="{% static 'src/js/settings.js' %}"></script>#}
+    {# 이 친구를 키면 javascipt 작동된다! #}
+    {#            <script src="{% static 'src/js/app.js' %}"></script>#}
+    {#            <script src="{% static 'src/js/settings.js' %}"></script>#}
 
 
     <!-- *** 페이지네이션 *** -->
@@ -715,9 +718,9 @@
             $(function() {
                 $('#bootstrap-table').DataTable({
                     pageLength: 25,
-                    {#columnDefs: {#}
-                    {#  className: "dt-center", targets: "_all"}#}
-                    {#},#}
+                {#columnDefs: {#}
+                {#  className: "dt-center", targets: "_all"}#}
+                {#},#}
                     {#lengthChange: false,#}
                     {#bFilter: true,#}
                     {#autoWidth: true,#}
@@ -733,56 +736,89 @@
                 });
                 {#$('#datatables-dashboard-products').closest('.dataTables_scrollBody').css('max-height', '100%');#}
                 $('#bootstrap-table').DataTable().draw();
-            });
 
-            /// DateTimePicker 원본 API
-            $(function() {
-                // Daterangepicker
-                $("input[name=\"daterange\"]").daterangepicker({
-                    opens: "left"
+                var table = $('#bootstrap-table').DataTable();
+
+                {#$('#bootstrap-table tbody').on( 'click', 'tr', function () {#}
+                {#    console.log('#bootstrap-table tbody');#}
+                {#    $(this).toggleClass('selected').css("background-color", "#F5E6C4");#}
+                {#});#}
+
+                    // 데이터 row 선택하기 (multiple rows selected)
+                    $('#bootstrap-table tbody').on('click', 'tr', function () {
+                        if ($(this).hasClass('selected')) {
+                            $(this).removeClass('selected');
+                            {#$(this).toggleClass('selected').#}
+                            $(this).css("background-color", "#F5E6C4");
+                        }
+                        else {
+                            {#table.$('tr.selected').removeClass('selected');#}
+                            {#$(this).addClass('selected');#}
+                            $(this).toggleClass('selected');
+                            $(this).css("background-color", "transparent");
+                        }
+
+
+                    });
+
+                    // #f4f7fc #F5E6C4
+
                 });
-                $("input[name=\"datetimes\"]").daterangepicker({
-                    timePicker: true,
-                    opens: "left",
-                    startDate: moment().startOf("hour"),
-                    endDate: moment().startOf("hour").add(32, "hour"),
-                    locale: {
-                        format: "M/DD"
+
+                // DateTimePicker 원본 API
+                $(function() {
+                    // Daterangepicker
+                    $("input[name=\"daterange\"]").daterangepicker({
+                        opens: "left"
+                    });
+                    $("input[name=\"datetimes\"]").daterangepicker({
+                        timePicker: true,
+                        opens: "left",
+                        startDate: moment().startOf("hour"),
+                        endDate: moment().startOf("hour").add(32, "hour"),
+                        locale: {
+                            format: "M/DD"
+                        }
+                    });
+                    $("input[name=\"datesingle\"]").daterangepicker({
+                        singleDatePicker: true,
+                        showDropdowns: true
+                    });
+                    var start = moment().subtract(29, "days");
+                    var end = moment();
+
+                    function cb(start, end) {
+                        $("#reportrange span").html(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
                     }
-                });
-                $("input[name=\"datesingle\"]").daterangepicker({
-                    singleDatePicker: true,
-                    showDropdowns: true
-                });
-                var start = moment().subtract(29, "days");
-                var end = moment();
 
-                function cb(start, end) {
-                    $("#reportrange span").html(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
-                }
+                    $("#reportrange").daterangepicker({
+                        startDate: start,
+                        endDate: end,
+                        ranges: {
+                            "Today": [moment(), moment()],
+                            "Yesterday": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+                            "Last 7 Days": [moment().subtract(6, "days"), moment()],
+                            "Last 30 Days": [moment().subtract(29, "days"), moment()],
+                            "This Month": [moment().startOf("month"), moment().endOf("month")],
+                            "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+                        }
+                    }, cb);
+                    cb(start, end);
 
-                $("#reportrange").daterangepicker({
-                    startDate: start,
-                    endDate: end,
-                    ranges: {
-                        "Today": [moment(), moment()],
-                        "Yesterday": [moment().subtract(1, "days"), moment().subtract(1, "days")],
-                        "Last 7 Days": [moment().subtract(6, "days"), moment()],
-                        "Last 30 Days": [moment().subtract(29, "days"), moment()],
-                        "This Month": [moment().startOf("month"), moment().endOf("month")],
-                        "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
-                    }
-                }, cb);
-                cb(start, end);
-                // Datetimepicker
-                $('#datetimepicker-date').datetimepicker({
-                    format: 'L'
+                    // Datetimepicker
+                    $('#datetimepicker-date').datetimepicker({
+                        format: 'L'
+                    });
+                    $('#datetimepicker-date2').datetimepicker({
+                        format: 'L'
+                    });
                 });
-                $('#datetimepicker-date2').datetimepicker({
-                    format: 'L'
-                });
-            });
-        }
+
+
+                // Select Data row (테이블 데이터 선택하기)
+
+            }
+
     </script>
 
 {% endblock javascript %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'order_list',
     'order_sheet',
     'information',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
