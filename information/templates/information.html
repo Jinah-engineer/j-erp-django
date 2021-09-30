@@ -79,7 +79,7 @@
 
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Category</h5>
+                                    <h5 class="card-title">카테고리</h5>
 
                                     <div class="col-12">
                                         <div class="card">
@@ -96,20 +96,7 @@
                             </div>
 
                         </div>
-                        <script>
-                            window.onload = function() {
-                                $('#tree').jstree({
-                                    'core' : {
-                                        'data' : [
-                                            {"id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
-                                            {"id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
-                                            {"id" : "ajson3", "parent" : "ajson2", "text" : "Child1" },
-                                            {"id" : "ajson4", "parent" : "ajson2", "text" : "Child2" },
-                                        ]
-                                    }
-                                });
-                            }
-                        </script>
+
                         <div class="tab-pane fade" id="product" role="tabpanel">
                             <div class="card">
                                 <div class="card-body">
@@ -1056,6 +1043,22 @@
 
 {% endblock %}
 
-{% block javascripts %}
-
-{% endblock javascripts %}
+{% block javascript %}
+    <script src="{% static '/dist/js/app.js' %}"></script>
+    <script src="{% static '/dist/js/settings.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+        window.onload = function() {
+            $('#tree').jstree({
+                'core' : {
+                    'data' : [
+                        {"id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+                        {"id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+                        {"id" : "ajson3", "parent" : "ajson2", "text" : "Child1" },
+                        {"id" : "ajson4", "parent" : "ajson2", "text" : "Child2" },
+                    ]
+                }
+            });
+        }
+    </script>
+{% endblock javascript %}
