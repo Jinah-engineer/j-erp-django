@@ -68,6 +68,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group" style="margin: 1rem;">
+                                            <label class="form-label">날짜 보기</label>
+                                            <div class="input-group date" id="datetimepicker-date2" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-date2" />
+                                                <div class="input-group-append" data-target="#datetimepicker-date2" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         {#                                        <div class="form-group" style="margin: 1rem;">#}
                                         {#                                            <label class="form-label">전체 보기</label>#}
                                         {#                                            <div class="input-group date" id="datetimepicker-view-mode" data-target-input="nearest">#}
@@ -265,7 +274,7 @@
                                     <table class="table table-bordered table-responsive table-sm"
                                            id="bootstrap-table">
                                         <thead>
-                                        <tr>
+                                        <tr style="font-weight: bold">
                                             <th style="width:40%;">주문 No.</th>
                                             <th style="width:25%">주문일자</th>
                                             <th class="d-none d-md-table-cell" style="width:25%">진행상태</th>
@@ -645,28 +654,20 @@
             </div>
         </main>
 
-
-
-
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-sm-6">#}
+{#                    <div class="form-group">#}
+{#                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">#}
+{#                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>#}
+{#                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">#}
+{#                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
 
 
 
@@ -696,6 +697,10 @@
             white-space: nowrap;
         }
         th, td{ text-align: center; }
+
+        th {
+            font-weight: bold;
+        }
 
     </style>
 {% endblock stylesheets %}

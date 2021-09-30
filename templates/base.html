@@ -16,10 +16,38 @@
     </title>
 
     <!-- CSS -->
+    <link href="{% static 'dist/css/modern.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
+    <!-- Naver font -->
+    <style>
+        @font-face {
+            font-family: 'NanumSquareB';
+            src: local('NanumSquareB');
+        url("{% static 'dist/fonts/NanumSquareB.otf' %}") format("opentype");
+        }
+        @font-face {
+            font-family: 'NanumSquareEB';
+            src: local('NanumSquareEB');
+        url("{% static 'dist/fonts/NanumSquareEB.otf' %}") format("opentype");
+        }
+        @font-face {
+            font-family: 'NanumSquareL';
+            src: local('NanumSquareL');
+        url("{% static 'dist/fonts/NanumSquareL.otf' %}") format("opentype");
+        }
+        @font-face {
+            font-family: 'NanumSquareR';
+            src: local('NanumSquareR');
+        url("{% static 'dist/fonts/NanumSquareR.otf' %}") format("opentype");
+        }
 
-        <link href="{% static 'dist/css/modern.css' %}" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
+        * {
+            font-family: 'NanumSquareR';
+        }
+    </style>
+
     {% block stylesheets %}
+
     {% endblock stylesheets %}
 
 </head>
