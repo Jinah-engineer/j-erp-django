@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'order_list',
     'order_sheet',
     'information',
-    'bootstrap4',
-    'tempus_dominus',
 ]
 
 MIDDLEWARE = [
