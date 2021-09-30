@@ -1,6 +1,7 @@
 {
   "name": "spark",
   "version": "3.3.3",
+  "type": "module",
   "description": "Spark - Responsive Bootstrap 4 Admin & Dashboard Template",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p --config webpack.config.js",

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'order_list',
     'order_sheet',
     'information',
+    'bootstrap4',
+    'tempus_dominus',
 ]
 
 MIDDLEWARE = [
@@ -78,13 +80,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'meehong',
+    #     'USER': 'root',
+    #     'PASSWORD': '000000',
+    #     'HOST': '172.30.1.51',
+    #     'PORT': '3306',
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'meehong',
-        'USER': 'root',
-        'PASSWORD': '000000',
-        'HOST': '172.30.1.51',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     },
 }
 
@@ -135,3 +141,4 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

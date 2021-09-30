@@ -2,31 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
-	<meta name="author" content="Bootlab">
 
-	<title>
-		{% block title %}
-		MEEHONG
-		{% endblock %}
-	</title>
-
-	<!-- CSS -->
-
-	{% block stylesheets %}
-	<!--	<link href="{% static 'assets/css/class.css' %}" rel="stylesheet">-->
-	<!--	<link href="{% static 'assets/css/dark.css' %}" rel="stylesheet">-->
-	<!--	<link rel="stylesheet" href="{% static 'assets/css/modern.css' %}">-->
-	<link href="{% static 'bootstrap4/dist/css/modern.css' %}" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
-	{% endblock stylesheets %}
-
-
-=======
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,48 +16,28 @@
     </title>
 
     <!-- CSS -->
-    {% block sheets %}
 
-        <link href="{% static '/assets/css/modern.css' %}" rel="stylesheet">
-        <!--	<link href="{% static '/assets/css/class.css' %}" rel="stylesheet">-->
-        <!--	<link href="{% static '/assets/css/dark.css' %}" rel="stylesheet">-->
-        <!--	<link href="{% static '/assets/css/light.css' %}" rel="stylesheet">-->
+        <link href="{% static 'dist/css/modern.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
-    {% endblock %}
->>>>>>> ce02865e5d3545867d0b2a20542d76cb7c2750e8
-
-    <!-- JS -->
-    {% include 'scripts.html' %}
+    {% block stylesheets %}
+    {% endblock stylesheets %}
 
 </head>
 
 <body>
 <div class="splash">
-<<<<<<< HEAD
-	<div class="splash-icon"></div>
-</div>
-
-<div class="wrapper">
-	{% block body %}
-	{% endblock %}
-</div>
-
-<!-- JS -->
-{% include 'scripts.html' %}
-=======
     <div class="splash-icon"></div>
 </div>
 
 <div class="wrapper">
-        {% block body %}
-        {% endblock %}
+    {% block body %}
+    {% endblock %}
 </div>
 
-
->>>>>>> ce02865e5d3545867d0b2a20542d76cb7c2750e8
-
-{% block javascripts %}
-{% endblock javascripts %}
+<!-- JS -->
+{% include 'scripts.html' %}
+{% block javascript %}
+{% endblock javascript %}
 </body>
 
 </html>
