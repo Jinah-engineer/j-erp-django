@@ -1,7 +1,6 @@
-
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf.urls import url
 from accounts import views
 from order_sheet import views
 from order_list import views
