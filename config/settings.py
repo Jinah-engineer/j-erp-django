@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'order_list',
     'order_sheet',
     'information',
-    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
@@ -79,17 +78,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'meehong',
-    #     'USER': 'root',
-    #     'PASSWORD': '000000',
-    #     'HOST': '172.30.1.51',
-    #     'PORT': '3306',
-    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'meehong_dev',
+        'USER': 'dev',
+        'PASSWORD': 'aibiz12#$',
+        'HOST': '118.33.32.227',
+        'PORT': '3306',
     },
 }
 
@@ -141,3 +136,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_REDIRECT_URL = '/list/first'
