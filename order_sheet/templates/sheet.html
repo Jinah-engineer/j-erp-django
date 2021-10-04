@@ -23,61 +23,352 @@
 
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="form-group row" style="margin-left: 10px; margin-right: 20px; width: 10%">
-                                        <label class="col-form-label col-sm-2 text-sm-left" for="order-person">주문 접수자</label>
-                                        <div class="col-sm-2">
-                                            <input type="text" class="form-control input-lg" id="order-person">
-                                        </div>
-                                        <i style="float: left;" class="align-middle mr-4 fas fa-fw fa-user-friends"></i>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-sm-2 text-sm-right">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group" style="margin-left: 20px; margin-right: 20px; width: 20%">
-                                        <label>주문 No.</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group" style="margin-left: 20px; margin-right: 20px; width: 25%">
-                                        <label>주문일자</label>
-                                        <input type="text" class="form-control" data-mask="00/00/0000">
-                                        <span class="font-13 text-muted">(EX) 2021-00-00</span>
-                                    </div>
-                                    <div class="form-group" style="margin-left: 20px; margin-right: 20px; width: 25%">
-                                        <label>주문경로</label>
+                                <form>
+                                    {#                                    <div class="form-row">#}
+                                    {#                                        <div class="form-group col-md-6">#}
+                                    {#                                            <label for="inputEmail4">Email</label>#}
+                                    {#                                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">#}
+                                    {#                                        </div>#}
+                                    {#                                        <div class="form-group col-md-6">#}
+                                    {#                                            <label for="inputPassword4">Password</label>#}
+                                    {#                                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">#}
+                                    {#                                        </div>#}
+                                    {#                                    </div>#}
 
-                                        <select class="form-control select2" data-toggle="select2"
-                                                style="">
-                                            <optgroup label="주문 경로를 선택해주세요.">
-                                                <option value="AK">전화</option>
-                                                <option value="HI">메세나폴리스 매장</option>
-                                                <option value="HI">스마트스토어</option>
-                                                <option value="HI">카페24</option>
-                                            </optgroup>
-                                        </select>
+                                    <!-- 1번째 줄 -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="inputCity">주문 접수자</label>
+                                            <button style="border: none; background-color: transparent" id="select-order-person">
+                                                <i class="align-middle mr-2 fas fa-fw fa-user-friends"></i>
+                                            </button>
+                                            <input type="text" class="form-control" id="inputCity" value="하민채">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="inputCity">주문 No.</label>
+                                            <input type="text" class="form-control" id="inputCity" value="20210902_B_010">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputCity">주문일자</label>
+                                            <button style="border: none; background-color: transparent" id="select-order-person">
+                                                <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
+                                            </button>
+                                            <input type="text" class="form-control" id="inputCity" value="2021-10-01">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="order-root">주문 경로</label>
+                                            <select class="form-control select1" data-toggle="select2"
+                                                    style="" id="order-root">
+                                                <optgroup label="주문 경로를 선택해주세요.">
+                                                    <option value="AK">전화</option>
+                                                    <option value="HI">메세나폴리스 매장</option>
+                                                    <option value="HI">스마트스토어</option>
+                                                    <option value="HI">카페24</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group" style="margin-left: 10px; margin-right: 20px; width: 20%">
-                                        <label>주문 No.</label>
-                                        <input type="text" class="form-control">
+
+                                    <!-- 2번째 줄 -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-2">
+                                            <label for="inputCity">고객명</label>
+                                            <input type="text" class="form-control" id="inputCity">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="inputCity">연락처</label>
+                                            <input type="text" class="form-control" id="inputCity">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="order-root">수령 방법</label>
+                                            <select class="form-control select1" data-toggle="select1"
+                                                    style="" id="order-root">
+                                                <option value="AK">일반택배</option>
+                                                <option value="HI">메세나 픽업</option>
+                                                <option value="HI">작업장 픽업</option>
+                                                <option value="HI">퀵</option>
+                                                <option value="HI">지하철 택배</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputCity">납품일자</label>
+                                            <button style="border: none; background-color: transparent" id="select-order-person">
+                                                <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
+                                            </button>
+                                            <input type="text" class="form-control" id="inputCity" value="2021-10-01">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputCity">도착시간</label>
+                                            <button style="border: none; background-color: transparent" id="select-order-person">
+                                                <i class="align-middle mr-2 far fa-fw fa-clock"></i>
+                                            </button>
+                                            <input type="text" class="form-control" id="inputCity" value="13:00">
+                                        </div>
                                     </div>
-                                    <div class="form-group" style="margin-left: 20px; margin-right: 20px; width: 25%">
-                                        <label>주문일자</label>
-                                        <input type="text" class="form-control" data-mask="00/00/0000">
-                                        <span class="font-13 text-muted">(EX) 2021-00-00</span>
+
+                                    <!-- 3번째 줄 -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <span>품목명</span>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="card" id="item-card">
+                                        <div class="card-body">
+                                            <!-- 1번째 품목 -->
+                                            <div class="form-group row">
+                                                <button class="item-button" style="margin-left: 50px; border-color: white;
+                                                background-color: #153d77; color: white">1</button>
+                                                <div class="col-md-3">
+                                                    <input type="email" class="form-control" placeholder="품목이름">
+                                                </div>
+                                                <button type="button" class="btn item-button"
+                                                        style="border-color: white;
+                                                background-color: #153d77; color: white"
+                                                        data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
+                                                <div class="col-md-3">
+                                                    <input type="email" class="form-control" placeholder="옵션이름">
+                                                </div>
+                                                <div class="col-md-1" style="padding-left: 0">
+                                                    <input type="email" class="form-control" placeholder="수량">
+                                                </div>
+                                                <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
+                                                <button class="item-button"
+                                                        style="border-color: white;
+                                                background-color: darkred; color: white">X</button>
+                                                <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
+                                                <div class="col-md-2">
+                                                    <input type="email" class="form-control" placeholder="금액">
+                                                </div>
+                                            </div>
+                                            <!-- 2번째 품목 -->
+                                            <div class="form-group row">
+                                                <button class="item-button" style="margin-left: 50px; border-color: white;
+                                                background-color: #153d77; color: white">2</button>
+                                                <div class="col-md-3">
+                                                    <input type="email" class="form-control" placeholder="품목이름">
+                                                </div>
+                                                <button type="button" class="btn item-button"
+                                                        style="border-color: white;
+                                                background-color: #153d77; color: white"
+                                                        data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
+                                                <div class="col-md-3">
+                                                    <input type="email" class="form-control" placeholder="옵션이름">
+                                                </div>
+                                                <div class="col-md-1" style="padding-left: 0">
+                                                    <input type="email" class="form-control" placeholder="수량">
+                                                </div>
+                                                <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
+                                                <button class="item-button"
+                                                        style="border-color: white;
+                                                background-color: darkred; color: white">X</button>
+                                                <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
+                                                <div class="col-md-2">
+                                                    <input type="email" class="form-control" placeholder="금액">
+                                                </div>
+                                            </div>
+
+                                            <!-- 상품 추가 버튼 -->
+                                            <div class="form-group row">
+                                                <button class="btn btn-block" style="margin-left: 50px; margin-top: 30px;
+                                                 background-color: #153d77; color: white; width: 30%;">
+                                                    + 상품 추가
+                                                </button>
+                                            </div>
+                                            <!-- 총 금액 표시 -->
+                                            <div class="form-group row" style="float: right; clear: both;">
+                                                <label style="padding-left: 20px;" class="col-form-label" for="">총</label>
+                                                <div class="col-md-10">
+                                                    <input type="email" class="form-control" placeholder="금액">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- 4번째 줄 -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="inputCity">결제금액</label>
+                                            <input type="text" class="form-control" id="inputCity">
+                                        </div>
+                                        <div class="col-md-4" style="margin-bottom: 16px;">
+                                            <label for="inputCity">결제여부</label>
+                                            <div class="col-md-6" style="align-items: center;">
+                                                <label class="form-check form-check-inline" style="margin-top: 8px; margin-right: 30px;">
+                                                    <input class="form-check-input" type="radio" name="inline-radios-example" value="option1">
+                                                    <span class="form-check-label">
+												완료
+											</span>
+                                                </label>
+                                                <label class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inline-radios-example" value="option2">
+                                                    <span class="form-check-label">
+												미완료
+											</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="order-root">결제 방법</label>
+                                            <select class="form-control select1" data-toggle="select1"
+                                                    style="" id="order-root">
+                                                <option value="AK">카드</option>
+                                                <option value="HI">계좌이체</option>
+                                                <option value="HI">직접 결제</option>
+                                                <option value="HI">그리고?</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- 5번째 줄 (동일인 체크) -->
+                                    <div class="form-row" style="margin-top: 20px;">
+                                        <div class="form-inline">
+                                            <div class="custom-control custom-checkbox mb-1 mr-sm-2">
+                                                <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                                <label class="custom-control-label" for="customControlInline"
+                                                       style="color: darkgray; font-size: 13px;">주문 고객과 동일인</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 6번째 줄 -->
+                                    <div class="form-row" style="margin-top: 10px;">
+                                        <div class="form-group col-md-3">
+                                            <label for="inputCity">수령인명</label>
+                                            <input type="text" class="form-control" id="inputCity">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="inputCity">수령인 연락처</label>
+                                            <input type="text" class="form-control" id="inputCity">
+                                        </div>
+                                    </div>
+
+                                    <!-- 7번째 줄 -->
+                                    <div class="form-group row">
+                                        <label style="padding-left: 12px;padding-right: 10px;"
+                                               class="col-form-label" for="">수령인 주소</label>
+                                        <button style="border-color: white;
+                                                background-color: #0d8ddc; color: white">우편번호 검색</button>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="inputCity">
+                                        </div>
+                                        <div class="col-md-4" style="padding-left: 0;">
+                                            <input type="text" class="form-control" id="inputCity">
+                                        </div>
+                                    </div>
+
+                                    <!-- 8번째 줄 -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label class="form-label">주문메모</label>
+                                            <textarea style="width: 100%;" class="form-control" placeholder="Textarea" rows="5" cols=""></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- 주문 등록 버튼 -->
+                                    <div class="form-group row justify-content-center">
+                                        <button class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;">
+                                            주문 등록
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- BEGIN  modal -->
+                {#                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sizedModalLg">#}
+                {#                    Large#}
+                {#                </button>#}
+                <div class="modal fade" id="sizedModalLg" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 style="font-family: 'NanumSquareB;" class="modal-title">옵션 선택</h2>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body m-3">
+                                <div class="form-group">
+
+
+                                    <div class="form-floating">
+                                        <label for="inputCity">사이즈 옵션</label>
+                                        <select class="form-control mb-3">
+                                            <option selected>사이즈를 선택해주세요.</option>
+                                            <option>2호</option>
+                                            <option>3호</option>
+                                            <option>4호</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <label for="inputCity">필링 옵션</label>
+                                        <select class="form-control mb-3">
+                                            <option selected>필링을 선택해주세요.</option>
+                                            <option>2호</option>
+                                            <option>3호</option>
+                                            <option>4호</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <label for="inputCity">시트 옵션</label>
+                                        <select class="form-control mb-3">
+                                            <option selected>사이즈를 선택해주세요.</option>
+                                            <option>2호</option>
+                                            <option>3호</option>
+                                            <option>4호</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <label for="inputCity">포장 옵션</label>
+                                        <select class="form-control mb-3">
+                                            <option selected>포장을 선택해주세요.</option>
+                                            <option>2호</option>
+                                            <option>3호</option>
+                                            <option>4호</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <label for="inputCity">시트 옵션</label>
+                                        <input type="email" class="form-control" placeholder="문구를 입력해주세요.">
+                                    </div>
+                                </div>
+
+                                <div class="card" id="item-card">
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12" style="margin-top: 16px;">
+                                                <input type="text" class="input-lg form-control"
+                                                       style="font-family: 'NanumSquareEB'; font-size: 15px;"
+                                                       value="여기에 최종옵션이 들어감 yo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                <button type="button" class="btn btn-primary">옵션 등록하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END  modal -->
+
+
+
             </div>
         </main>
 
@@ -101,6 +392,16 @@
     input {
         width: 100%
     }
+    #item-card {
+        box-shadow: 0 2px 4px 0 rgba(126 142 177 12)
+        /*
+         * 안먹힘 ;;;;
+         */
+    }
+    button.item-button {
+        border-color: white;
+
+    }
 </style>
 
 {% block javascript %}
@@ -118,6 +419,11 @@
                         dropdownParent: $(this).parent()
                     });
             })
+            // Select Orderer
+            $('#select-order-person').on('click', function () {
+                console.log('working right!')
+                alert("주문자를 선택해yo ");
+            });
         });
     </script>
 {% endblock javascript %}
