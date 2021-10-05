@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Form
+from django.forms import Form
 
 from order_list.models import Order
 
