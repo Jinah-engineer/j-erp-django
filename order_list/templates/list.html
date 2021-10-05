@@ -1,930 +1,658 @@
 {% extends "base.html" %}
+
+{#{% load bootstrap4 %}#}
 {% load static %}
 
 
 {% block body %}
 
-<div class="splash active">
-    <div class="splash-icon"></div>
-</div>
+    <div class="splash active">
+        <div class="splash-icon"></div>
+    </div>
 
-<!-- *** 사이드 내비게이션 바 -->
-{% include 'navigation.html' %}
+    <!-- *** 사이드 내비게이션 바 -->
+    {% include 'navigation.html' %}
 
-<div class="main">
+    <div class="main">
 
-    <!-- *** 상위 내비게이션 바 *** -->
-    {% include 'top-navigation.html' %}
+        <!-- *** 상위 내비게이션 바 *** -->
+        {% include 'top-navigation.html' %}
 
-    <main class="content">
-        <div class="container-fluid">
+        <main class="content">
+            <div class="container-fluid">
 
-            <div class="header">
-                <h1 class="header-title">
-                    주문 목록
-                </h1>
-                <p class="header-subtitle">경로 작성하기</p>
-            </div>
-
-            <!-- *** 검색 바 *** -->
-            {% include 'search_bar.html' %}
-
-
-            <!-- *** 날짜 보기 / 선택 *** -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-
-
-                                <!--                                <div class="col-12 col-xl-6">-->
-                                <!--                                    <div class="form-group">-->
-                                <!--                                        <label class="form-label">현재 날짜 및 시각</label>-->
-                                <!--                                        <div class="input-group date" id="datetimepicker-minimum" data-target-input="nearest">-->
-                                <!--                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-minimum" />-->
-                                <!--                                            <div class="input-group-append" data-target="#datetimepicker-minimum" data-toggle="datetimepicker">-->
-                                <!--                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>-->
-                                <!--                                            </div>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="form-group">-->
-                                <!--                                        <label class="form-label">시간만 표시</label>-->
-                                <!--                                        <div class="input-group date" id="datetimepicker-time" data-target-input="nearest">-->
-                                <!--                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-time" />-->
-                                <!--                                            <div class="input-group-append" data-target="#datetimepicker-time" data-toggle="datetimepicker">-->
-                                <!--                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>-->
-                                <!--                                            </div>-->
-                                <!--                                        </div>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-
-
-                                <div class="row col-12 col-xl-6">
-                                    <div class="form-group" style="margin: 1rem;">
-                                        <label class="form-label">시작일</label>
-                                        <div class="input-group date" id="datetimepicker-date" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-date" />
-                                            <div class="input-group-append" data-target="#datetimepicker-date" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group" style="margin: 1rem;">
-                                        <label class="form-label">종료일</label>
-                                        <div class="input-group date" id="datetimepicker-date2" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-date2" />
-                                            <div class="input-group-append" data-target="#datetimepicker-date2" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--                                    <div class="form-group" style="margin: 1rem;">-->
-                                    <!--                                        <label class="form-label">전체 보기</label>-->
-                                    <!--                                        <div class="input-group date" id="datetimepicker-view-mode" data-target-input="nearest">-->
-                                    <!--                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-view-mode" />-->
-                                    <!--                                            <div class="input-group-append" data-target="#datetimepicker-view-mode" data-toggle="datetimepicker">-->
-                                    <!--                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
-                                    <!--                                    </div>-->
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                <div class="header">
+                    <h1 class="header-title">
+                        주문 목록
+                    </h1>
+                    <p class="header-subtitle">경로 작성하기</p>
                 </div>
 
+                <!-- *** 검색 바 *** -->
+                {% include 'search_bar.html' %}
 
 
-
-
-                <!-- *** 버튼 바 *** -->
-                <style>
-                    .card {
-                        margin: 0 auto; /* Added */
-                        float: none; /* Added */
-                        margin-bottom: 10px; /* Added */
-                    }
-                </style>
-
-                <div class="col-12">
-                    <div class="card" style="height: 50px;">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
-                                    <button class="btn btn-secondary">주문 목록 인쇄</button>
-                                </div>
-                                <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
-                                    <button class="btn btn-secondary">Excel 업로드</button>
-                                </div>
-                                <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
-                                    <button class="btn btn-secondary">Excel 다운로드</button>
-                                </div>
-                                <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
-                                    <button class="btn btn-secondary">개별 주문장 출력</button>
-                                </div>
-                                <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
-                                    <button class="btn btn-secondary">주문 수정</button>
-                                </div>
-                                <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
-                                    <button class="btn btn-secondary">주문 삭제</button>
-                                </div>
-                                <div class="btn-group btn-group-sm mb-4 align-items-center mr-auto" role="group" style="padding: 0 2px;">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        상태변경
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">고객명</a>
-                                        <a class="dropdown-item" href="#">수령인명</a>
-                                        <a class="dropdown-item" href="#">상품명</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">연락처</a>
+                <!-- *** 날짜 보기 / 선택 *** -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    {#                                    <div class="col-12 col-xl-6">#}
+                                    {#                                        <div class="form-group">#}
+                                    {#                                            <label class="form-label">현재 날짜 및 시각</label>#}
+                                    {#                                            <div class="input-group date" id="datetimepicker-minimum" data-target-input="nearest">#}
+                                    {#                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-minimum" />#}
+                                    {#                                                <div class="input-group-append" data-target="#datetimepicker-minimum" data-toggle="datetimepicker">#}
+                                    {#                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>#}
+                                    {#                                                </div>#}
+                                    {#                                            </div>#}
+                                    {#                                        </div>#}
+                                    {#                                        <div class="form-group">#}
+                                    {#                                            <label class="form-label">시간만 표시</label>#}
+                                    {#                                            <div class="input-group date" id="datetimepicker-time" data-target-input="nearest">#}
+                                    {#                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-time" />#}
+                                    {#                                                <div class="input-group-append" data-target="#datetimepicker-time" data-toggle="datetimepicker">#}
+                                    {#                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>#}
+                                    {#                                                </div>#}
+                                    {#                                            </div>#}
+                                    {#                                        </div>#}
+                                    {#                                    </div>#}
+                                    <div class="row col-12 col-xl-6">
+                                        <div class="form-group" style="margin: 1rem;">
+                                            <label class="form-label">시작일</label>
+                                            <div class="input-group date" id="datetimepicker-date" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-date" />
+                                                <div class="input-group-append" data-target="#datetimepicker-date" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin: 1rem;">
+                                            <label class="form-label">종료일</label>
+                                            <div class="input-group date" id="datetimepicker-date2" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-date2" />
+                                                <div class="input-group-append" data-target="#datetimepicker-date2" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {#                                        <div class="form-group" style="margin: 1rem;">#}
+                                        {#                                            <label class="form-label">전체 보기</label>#}
+                                        {#                                            <div class="input-group date" id="datetimepicker-view-mode" data-target-input="nearest">#}
+                                        {#                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker-view-mode" />#}
+                                        {#                                                <div class="input-group-append" data-target="#datetimepicker-view-mode" data-toggle="datetimepicker">#}
+                                        {#                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>#}
+                                        {#                                                </div>#}
+                                        {#                                            </div>#}
+                                        {#                                        </div>#}
                                     </div>
                                 </div>
-                                <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        정렬
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">10개씩</a>
-                                        <a class="dropdown-item" href="#">50개씩</a>
-                                        <a class="dropdown-item" href="#">100개씩</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!-- *** 버튼 바 *** -->
+                    <style>
+                        .card {
+                            margin: 0 auto; /* Added */
+                            float: none; /* Added */
+                            margin-bottom: 10px; /* Added */
+                        }
+                    </style>
+
+                    <div class="col-12">
+                        <div class="card" style="height: 50px;">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
+                                        <button class="btn btn-secondary">주문 목록 인쇄</button>
+                                    </div>
+                                    <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
+                                        <button class="btn btn-secondary">Excel 업로드</button>
+                                    </div>
+                                    <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
+                                        <button class="btn btn-secondary">Excel 다운로드</button>
+                                    </div>
+                                    <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
+                                        <button class="btn btn-secondary">개별 주문장 출력</button>
+                                    </div>
+                                    <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
+                                        <button class="btn btn-secondary">주문 수정</button>
+                                    </div>
+                                    <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
+                                        <button class="btn btn-secondary">주문 삭제</button>
+                                    </div>
+                                    <div class="btn-group btn-group-sm mb-4 align-items-center mr-auto" role="group" style="padding: 0 2px;">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            상태변경
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">고객명</a>
+                                            <a class="dropdown-item" href="#">수령인명</a>
+                                            <a class="dropdown-item" href="#">상품명</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">연락처</a>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group btn-group-sm mb-4 align-items-center" role="group" style="padding: 0 2px;">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            정렬
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">10개씩</a>
+                                            <a class="dropdown-item" href="#">50개씩</a>
+                                            <a class="dropdown-item" href="#">100개씩</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div class="col-12 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-header">
-                            <div class="card-actions float-right">
-                                <a href="#" class="mr-1">
-                                    <i class="align-middle" data-feather="refresh-cw"></i>
-                                </a>
-                                <div class="d-inline-block dropdown show">
-                                    <a href="#" data-toggle="dropdown" data-display="static">
-                                        <i class="align-middle" data-feather="more-vertical"></i>
+                    <div class="col-12 d-flex">
+                        <div class="card flex-fill">
+                            <div class="card-header">
+                                <div class="card-actions float-right">
+                                    <a href="#" class="mr-1">
+                                        <i class="align-middle" data-feather="refresh-cw"></i>
                                     </a>
+                                    <div class="d-inline-block dropdown show">
+                                        <a href="#" data-toggle="dropdown" data-display="static">
+                                            <i class="align-middle" data-feather="more-vertical"></i>
+                                        </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
                                     </div>
                                 </div>
+                                <h5 class="card-title mb-0" style="font-family: 'NanumSquareEB'">주문 목록 Record</h5>
                             </div>
-                            <h5 class="card-title mb-0" style="font-family: 'NanumSquareEB'">주문 목록 Record</h5>
-                        </div>
 
-                        <!-- *** 주문 목록 테이블 시작 *** -->
-                        <!--                        <table id="datatables-dashboard-products" class="table cell-border my-0"-->
-                        <!--                               cellspacing="0" style="width: 100%;">-->
-                        <!--                            <thead>-->
-                        <!--                            <tr>-->
-                        <!--                                <th>주문 No.</th>-->
-                        <!--                                <th class="d-none d-xl-table-cell">주문일자</th>-->
-                        <!--                                <th class="d-none d-xl-table-cell">진행상태</th>-->
-                        <!--                                <th class="d-none d-xl-table-cell">고객명</th>-->
-                        <!--                                <th>품목</th>-->
-                        <!--                                <th>사이즈</th>-->
-                        <!--                                <th>시트</th>-->
-                        <!--                                <th>필링</th>-->
-                        <!--                                <th>포장</th>-->
-                        <!--                                <th>문구</th>-->
-                        <!--                                <th>수량</th>-->
-                        <!--                                <th>금액</th>-->
-                        <!--                                <th>주문경로</th>-->
-                        <!--                                <th>결제방법</th>-->
-                        <!--                                <th>결제여부</th>-->
-                        <!--                                <th>수령인</th>-->
-                        <!--                                <th>연락처</th>-->
-                        <!--                                <th>수령방법</th>-->
-                        <!--                                <th>수령주소</th>-->
-                        <!--                                <th>납품일자</th>-->
-                        <!--                                <th>주문메모</th>-->
-                        <!--                            </tr>-->
-                        <!--                            </thead>-->
-                        <!--                            <tbody>-->
-                        <!--                            <tr>-->
-                        <!--                                <td>20210902_B_010</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">2021-09-02</td>-->
-                        <!--                                <td><span class="badge badge-success">제작완료</span></td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">고기우</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">흑임자알떡</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell"></td>-->
-                        <!--                                <td class="d-none d-xl-table-cell"></td>-->
-                        <!--                                <td class="d-none d-xl-table-cell"></td>-->
-                        <!--                                <td class="d-none d-xl-table-cell"></td>-->
-                        <!--                                <td class="d-none d-xl-table-cell"></td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">2</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">37800</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">카페24</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">카드</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">O</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">고기우</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">01012341213</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">택배</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">2021-09-10</td>-->
-                        <!--                            </tr>-->
-                        <!--                            {% for order in orders %}-->
-                        <!--                            <tr>-->
-                        <!--                                <td>{{ order.id }}</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">{{ order.blah }}</td>-->
-                        <!--                                <td class="d-none d-xl-table-cell">{{ order.blah }}</td>-->
-                        <!--                                <td>{{ order.blh }}</td>-->
-                        <!--                                <td>{{ order.blh }}</td>-->
-                        <!--                                <td>{{ order.blh }}</td>-->
-                        <!--                            </tr>-->
-                        <!--                            {% endfor %}-->
-                        <!--                            </tbody>-->
-                        <!--                        </table>-->
-                        <!--                    </div>-->
-                        <!--                </div>-->
-                        <!--            </div>-->
-                        <!--        </div>-->
+                            <!-- *** 주문 목록 테이블 시작 *** -->
+                            {#                            <table id="datatables-dashboard-products" class="table cell-border my-0"#}
+                            {#                                   cellspacing="0" style="width: 100%;">#}
+                            {#                                <thead>#}
+                            {#                                <tr>#}
+                            {#                                    <th>주문 No.</th>#}
+                            {#                                    <th class="d-none d-xl-table-cell">주문일자</th>#}
+                            {#                                    <th class="d-none d-xl-table-cell">진행상태</th>#}
+                            {#                                    <th class="d-none d-xl-table-cell">고객명</th>#}
+                            {#                                    <th>품목</th>#}
+                            {#                                    <th>사이즈</th>#}
+                            {#                                    <th>시트</th>#}
+                            {#                                    <th>필링</th>#}
+                            {#                                    <th>포장</th>#}
+                            {#                                    <th>문구</th>#}
+                            {#                                    <th>수량</th>#}
+                            {#                                    <th>금액</th>#}
+                            {#                                    <th>주문경로</th>#}
+                            {#                                    <th>결제방법</th>#}
+                            {#                                    <th>결제여부</th>#}
+                            {#                                    <th>수령인</th>#}
+                            {#                                    <th>연락처</th>#}
+                            {#                                    <th>수령방법</th>#}
+                            {#                                    <th>수령주소</th>#}
+                            {#                                    <th>납품일자</th>#}
+                            {#                                    <th>주문메모</th>#}
+                            {#                                </tr>#}
+                            {#                                </thead>#}
+                            {#                                <tbody>#}
+                            {#                                <tr>#}
+                            {#                                    <td>20210902_B_010</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">2021-09-02</td>#}
+                            {#                                    <td><span class="badge badge-success">제작완료</span></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">고기우</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">흑임자알떡</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell"></td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">2</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">37800</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">카페24</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">카드</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">O</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">고기우</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">01012341213</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">택배</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">서울특별시 관악구 봉천동 1690-3434</td>#}
+                            {#                                    <td class="d-none d-xl-table-cell">2021-09-10</td>#}
+                            {#                                </tr>#}
+                            {#                                {% for order in orders %}#}
+                            {#                                    <tr>#}
+                            {#                                        <td>{{ order.id }}</td>#}
+                            {#                                        <td class="d-none d-xl-table-cell">{{ order.blah }}</td>#}
+                            {#                                        <td class="d-none d-xl-table-cell">{{ order.blah }}</td>#}
+                            {#                                        <td>{{ order.blh }}</td>#}
+                            {#                                        <td>{{ order.blh }}</td>#}
+                            {#                                        <td>{{ order.blh }}</td>#}
+                            {#                                    </tr>#}
+                            {#                                {% endfor %}#}
+                            {#                                </tbody>#}
+                            {#                            </table>#}
+                            {#                        </div>#}
+                            {#                    </div>#}
+                            {#                </div>#}
+                            {#            </div>#}
 
 
 
 
 
-                        <!-- *** Bootstrap 테이블 *** -->
-                        <div class="col-12" style="padding: 0">
-                            <div class="card w-100" style="">
-                                <table class="table table-bordered table-responsive table-sm"
-                                       id="bootstrap-table">
-                                    <thead>
-                                    <tr style="font-family: 'NanumSquareL'">
-                                        <th style="width:40%;">주문 No.</th>
-                                        <th style="width:25%">주문일자</th>
-                                        <th class="d-none d-md-table-cell" style="width:25%">진행상태</th>
-                                        <th>고객명</th>
-                                        <th>품목</th>
-                                        <th>사이즈</th>
-                                        <th>시트</th>
-                                        <th>필링</th>
-                                        <th>포장</th>
-                                        <th>문구</th>
-                                        <th>수량</th>
-                                        <th>금액</th>
-                                        <th>주문경로</th>
-                                        <th>결제방법</th>
-                                        <th>결제여부</th>
-                                        <th>수령인</th>
-                                        <th>연락처</th>
-                                        <th>수령방법</th>
-                                        <th>수령주소</th>
-                                        <th>납품일자</th>
-                                        <th>주문메모</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>20210902_B_010</td>
-                                        <td>2021-09-02</td>
-                                        <td><span class="badge badge-success">제작완료</span></td>
-                                        <td>고기우</td>
-                                        <td>흑임자알떡</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>X</td>
-                                        <td>2</td>
-                                        <td>37800</td>
-                                        <td>카페24</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>고기우</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 관악구 봉천동 1690-149</td>
-                                        <td>2021-09-10</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_B_010</td>
-                                        <td>2021-09-02</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>고기우</td>
-                                        <td>모듬돔형 앙금플라워 떡케이크</td>
-                                        <td>2호</td>
-                                        <td>자색고구마설기</td>
-                                        <td>꿀+견과류</td>
-                                        <td>보자기</td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>73000</td>
-                                        <td>카페24</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>고기우</td>
-                                        <td>01012341234</td>
-                                        <td>퀵</td>
-                                        <td>서울특별시 관악구 봉천동 1690-149</td>
-                                        <td>2021-09-19</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_009</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-success">제작완료</span></td>
-                                        <td>유지영</td>
-                                        <td>오색 알송편</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>X</td>
-                                        <td>1</td>
-                                        <td>38000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>유지영</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_008</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>장민수</td>
-                                        <td>포토 떡 케이크 미니</td>
-                                        <td>2호</td>
-                                        <td>백설기</td>
-                                        <td>꿀+견과류</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>45000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>장민수</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-warning">주문완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-primary">출고완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-primary">출고완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>20210902_A_007</td>
-                                        <td>2021-09-01</td>
-                                        <td><span class="badge badge-primary">출고완료</span></td>
-                                        <td>이지현</td>
-                                        <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                        <td>3호</td>
-                                        <td>흑임자</td>
-                                        <td>흑임자</td>
-                                        <td></td>
-                                        <td>O</td>
-                                        <td>1</td>
-                                        <td>90000</td>
-                                        <td>스마트스토어</td>
-                                        <td>카드</td>
-                                        <td>O</td>
-                                        <td>박필순</td>
-                                        <td>01012341234</td>
-                                        <td>택배</td>
-                                        <td>서울특별시 마포구 포은로 42 203호</td>
-                                        <td>2021-09-10</td>
-                                        <td>맛있게 해주세요.</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!--    <div class="container">-->
-    <!--        <div class="row">-->
-    <!--            <div class="col-sm-6">-->
-    <!--                <div class="form-group">-->
-    <!--                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">-->
-    <!--                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>-->
-    <!--                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">-->
-    <!--                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-
-
-
-    <!-- 주문 상세/수정 modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sizedModalLg">
-        Large
-    </button>
-    <div class="modal fade" id="sizedModalLg" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 style="font-family: 'NanumSquareB;" class="modal-title">주문 수정 (testing) </h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body m-3">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="" method="post">
-                                        <!-- 1번째 줄 -->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-3">
-                                                <label for="inputCity">주문 접수자</label>
-                                                <button style="border: none; background-color: transparent" id="accounts-user">
-                                                    <i class="align-middle mr-2 fas fa-fw fa-user-friends"></i>
-                                                </button>
-                                                <input type="text" class="form-control" id="inputCity1" value="하민채">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="inputCity">주문 No.</label>
-                                                <input type="text" class="form-control" id="inputCity2" value="20210902_B_010">
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label for="inputCity">주문일자</label>
-                                                <button style="border: none; background-color: transparent" id="select-order-person2">
-                                                    <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
-                                                </button>
-                                                <input type="text" class="form-control" id="inputCity4" value="2021-10-01">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="order-root">주문 경로</label>
-                                                <select class="form-control select1" data-toggle="select2"
-                                                        style="" id="order-root">
-                                                    <optgroup label="주문 경로를 선택해주세요.">
-                                                        <option value="AK">전화</option>
-                                                        <option value="HI">메세나폴리스 매장</option>
-                                                        <option value="HI">스마트스토어</option>
-                                                        <option value="HI">카페24</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <!-- 2번째 줄 -->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-2">
-                                                <label for="inputCity">고객명</label>
-                                                <input type="text" class="form-control" id="inputCity">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="inputCity">연락처</label>
-                                                <input type="text" class="form-control" id="inputCity">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="order-root">수령 방법</label>
-                                                <select class="form-control select1" data-toggle="select1"
-                                                        style="" id="order-root">
-                                                    <option value="AK">일반택배</option>
-                                                    <option value="HI">메세나 픽업</option>
-                                                    <option value="HI">작업장 픽업</option>
-                                                    <option value="HI">퀵</option>
-                                                    <option value="HI">지하철 택배</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputCity">납품일자</label>
-                                                <button style="border: none; background-color: transparent" id="select-order-person">
-                                                    <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
-                                                </button>
-                                                <input type="text" class="form-control" id="inputCity" value="2021-10-01">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputCity">도착시간</label>
-                                                <button style="border: none; background-color: transparent" id="select-order-person">
-                                                    <i class="align-middle mr-2 far fa-fw fa-clock"></i>
-                                                </button>
-                                                <input type="text" class="form-control" id="inputCity" value="13:00">
-                                            </div>
-                                        </div>
-
-                                        <!-- 3번째 줄 -->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-3">
-                                                <span>품목명</span>
-                                            </div>
-                                        </div>
-                                        <div class="card" id="item-card">
-                                            <div class="card-body">
-                                                <!-- 1번째 품목 -->
-                                                <div class="form-group row">
-                                                    <button class="item-button" style="margin-left: 5px; border-color: white;
-                                                background-color: #153d77; color: white">1</button>
-                                                    <div class="col-md-4">
-                                                        <input type="email" class="form-control" placeholder="품목이름">
-                                                    </div>
-                                                    <button type="button" class="btn item-button"
-                                                            style="border-color: white;
-                                                background-color: #153d77; color: white"
-                                                            data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
-                                                    <div class="col-md-4">
-                                                        <input type="email" class="form-control" placeholder="옵션이름">
-                                                    </div>
-                                                    <div class="col-md-1" style="padding-left: 0">
-                                                        <input type="email" class="form-control" placeholder="수량">
-                                                    </div>
-                                                    <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
-                                                    <button class="item-button"
-                                                            style="border-color: white;
-                                                background-color: darkred; color: white">X</button>
-                                                </div>
-                                                <div class="form-group row justify-content-end">
-                                                    <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
-                                                    <div class="col-md-4">
-                                                        <input type="email" class="form-control" placeholder="금액">
-                                                    </div>
-                                                </div>
-                                                <!-- 2번째 품목 -->
-                                                <div class="form-group row">
-                                                    <button class="item-button" style="margin-left: 5px; border-color: white;
-                                                background-color: #153d77; color: white">1</button>
-                                                    <div class="col-md-4">
-                                                        <input type="email" class="form-control" placeholder="품목이름">
-                                                    </div>
-                                                    <button type="button" class="btn item-button"
-                                                            style="border-color: white;
-                                                background-color: #153d77; color: white"
-                                                            data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
-                                                    <div class="col-md-4">
-                                                        <input type="email" class="form-control" placeholder="옵션이름">
-                                                    </div>
-                                                    <div class="col-md-1" style="padding-left: 0">
-                                                        <input type="email" class="form-control" placeholder="수량">
-                                                    </div>
-                                                    <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
-                                                    <button class="item-button"
-                                                            style="border-color: white;
-                                                background-color: darkred; color: white">X</button>
-                                                </div>
-                                                <div class="form-group row justify-content-end">
-                                                    <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
-                                                    <div class="col-md-4">
-                                                        <input type="email" class="form-control" placeholder="금액">
-                                                    </div>
-                                                </div>
-
-                                                <!-- 상품 추가 버튼 -->
-                                                <div class="form-group row">
-                                                    <button class="btn btn-block" style="margin-left: 50px; margin-top: 30px;
-                                                 background-color: #153d77; color: white; width: 30%;">
-                                                        + 상품 추가
-                                                    </button>
-                                                </div>
-                                                <!-- 총 금액 표시 -->
-                                                <div class="form-group row" style="float: right; clear: both;">
-                                                    <label style="padding-left: 20px;" class="col-form-label" for="">총</label>
-                                                    <div class="col-md-10">
-                                                        <input type="email" class="form-control" placeholder="금액">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <!-- 4번째 줄 -->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-2">
-                                                <label for="inputCity">결제금액</label>
-                                                <input type="text" class="form-control" id="inputCity">
-                                            </div>
-                                            <div class="col-md-6" style="margin-bottom: 16px;">
-                                                <label for="inputCity">결제여부</label>
-                                                <div class="col-md-6" style="align-items: center;">
-                                                    <label class="form-check form-check-inline" style="margin-top: 8px; margin-right: 30px;">
-                                                        <input class="form-check-input" type="radio" name="inline-radios-example" value="option1">
-                                                        <span class="form-check-label">
-												완료
-											</span>
-                                                    </label>
-                                                    <label class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inline-radios-example" value="option2">
-                                                        <span class="form-check-label">
-												미완료
-											</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-4" style="margin-left: -200px;">
-                                                <label for="order-root">결제 방법</label>
-                                                <select class="form-control select1" data-toggle="select1"
-                                                        style="" id="order-root">
-                                                    <option value="AK">카드</option>
-                                                    <option value="HI">계좌이체</option>
-                                                    <option value="HI">직접 결제</option>
-                                                    <option value="HI">그리고?</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- 5번째 줄 (동일인 체크) -->
-                                        <div class="form-row" style="margin-top: 20px;">
-                                            <div class="form-inline">
-                                                <div class="custom-control custom-checkbox mb-1 mr-sm-2">
-                                                    <input type="checkbox" class="custom-control-input" id="customControlInline">
-                                                    <label class="custom-control-label" for="customControlInline"
-                                                           style="color: darkgray; font-size: 13px;">주문 고객과 동일인</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- 6번째 줄 -->
-                                        <div class="form-row" style="margin-top: 10px;">
-                                            <div class="form-group col-md-3">
-                                                <label for="inputCity">수령인명</label>
-                                                <input type="text" class="form-control" id="inputCity">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="inputCity">수령인 연락처</label>
-                                                <input type="text" class="form-control" id="inputCity">
-                                            </div>
-                                        </div>
-
-                                        <!-- 7번째 줄 -->
-                                        <div class="form-group row">
-                                            <label style="padding-left: 12px;padding-right: 10px;"
-                                                   class="col-form-label" for="">수령인 주소</label>
-                                            <button style="border-color: white;
-                                                background-color: #0d8ddc; color: white">우편번호 검색</button>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" id="inputCity">
-                                            </div>
-                                            <div class="col-md-4" style="padding-left: 0;">
-                                                <input type="text" class="form-control" id="inputCity">
-                                            </div>
-                                        </div>
-
-                                        <!-- 8번째 줄 -->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <label class="form-label">주문메모</label>
-                                                <textarea style="width: 100%;" class="form-control" placeholder="Textarea" rows="5" cols=""></textarea>
-                                            </div>
-                                        </div>
-                                        {{ form }}
-                                    </form>
+                            <!-- *** Bootstrap 테이블 *** -->
+                            <div class="col-12" style="padding: 0">
+                                <div class="card w-100" style="">
+                                    <table class="table table-bordered table-responsive table-sm"
+                                           id="bootstrap-table">
+                                        <thead>
+                                        <tr style="font-family: 'NanumSquareL'">
+                                            <th style="width:40%;">주문 No.</th>
+                                            <th style="width:25%">주문일자</th>
+                                            <th class="d-none d-md-table-cell" style="width:25%">진행상태</th>
+                                            <th>고객명</th>
+                                            <th>품목</th>
+                                            <th>사이즈</th>
+                                            <th>시트</th>
+                                            <th>필링</th>
+                                            <th>포장</th>
+                                            <th>문구</th>
+                                            <th>수량</th>
+                                            <th>금액</th>
+                                            <th>주문경로</th>
+                                            <th>결제방법</th>
+                                            <th>결제여부</th>
+                                            <th>수령인</th>
+                                            <th>연락처</th>
+                                            <th>수령방법</th>
+                                            <th>수령주소</th>
+                                            <th>납품일자</th>
+                                            <th>주문메모</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>20210902_B_010</td>
+                                            <td>2021-09-02</td>
+                                            <td><span class="badge badge-success">제작완료</span></td>
+                                            <td>고기우</td>
+                                            <td>흑임자알떡</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>X</td>
+                                            <td>2</td>
+                                            <td>37800</td>
+                                            <td>카페24</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>고기우</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 관악구 봉천동 1690-149</td>
+                                            <td>2021-09-10</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_B_010</td>
+                                            <td>2021-09-02</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>고기우</td>
+                                            <td>모듬돔형 앙금플라워 떡케이크</td>
+                                            <td>2호</td>
+                                            <td>자색고구마설기</td>
+                                            <td>꿀+견과류</td>
+                                            <td>보자기</td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>73000</td>
+                                            <td>카페24</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>고기우</td>
+                                            <td>01012341234</td>
+                                            <td>퀵</td>
+                                            <td>서울특별시 관악구 봉천동 1690-149</td>
+                                            <td>2021-09-19</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_009</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-success">제작완료</span></td>
+                                            <td>유지영</td>
+                                            <td>오색 알송편</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>X</td>
+                                            <td>1</td>
+                                            <td>38000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>유지영</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_008</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>장민수</td>
+                                            <td>포토 떡 케이크 미니</td>
+                                            <td>2호</td>
+                                            <td>백설기</td>
+                                            <td>꿀+견과류</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>45000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>장민수</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-warning">주문완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-primary">출고완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-primary">출고완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20210902_A_007</td>
+                                            <td>2021-09-01</td>
+                                            <td><span class="badge badge-primary">출고완료</span></td>
+                                            <td>이지현</td>
+                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
+                                            <td>3호</td>
+                                            <td>흑임자</td>
+                                            <td>흑임자</td>
+                                            <td></td>
+                                            <td>O</td>
+                                            <td>1</td>
+                                            <td>90000</td>
+                                            <td>스마트스토어</td>
+                                            <td>카드</td>
+                                            <td>O</td>
+                                            <td>박필순</td>
+                                            <td>01012341234</td>
+                                            <td>택배</td>
+                                            <td>서울특별시 마포구 포은로 42 203호</td>
+                                            <td>2021-09-10</td>
+                                            <td>맛있게 해주세요.</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                        <button type="button" class="btn btn-primary">옵션 등록하기</button>
-                    </div>
                 </div>
             </div>
-        </div>
-        <!-- END  modal -->
+        </main>
+
+        {#        <div class="container">#}
+        {#            <div class="row">#}
+        {#                <div class="col-sm-6">#}
+        {#                    <div class="form-group">#}
+        {#                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">#}
+        {#                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>#}
+        {#                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">#}
+        {#                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>#}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </div>#}
+
 
 
 
@@ -932,167 +660,166 @@
         {% include 'footer.html' %}
     </div>
 
-</div>
+    </div>
 
-<svg width="0" height="0" style="position:absolute">
-    <defs>
-        <symbol viewBox="0 0 512 512" id="ion-ios-pulse-strong">
-            <path
-                    d="M448 273.001c-21.27 0-39.296 13.999-45.596 32.999h-38.857l-28.361-85.417a15.999 15.999 0 0 0-15.183-10.956c-.112 0-.224 0-.335.004a15.997 15.997 0 0 0-15.049 11.588l-44.484 155.262-52.353-314.108C206.535 54.893 200.333 48 192 48s-13.693 5.776-15.525 13.135L115.496 306H16v31.999h112c7.348 0 13.75-5.003 15.525-12.134l45.368-182.177 51.324 307.94c1.229 7.377 7.397 11.92 14.864 12.344.308.018.614.028.919.028 7.097 0 13.406-3.701 15.381-10.594l49.744-173.617 15.689 47.252A16.001 16.001 0 0 0 352 337.999h51.108C409.973 355.999 427.477 369 448 369c26.511 0 48-22.492 48-49 0-26.509-21.489-46.999-48-46.999z">
-            </path>
-        </symbol>
-    </defs>
-</svg>
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <symbol viewBox="0 0 512 512" id="ion-ios-pulse-strong">
+                <path
+                        d="M448 273.001c-21.27 0-39.296 13.999-45.596 32.999h-38.857l-28.361-85.417a15.999 15.999 0 0 0-15.183-10.956c-.112 0-.224 0-.335.004a15.997 15.997 0 0 0-15.049 11.588l-44.484 155.262-52.353-314.108C206.535 54.893 200.333 48 192 48s-13.693 5.776-15.525 13.135L115.496 306H16v31.999h112c7.348 0 13.75-5.003 15.525-12.134l45.368-182.177 51.324 307.94c1.229 7.377 7.397 11.92 14.864 12.344.308.018.614.028.919.028 7.097 0 13.406-3.701 15.381-10.594l49.744-173.617 15.689 47.252A16.001 16.001 0 0 0 352 337.999h51.108C409.973 355.999 427.477 369 448 369c26.511 0 48-22.492 48-49 0-26.509-21.489-46.999-48-46.999z">
+                </path>
+            </symbol>
+        </defs>
+    </svg>
+    {% block stylesheets %}
+        <style>
+            #bootstrap-table {
+                overflow-x: scroll;
+                overflow-y: scroll;
+            {#max-width: 100%;#}
+                display: block;
+                white-space: nowrap;
+            }
+            th, td{ text-align: center; }
 
-{% block stylesheets %}
-<style>
-    #bootstrap-table {
-        overflow-x: scroll;
-        overflow-y: scroll;
-    {#max-width: 100%;#}
-    display: block;
-    white-space: nowrap;
-    }
-    th, td{ text-align: center; }
+            th {
+                font-weight: bold;
+            }
+            .dataTables_length label {
+            {#padding-left: 20px;#}
+            }
+            .sorting, .sorting_asc {
+                font-family: 'NanumSquareB';
+            }
 
-    th {
-        font-weight: bold;
-    }
-    .dataTables_length label {
-    {#padding-left: 20px;#}
-    }
-    .sorting, .sorting_asc {
-        font-family: 'NanumSquareB';
-    }
-
-</style>
-{% endblock stylesheets %}
+        </style>
+    {% endblock stylesheets %}
 {% endblock %}
 
 {% block javascript %}
 
-<script src="{% static 'dist/js/app.js' %}"></script>
-<script src="{% static 'dist/js/settings.js' %}"></script>
+    <script src="{% static 'dist/js/app.js' %}"></script>
+    <script src="{% static 'dist/js/settings.js' %}"></script>
 
-{#            <script src="{% static 'assets/js/jquery.min.js' %}"></script>#}
+    {#            <script src="{% static 'assets/js/jquery.min.js' %}"></script>#}
 
-{# 이 친구를 키면 bootstrap이 켜진다! #}
-{#            <script src="{% static 'assets/js/app.js' %}"></script>#}
-{#            <script src="{% static 'assets/js/settings.js' %}"></script>#}
+    {# 이 친구를 키면 bootstrap이 켜진다! #}
+    {#            <script src="{% static 'assets/js/app.js' %}"></script>#}
+    {#            <script src="{% static 'assets/js/settings.js' %}"></script>#}
 
-{# 이 친구를 키면 javascipt 작동된다! #}
-{#            <script src="{% static 'src/js/app.js' %}"></script>#}
-{#            <script src="{% static 'src/js/settings.js' %}"></script>#}
-
-
-<!-- *** 페이지네이션 *** -->
-<script>
-    window.onload = function() {
-        $(function() {
-            $('#bootstrap-table').DataTable({
-                pageLength: 25,
-                // columnDefs: {
-                //     className: "dt-center", targets: "_all"
-                // },
-                // lengthChange: false,
-                // bFilter: true,
-                // autoWidth: true,
-                // autoAdjustHeight: true;
-                // autoplay: true,
-                // lengthAdjust: false,
-                // scrollY: "60vh",
-                // sScrollX: "100%",
-                // sScrollXInner: "50%",
-                // scrollCollapse: false,
-                // paging: true,
-                // responsive: true,
-            });
-            // $('#datatables-dashboard-products').closest('.dataTables_scrollBody').css('max-height', '100%');
-            $('#bootstrap-table').DataTable().draw();
-
-            var table = $('#bootstrap-table').DataTable();
-
-            // $('#bootstrap-table tbody').on( 'click', 'tr', function () {
-            //     console.log('#bootstrap-table tbody');
-            //     $(this).toggleClass('selected').css("background-color", "#F5E6C4");
-            // });
-
-            // 데이터 row 선택하기 (multiple rows selected)
-            $('#bootstrap-table tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                    // $(this).toggleClass('selected');
-                    $(this).css("background-color", "#F5E6C4");
-                }
-                else {
-                    // table.$('tr.selected').removeClass('selected');
-                    // $(this).addClass('selected');
-                    $(this).toggleClass('selected');
-                    $(this).css("background-color", "transparent");
-                }
+    {# 이 친구를 키면 javascipt 작동된다! #}
+    {#            <script src="{% static 'src/js/app.js' %}"></script>#}
+    {#            <script src="{% static 'src/js/settings.js' %}"></script>#}
 
 
-            });
+    <!-- *** 페이지네이션 *** -->
+    <script>
+        window.onload = function() {
+            $(function() {
+                $('#bootstrap-table').DataTable({
+                    pageLength: 25,
+                {#columnDefs: {#}
+                {#  className: "dt-center", targets: "_all"}#}
+                {#},#}
+                    {#lengthChange: false,#}
+                    {#bFilter: true,#}
+                    {#autoWidth: true,#}
+                    {#autoAdjustHeight: true;#}
+                    {#autoplay: true,#}
+                    {#lengthAdjust: false,#}
+                    {#scrollY: "60vh",#}
+                    {#sScrollX: "100%",#}
+                    {#sScrollXInner: "50%",#}
+                    {#scrollCollapse: false,#}
+                    {#paging: true,#}
+                    {#responsive: true,#}
+                });
+                {#$('#datatables-dashboard-products').closest('.dataTables_scrollBody').css('max-height', '100%');#}
+                $('#bootstrap-table').DataTable().draw();
 
-            // #f4f7fc #F5E6C4
+                var table = $('#bootstrap-table').DataTable();
 
-        });
+                {#$('#bootstrap-table tbody').on( 'click', 'tr', function () {#}
+                {#    console.log('#bootstrap-table tbody');#}
+                {#    $(this).toggleClass('selected').css("background-color", "#F5E6C4");#}
+                {#});#}
 
-        // DateTimePicker 원본 API
-        $(function() {
-            // Daterangepicker
-            $("input[name=\"daterange\"]").daterangepicker({
-                opens: "left"
-            });
-            $("input[name=\"datetimes\"]").daterangepicker({
-                timePicker: true,
-                opens: "left",
-                startDate: moment().startOf("hour"),
-                endDate: moment().startOf("hour").add(32, "hour"),
-                locale: {
-                    format: "M/DD"
-                }
-            });
-            $("input[name=\"datesingle\"]").daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true
-            });
-            var start = moment().subtract(29, "days");
-            var end = moment();
+                    // 데이터 row 선택하기 (multiple rows selected)
+                    $('#bootstrap-table tbody').on('click', 'tr', function () {
+                        if ($(this).hasClass('selected')) {
+                            $(this).removeClass('selected');
+                            {#$(this).toggleClass('selected').#}
+                            $(this).css("background-color", "#F5E6C4");
+                        }
+                        else {
+                            {#table.$('tr.selected').removeClass('selected');#}
+                            {#$(this).addClass('selected');#}
+                            $(this).toggleClass('selected');
+                            $(this).css("background-color", "transparent");
+                        }
 
-            function cb(start, end) {
-                $("#reportrange span").html(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
+
+                    });
+
+                    // #f4f7fc #F5E6C4
+
+                });
+
+                // DateTimePicker 원본 API
+                $(function() {
+                    // Daterangepicker
+                    $("input[name=\"daterange\"]").daterangepicker({
+                        opens: "left"
+                    });
+                    $("input[name=\"datetimes\"]").daterangepicker({
+                        timePicker: true,
+                        opens: "left",
+                        startDate: moment().startOf("hour"),
+                        endDate: moment().startOf("hour").add(32, "hour"),
+                        locale: {
+                            format: "M/DD"
+                        }
+                    });
+                    $("input[name=\"datesingle\"]").daterangepicker({
+                        singleDatePicker: true,
+                        showDropdowns: true
+                    });
+                    var start = moment().subtract(29, "days");
+                    var end = moment();
+
+                    function cb(start, end) {
+                        $("#reportrange span").html(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
+                    }
+
+                    $("#reportrange").daterangepicker({
+                        startDate: start,
+                        endDate: end,
+                        ranges: {
+                            "Today": [moment(), moment()],
+                            "Yesterday": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+                            "Last 7 Days": [moment().subtract(6, "days"), moment()],
+                            "Last 30 Days": [moment().subtract(29, "days"), moment()],
+                            "This Month": [moment().startOf("month"), moment().endOf("month")],
+                            "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+                        }
+                    }, cb);
+                    cb(start, end);
+
+                    // Datetimepicker
+                    $('#datetimepicker-date').datetimepicker({
+                        format: 'L'
+                    });
+                    $('#datetimepicker-date2').datetimepicker({
+                        format: 'L'
+                    });
+                });
+
+
+                // Select Data row (테이블 데이터 선택하기)
+
             }
 
-            $("#reportrange").daterangepicker({
-                startDate: start,
-                endDate: end,
-                ranges: {
-                    "Today": [moment(), moment()],
-                    "Yesterday": [moment().subtract(1, "days"), moment().subtract(1, "days")],
-                    "Last 7 Days": [moment().subtract(6, "days"), moment()],
-                    "Last 30 Days": [moment().subtract(29, "days"), moment()],
-                    "This Month": [moment().startOf("month"), moment().endOf("month")],
-                    "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
-                }
-            }, cb);
-            cb(start, end);
-
-            // Datetimepicker
-            $('#datetimepicker-date').datetimepicker({
-                format: 'L'
-            });
-            $('#datetimepicker-date2').datetimepicker({
-                format: 'L'
-            });
-        });
-
-
-        // Select Data row (테이블 데이터 선택하기)
-
-    }
-
-</script>
+    </script>
 
 {% endblock javascript %}
 
