@@ -11,7 +11,7 @@ class Order(models.Model):
     customer = models.CharField(db_column='customer', max_length=20)
     customer_phone = models.CharField(db_column='customer_phone', max_length=11)
     order_type = models.ForeignKey(information_models.Order_type, related_name='order', on_delete=models.CASCADE, db_column='order_type')
-    pay = models.ForeignKey(information_models.Pay, related_name='order', on_delete=models.CASCADE, db_column='pay')
+    pay_type = models.ForeignKey(information_models.Pay_type, related_name='order', on_delete=models.CASCADE, db_column='pay_type')
     pay_check = models.CharField(db_column='pay_check', max_length=1)
 
     class Meta:
