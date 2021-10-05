@@ -1116,15 +1116,22 @@
                                             <tbody>
                                             <!-- 새로운 정보를 입력받을 공란 -->
                                             <tr>
-                                                <td><input type="checkbox" name="select"></td>
-                                                <td>6</td>
-                                                <td><input type="text" placeholder="입력"></td>
-                                                <td><input type="text" placeholder="입력"></td>
-                                                <td><input type="text" placeholder="입력"></td>
-                                                <td><input type="text" placeholder="입력"></td>
-                                                <td class="table-action" style="text-align: center;">
-                                                    <button class="btn mb-1 btn-primary">등록</button>
-                                                </td>
+                                                <form action="/employee_register" method="POST" id="empTable">
+                                                    <td><input type="checkbox" name="select"></td>
+                                                    <td>6</td>
+                                                    <td><input type="text" placeholder="입력" name="name"></td>
+                                                    <td><input type="text" placeholder="입력" name="rank"></td>
+                                                    <td><input type="text" placeholder="입력" name="hire"></td>
+                                                    <td>
+                                                        <select name="auth">
+                                                            <option>관리자</option>
+                                                            <option>사원</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="table-action" style="text-align: center;">
+                                                        <button class="btn mb-1 btn-primary" type="submit">등록</button>
+                                                    </td>
+                                                </form>
                                             </tr>
                                             <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
                                             <tr>
@@ -1211,5 +1218,10 @@
 <script src="{% static '/dist/js/app.js' %}"></script>
 <script src="{% static '/dist/js/settings.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<script>
+    function employee_register() {
+        location.href = "{% url 'information:employee_register' %}";
+    }
+</script>
 
 {% endblock javascript %}

@@ -5,7 +5,8 @@ from datetime import datetime
 
 
 class Order(models.Model):
-    order_no = models.CharField(db_column='order_no', max_length=14, primary_key=True)
+    pk_no = models.AutoField(db_column='pno', primary_key=True)
+    order_no = models.CharField(db_column='order_no', max_length=14)
     order_date = models.DateTimeField(db_column='order_date', default=datetime.now)
     customer = models.CharField(db_column='customer', max_length=20)
     customer_phone = models.CharField(db_column='customer_phone', max_length=11)
@@ -19,7 +20,7 @@ class Order(models.Model):
 
 class Order_item(models.Model):
     order_item_no = models.AutoField(db_column='order_item_id', primary_key=True)
-    order_no = models.ForeignKey(Order, related_name='order_item', on_delete=models.CASCADE, db_column='order_no')
+    pk_no = models.ForeignKey(Order, related_name='order_item', on_delete=models.CASCADE, db_column='pk_no')
     product_id = models.ForeignKey(information_models.Product, related_name='order_item', on_delete=models.CASCADE, db_column='product_id')
     state = models.CharField(db_column='state', max_length=20)
     receipt_date = models.DateTimeField(db_column='receipt_date', )

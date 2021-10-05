@@ -1,10 +1,16 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 
 # Create your views here.
 
-def home(request):
-    return render(request, 'home.html')
 
 def information(request):
     return render(request, 'information.html')
+
+
+def employee_register(request):
+
+
+    return render(request, 'information.html')
+
