@@ -1,4 +1,10 @@
 from django.shortcuts import render
+from django.views.generic import CreateView
+from requests import request
+
+from order_list.forms import ListCreationOrderForm
+from order_list.models import Order
+
 
 def first_test(request):
     return render(request, 'list.html')
@@ -48,3 +54,15 @@ def first_test(request):
             20) 주문메모 
         11. 페이지네이션 (pagination)
 '''
+
+
+# class OrderListCreation(CreateView):
+#     model = Order
+#     form = ListCreationOrderForm
+#     context_object_name = 'order_list'
+#     template_name = 'list/first/list.html'
+
+def order_list_creation(request):
+    form = ListCreationOrderForm()
+
+    return render(request, 'list.html', {'form': form})
