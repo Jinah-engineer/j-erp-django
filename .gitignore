@@ -1,9 +1,10 @@
 # Virtual Env #
 .venv/
 
-# Python #
+# pycharm private settings #
 .idea/
-__pycache__/
 
+# Python #
+__pycache__/
 migrations/
 __init__.py

@@ -1,15 +1,22 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import *
 
 
 # Create your views here.
-
-
 def information(request):
 
-    form = EmployeeForm(request.POST)
+    return render(request, 'information.html')
 
-    return render(request, 'information.html', {'form': form})
+
+def emp_insert(request):
+    emp_name = request.GET['emp_name']
+    emp_rank = request.GET['emp_rank']
+    emp_hire = request.GET['emp_hire']
+    emp_auth = request.GET['emp_auth']
+    if emp_name and emp_rank and emp_hire and emp_auth != "":
+        rows = Employee.objects.create(employee_name=emp_name, employee_rank=emp_rank, employee_auth=emp_auth, hiredate=emp_hire)
+        return redirect('/information')
+    else:
+        return redirect('/information')
 
