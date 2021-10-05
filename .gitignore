@@ -1,5 +1,5 @@
 # Virtual Env #
-/.venv/
+.venv/
 
 # pycharm private settings #
 .idea/
