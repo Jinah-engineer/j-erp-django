@@ -14,6 +14,8 @@
 
     <!--  main content  -->
     <main class="content">
+
+
         <div class="container-fluid">
 
             <div class="header">
@@ -42,9 +44,9 @@
                             <a class="list-group-item list-group-item-action active" data-toggle="list" href="#category" role="tab">
                                 제품
                             </a>
-<!--                            <a class="list-group-item list-group-item-action" data-toggle="list" href="#product" role="tab">-->
-<!--                                제품 등록-->
-<!--                            </a>-->
+                            <!--                            <a class="list-group-item list-group-item-action" data-toggle="list" href="#product" role="tab">-->
+                            <!--                                제품 등록-->
+                            <!--                            </a>-->
                             <a class="list-group-item list-group-item-action" data-toggle="list" href="#product-size" role="tab">
                                 제품 옵션 - 사이즈
                             </a>
@@ -1099,7 +1101,12 @@
                                         </div>
                                     </div>
 
+
                                     <div class="card">
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            {{ form }}
+                                        </form>
                                         <table class="table">
                                             <thead>
                                             <!-- 표 양식 -->
@@ -1116,22 +1123,24 @@
                                             <tbody>
                                             <!-- 새로운 정보를 입력받을 공란 -->
                                             <tr>
-                                                <form action="/employee_register" method="POST" id="empTable">
-                                                    <td><input type="checkbox" name="select"></td>
-                                                    <td>6</td>
-                                                    <td><input type="text" placeholder="입력" name="name"></td>
-                                                    <td><input type="text" placeholder="입력" name="rank"></td>
-                                                    <td><input type="text" placeholder="입력" name="hire"></td>
-                                                    <td>
-                                                        <select name="auth">
-                                                            <option>관리자</option>
-                                                            <option>사원</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="table-action" style="text-align: center;">
-                                                        <button class="btn mb-1 btn-primary" type="submit">등록</button>
-                                                    </td>
-                                                </form>
+
+
+                                                <!--                                                <form action="/employee_register" method="POST" id="empTable">-->
+                                                <!--                                                    <td><input type="checkbox" name="select"></td>-->
+                                                <!--                                                    <td>6</td>-->
+                                                <!--                                                    <td><input type="text" placeholder="입력" name="name"></td>-->
+                                                <!--                                                    <td><input type="text" placeholder="입력" name="rank"></td>-->
+                                                <!--                                                    <td><input type="text" placeholder="입력" name="hire"></td>-->
+                                                <!--                                                    <td>-->
+                                                <!--                                                        <select name="auth">-->
+                                                <!--                                                            <option>관리자</option>-->
+                                                <!--                                                            <option>사원</option>-->
+                                                <!--                                                        </select>-->
+                                                <!--                                                    </td>-->
+                                                <!--                                                    <td class="table-action" style="text-align: center;">-->
+                                                <!--                                                        <button class="btn mb-1 btn-primary" type="submit">등록</button>-->
+                                                <!--                                                    </td>-->
+                                                <!--                                                </form>-->
                                             </tr>
                                             <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
                                             <tr>

@@ -5,6 +5,7 @@ class Employee(models.Model):
     employee_id = models.AutoField(db_column='employee_id', primary_key=True)
     employee_name = models.CharField(db_column='employee_name', max_length=255)
     employee_rank = models.CharField(db_column='employee_rank', max_length=50)
+    employee_auth = models.CharField(db_column='auth', max_length=20)
     hiredate = models.DateTimeField(db_column='hiredate')
 
     class Meta:
@@ -19,12 +20,12 @@ class Delivery(models.Model):
         db_table = 'delivery'
 
 
-class Pay(models.Model):
-    pay_id = models.AutoField(db_column='pay_id', primary_key=True)
-    pay_name = models.CharField(db_column='pay_name', max_length=50)
+class Pay_type(models.Model):
+    pay_type_id = models.AutoField(db_column='pay_type_id', primary_key=True)
+    pay_type_name = models.CharField(db_column='pay_type_name', max_length=50)
 
     class Meta:
-        db_table = 'pay'
+        db_table = 'pay_type'
 
 
 class Order_type(models.Model):

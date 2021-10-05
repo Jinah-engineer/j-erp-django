@@ -1,16 +1,15 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from .models import *
+from .forms import *
 
 
 # Create your views here.
 
 
 def information(request):
-    return render(request, 'information.html')
 
+    form = EmployeeForm(request.POST)
 
-def employee_register(request):
-
-
-    return render(request, 'information.html')
+    return render(request, 'information.html', {'form': form})
 
