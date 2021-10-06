@@ -82,37 +82,38 @@ def board_insert(request):
     else:
         return redirect('/board_write')
 '''
-
+# 주문서 페이지 출력
 def new_order(request):
-
     return render(request, 'sheet.html')
 
-def create_new_order(request):
-    # 주문 접수자 - accounts_user
-    # 주문 No. _order_no
+# 새로운 주문서 작성
+# def create_new_order(request):
+    # 주문 접수자 - employee_name
+    # 주문 No. _ order_no
     # 주문일자 - order_date
-    # 주문 경로 - order_type
+    # 주문 경로 - order_type_name
     # 고객명 - customer
     # 연락처 - customer_phone
-    # 수령방법 - delivery_option
+    # 수령방법 - delivery_option_name
     # 납품일자 - receipt_date
-    # 도착시간 -
+    # 도착시간 - receipt_hour
     # 품목이름 - product_name
-    # 사이즈옵션 - size_name
-    # 필링옵션 - filling_name
-    # 시트옵션 - sheet_name
-    # 포장옵션 - boxing_name
-    # 문구옵션 -
+    # 사이즈옵션 - size_option_name
+    # 필링옵션 - filling_option_name
+    # 시트옵션 - sheet_option_name
+    # 포장옵션 - boxing_option_name
+    # 문구옵션 - phrase
     # 수량 - count
     # 결제 금액 - total_price
     # 결제 여부 - pay_check
-    # 결제 방법 - pay_type
+    # 결제 방법 - pay_type_name
     # 수령인명 - recipient
     # 수령인 연락처 - recipient_phone
-    # 수령인 주소 - address
-    # 수령인 상세주소
+    # 수령인 주소 - address1
+    # 수령인 상세주소 - address2
     # 주문메모 - memo
+    # 상태 - status
 
 
-    return redirect('/list')
+    # return redirect('/list')
 
