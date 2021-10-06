@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from requests import request
 
 # from order_list.forms import ListCreationOrderForm
 from order_list.models import Order
