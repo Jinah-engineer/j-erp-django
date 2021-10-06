@@ -1,16 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
 from django.views.generic import CreateView
 
 from order_list.models import Order
-from order_sheet.forms import SheetCreationOrder
-
-
-def first_test(request):
-    return render(request, 'sheet.html')
-
 
 '''
     1. 주문 접수자
@@ -69,18 +63,56 @@ def first_test(request):
         - list up 된 모든 value들 database 및 화면으로 최종적으로 넘겨주는 역할을 함
 '''
 
+'''
+def board_write(request):
 
-class OrderSheetCreation(CreateView):
-    model = Order
-    form_class = SheetCreationOrder
-    context_object_name = 'order_sheet'
-    template_name = 'sheet/first/sheet.html'
+    # form = CreateBoard()
 
-    # def form_valid(self, form):
-    #     temp_order = form.save(commit=False)
-    #     temp_order.writer = self.request.user
-    #     temp_order.save()
-    #     return super().form_valid(form)
-    #
-    # def get_success_url(self):
-    #     return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
+    return render(request, "board_write.html")
+
+def board_insert(request):
+    btitle = request.GET['b_title']
+    bnote = request.GET['b_note']
+    bwriter = request.GET['b_writer']
+
+    if btitle != "":
+        rows = Board.objects.create(b_title=btitle, b_note=bnote, b_writer=bwriter)
+        return redirect('/board')
+
+    else:
+        return redirect('/board_write')
+'''
+
+def new_order(request):
+
+    return render(request, 'sheet.html')
+
+def create_new_order(request):
+    # 주문 접수자 - accounts_user
+    # 주문 No. _order_no
+    # 주문일자 - order_date
+    # 주문 경로 - order_type
+    # 고객명 - customer
+    # 연락처 - customer_phone
+    # 수령방법 - delivery_option
+    # 납품일자 - receipt_date
+    # 도착시간 -
+    # 품목이름 - product_name
+    # 사이즈옵션 - size_name
+    # 필링옵션 - filling_name
+    # 시트옵션 - sheet_name
+    # 포장옵션 - boxing_name
+    # 문구옵션 -
+    # 수량 - count
+    # 결제 금액 - total_price
+    # 결제 여부 - pay_check
+    # 결제 방법 - pay_type
+    # 수령인명 - recipient
+    # 수령인 연락처 - recipient_phone
+    # 수령인 주소 - address
+    # 수령인 상세주소
+    # 주문메모 - memo
+
+
+    return redirect('/list')
+
