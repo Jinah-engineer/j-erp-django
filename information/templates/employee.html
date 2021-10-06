@@ -236,8 +236,10 @@
                 var content = data_tr.children[i].innerHTML;
 
                 data_tr.children[i].innerHTML = "";
-                if (i < 4) {
+                if (i < 3) {
                     data_tr.children[i].innerHTML = "<input type='text' value='" + content + "'>";
+                } else if(i === 3) {
+
                 } else if(i === 4) {
                     data_tr.children[i].innerHTML = "<input type='text' value=''>";
                 } else if(i === 5) {
