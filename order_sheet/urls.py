@@ -1,7 +1,6 @@
 from django.urls import path
 
-from order_sheet.views import new_order
-
+x
 app_name = "sheet"
 
 urlpatterns = [
