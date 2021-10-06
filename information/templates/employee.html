@@ -120,12 +120,13 @@
                                                     <thead>
                                                     <!-- 표 양식 -->
                                                     <tr>
-                                                        <th style="width:10%;">번호</th>
-                                                        <th style="width:15%">이름</th>
-                                                        <th style="width:15%">직급</th>
-                                                        <th style="width:25%">입사일</th>
+                                                        <th style="width:15%;">번호</th>
+                                                        <th style="width:10%">이름</th>
+                                                        <th style="width:10%">직급</th>
+                                                        <th style="width:15%">입사일</th>
+                                                        <th style="width:10%">퇴사일</th>
                                                         <th style="width:15%">권한</th>
-                                                        <th style="width:15%;"></th>
+                                                        <th style="width:20%;"></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -135,8 +136,10 @@
                                                         <td><input type="text" placeholder="입력" name="emp_name"></td>
                                                         <td><input type="text" placeholder="입력" name="emp_rank"></td>
                                                         <td><input type="text" placeholder="입력" name="emp_hire"></td>
+                                                        <td><input type="text" placeholder=" -" name="emp_fire" readonly></td>
                                                         <td>
                                                             <select name="emp_auth">
+                                                                <option>==선택==</option>
                                                                 <option>관리자</option>
                                                                 <option>사원</option>
                                                             </select>
@@ -146,33 +149,51 @@
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
-                                                    {% for i in employee_table %}
-                                                        <tr id="databox_{{ i.employee_id }}">
-                                                            <td class="d-none d-md-table-cell">{{ i.employee_id }} </td>
-                                                            <td class="d-none d-md-table-cell">{{ i.employee_name }} </td>
-                                                            <td class="d-none d-md-table-cell">{{ i.employee_rank }} </td>
-                                                            <td class="d-none d-md-table-cell">{{ i.hiredate }} </td>
-                                                            <td class="d-none d-md-table-cell">{{ i.employee_auth }} </td>
-                                                            <td class="" style="text-align: center;">
-                                                                <button class="btn mb-1 btn-danger" id="changeBtn_{{ i.employee_id }}"
-                                                                        onclick="changeBtn({{ i.employee_id }})">수정
-                                                                </button>
-                                                                <button class="btn btn-success" id="confirmBtn_{{ i.employee_id }}"
-                                                                        style="display: none" onclick="deleteEmp({{ i.employee_id }});">
-                                                                    <i class="fas fa-check"></i>
-                                                                </button>
-                                                                <button class="btn btn-danger" id="deleteBtn_{{ i.employee_id }}" style="display: none">
-                                                                    <i class="fas fa-times"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    {% endfor %}
-
                                                     </tbody>
                                                 </table>
                                             </form>
                                             <!-- employee form end -->
+                                            <table class="table">
+                                                <thead>
+                                                <!-- 표 양식 -->
+                                                <tr>
+                                                    <th style="width:15%;"></th>
+                                                    <th style="width:10%"></th>
+                                                    <th style="width:10%"></th>
+                                                    <th style="width:15%"></th>
+                                                    <th style="width:10%"></th>
+                                                    <th style="width:15%"></th>
+                                                    <th style="width:20%;"></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                                {% for i in employee_table %}
+                                                    <tr id="databox_{{ i.employee_id }}">
+                                                        <td class="d-none d-md-table-cell">{{ i.employee_id }} </td>
+                                                        <td class="d-none d-md-table-cell">{{ i.employee_name }} </td>
+                                                        <td class="d-none d-md-table-cell">{{ i.employee_rank }} </td>
+                                                        <td class="d-none d-md-table-cell">{{ i.hiredate }} </td>
+                                                        <td class="d-none d-md-table-cell">{{ i.firedate }} </td>
+                                                        <td class="d-none d-md-table-cell">{{ i.employee_auth }} </td>
+                                                        <td class="" style="text-align: center;">
+                                                            <button class="btn mb-1 btn-danger" id="changeBtn_{{ i.employee_id }}"
+                                                                    onclick="changeBtn({{ i.employee_id }})">수정
+                                                            </button>
+                                                            <button class="btn btn-success" id="confirmBtn_{{ i.employee_id }}"
+                                                                    style="display: none" onclick="deleteEmp({{ i.employee_id }});">
+                                                                <i class="fas fa-check"></i>
+                                                            </button>
+                                                            <button class="btn btn-danger" id="deleteBtn_{{ i.employee_id }}" style="display: none">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+
+                                                </tbody>
+                                            </table>
+
                                         </div>
 
                                     </div>
@@ -196,6 +217,7 @@
     <script>
         <!-- 수정 버튼 클릭 -->
         function changeBtn(id) {
+
             event.preventDefault();
             var btn = document.getElementById("changeBtn_" + id)
             var btn_confirm = btn.nextSibling.nextSibling;
@@ -209,13 +231,27 @@
             console.log(data_tr);
             {#console.log(data_tr.children);#}
 
-            for(var i = 1; i < 5; i++) {
+            for(var i = 1; i < 6; i++) {
                 console.log(data_tr.children[i]);
-                var content = data_tr.children[i];
-                {#data_tr.children[i].innerHTML = "";#}
-                {#data_tr.children[i].innerHTML = "<input type='text' value='" + content + "'>";#}
+                var content = data_tr.children[i].innerHTML;
+
+                data_tr.children[i].innerHTML = "";
+                if (i < 4) {
+                    data_tr.children[i].innerHTML = "<input type='text' value='" + content + "'>";
+                } else if(i === 4) {
+                    data_tr.children[i].innerHTML = "<input type='text' value=''>";
+                } else if(i === 5) {
+                    data_tr.children[i].innerHTML = "<select name='update_auth'><option selected>==선택==</option><option >관리자</option><option>사원</option></select>";
+                }
             }
 
+            console.log(data_tr.children);
+
+            var name = data_tr.children;
+            name[1].firstChild.setAttribute('name', 'update_name');
+            name[2].firstChild.setAttribute('name', 'update_rank');
+            name[3].firstChild.setAttribute('name', 'update_hire');
+            name[4].firstChild.setAttribute('name', 'update_fire');
 
         }
 

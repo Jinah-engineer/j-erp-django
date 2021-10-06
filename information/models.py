@@ -7,7 +7,7 @@ class Employee(models.Model):
     employee_rank = models.CharField(db_column='employee_rank', max_length=50)
     employee_auth = models.CharField(db_column='auth', max_length=20)
     hiredate = models.DateField(db_column='hiredate')
-    firedate = models.DateField(db_column='firedate')
+    firedate = models.DateField(db_column='firedate', null=True)
 
     class Meta:
         db_table = 'employee'

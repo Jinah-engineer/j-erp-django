@@ -39,6 +39,26 @@ def emp_insert(request):
         return redirect('information:emp_view')
 
 
+# @csrf_exempt
+# def emp_update(request):
+#     emp_id = request.GET['employee_id']
+#     emp_name = request.GET['emp_name']
+#     emp_rank = request.GET['emp_rank']
+#     emp_hire = request.GET['emp_hire']
+#     emp_fire = request.GET['emp_fire']
+#     emp_auth = request.GET['emp_auth']
+#
+#     try:
+#         rows = Employee.objects.get(employee_id = emp_id)
+#         if emp_name != "":
+#             rows.employee_name = emp_name
+#         if emp_rank != "":
+#             rows.employee_rank = emp_rank
+#         if emp_hire != "":
+#             rows.hiredate = emp_hire
+#
+
+
 @csrf_exempt
 def emp_delete(request):
     emp_id = request.GET['employee_id']
