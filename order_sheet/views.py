@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.generic import CreateView
 
 from order_list.models import Order
-from order_sheet.forms import SheetCreationOrder, SheetCreationOrderItem
+from order_sheet.forms import SheetCreationOrder
 
 
 def first_test(request):
@@ -72,7 +72,7 @@ def first_test(request):
 
 class OrderSheetCreation(CreateView):
     model = Order
-    form_class = SheetCreationOrder, SheetCreationOrderItem
+    form_class = SheetCreationOrder
     context_object_name = 'order_sheet'
     template_name = 'sheet/first/sheet.html'
 

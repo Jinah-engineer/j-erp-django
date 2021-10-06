@@ -120,7 +120,6 @@
                                                     <thead>
                                                     <!-- 표 양식 -->
                                                     <tr>
-                                                        <th><input type="checkbox" name="allSelect"></th>
                                                         <th style="width:10%;">번호</th>
                                                         <th style="width:15%">이름</th>
                                                         <th style="width:15%">직급</th>
@@ -132,7 +131,6 @@
                                                     <tbody>
                                                     <!-- 새로운 정보를 입력받을 공란 -->
                                                     <tr>
-                                                        <td><input type="checkbox" name="select"></td>
                                                         <td>{{ last_id }}</td>
                                                         <td><input type="text" placeholder="입력" name="emp_name"></td>
                                                         <td><input type="text" placeholder="입력" name="emp_rank"></td>
@@ -151,10 +149,6 @@
                                                     <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
                                                     {% for i in employee_table %}
                                                         <tr id="databox_{{ i.employee_id }}">
-                                                            <td class="d-none d-md-table-cell">
-                                                                <input type="checkbox" name="select"
-                                                                       id="select_{{ i.employee_id }}"/>
-                                                            </td>
                                                             <td class="d-none d-md-table-cell">{{ i.employee_id }} </td>
                                                             <td class="d-none d-md-table-cell">{{ i.employee_name }} </td>
                                                             <td class="d-none d-md-table-cell">{{ i.employee_rank }} </td>
@@ -213,6 +207,15 @@
 
             var data_tr = document.getElementById("databox_" + id);
             console.log(data_tr);
+            {#console.log(data_tr.children);#}
+
+            for(var i = 1; i < 5; i++) {
+                console.log(data_tr.children[i]);
+                var content = data_tr.children[i];
+                {#data_tr.children[i].innerHTML = "";#}
+                {#data_tr.children[i].innerHTML = "<input type='text' value='" + content + "'>";#}
+            }
+
 
         }
 

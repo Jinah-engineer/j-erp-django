@@ -13,8 +13,13 @@ def information(request):
 
 
 def employee_view(request):
+
     rsBoard = Employee.objects.all().order_by('-employee_id')
-    last_id = Employee.objects.last().employee_id + 1
+
+    if Employee.objects.first() is not None:
+        last_id = Employee.objects.last().employee_id + 1
+    else:
+        last_id = 1
 
     context = {"last_id": last_id, "employee_table": rsBoard}
 

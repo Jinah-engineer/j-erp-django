@@ -3,10 +3,11 @@ from django.db import models
 
 class Employee(models.Model):
     employee_id = models.AutoField(db_column='employee_id', primary_key=True)
-    employee_name = models.CharField(db_column='employee_name', max_length=255)
+    employee_name = models.CharField(db_column='employee_name', max_length=50)
     employee_rank = models.CharField(db_column='employee_rank', max_length=50)
     employee_auth = models.CharField(db_column='auth', max_length=20)
-    hiredate = models.DateTimeField(db_column='hiredate')
+    hiredate = models.DateField(db_column='hiredate')
+    firedate = models.DateField(db_column='firedate')
 
     class Meta:
         db_table = 'employee'
