@@ -106,7 +106,15 @@
                                             <button style="border: none; background-color: transparent" id="select-order-person">
                                                 <i class="align-middle mr-2 far fa-fw fa-clock"></i>
                                             </button>
-                                            <input type="text" class="form-control" id="inputCity" value="13:00">
+                                            <select class="form-control select1" data-toggle="select2"
+                                                    style="" id="order-root">
+                                                <optgroup label="도착시간을 선택해주세요.">
+                                                    <option value="AK">1</option>
+                                                    <option value="AK">2</option>
+                                                    <option value="AK">3</option>
+                                                    <option value="AK">4</option>
+                                                </optgroup>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -303,9 +311,14 @@
                                         <label for="inputCity">사이즈 옵션</label>
                                         <select class="form-control mb-3">
                                             <option selected>사이즈를 선택해주세요.</option>
+                                            <option>1호</option>
                                             <option>2호</option>
                                             <option>3호</option>
                                             <option>4호</option>
+                                            <option>미니</option>
+                                            <option>1 + 3호 (2단)</option>
+                                            <option>미니 + 2호 + 4호 (3단)</option>
+                                            <option>한송이, 꽃다발</option>
                                         </select>
                                     </div>
 
@@ -313,9 +326,12 @@
                                         <label for="inputCity">필링 옵션</label>
                                         <select class="form-control mb-3">
                                             <option selected>필링을 선택해주세요.</option>
-                                            <option>2호</option>
-                                            <option>3호</option>
-                                            <option>4호</option>
+                                            <option>선택없음</option>
+                                            <option>꿀 + 견과류</option>
+                                            <option>흑임자</option>
+                                            <option>단호박</option>
+                                            <option>자색고구마</option>
+                                            <option>블루베리</option>
                                         </select>
                                     </div>
 
@@ -323,9 +339,11 @@
                                         <label for="inputCity">시트 옵션</label>
                                         <select class="form-control mb-3">
                                             <option selected>사이즈를 선택해주세요.</option>
-                                            <option>2호</option>
-                                            <option>3호</option>
-                                            <option>4호</option>
+                                            <option>백설기</option>
+                                            <option>흑임자설기</option>
+                                            <option>단호박설기</option>
+                                            <option>자색고구마설기</option>
+                                            <option>블루베리설기</option>
                                         </select>
                                     </div>
 
@@ -333,14 +351,14 @@
                                         <label for="inputCity">포장 옵션</label>
                                         <select class="form-control mb-3">
                                             <option selected>포장을 선택해주세요.</option>
-                                            <option>2호</option>
-                                            <option>3호</option>
-                                            <option>4호</option>
+                                            <option>포장없음</option>
+                                            <option>보자기</option>
+                                            <option>선물박스</option>
                                         </select>
                                     </div>
 
                                     <div class="form-floating">
-                                        <label for="inputCity">시트 옵션</label>
+                                        <label for="inputCity">문구 옵션</label>
                                         <input type="email" class="form-control" placeholder="문구를 입력해주세요.">
                                     </div>
                                 </div>

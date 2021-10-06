@@ -1,13 +1,11 @@
-from django.shortcuts import render
-from django.views.generic import CreateView
+from django.shortcuts import render, redirect
+from django.utils import timezone
 from requests import request
 
-from order_list.forms import ListCreationOrderForm
+# from order_list.forms import ListCreationOrderForm
 from order_list.models import Order
 
 
-def first_test(request):
-    return render(request, 'list.html')
 
 '''
     구현 list
@@ -55,14 +53,63 @@ def first_test(request):
         11. 페이지네이션 (pagination)
 '''
 
+# def order_list_creation(request):
+#     # create_list_order = ListCreationOrderForm(request.POST or None)
+#     # create_list_order_item = ListCreationOrderItemForm(request.POST or None)
+#
+#     order = get_object_or_404(Order, pk=pk_no)
+#
+#     if request.method == 'POST':
+#         order_list_form = ListCreationOrderForm(request.POST)
+#         order_list_item_form = ListCreationOrderItemForm(request.POST)
+#
+#             if order_list_form.is_valid():
+#                 order = form.save(commit=False)
+#                 order.order_no = '20211006_A_001'
+#                 order.order_date = timezone.now()
+#                 order.save()
+#                 return render(request, 'room.html')
+#
+#
+#             elif order_list_item_form.is_valid():
+#                 order = form.save(commit=False)
+#                 order.order_no = '20211006_A_001'
+#                 order.order_date = timezone.now()
+#                 order.save()
+#                 return render(request, 'room.html')
+#
+#     else:
+#
+#
+#     context = {'order_list_form': order_list_form,
+#                'order_list_item_form': order_list_item_form}
+#
+#     return render(request, 'index.html', context)
 
-# class OrderListCreation(CreateView):
-#     model = Order
-#     form = ListCreationOrderForm
-#     context_object_name = 'order_list'
-#     template_name = 'list/first/list.html'
+'''
+    주문서 작성
+'''
+# def create_order(request):
+#     pass
+#     if request.method == 'POST':
+#         form = ListCreationOrderForm(request.POST)
+#         if form.is_valid():
+#             order = form.save(commit=False)
+#             order.order_date = timezone.now()
+#             order.save()
+#             return redirect('list:list')
+#
+#     else:
+#         form = ListCreationOrderForm()
+#
+#     context = {'form': form}
+#     return render(request, 'list/first/list.html', context)
 
-def order_list_creation(request):
-    form = ListCreationOrderForm()
+'''
+    주문서 상세
+'''
+def order_detail_view(request):
+    # pno = request.POST['pno']
+    order_detail = Order.objects.all()
 
-    return render(request, 'list.html', {'form': form})
+    return render(request, "list.html", {'order_detail': order_detail})
