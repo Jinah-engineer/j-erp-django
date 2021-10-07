@@ -31,6 +31,7 @@ class Pay_type(models.Model):
 
 class Order_type(models.Model):
     order_type_id = models.AutoField(db_column='order_type_id', primary_key=True)
+    order_type_sym = models.CharField(db_column='order_type_sym', max_length=1)
     order_type_name = models.CharField(db_column='order_type_name', max_length=50)
 
     class Meta:
