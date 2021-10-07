@@ -26,7 +26,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <form>
+                                <form action="/create_new_order">
                                     {#                                    <div class="form-row">#}
                                     {#                                        <div class="form-group col-md-6">#}
                                     {#                                            <label for="inputEmail4">Email</label>#}
@@ -40,33 +40,33 @@
 
                                     <!-- 1번째 줄 -->
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="employee_name">주문 접수자</label>
                                             <button style="border: none; background-color: transparent" id="">
                                                 <i class="align-middle mr-2 fas fa-fw fa-user-friends"></i>
                                             </button>
-                                            <input type="text" class="form-control" id="" name="employee_name">
+                                            <input type="text" class="form-control" id="" name="employee_name" value="박진아">
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="order_no">주문 No.</label>
-                                            <input type="text" class="form-control" id="" name="order_no">
-                                        </div>
+                                        {#                                        <div class="form-group col-md-3">#}
+                                        {#                                            <label for="order_no">주문 No.</label>#}
+                                        {#                                            <input type="text" class="form-control" id="" name="order_no">#}
+                                        {#                                        </div>#}
                                         <div class="form-group col-md-4">
                                             <label for="order_date">주문일자</label>
-                                            <button style="border: none; background-color: transparent" id="select-order-person2">
-                                                <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
-                                            </button>
-                                            <input type="text" class="form-control" id="" name="order_date">
+                                            {#                                            <button style="border: none; background-color: transparent" id="select-order-person2">#}
+                                            {#                                                <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>#}
+                                            {#                                            </button>#}
+                                            <input type="date" class="form-control" id="currentDate1" name="order_date">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-4">
                                             <label for="order_type_name">주문 경로</label>
                                             <select class="form-control select1" data-toggle="select2"
                                                     style="" id="" name="order_type_name">
                                                 <optgroup label="주문 경로를 선택해주세요.">
-                                                    <option value="">전화</option>
-                                                    <option value="">메세나폴리스 매장</option>
-                                                    <option value="">스마트스토어</option>
-                                                    <option value="">카페24</option>
+                                                    <option value="A" selected>전화</option>
+                                                    <option value="B">메세나폴리스 매장</option>
+                                                    <option value="C">스마트스토어</option>
+                                                    <option value="D">카페24</option>
                                                 </optgroup>
                                             </select>
                                         </div>
@@ -85,12 +85,12 @@
                                         <div class="form-group col-md-3">
                                             <label for="delivery_option_name">수령 방법</label>
                                             <select class="form-control select1" data-toggle="select1"
-                                                    style="" id="" name="delivery_option_name">
-                                                <option value="">일반택배</option>
-                                                <option value="">메세나 픽업</option>
-                                                <option value="">작업장 픽업</option>
-                                                <option value="">퀵</option>
-                                                <option value="">지하철 택배</option>
+                                                    style="" id="order_type" name="delivery_option_name">
+                                                <option value="A" selected>일반택배</option>
+                                                <option value="B">메세나 픽업</option>
+                                                <option value="C">작업장 픽업</option>
+                                                <option value="D">퀵</option>
+                                                <option value="E">지하철 택배</option>
                                                 </optgroup>
                                             </select>
                                         </div>
@@ -99,7 +99,7 @@
                                             <button style="border: none; background-color: transparent" id="select-order-person">
                                                 <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
                                             </button>
-                                            <input type="text" class="form-control" id="" name="receipt_date">
+                                            <input type="date" class="form-control" id="currentDate2" name="receipt_date">
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="receipt_hour">도착시간</label>
@@ -109,10 +109,30 @@
                                             <select class="form-control select1" data-toggle="select2"
                                                     style="" id="" name="receipt_hour">
                                                 <optgroup label="도착시간을 선택해주세요.">
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                    <option value="">3</option>
-                                                    <option value="">4</option>
+                                                    <option value="1">1:00</option>
+                                                    <option value="2">2:00</option>
+                                                    <option value="3">3:00</option>
+                                                    <option value="4">4:00</option>
+                                                    <option value="5">5:00</option>
+                                                    <option value="6">6:00</option>
+                                                    <option value="7">7:00</option>
+                                                    <option value="8">8:00</option>
+                                                    <option value="9">9:00</option>
+                                                    <option value="10">10:00</option>
+                                                    <option value="11">11:00</option>
+                                                    <option value="12">12:00</option>
+                                                    <option value="13">13:00</option>
+                                                    <option value="14">14:00</option>
+                                                    <option value="15">15:00</option>
+                                                    <option value="16">16:00</option>
+                                                    <option value="17">17:00</option>
+                                                    <option value="18">18:00</option>
+                                                    <option value="19">19:00</option>
+                                                    <option value="20">20:00</option>
+                                                    <option value="21">21:00</option>
+                                                    <option value="22">22:00</option>
+                                                    <option value="23">23:00</option>
+                                                    <option value="24">24:00</option>
                                                 </optgroup>
                                             </select>
                                         </div>
@@ -138,7 +158,7 @@
                                                 background-color: #153d77; color: white"
                                                         data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
                                                 <div class="col-md-3">
-                                                    <input type="email" class="form-control" placeholder="옵션이름">
+                                                    <input type="email" class="form-control" placeholder="옵션이름" name="input-option-result">
                                                 </div>
                                                 <div class="col-md-1" style="padding-left: 0">
                                                     <input type="email" class="form-control" placeholder="수량">
@@ -225,7 +245,7 @@
                                             <select class="form-control select1" data-toggle="select1"
                                                     style="" id="order-root">
                                                 <option value="AK">카드</option>
-                                                <option value="HI">계좌이체</option>
+                                                <option value="HI" selected>계좌이체</option>
                                                 <option value="HI">직접 결제</option>
                                                 <option value="HI">그리고?</option>
                                                 </optgroup>
@@ -299,7 +319,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h2 style="font-family: 'NanumSquareB;" class="modal-title">옵션 선택</h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="option-modal">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -309,7 +329,7 @@
 
                                     <div class="form-floating">
                                         <label for="inputCity">사이즈 옵션</label>
-                                        <select class="form-control mb-3">
+                                        <select id="size-option" class="form-control mb-3">
                                             <option selected>사이즈를 선택해주세요.</option>
                                             <option>1호</option>
                                             <option>2호</option>
@@ -324,7 +344,7 @@
 
                                     <div class="form-floating">
                                         <label for="inputCity">필링 옵션</label>
-                                        <select class="form-control mb-3">
+                                        <select id="filling-option" class="form-control mb-3">
                                             <option selected>필링을 선택해주세요.</option>
                                             <option>선택없음</option>
                                             <option>꿀 + 견과류</option>
@@ -337,7 +357,7 @@
 
                                     <div class="form-floating">
                                         <label for="inputCity">시트 옵션</label>
-                                        <select class="form-control mb-3">
+                                        <select id="sheet-option" class="form-control mb-3">
                                             <option selected>사이즈를 선택해주세요.</option>
                                             <option>백설기</option>
                                             <option>흑임자설기</option>
@@ -349,7 +369,7 @@
 
                                     <div class="form-floating">
                                         <label for="inputCity">포장 옵션</label>
-                                        <select class="form-control mb-3">
+                                        <select id="boxing-option" class="form-control mb-3">
                                             <option selected>포장을 선택해주세요.</option>
                                             <option>포장없음</option>
                                             <option>보자기</option>
@@ -359,7 +379,7 @@
 
                                     <div class="form-floating">
                                         <label for="inputCity">문구 옵션</label>
-                                        <input type="email" class="form-control" placeholder="문구를 입력해주세요.">
+                                        <input id="phrase-option" type="email" class="form-control" placeholder="문구를 입력해주세요.">
                                     </div>
                                 </div>
 
@@ -367,18 +387,27 @@
                                     <div class="card-body">
                                         <div class="form-row">
                                             <div class="form-group col-md-12" style="margin-top: 16px;">
-                                                <input type="text" class="input-lg form-control"
-                                                       style="font-family: 'NanumSquareEB'; font-size: 15px;"
-                                                       value="여기에 최종옵션이 들어감 yo">
+                                                {#                                                <input type="text" class="input-lg form-control"#}
+                                                {#                                                       style="font-family: 'NanumSquareEB'; font-size: 15px;" id=""#}
+                                                {#                                                       value="" readonly>#}
+                                                <div style="font-family: 'NanumSquareEB'; font-size: 15px;" id="option-result">
+                                                </div>
+                                                <div style="margin: 5px 0;" id="size-result"></div>
+                                                <div style="margin: 5px 0;" id="filling-result"></div>
+                                                <div style="margin: 5px 0;" id="sheet-result"></div>
+                                                <div style="margin: 5px 0;" id="boxing-result"></div>
+                                                <div style="margin: 5px 0;" id="phrase-result"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                {#                                <button type="submit" id="test-option-submit" class="btn btn-primary">옵션 등록하기(test)</button>#}
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                <button type="button" class="btn btn-primary">옵션 등록하기</button>
+                                <button type="submit" class="btn btn-primary" id="final-option-result">옵션 등록하기</button>
                             </div>
                         </div>
                     </div>
@@ -427,8 +456,35 @@
     <script src="{% static '/dist/js/settings.js' %}"></script>
 
     <script>
+        // *** order_date (default: currentDate)
+        document.getElementById('currentDate1').value = new Date().toISOString().substring(0, 10);
+
+
+
+        // *** order_no (default: yyyymmdd-A/B/C/D-00)
+        // 옵션 값 찾기
+        let $order_date = document.getElementById('currentDate').value;
+        console.log($order_date);
+
+        let $orderNo_date = $order_date.replaceAll("-", "");
+        console.log($orderNo_date);
+
+        let $order_type = document.getElementById('order_type');
+        let $order_type_option = $order_type.options[$order_type.selectedIndex].value;
+        console.log($order_type_option)
+
+        let $option_value = $order_type.options[$order_type.selectedIndex].value;
+        console.log($option_value);
+
+        // ** status 설정 (주문완료 상태)
+
+
+    </script>
+
+
+    <script>
         $(function() {
-            // Select2
+            // *** Select2
             $(".select2").each(function() {
                 $(this)
                     .wrap("<div class=\"position-relative\"></div>")
@@ -437,11 +493,118 @@
                         dropdownParent: $(this).parent()
                     });
             })
-            // Select Orderer
+            // *** Select Orderer
             $('#select-order-person').on('click', function () {
                 console.log('working right!')
                 alert("주문자를 선택해yo ");
             });
+
+            // *** Test Option Value
+            $('#test-option-submit').on('click', function () {
+                $sizeOption = document.getElementById('size-option');
+                $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
+
+                $fillingOption = document.getElementById('filling-option');
+                $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
+
+                $sheetOption = document.getElementById('sheet-option');
+                $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
+
+                $boxingOption = document.getElementById('boxing-option');
+                $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
+
+                $phraseOptionValue = document.getElementById('phrase-option').value;
+
+                //alert($sizeOptionValue)
+
+                alert(
+                    'sizeOptionValue = ' + $sizeOptionValue + '\n'
+                    + 'fillingOptionValue = ' + $fillingOptionValue + '\n'
+                    + 'sheetOptionValue = ' + $sheetOptionValue + '\n'
+                    + 'boxingOptionValue = ' + $boxingOptionValue + '\n'
+                    + 'phraseOption = ' + $phraseOptionValue
+                )
+            })
+
+            $(function () {
+                $('#size-option').on('change', function () {
+                    $sizeOption = document.getElementById('size-option');
+                    $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
+                    document.getElementById('size-result').innerText = $sizeOptionValue;
+                })
+                $('#filling-option').on('change', function () {
+                    $fillingOption = document.getElementById('filling-option');
+                    $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
+                    document.getElementById('filling-result').innerText = $fillingOptionValue;
+                })
+                $('#sheet-option').on('change', function () {
+                    $sheetOption = document.getElementById('sheet-option');
+                    $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
+                    document.getElementById('sheet-result').innerText = $sheetOptionValue;
+                })
+                $('#boxing-option').on('change', function () {
+                    $boxingOption = document.getElementById('boxing-option');
+                    $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
+                    document.getElementById('boxing-result').innerText = $boxingOptionValue;
+                })
+                $('#phrase-option').on('change', function () {
+                    $phraseOptionValue = document.getElementById('phrase-option').value;
+                    document.getElementById('phrase-result').innerText = $phraseOptionValue;
+                })
+            })
+
+
+            // Option Modal
+            {#$(function () {#}
+            {#    const $optionFinalResult = $('#final-option-result');#}
+            {#    $optionFinalResult.click(function () {#}
+            {#        $.ajax({#}
+            {#            type: "get",#}
+            {#            url: {% url 'sheet:order_sheet' %},#}
+            {#            success: function () {#}
+            {#                $sizeOptionResult = document.getElementById('size-result').value;#}
+            {#                $fillingOptionResult = document.getElementById('filling-result').value;#}
+            {#                $sheetOptionResult = document.getElementById('sheet-result').value;#}
+            {#                $boxingOptionResult = document.getElementById('boxing-result').value;#}
+            {#                $phraseOptionResult = document.getElementById('phrase-result').value;#}
+            {##}
+            {#                $finalResult = $sizeOptionResult + " / " + $fillingOptionResult + " / "#}
+            {#                    + $sheetOptionResult + " / " + $boxingOptionResult#}
+            {#                    + " / " + $phraseOptionResult;#}
+            {##}
+            {#                $('input[name=input-option-result]').attr('value', $finalResult);#}
+            {##}
+            {#                $('#sizedModalLg').modal('hide');#}
+            {#            },#}
+            {#            error: function (xhr, status) {#}
+            {#                console.log("error!!!");#}
+            {#                alert("그만,,,");#}
+            {#                $('#sizedModalLg').modal('hide');#}
+            {#            }#}
+            {#        })#}
+            {#    });#}
+            {# });#}
+
+
+            $('#final-option-result').on('click', function () {
+                $sizeOptionResult = document.getElementById('size-result').innerHTML;
+                $fillingOptionResult = document.getElementById('filling-result').innerHTML;
+                $sheetOptionResult = document.getElementById('sheet-result').innerHTML;
+                $boxingOptionResult = document.getElementById('boxing-result').innerHTML;
+                $phraseOptionResult = document.getElementById('phrase-result').innerHTML;
+
+                $finalResult = $sizeOptionResult + " / " + $fillingOptionResult + " / "
+                    + $sheetOptionResult + " / " + $boxingOptionResult
+                    + " / " + $phraseOptionResult;
+
+                $('input[name=input-option-result]').attr('value', $finalResult);
+                $('#sizedModalLg').modal('hide');
+            })
+
         });
+
+    </script>
+
+    <script>
     </script>
 {% endblock javascript %}

@@ -83,37 +83,85 @@ def board_insert(request):
         return redirect('/board_write')
 '''
 # 주문서 페이지 출력
+'''
+    자동입력값 js 처리
+        1. employee_name - login된 user_name
+        2. order_no - 'current date' + '-' + 'order type value(A/B/C/D)' + '-' + '순서(for문?)'
+        3. order_date - current date
+'''
 def new_order(request):
+    # 주문 접수자 - employee_name (자동입력)
+
+    # 주문 No. _ order_no (자동입력)
+
+    # 주문일자 - order_date (default: 오늘날짜)
+
+
     return render(request, 'sheet.html')
 
 # 새로운 주문서 작성
-# def create_new_order(request):
-    # 주문 접수자 - employee_name
-    # 주문 No. _ order_no
-    # 주문일자 - order_date
-    # 주문 경로 - order_type_name
-    # 고객명 - customer
-    # 연락처 - customer_phone
-    # 수령방법 - delivery_option_name
-    # 납품일자 - receipt_date
-    # 도착시간 - receipt_hour
-    # 품목이름 - product_name
-    # 사이즈옵션 - size_option_name
-    # 필링옵션 - filling_option_name
-    # 시트옵션 - sheet_option_name
-    # 포장옵션 - boxing_option_name
-    # 문구옵션 - phrase
-    # 수량 - count
-    # 결제 금액 - total_price
-    # 결제 여부 - pay_check
-    # 결제 방법 - pay_type_name
-    # 수령인명 - recipient
-    # 수령인 연락처 - recipient_phone
-    # 수령인 주소 - address1
-    # 수령인 상세주소 - address2
-    # 주문메모 - memo
-    # 상태 - status
+def create_new_order(request):
 
+    employee_name = request.GET['employee_name']
+    order_date = request.GET['order_date']
+    order_type_name = request.GET['order_type_name'] ### default: 전화
+    customer = request.GET['customer']
+    customer_phone = request.GET['customer_phone']
+    delivery_option_name = request.GET['delivery_option_name'] ### default: 일반택배
+    receipt_date = request.GET['receipt_date']
+    receipt_hour = request.GET['receipt_hour']
+    product_name = request.GET['product_name']
+    size_option_name = request.GET['size_option_name']
+    filling_option_name = request.GET['filling_option_name']
+    sheet_option_name = request.GET['sheet_option_name']
+    boxing_option_name = request.GET['boxing_option_name']
+    phrase = request.GET['phrase']
+    count = request.GET['count']
+    total_price = request.GET['total_price']
+    pay_check = request.GET['pay_check']
+    pay_type_name = request.GET['pay_type_name'] ### default: 카드
+    recipient = request.GET['recipient']
+    recipient_phone = request.GET['recipient_phone']
+    address1 = request.GET['address1']
+    address2 = request.GET['address2']
+    memo = request.GET['memo']
+    status = request.GET['status']
 
-    # return redirect('/list')
+    if employee_name & order_date & order_type_name & customer & customer_phone \
+            & delivery_option_name & receipt_date & receipt_hour & product_name \
+            & size_option_name & filling_option_name & sheet_option_name & boxing_option_name \
+            & phrase & count & total_price & pay_check & pay_type_name & recipient & recipient_phone \
+            & address1 & memo & status != "":
+
+        rows = Order.objects.create(
+                employee_name=employee_name,
+                order_date=order_date,
+                order_type_name=order_type_name,
+                customer=customer,
+                customer_phone=customer_phone,
+                delivery_option_name=delivery_option_name,
+                receipt_date=receipt_date,
+                receipt_hour=receipt_hour,
+                product_name=product_name,
+                size_option_name=size_option_name,
+                filling_option_name=filling_option_name,
+                sheet_option_name=sheet_option_name,
+                boxing_option_name=boxing_option_name,
+                phrase=phrase,
+                count=count,
+                total_price=total_price,
+                pay_check=pay_check,
+                pay_type_name=pay_type_name,
+                recipient=recipient,
+                recipient_phone=recipient_phone,
+                address1=address1,
+                address2=address2,
+                memo=memo,
+                status=status
+        )
+        return redirect('/list')
+
+    else:
+        return redirect('/order_sheet')
+
 
