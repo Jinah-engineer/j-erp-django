@@ -1,3 +1,4 @@
+# ---------- 고기우 작업 ----------
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.forms.models import model_to_dict

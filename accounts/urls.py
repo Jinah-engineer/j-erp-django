@@ -1,3 +1,4 @@
+# ---------- 고기우 작업 ----------
 from django.urls import path, include
 from . import views
 

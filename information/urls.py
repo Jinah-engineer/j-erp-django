@@ -1,3 +1,4 @@
+# ---------- 고기우 작업 ----------
 from django.urls import path
 
 from information import views

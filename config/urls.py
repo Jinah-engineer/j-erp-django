@@ -1,3 +1,4 @@
+# ---------- 고기우, 박진아 공동 작업 ----------
 from django.contrib import admin
 from django.urls import path, include
 

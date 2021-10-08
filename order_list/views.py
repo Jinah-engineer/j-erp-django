@@ -1,3 +1,4 @@
+# ---------- 박진아 작업 ----------
 from django.shortcuts import render, redirect
 from django.utils import timezone
 

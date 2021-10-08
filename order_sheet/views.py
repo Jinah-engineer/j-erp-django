@@ -1,7 +1,9 @@
+# ---------- 박진아 작업 ----------
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 
 from order_list.models import Order
@@ -100,68 +102,71 @@ def new_order(request):
     return render(request, 'sheet.html')
 
 # 새로운 주문서 작성
-def create_new_order(request):
+@csrf_exempt
+def create_order(request):
 
-    employee_name = request.GET['employee_name']
-    order_date = request.GET['order_date']
-    order_type_name = request.GET['order_type_name'] ### default: 전화
-    customer = request.GET['customer']
-    customer_phone = request.GET['customer_phone']
-    delivery_option_name = request.GET['delivery_option_name'] ### default: 일반택배
-    receipt_date = request.GET['receipt_date']
-    receipt_hour = request.GET['receipt_hour']
-    product_name = request.GET['product_name']
-    size_option_name = request.GET['size_option_name']
-    filling_option_name = request.GET['filling_option_name']
-    sheet_option_name = request.GET['sheet_option_name']
-    boxing_option_name = request.GET['boxing_option_name']
-    phrase = request.GET['phrase']
-    count = request.GET['count']
-    total_price = request.GET['total_price']
-    pay_check = request.GET['pay_check']
-    pay_type_name = request.GET['pay_type_name'] ### default: 카드
-    recipient = request.GET['recipient']
-    recipient_phone = request.GET['recipient_phone']
-    address1 = request.GET['address1']
-    address2 = request.GET['address2']
-    memo = request.GET['memo']
-    status = request.GET['status']
+    employee_name = request.POST.get('employee_name')
+    order_date = request.POST.get('order_date')
+    order_type_name = request.POST.get('order_type_name') ### default: 전화
+    customer = request.POST.get('customer')
+    customer_phone = request.POST.get('customer_phone')
+    delivery_option_name = request.POST.get('delivery_option_name') ### default: 일반택배
+    receipt_date = request.POST.get('receipt_date')
+    receipt_hour = request.POST.get('receipt_hour')
+    product_name = request.POST.get('product_name')
+    size_option_name = request.POST.get('size-result')
+    filling_option_name = request.POST.get('filling-result')
+    sheet_option_name = request.POST.get('sheet-result')
+    boxing_option_name = request.POST.get('boxing-result')
+    phrase = request.POST.get('phrase-result')
+    count = request.POST.get('count')
+    total_price = request.POST.get('total_price')
+    pay_check = request.POST.getlist('pay_check')
+    pay_type_name = request.POST.get('pay_type_name') ### default: 카드
+    recipient = request.POST.get('recipient')
+    recipient_phone = request.POST.get('recipient_phone')
+    address1 = request.POST.get('address1')
+    address2 = request.POST.get('address2')
+    memo = request.POST.get('memo')
+    state = request.POST.get('state')
 
-    if employee_name & order_date & order_type_name & customer & customer_phone \
-            & delivery_option_name & receipt_date & receipt_hour & product_name \
-            & size_option_name & filling_option_name & sheet_option_name & boxing_option_name \
-            & phrase & count & total_price & pay_check & pay_type_name & recipient & recipient_phone \
-            & address1 & memo & status != "":
+    if employee_name and order_date and order_type_name and customer and customer_phone \
+            and delivery_option_name and receipt_date and receipt_hour and product_name \
+            and size_option_name and filling_option_name and sheet_option_name and boxing_option_name \
+            and phrase and count and total_price and pay_check and pay_type_name and recipient and recipient_phone \
+            and address1 and state != "":
 
         rows = Order.objects.create(
-                employee_name=employee_name,
-                order_date=order_date,
-                order_type_name=order_type_name,
-                customer=customer,
-                customer_phone=customer_phone,
-                delivery_option_name=delivery_option_name,
-                receipt_date=receipt_date,
-                receipt_hour=receipt_hour,
-                product_name=product_name,
-                size_option_name=size_option_name,
-                filling_option_name=filling_option_name,
-                sheet_option_name=sheet_option_name,
-                boxing_option_name=boxing_option_name,
-                phrase=phrase,
-                count=count,
-                total_price=total_price,
-                pay_check=pay_check,
-                pay_type_name=pay_type_name,
-                recipient=recipient,
-                recipient_phone=recipient_phone,
-                address1=address1,
-                address2=address2,
-                memo=memo,
-                status=status
+            employee_name=employee_name,
+            order_date=order_date,
+            order_type_name=order_type_name,
+            customer=customer,
+            customer_phone=customer_phone,
+            delivery_option_name=delivery_option_name,
+            receipt_date=receipt_date,
+            receipt_hour=receipt_hour,
+            product_name=product_name,
+            size_option_name=size_option_name,
+            filling_option_name=filling_option_name,
+            sheet_option_name=sheet_option_name,
+            boxing_option_name=boxing_option_name,
+            phrase=phrase,
+            count=count,
+            total_price=total_price,
+            pay_check=pay_check,
+            pay_type_name=pay_type_name,
+            recipient=recipient,
+            recipient_phone=recipient_phone,
+            address1=address1,
+            address2=address2,
+            memo=memo,
+            state=state
         )
-        return redirect('/list')
+
+        return redirect('list:orderlist')
+
 
     else:
-        return redirect('/order_sheet')
+        return redirect('sheet:order_sheet')
 
 

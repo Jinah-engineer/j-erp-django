@@ -1,3 +1,6 @@
+# ---------- 고기우, 박진아 공동 작업 ----------
+
+
 """
 Django settings for config project.
 

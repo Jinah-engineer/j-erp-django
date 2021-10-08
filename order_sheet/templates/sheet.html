@@ -1,3 +1,4 @@
+{# ---------- 박진아 작업 ---------- #}
 {% extends "base.html" %}
 {% load static %}
 
@@ -21,12 +22,13 @@
                     <p class="header-subtitle">경로 작성하기</p>
                 </div>
 
-
+                <!-- 주문서 작성 시작 -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="/create_new_order">
+                                <form action="{% url 'sheet:create_order' %}" method="post" id="create-order">
+{#                                    {{ csrf_token }}#}
                                     {#                                    <div class="form-row">#}
                                     {#                                        <div class="form-group col-md-6">#}
                                     {#                                            <label for="inputEmail4">Email</label>#}
@@ -38,7 +40,7 @@
                                     {#                                        </div>#}
                                     {#                                    </div>#}
 
-                                    <!-- 1번째 줄 -->
+                                    <!-- 주문 접수자 / 주문일자 / 주문경로 -->
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="employee_name">주문 접수자</label>
@@ -49,7 +51,7 @@
                                         </div>
                                         {#                                        <div class="form-group col-md-3">#}
                                         {#                                            <label for="order_no">주문 No.</label>#}
-                                        {#                                            <input type="text" class="form-control" id="" name="order_no">#}
+                                        <input hidden="hidden" type="text" class="form-control" id="" value="20211008_A_001" name="order_no">
                                         {#                                        </div>#}
                                         <div class="form-group col-md-4">
                                             <label for="order_date">주문일자</label>
@@ -60,7 +62,7 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="order_type_name">주문 경로</label>
-                                            <select class="form-control select1" data-toggle="select2"
+                                            <select class="form-control select1" data-toggle="select1"
                                                     style="" id="" name="order_type_name">
                                                 <optgroup label="주문 경로를 선택해주세요.">
                                                     <option value="A" selected>전화</option>
@@ -72,7 +74,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- 2번째 줄 -->
+                                    <!-- 고객명 / 연락처 / 수령방법 / 납품일자 / 도착시간 -->
                                     <div class="form-row">
                                         <div class="form-group col-md-2">
                                             <label for="customer">고객명</label>
@@ -138,7 +140,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- 3번째 줄 -->
+                                    <!-- 품목 -->
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
                                             <span>품목명</span>
@@ -151,17 +153,22 @@
                                                 <button class="item-button" style="margin-left: 50px; border-color: white;
                                                 background-color: #153d77; color: white">1</button>
                                                 <div class="col-md-3">
-                                                    <input type="email" class="form-control" placeholder="품목이름">
+                                                    <div class="ui-widget">
+                                                        <input id="products" type="text" class="form-control" name="product_name"
+                                                               style="font-family: 'NanumSquareR';" placeholder="품목이름">
+                                                    </div>
                                                 </div>
+
                                                 <button type="button" class="btn item-button"
                                                         style="border-color: white;
                                                 background-color: #153d77; color: white"
                                                         data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
                                                 <div class="col-md-3">
-                                                    <input type="email" class="form-control" placeholder="옵션이름" name="input-option-result">
+                                                    <input type="text" class="form-control" placeholder="옵션이름"
+                                                           id="input-option-result">
                                                 </div>
                                                 <div class="col-md-1" style="padding-left: 0">
-                                                    <input type="email" class="form-control" placeholder="수량">
+                                                    <input type="number" class="form-control" name="count" placeholder="수량" min="1">
                                                 </div>
                                                 <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
                                                 <button class="item-button"
@@ -169,35 +176,10 @@
                                                 background-color: darkred; color: white">X</button>
                                                 <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
                                                 <div class="col-md-2">
-                                                    <input type="email" class="form-control" placeholder="금액">
+                                                    <input type="text" name="" class="form-control" placeholder="금액">
                                                 </div>
                                             </div>
                                             <!-- 2번째 품목 -->
-                                            <div class="form-group row">
-                                                <button class="item-button" style="margin-left: 50px; border-color: white;
-                                                background-color: #153d77; color: white">2</button>
-                                                <div class="col-md-3">
-                                                    <input type="email" class="form-control" placeholder="품목이름">
-                                                </div>
-                                                <button type="button" class="btn item-button"
-                                                        style="border-color: white;
-                                                background-color: #153d77; color: white"
-                                                        data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
-                                                <div class="col-md-3">
-                                                    <input type="email" class="form-control" placeholder="옵션이름">
-                                                </div>
-                                                <div class="col-md-1" style="padding-left: 0">
-                                                    <input type="email" class="form-control" placeholder="수량">
-                                                </div>
-                                                <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
-                                                <button class="item-button"
-                                                        style="border-color: white;
-                                                background-color: darkred; color: white">X</button>
-                                                <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
-                                                <div class="col-md-2">
-                                                    <input type="email" class="form-control" placeholder="금액">
-                                                </div>
-                                            </div>
 
                                             <!-- 상품 추가 버튼 -->
                                             <div class="form-group row">
@@ -210,30 +192,34 @@
                                             <div class="form-group row" style="float: right; clear: both;">
                                                 <label style="padding-left: 20px;" class="col-form-label" for="">총</label>
                                                 <div class="col-md-10">
-                                                    <input type="email" class="form-control" placeholder="금액">
+                                                    <input type="text" class="form-control" placeholder="금액">
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
 
-                                    <!-- 4번째 줄 -->
+
+
+
+
+                                    <!-- 결제금액 / 결제여부 / 결제방법 -->
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
                                             <label for="inputCity">결제금액</label>
-                                            <input type="text" class="form-control" id="inputCity">
+                                            <input type="text" name="total_price" class="form-control" id="">
                                         </div>
                                         <div class="col-md-4" style="margin-bottom: 16px;">
                                             <label for="inputCity">결제여부</label>
                                             <div class="col-md-6" style="align-items: center;">
                                                 <label class="form-check form-check-inline" style="margin-top: 8px; margin-right: 30px;">
-                                                    <input class="form-check-input" type="radio" name="inline-radios-example" value="option1">
+                                                    <input class="form-check-input" type="radio" name="pay_check" value="option1">
                                                     <span class="form-check-label">
 												완료
 											</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inline-radios-example" value="option2">
+                                                    <input class="form-check-input" type="radio" name="pay_check" value="option2">
                                                     <span class="form-check-label">
 												미완료
 											</span>
@@ -243,16 +229,16 @@
                                         <div class="form-group col-md-4" style="margin-left: -200px;">
                                             <label for="order-root">결제 방법</label>
                                             <select class="form-control select1" data-toggle="select1"
-                                                    style="" id="order-root">
-                                                <option value="AK">카드</option>
-                                                <option value="HI" selected>계좌이체</option>
-                                                <option value="HI">직접 결제</option>
-                                                <option value="HI">그리고?</option>
+                                                    style="" name="pay_type_name" id="order-root">
+                                                <option value="A">카드</option>
+                                                <option value="B" selected>계좌이체</option>
+                                                <option value="C">직접 결제</option>
+                                                <option value="D">그리고?</option>
                                                 </optgroup>
                                             </select>
                                         </div>
                                     </div>
-                                    <!-- 5번째 줄 (동일인 체크) -->
+                                    <!-- 동일인 체크 -->
                                     <div class="form-row" style="margin-top: 20px;">
                                         <div class="form-inline">
                                             <div class="custom-control custom-checkbox mb-1 mr-sm-2">
@@ -263,45 +249,49 @@
                                         </div>
                                     </div>
 
-                                    <!-- 6번째 줄 -->
+                                    <!-- 수령인명 / 수령인 연락처 -->
                                     <div class="form-row" style="margin-top: 10px;">
                                         <div class="form-group col-md-3">
                                             <label for="inputCity">수령인명</label>
-                                            <input type="text" class="form-control" id="inputCity">
+                                            <input type="text" name="recipient" class="form-control" id="inputCity">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputCity">수령인 연락처</label>
-                                            <input type="text" class="form-control" id="inputCity">
+                                            <input type="tel" name="recipient_phone" class="form-control" id="inputCity">
                                         </div>
                                     </div>
 
-                                    <!-- 7번째 줄 -->
+                                    <!-- 수령인 주소 -->
                                     <div class="form-group row">
                                         <label style="padding-left: 12px;padding-right: 10px;"
                                                class="col-form-label" for="">수령인 주소</label>
                                         <button style="border-color: white;
                                                 background-color: #0d8ddc; color: white">우편번호 검색</button>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" id="inputCity">
+                                            <input type="text" name="address1" class="form-control" id="inputCity">
                                         </div>
                                         <div class="col-md-4" style="padding-left: 0;">
-                                            <input type="text" class="form-control" id="inputCity">
+                                            <input type="text" name="address2" class="form-control" id="inputCity">
                                         </div>
                                     </div>
 
-                                    <!-- 8번째 줄 -->
+                                    <!-- 주문메모 -->
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label class="form-label">주문메모</label>
-                                            <textarea style="width: 100%;" class="form-control" placeholder="Textarea" rows="5" cols=""></textarea>
+                                            <textarea style="width: 100%;" class="form-control" name="memo" placeholder="Textarea" rows="5" cols=""></textarea>
                                         </div>
                                     </div>
 
                                     <!-- 주문 등록 버튼 -->
                                     <div class="form-group row justify-content-center">
-                                        <button class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;">
+                                        <button type="submit" class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;">
                                             주문 등록
                                         </button>
+                                        {#                                        <button type="submit" class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;"#}
+                                        {#                                        onclick="javascript:document.getElementById('create-order').submit();">#}
+                                        {#                                                주문 등록#}
+                                        {#                                        </button>#}
                                     </div>
                                 </form>
                             </div>
@@ -330,7 +320,6 @@
                                     <div class="form-floating">
                                         <label for="inputCity">사이즈 옵션</label>
                                         <select id="size-option" class="form-control mb-3">
-                                            <option selected>사이즈를 선택해주세요.</option>
                                             <option>1호</option>
                                             <option>2호</option>
                                             <option>3호</option>
@@ -345,8 +334,7 @@
                                     <div class="form-floating">
                                         <label for="inputCity">필링 옵션</label>
                                         <select id="filling-option" class="form-control mb-3">
-                                            <option selected>필링을 선택해주세요.</option>
-                                            <option>선택없음</option>
+                                            <option selected>선택없음</option>
                                             <option>꿀 + 견과류</option>
                                             <option>흑임자</option>
                                             <option>단호박</option>
@@ -358,8 +346,7 @@
                                     <div class="form-floating">
                                         <label for="inputCity">시트 옵션</label>
                                         <select id="sheet-option" class="form-control mb-3">
-                                            <option selected>사이즈를 선택해주세요.</option>
-                                            <option>백설기</option>
+                                            <option selected>백설기</option>
                                             <option>흑임자설기</option>
                                             <option>단호박설기</option>
                                             <option>자색고구마설기</option>
@@ -370,8 +357,7 @@
                                     <div class="form-floating">
                                         <label for="inputCity">포장 옵션</label>
                                         <select id="boxing-option" class="form-control mb-3">
-                                            <option selected>포장을 선택해주세요.</option>
-                                            <option>포장없음</option>
+                                            <option selected>포장없음</option>
                                             <option>보자기</option>
                                             <option>선물박스</option>
                                         </select>
@@ -392,11 +378,18 @@
                                                 {#                                                       value="" readonly>#}
                                                 <div style="font-family: 'NanumSquareEB'; font-size: 15px;" id="option-result">
                                                 </div>
-                                                <div style="margin: 5px 0;" id="size-result"></div>
-                                                <div style="margin: 5px 0;" id="filling-result"></div>
-                                                <div style="margin: 5px 0;" id="sheet-result"></div>
-                                                <div style="margin: 5px 0;" id="boxing-result"></div>
-                                                <div style="margin: 5px 0;" id="phrase-result"></div>
+
+                                                <div style="margin: 5px 0;" id="div-size-result"></div>
+                                                <div style="margin: 5px 0;" id="div-filling-result"></div>
+                                                <div style="margin: 5px 0;" id="div-sheet-result"></div>
+                                                <div style="margin: 5px 0;" id="div-boxing-result"></div>
+                                                <div style="margin: 5px 0;" id="div-phrase-result"></div>
+
+                                                <input type="text" hidden="hidden" name="size-result" id="size-result">
+                                                <input type="text" hidden="hidden" name="filling-result" id="filling-result">
+                                                <input type="text" hidden="hidden" name="sheet-result" id="sheet-result">
+                                                <input type="text" hidden="hidden" name="boxing-result" id="boxing-result">
+                                                <input type="text" hidden="hidden" name="phrase-result" id="phrase-result">
                                             </div>
                                         </div>
                                     </div>
@@ -405,6 +398,17 @@
                                 {#                                <button type="submit" id="test-option-submit" class="btn btn-primary">옵션 등록하기(test)</button>#}
 
                             </div>
+
+
+                            <!-- 상태 -->
+                            <input name="state" type="text" hidden="hidden" value="order-completed">
+
+                            <!--
+                                1. 주문완료 : order-completed
+                                2. 제작완료 : production-completed
+                                3. 출고완료 : release-completed
+                            -->
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                                 <button type="submit" class="btn btn-primary" id="final-option-result">옵션 등록하기</button>
@@ -442,7 +446,7 @@
     #item-card {
         box-shadow: 0 2px 4px 0 rgba(126 142 177 12)
         /*
-         * 안먹힘 ;;;;
+         * 안먹힘
          */
     }
     button.item-button {
@@ -455,15 +459,87 @@
     <script src="{% static '/dist/js/app.js' %}"></script>
     <script src="{% static '/dist/js/settings.js' %}"></script>
 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script type="text/javascript">
+        // *** 품목 자동완성
+        //<![CDATA[
+        $(function() {
+            var products = [
+                '모듬돔형 앙금플라워 케이크',
+                '카네이션 모듬돔형 앙금플라워 케이크',
+                '크레센트형 앙금플라워 케이크',
+                '2단 앙금플라워 케이크',
+                '3단 앙금플라워 케이크',
+                '미니 앙금플라워 케이크',
+                '미니 앙금플라워 컵케이크',
+                '앙금꽃 망개떡 케이크',
+                '망개떡 케이크',
+                '장미포인트 망개떡 케이크',
+                '포토 앙금플라워 케이크',
+                '포토 미니 떡케이크',
+                '2단 포토 앙금플라워 케이크',
+                '행사용 주문제작 행사떡 케이크',
+                '행사용 주문 제작 예단떡',
+                '행사용 주문제작 생화케이크',
+                '흑임자알떡',
+                '무지개알떡',
+                '쑥 가래떡',
+                '들깨 가래떡',
+                '흑임자 가래떡',
+                '가래떡 3종세트',
+                '무지개 떡국떡 1KG',
+                '무지개 떡국떡 2KG',
+                '약식 반반 세트',
+                '흑임자 듬뿍 수제약식',
+                '대추고 듬뿍 수제약식',
+                '망개떡 10개',
+                '흑임자꿀찰떡 10개',
+                '쑥영양찰떡 10개',
+                '현미영양찰떡 10개',
+                '유자찰떡 10개',
+                '단호박 찰떡 10개',
+                '쇠머리떡 10개',
+                '앙치즈 찹쌀떡 15개 세트',
+                '팥쑥절미 15개',
+                '카스텔라 두텁떡 15개 세트',
+                '까마쿤 흑임자 15개 세트',
+                '백설기 10개 묶음',
+                '흑임자꿀설기 10개 묶음',
+                '기피단호박설기 10개',
+                '보리떡 10개',
+                '선물세트 답례떡',
+                '선물세트 오색 알 송편',
+                '선물세트',
+                '선물세트 효자떡 샘플러 6종',
+                '선물세트 찹쌀떡 샘플러 6종'
+            ];
+            $("#products").autocomplete({
+                source: products,
+                select: function(event, ui) {
+                    console.log(ui.item);
+                },
+                focus: function(event, ui) {
+                    return false;
+                    //event.preventDefault();
+                }
+            });
+        });
+        //]]>
+    </script>
+
+
+
+
     <script>
-        // *** order_date (default: currentDate)
+        // *** 주문날짜 Default 값 표시 - order_date (default: currentDate)
         document.getElementById('currentDate1').value = new Date().toISOString().substring(0, 10);
 
 
-
+        // *** 주문번호 만들기
         // *** order_no (default: yyyymmdd-A/B/C/D-00)
-        // 옵션 값 찾기
-        let $order_date = document.getElementById('currentDate').value;
+        let $order_date = document.getElementById('currentDate1').value;
         console.log($order_date);
 
         let $orderNo_date = $order_date.replaceAll("-", "");
@@ -476,7 +552,7 @@
         let $option_value = $order_type.options[$order_type.selectedIndex].value;
         console.log($option_value);
 
-        // ** status 설정 (주문완료 상태)
+        // ** status Default 값 표시 (주문완료 상태)
 
 
     </script>
@@ -526,35 +602,81 @@
                 )
             })
 
+
+            // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
             $(function () {
                 $('#size-option').on('change', function () {
                     $sizeOption = document.getElementById('size-option');
                     $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
-                    document.getElementById('size-result').innerText = $sizeOptionValue;
+                    document.getElementById('div-size-result').innerText = $sizeOptionValue;
+                    $('#size-result').val($sizeOptionValue);
                 })
                 $('#filling-option').on('change', function () {
                     $fillingOption = document.getElementById('filling-option');
                     $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
-                    document.getElementById('filling-result').innerText = $fillingOptionValue;
+                    document.getElementById('div-filling-result').innerText = $fillingOptionValue;
+                    $('#filling-result').val($fillingOptionValue);
+
                 })
                 $('#sheet-option').on('change', function () {
                     $sheetOption = document.getElementById('sheet-option');
                     $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
-                    document.getElementById('sheet-result').innerText = $sheetOptionValue;
+                    document.getElementById('div-sheet-result').innerText = $sheetOptionValue;
+                    $('#sheet-result').val($sheetOptionValue);
+
                 })
                 $('#boxing-option').on('change', function () {
                     $boxingOption = document.getElementById('boxing-option');
                     $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
-                    document.getElementById('boxing-result').innerText = $boxingOptionValue;
+                    document.getElementById('div-boxing-result').innerText = $boxingOptionValue;
+                    $('#boxing-result').val($boxingOptionValue);
+
                 })
                 $('#phrase-option').on('change', function () {
                     $phraseOptionValue = document.getElementById('phrase-option').value;
-                    document.getElementById('phrase-result').innerText = $phraseOptionValue;
+                    document.getElementById('div-phrase-result').innerText = $phraseOptionValue;
+                    $('#phrase-result').val($phraseOptionValue);
+
                 })
             })
 
+            $('#final-option-result').on('click', function () {
+                //$sizeOptionResult = document.getElementById('size-result').innerHTML;
+                // $fillingOptionResult = document.getElementById('filling-result').innerHTML;
+                // $sheetOptionResult = document.getElementById('sheet-result').innerHTML;
+                // $boxingOptionResult = document.getElementById('boxing-result').innerHTML;
+                // $phraseOptionResult = document.getElementById('phrase-result').innerHTML;
 
-            // Option Modal
+                $sizeOptionResult = $('#size-result').val();
+                console.log($sizeOptionResult)
+                $fillingOptionResult = $('#filling-result').val();
+                $sheetOptionResult = $('#sheet-result').val();
+                $boxingOptionResult = $('#boxing-result').val();
+                $phraseOptionResult = $('#phrase-result').val();
+
+                var list = [$sizeOptionResult, $fillingOptionResult, $sheetOptionResult, $boxingOptionResult, $phraseOptionResult];
+                console.log(list);
+
+                var finalOptionResult = "";
+
+                for (let optionlist of list) {
+                    if (optionlist != null) {
+                        console.log(optionlist)
+                        finalOptionResult += optionlist + " "
+                        console.log(finalOptionResult)
+                        $('input[id=input-option-result]').attr('value', finalOptionResult);
+                    }
+                }
+
+                {#$finalResult = $sizeOptionResult + " / " + $fillingOptionResult + " / "#}
+                {#    + $sheetOptionResult + " / " + $boxingOptionResult#}
+                {#    + " / " + $phraseOptionResult;#}
+                {##}
+                {#$('input[name=input-option-result]').attr('value', $finalResult);#}
+                $('#sizedModalLg').modal('hide');
+            })
+
+            // ajax
             {#$(function () {#}
             {#    const $optionFinalResult = $('#final-option-result');#}
             {#    $optionFinalResult.click(function () {#}
@@ -562,19 +684,6 @@
             {#            type: "get",#}
             {#            url: {% url 'sheet:order_sheet' %},#}
             {#            success: function () {#}
-            {#                $sizeOptionResult = document.getElementById('size-result').value;#}
-            {#                $fillingOptionResult = document.getElementById('filling-result').value;#}
-            {#                $sheetOptionResult = document.getElementById('sheet-result').value;#}
-            {#                $boxingOptionResult = document.getElementById('boxing-result').value;#}
-            {#                $phraseOptionResult = document.getElementById('phrase-result').value;#}
-            {##}
-            {#                $finalResult = $sizeOptionResult + " / " + $fillingOptionResult + " / "#}
-            {#                    + $sheetOptionResult + " / " + $boxingOptionResult#}
-            {#                    + " / " + $phraseOptionResult;#}
-            {##}
-            {#                $('input[name=input-option-result]').attr('value', $finalResult);#}
-            {##}
-            {#                $('#sizedModalLg').modal('hide');#}
             {#            },#}
             {#            error: function (xhr, status) {#}
             {#                console.log("error!!!");#}
@@ -584,22 +693,6 @@
             {#        })#}
             {#    });#}
             {# });#}
-
-
-            $('#final-option-result').on('click', function () {
-                $sizeOptionResult = document.getElementById('size-result').innerHTML;
-                $fillingOptionResult = document.getElementById('filling-result').innerHTML;
-                $sheetOptionResult = document.getElementById('sheet-result').innerHTML;
-                $boxingOptionResult = document.getElementById('boxing-result').innerHTML;
-                $phraseOptionResult = document.getElementById('phrase-result').innerHTML;
-
-                $finalResult = $sizeOptionResult + " / " + $fillingOptionResult + " / "
-                    + $sheetOptionResult + " / " + $boxingOptionResult
-                    + " / " + $phraseOptionResult;
-
-                $('input[name=input-option-result]').attr('value', $finalResult);
-                $('#sizedModalLg').modal('hide');
-            })
 
         });
 

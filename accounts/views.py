@@ -1,3 +1,4 @@
+# ---------- 고기우 작업 ----------
 from django.shortcuts import render
 from .models import User
 from django.contrib.auth import authenticate, login, logout
