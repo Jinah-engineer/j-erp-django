@@ -246,7 +246,7 @@
                             <div class="modal-footer">
                                 <div style="margin: 0 auto;">
                                     <button type="submit" class="btn btn-success">저장</button>
-                                    <button type="button" class="btn btn-danger">삭제</button>
+                                    <button id='delBtn' type="button" class="btn btn-danger">삭제</button>
                                 </div>
                             </div>
                         </form>
@@ -266,96 +266,7 @@
     <script src="{% static '/dist/js/settings.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
-
-
-        function paging(id){
-
-            event.preventDefault();
-
-            console.log(id);
-            var strurl = "emp_get?employee_id=" + id;
-            console.log(strurl);
-            xhr = new XMLHttpRequest();
-            console.log(xhr);
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState == 4) {
-
-                    var data = xhr.responseText;
-                    console.log(data);
-                    var obj = JSON.parse(data);
-
-                    var canvas = document.querySelectorAll(".update_area");
-
-                    var modal_id = canvas[0];
-                    var modal_name = canvas[1];
-                    var modal_rank = canvas[2];
-                    var modal_hire = canvas[3];
-                    var modal_fire = canvas[4];
-                    var modal_auth = canvas[5];
-
-                    modal_id.innerHTML = "<input type='text' name='employee_id' value='" + obj.employee_id + "' readonly/>";
-                    modal_name.innerHTML = "<input type='text' name='employee_name' value='" + obj.employee_name + "'/>";
-                    modal_rank.innerHTML = "<input type='text' name='employee_rank' value='" + obj.employee_rank + "'/>";
-                    modal_hire.innerHTML = "<input type='date' name='employee_hire' value='" + obj.hiredate + "'/>";
-                    modal_fire.innerHTML = "<input type='date' name='employee_fire' value='" + obj.firedate + "'/>";
-                    var auth_str = "<select class='form-control' name='employee_auth' >";
-                    if(obj.employee_auth === '관리자') {
-                        auth_str += "<option selected>관리자</option><option>사원</option></select>";
-                    } else {
-                        auth_str += "<option>관리자</option><option selected>사원</option></select>";
-                    }
-                    modal_auth.innerHTML = auth_str;
-                }
-            }
-            xhr.open("GET", strurl);
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            xhr.send(null);
-
-        }
-
-        <!-- 수정 버튼 클릭 -->
-        function changeBtn(id) {
-
-            event.preventDefault();
-            var btn = document.getElementById("changeBtn_" + id)
-            var btn_confirm = btn.nextSibling.nextSibling;
-            var btn_delete = btn_confirm.nextSibling.nextSibling;
-
-            btn.style.display = "none";
-            btn_confirm.style.display = "";
-            btn_delete.style.display = "";
-
-            var data_tr = document.getElementById("databox_" + id);
-            console.log(data_tr);
-            console.log(data_tr.children);
-
-            for(var i = 1; i < 6; i++) {
-                console.log(data_tr.children[i]);
-                var content = data_tr.children[i].innerHTML;
-
-                data_tr.children[i].innerHTML = "";
-                if (i < 3) {
-                    data_tr.children[i].innerHTML = "<input type='text' value='" + content + "'>";
-                } else if(i === 3) {
-
-                } else if(i === 4) {
-                    data_tr.children[i].innerHTML = "<input type='text' value=''>";
-                } else if(i === 5) {
-                    data_tr.children[i].innerHTML = "<select name='update_auth'><option selected>==선택==</option><option >관리자</option><option>사원</option></select>";
-                }
-            }
-
-            console.log(data_tr.children);
-
-            var name = data_tr.children;
-            name[1].firstChild.setAttribute('name', 'update_name');
-            name[2].firstChild.setAttribute('name', 'update_rank');
-            name[3].firstChild.setAttribute('name', 'update_hire');
-            name[4].firstChild.setAttribute('name', 'update_fire');
-
-        }
-
-        <!-- 삭제 버튼 클릭 -->
+        <!-- 비동기 처리를 위한 사전 처리 -->
         function getCookie(name) {
             console.log(1);
             var cookieValue = null;
@@ -376,29 +287,52 @@
 
         var xhr;
 
-        function deleteEmp(id) {
-             if(confirm('삭제하시겠습니까?') == false) {
-                    return false;
-                }
+        <!-- modal창에 수정 대상이 될 정보를 올리는 함수 -->
 
-                var strurl = "emp_delete?employee_id=" + id;
+        function paging(id){
 
-                xhr = new XMLHttpRequest();
-                console.log(xhr);
-                xhr.onreadystatechange = function() {
-                    if(xhr.readyState == 4) {
-                        var data = xhr.responseText;
-                        console.log(data);
-                        document.getElementById("databox_" + id).style.display = "none";
+            <!-- 버튼에 걸린 이벤트 제거 -->
+            event.preventDefault();
+            <!-- view요청경로 -->
+            var strurl = "emp_get?employee_id=" + id;
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    <!-- 비동기 요청으로 돌려받은 응답을 data에 저장 -->
+                    var data = xhr.responseText;
+                    <!-- JSON 형태로 파싱 -->
+                    var obj = JSON.parse(data);
+                    <!-- 불러온 data를 넣을 영역 특정 -->
+                    var canvas = document.querySelectorAll(".update_area");
 
-                        var obj = JSON.parse(data);
-                        alert(obj.result_msg);
-
+                    var modal_id = canvas[0];
+                    var modal_name = canvas[1];
+                    var modal_rank = canvas[2];
+                    var modal_hire = canvas[3];
+                    var modal_fire = canvas[4];
+                    var modal_auth = canvas[5];
+                    <!-- 수정할 수 있도록 input 태그로 변환 -->
+                    modal_id.innerHTML = "<input type='text' name='employee_id' value='" + obj.employee_id + "' readonly/>";
+                    modal_name.innerHTML = "<input type='text' name='employee_name' value='" + obj.employee_name + "'/>";
+                    modal_rank.innerHTML = "<input type='text' name='employee_rank' value='" + obj.employee_rank + "'/>";
+                    modal_hire.innerHTML = "<input type='date' name='employee_hire' value='" + obj.hiredate + "'/>";
+                    modal_fire.innerHTML = "<input type='date' name='employee_fire' value='" + obj.firedate + "'/>";
+                    var auth_str = "<select class='form-control' name='employee_auth' >";
+                    if(obj.employee_auth === '관리자') {
+                        auth_str += "<option selected>관리자</option><option>사원</option></select>";
+                    } else {
+                        auth_str += "<option>관리자</option><option selected>사원</option></select>";
                     }
+                    modal_auth.innerHTML = auth_str;
+                    <!-- 삭제를 위한 인자 생성 -->
+                    var del = document.getElementById("delBtn");
+                    var onclick = "location.href='/information/emp_delete?employee_id=" + obj.employee_id + "'";
+                    del.setAttribute("onclick", onclick);
                 }
-                xhr.open("GET", strurl);
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                xhr.send(null);
+            }
+            xhr.open("GET", strurl);
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.send(null);
         }
     </script>
 
