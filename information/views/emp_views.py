@@ -43,7 +43,7 @@ def emp_insert(request):
     emp_rank = request.GET['emp_rank']
     emp_hire = request.GET['emp_hire']
     emp_auth = request.GET['emp_auth']
-    if emp_name and emp_rank and emp_hire and emp_auth != "" and emp_auth != '==선택==':
+    if emp_name and emp_rank and emp_hire != "" and emp_auth != '==선택==':
         rows = Employee.objects.create(employee_name=emp_name, employee_rank=emp_rank, employee_auth=emp_auth,
                                        hiredate=emp_hire)
         return redirect('information:emp_view')
