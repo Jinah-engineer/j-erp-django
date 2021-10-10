@@ -96,15 +96,3 @@ def delivery_view(request):
     context = {"last_id": last_id, "delivery_table": delivery}
 
     return render(request, 'delivery.html', context)
-
-
-# boxing
-def boxing_view(request):
-    boxing = Boxing.objects.all().order_by('-boxing_id')
-    if Boxing.objects.first() is not None:
-        last_id = Boxing.objects.last().boxing_id + 1
-    else:
-        last_id = 1
-    context = {"last_id": last_id, "boxing_table": boxing}
-
-    return render(request, 'boxing.html', context)

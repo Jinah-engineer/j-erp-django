@@ -17,6 +17,7 @@ class Employee(models.Model):
 class Delivery(models.Model):
     delivery_id = models.AutoField(db_column='delivery_id', primary_key=True)
     delivery_name = models.CharField(db_column='delivery_name', max_length=50)
+    delivery_price = models.IntegerField(db_column='delivery_price', default=0)
 
     class Meta:
         db_table = 'delivery'

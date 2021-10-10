@@ -22,9 +22,7 @@
                     </h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/information/">기초 정보 등록</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Settings</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="/information/emp">직원</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -53,7 +51,7 @@
                                    role="tab">
                                     제품 옵션 - 필링
                                 </a>
-                                <a class="list-group-item list-group-item-action" href="boxing"
+                                <a class="list-group-item list-group-item-action" href="/information/boxing"
                                    role="tab">
                                     제품 옵션 - 포장
                                 </a>
@@ -71,7 +69,7 @@
                                     배송 유형
                                 </a>
                                 <a class="list-group-item list-group-item-action active"
-                                   href="emp"
+                                   href="/information/emp"
                                    role="tab">
                                     직원
                                 </a>
@@ -116,7 +114,7 @@
 
                                         <div class="card">
                                             <!-- employee form -->
-                                            <form action="{% url 'information:emp_insert' %}" method="GET">
+                                            <form name="insertForm" action="{% url 'information:emp_insert' %}" method="GET">
                                                 <table class="table">
                                                     <thead>
                                                     <!-- 표 양식 -->
@@ -146,7 +144,7 @@
                                                             </select>
                                                         </td>
                                                         <td class="table-action" style="text-align: center;">
-                                                            <button class="btn mb-1 btn-primary" type="submit">등록
+                                                            <button class="btn mb-1 btn-primary" type="button" onclick="checkBtn();">등록
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -185,9 +183,6 @@
         </main>
 
         <!-- update, delete modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sizedModalLg">
-            직원 정보 수정
-        </button>
         <div class="modal fade" id="sizedModalLg" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -246,7 +241,7 @@
                             <div class="modal-footer">
                                 <div style="margin: 0 auto;">
                                     <button type="submit" class="btn btn-success">저장</button>
-                                    <button id='delBtn' type="button" class="btn btn-danger">삭제</button>
+                                    <button id='delBtn' type="button" class="btn btn-danger" onclick="deleteBtn();">삭제</button>
                                 </div>
                             </div>
                         </form>
@@ -266,6 +261,26 @@
     <script src="{% static '/dist/js/settings.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
+        <!-- 폼 검증 -->
+        function checkBtn() {
+            var insertForm = document.insertForm;
+            var name = insertForm.emp_name.value;
+            var rank = insertForm.emp_rank.value;
+            var hire = insertForm.emp_hire.value;
+            var auth = insertForm.emp_auth.value;
+            if (!name) {
+                alert("이름을 입력하세요");
+            } else if (!rank) {
+                alert("직급을 입력하세요");
+            } else if (!hire) {
+                alert("입사일을 입력하세요");
+            } else if (auth === '==선택==') {
+                alert("권한을 입력하세요");
+            } else {
+                insertForm.submit();
+            }
+        }
+
         <!-- 비동기 처리를 위한 사전 처리 -->
         function getCookie(name) {
             console.log(1);
@@ -326,13 +341,21 @@
                     modal_auth.innerHTML = auth_str;
                     <!-- 삭제를 위한 인자 생성 -->
                     var del = document.getElementById("delBtn");
-                    var onclick = "location.href='/information/emp_delete?employee_id=" + obj.employee_id + "'";
-                    del.setAttribute("onclick", onclick);
+                    var delete_id = obj.employee_id;
+                    del.setAttribute("data-id", delete_id);
                 }
             }
             xhr.open("GET", strurl);
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
             xhr.send(null);
+        }
+
+        <!-- delete -->
+        function deleteBtn() {
+            var emp_id = event.currentTarget.dataset.id;
+            if(confirm('삭제하시겠습니까?')) {
+                location.href = '/information/emp_delete?employee_id=' + emp_id;
+            }
         }
     </script>
 
