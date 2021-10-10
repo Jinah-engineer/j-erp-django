@@ -1,15 +1,20 @@
 # ---------- 고기우 작업 ----------
 from django.urls import path
-from information.views import views, emp_views, boxing_views, delivery_views, filling_views
+from information.views import views, emp_views, boxing_views, delivery_views, filling_views, size_views
 
 app_name = "information"
 
 urlpatterns = [
     path('product', views.product_view, name='product_view'),
-    path('size', views.size_view, name='size_view'),
     path('sheets', views.sheets_view, name='sheets_view'),
     path('order_type', views.order_type_view, name='order_type_view'),
     path('pay_type', views.pay_type_view, name='pay_type_view'),
+
+    path('size', size_views.size_view, name='size_view'),
+    path('size_get', size_views.size_get, name='size_get'),
+    path('size_insert', size_views.size_insert, name='size_insert'),
+    path('size_update', size_views.size_update, name='size_update'),
+    path('size_delete', size_views.size_delete, name='size_delete'),
 
     path('filling', filling_views.filling_view, name='filling_view'),
     path('filling_get', filling_views.filling_get, name='fillingy_get'),

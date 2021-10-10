@@ -32,7 +32,7 @@ def employee_view(request):
     else:
         last_id = 1
 
-    context = {"last_id": last_id, "employee_table": rsBoard}
+    context = {"last_id": last_id, "employee_table": rsBoard, "test": "스크립트에서도 되나?"}
 
     return render(request, 'employee.html', context)
 

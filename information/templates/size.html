@@ -109,7 +109,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <h1>sizetable</h1>
                                         <div class="card">
                                             <!-- size form -->
                                             <form name="insertForm" action="{% url 'information:size_insert' %}" method="GET">
@@ -117,17 +117,36 @@
                                                 <thead>
                                                 <tr>
                                                     <th style="width:15%; text-align: center;">번호</th>
-                                                    <th style="width:30%">종류</th>
-                                                    <th class="d-none d-md-table-cell" style="width:30%">가격</th>
+                                                    <th style="width:25%">품목</th>
+                                                    <th style="width:20%">사이즈</th>
+                                                    <th class="d-none d-md-table-cell" style="width:20%">가격</th>
                                                     <th style="width:20%;"></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <!-- 새로운 정보를 입력받을 공란 -->
                                                 <tr>
-                                                    <td style="text-align: center";>{{ last_id }}</td>
-                                                    <td><input type="text" placeholder="입력" name="filling_name"></td>
-                                                    <td><input type="text" placeholder="입력" name="filling_price"></td>
+                                                    <td style="text-align: center;">{{ last_id }}</td>
+                                                    <td>
+                                                        <div class="">
+                                                            <select class="form-control select2" data-toggle="select2" id="select-search">
+                                                                <option value="0">상품선택</option>
+                                                                {% for i in product_dict %}
+                                                                    <optgroup label="{{ i.category_mid }}">
+                                                                    {% for j in product_dict.values %}
+                                                                        {% for k in j %}
+                                                                            {% if k.category_id_id == i.category_id %}
+                                                                                <option value="{{ k.product_id }}">{{ k.product_name }}</option>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    {% endfor %}
+                                                                    </optgroup>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td><input type="text" placeholder="입력" name="size_name"></td>
+                                                    <td><input type="text" placeholder="입력" name="size_price"></td>
                                                     <td class="table-action" style="text-align: center;">
                                                         <button class="btn mb-1 btn-primary" type="button" onclick="checkBtn();">등록
                                                         </button>
@@ -222,6 +241,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
     <script>
+        <!-- 상품목록 검색 -->
+        function listUp() {
+            var select = document.getElementById("select-search");
+            {% for i in product_dict %}
+                var optgroup = document.createElement("optgroup");
+                optgroup.setAttribute("label", "{{ i.category_mid }}");
+                optgroup.setAttribute("name", "{{ i.category_id }}");
+                select.appendChild(optgroup);
+                {% for j in product_dict.values %}
+                    {% for k in j %}
+                        {% if k.category_id_id == i.category_id %}
+                            var opt = document.createElement("option");
+                            opt.setAttribute("value", "{{ k.product_id }}");
+                            var opt_content = document.createTextNode("{{ k.product_name }}");
+                            opt.appendChild(opt_content);
+                            optgroup.appendChild(opt);
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+
+
+        }
 
         <!-- 폼 검증 -->
         function checkBtn() {
@@ -301,5 +343,17 @@
                 location.href = '/information/filling_delete?filling_id=' + filling_id;
             }
         }
+        $(function() {
+            <!-- 검색어 자동완성 -->
+            $(".select2").each(function() {
+                $(this)
+                    .wrap("<div class=\"position-relative\"></div>")
+                    .select2({
+                        placeholder: "Select value",
+                        dropdownParent: $(this).parent()
+                    });
+            })
+        });
+
     </script>
 {% endblock javascript %}
