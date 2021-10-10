@@ -86,6 +86,9 @@ class Product(models.Model):
     class Meta:
         db_table = 'product'
 
+    def __str__(self):
+        return self.product_name
+
 
 class Category(models.Model):
     category_id = models.AutoField(db_column='category_id', primary_key=True)
@@ -94,3 +97,6 @@ class Category(models.Model):
 
     class Meta:
         db_table = 'category'
+
+    def __str__(self):
+        return self.category_mid, self.category_big

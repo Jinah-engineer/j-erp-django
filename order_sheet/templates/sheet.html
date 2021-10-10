@@ -3,9 +3,9 @@
 {% load static %}
 
 {% block body %}
-    <div class="splash active">
-        <div class="splash-icon"></div>
-    </div>
+{#    <div class="splash active">#}
+{#        <div class="splash-icon"></div>#}
+{#    </div>#}
     <!-- side navbar -->
     {% include "navigation.html" %}
     <div class="main">
@@ -28,7 +28,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <form action="{% url 'sheet:create_order' %}" method="post" id="create-order">
-{#                                    {{ csrf_token }}#}
+                                    {#                                    {{ csrf_token }}#}
                                     {#                                    <div class="form-row">#}
                                     {#                                        <div class="form-group col-md-6">#}
                                     {#                                            <label for="inputEmail4">Email</label>#}
@@ -148,13 +148,14 @@
                                     </div>
                                     <div class="card" id="item-card">
                                         <div class="card-body">
+
                                             <!-- 1번째 품목 -->
                                             <div class="form-group row">
                                                 <button class="item-button" style="margin-left: 50px; border-color: white;
                                                 background-color: #153d77; color: white">1</button>
                                                 <div class="col-md-3">
                                                     <div class="ui-widget">
-                                                        <input id="products" type="text" class="form-control" name="product_name"
+                                                        <input id="products" type="text" class="form-control" name=""
                                                                style="font-family: 'NanumSquareR';" placeholder="품목이름">
                                                     </div>
                                                 </div>
@@ -179,6 +180,18 @@
                                                     <input type="text" name="" class="form-control" placeholder="금액">
                                                 </div>
                                             </div>
+
+
+                                            {% for product in products %}
+                                                {#                                                <input type="text" id="first-products-list" name="product_name" value="{{ product }}">#}
+                                                <li id="first-products-list">{{ product.product_name }}</li>
+                                            {% endfor %}
+
+
+
+
+
+
                                             <!-- 2번째 품목 -->
 
                                             <!-- 상품 추가 버튼 -->
@@ -466,6 +479,20 @@
         // *** 품목 자동완성
         //<![CDATA[
         $(function() {
+
+            // 품목 리스트
+            var productList = [];
+            {% for product in products %}
+                productList.push('{{ product.product_name }}')
+            {% endfor %}
+            console.log(productList);
+
+            // 카테고리 리스트
+            var categoryMidList = [];
+            {% for category in categories %}
+                categoryMidList.push('{{ category.category_mid }}')
+            {% endfor %}
+
             var products = [
                 '모듬돔형 앙금플라워 케이크',
                 '카네이션 모듬돔형 앙금플라워 케이크',
@@ -515,8 +542,9 @@
                 '선물세트 효자떡 샘플러 6종',
                 '선물세트 찹쌀떡 샘플러 6종'
             ];
+
             $("#products").autocomplete({
-                source: products,
+                source: productList,
                 select: function(event, ui) {
                     console.log(ui.item);
                 },
@@ -527,10 +555,8 @@
             });
         });
         //]]>
+
     </script>
-
-
-
 
     <script>
         // *** 주문날짜 Default 값 표시 - order_date (default: currentDate)

@@ -21,9 +21,4 @@ urlpatterns = [
     path('emp_update', emp_views.emp_update, name='emp_update'),
     path('emp_delete', emp_views.emp_delete, name='emp_delete'),
 
-    path('boxing', boxing_views.boxing_view, name='boxing_view'),
-    path('boxing_get', boxing_views.boxing_get, name='boxing_get'),
-    path('boxing_insert', boxing_views.boxing_insert, name='boxing_insert'),
-    path('boxing_update', boxing_views.boxing_update, name='boxing_update'),
-    path('boxing_delete', boxing_views.boxing_delete, name='boxing_delete'),
 ]

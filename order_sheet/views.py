@@ -1,11 +1,14 @@
 # ---------- 박진아 작업 ----------
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
+from rest_framework.utils import json
 
+from information.models import Product, Category
 from order_list.models import Order
 
 '''
@@ -65,26 +68,7 @@ from order_list.models import Order
         - list up 된 모든 value들 database 및 화면으로 최종적으로 넘겨주는 역할을 함
 '''
 
-'''
-def board_write(request):
-
-    # form = CreateBoard()
-
-    return render(request, "board_write.html")
-
-def board_insert(request):
-    btitle = request.GET['b_title']
-    bnote = request.GET['b_note']
-    bwriter = request.GET['b_writer']
-
-    if btitle != "":
-        rows = Board.objects.create(b_title=btitle, b_note=bnote, b_writer=bwriter)
-        return redirect('/board')
-
-    else:
-        return redirect('/board_write')
-'''
-# 주문서 페이지 출력
+# ====================== 주문서 페이지 출력
 '''
     자동입력값 js 처리
         1. employee_name - login된 user_name
@@ -93,15 +77,48 @@ def board_insert(request):
 '''
 def new_order(request):
     # 주문 접수자 - employee_name (자동입력)
-
     # 주문 No. _ order_no (자동입력)
-
     # 주문일자 - order_date (default: 오늘날짜)
 
+    products = Product.objects.all()
+    categories = Category.objects.all()
 
-    return render(request, 'sheet.html')
+    # products_name = Product.objects.values('product_name', 'product_name')
+    # category_mid_Set = Category.objects.values('category_mid')
+    # category_mid_Set_pick = Category.objects.values('category_mid').filter(category_mid='앙금플라워')
+    # print(products_name)
 
-# 새로운 주문서 작성
+    context = {
+        "products": products,
+        "categories": categories
+    }
+
+    return render(request, 'sheet.html', context)
+
+
+# ====================== 품목 등록 / 자동 완성
+def product_autocomplete(request):
+    pass
+
+
+
+
+
+# ====================== 품목 추가
+
+'''
+    1. 사용자가 품목명을 입력칸에 입력한다. 
+    2. 입력된 값(자동완성 list 값)이 기존 데이터 (카테고리 이름, 품목 이름)과 일치하는지 확인한다.
+    3. 카테고리 이름과 일치하는지 확인한다. 
+    4. 카테고리 이름과 일치하면 category_id 를 갖게된다. 
+    5. 이번에는 품목 이름과 가지고 있는 category_id가 일치하는지 확인한다.  
+    6. 일치하면 품목 이름(product_name)을 입력값으로 확정한다. 
+    
+'''
+
+
+
+# ====================== 새로운 주문서 작성
 @csrf_exempt
 def create_order(request):
 
@@ -129,6 +146,8 @@ def create_order(request):
     address2 = request.POST.get('address2')
     memo = request.POST.get('memo')
     state = request.POST.get('state')
+
+
 
     if employee_name and order_date and order_type_name and customer and customer_phone \
             and delivery_option_name and receipt_date and receipt_hour and product_name \
@@ -162,6 +181,9 @@ def create_order(request):
             memo=memo,
             state=state
         )
+
+        # 만약 사용자에게서 받아오는 product_name 과 DB 에서의 product_name 이 일치하면,
+        #
 
         return redirect('list:orderlist')
 
