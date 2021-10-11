@@ -1,5 +1,7 @@
 # ---------- 박진아 작업 ----------
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.utils import timezone
 
 # from order_list.forms import ListCreationOrderForm
@@ -53,63 +55,23 @@ from order_list.models import Order
         11. 페이지네이션 (pagination)
 '''
 
-# def order_list_creation(request):
-#     # create_list_order = ListCreationOrderForm(request.POST or None)
-#     # create_list_order_item = ListCreationOrderItemForm(request.POST or None)
-#
-#     order = get_object_or_404(Order, pk=pk_no)
-#
-#     if request.method == 'POST':
-#         order_list_form = ListCreationOrderForm(request.POST)
-#         order_list_item_form = ListCreationOrderItemForm(request.POST)
-#
-#             if order_list_form.is_valid():
-#                 order = form.save(commit=False)
-#                 order.order_no = '20211006_A_001'
-#                 order.order_date = timezone.now()
-#                 order.save()
-#                 return render(request, 'room.html')
-#
-#
-#             elif order_list_item_form.is_valid():
-#                 order = form.save(commit=False)
-#                 order.order_no = '20211006_A_001'
-#                 order.order_date = timezone.now()
-#                 order.save()
-#                 return render(request, 'room.html')
-#
-#     else:
-#
-#
-#     context = {'order_list_form': order_list_form,
-#                'order_list_item_form': order_list_item_form}
-#
-#     return render(request, 'index.html', context)
 
-'''
-    주문서 작성
-'''
-# def create_order(request):
-#     pass
-#     if request.method == 'POST':
-#         form = ListCreationOrderForm(request.POST)
-#         if form.is_valid():
-#             order = form.save(commit=False)
-#             order.order_date = timezone.now()
-#             order.save()
-#             return redirect('list:list')
-#
-#     else:
-#         form = ListCreationOrderForm()
-#
-#     context = {'form': form}
-#     return render(request, 'list/first/list.html', context)
+# ====================== 전체 주문 목록
+def order_list_view(request):
+    # pno = request.GET['pno']
+    orderDetail = Order.objects.all().order_by('-pno')
 
-'''
-    주문서 상세
-'''
-def order_detail_view(request):
-    # pno = request.POST['pno']
-    order_detail = Order.objects.all()
+    context = {
+        "orderDetail": orderDetail
+    }
 
-    return render(request, "list.html", {'order_detail': order_detail})
+    if request.is_ajax():
+        data = {
+
+            }
+
+        return JsonResponse(data)
+
+    return render(request, "list.html", context)
+
+

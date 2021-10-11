@@ -3,9 +3,9 @@
 {% load static %}
 
 {% block body %}
-{#    <div class="splash active">#}
-{#        <div class="splash-icon"></div>#}
-{#    </div>#}
+    {#    <div class="splash active">#}
+    {#        <div class="splash-icon"></div>#}
+    {#    </div>#}
     <!-- side navbar -->
     {% include "navigation.html" %}
     <div class="main">
@@ -155,7 +155,7 @@
                                                 background-color: #153d77; color: white">1</button>
                                                 <div class="col-md-3">
                                                     <div class="ui-widget">
-                                                        <input id="products" type="text" class="form-control" name=""
+                                                        <input id="products" type="text" class="form-control" name="product_name"
                                                                style="font-family: 'NanumSquareR';" placeholder="품목이름">
                                                     </div>
                                                 </div>
@@ -181,10 +181,10 @@
                                                 </div>
                                             </div>
 
-
+                                            <!-- For Loop 품목 -->
                                             {% for product in products %}
                                                 {#                                                <input type="text" id="first-products-list" name="product_name" value="{{ product }}">#}
-                                                <li id="first-products-list">{{ product.product_name }}</li>
+                                                <li hidden="hidden" id="first-products-list">{{ product.product_name }}</li>
                                             {% endfor %}
 
 
@@ -213,9 +213,6 @@
                                     </div>
 
 
-
-
-
                                     <!-- 결제금액 / 결제여부 / 결제방법 -->
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
@@ -226,19 +223,23 @@
                                             <label for="inputCity">결제여부</label>
                                             <div class="col-md-6" style="align-items: center;">
                                                 <label class="form-check form-check-inline" style="margin-top: 8px; margin-right: 30px;">
-                                                    <input class="form-check-input" type="radio" name="pay_check" value="option1">
+                                                    <input class="form-check-input" type="radio" name="pay_check" value="O" data-value="O">
                                                     <span class="form-check-label">
 												완료
 											</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="pay_check" value="option2">
+                                                    <input class="form-check-input" type="radio" name="pay_check" value="X" data-value="X">
                                                     <span class="form-check-label">
 												미완료
 											</span>
                                                 </label>
                                             </div>
                                         </div>
+
+                                        <!-- Radio Button result -->
+                                        <input type="text" hidden="hidden" id="radio-result" name="radio-result">
+
                                         <div class="form-group col-md-4" style="margin-left: -200px;">
                                             <label for="order-root">결제 방법</label>
                                             <select class="form-control select1" data-toggle="select1"
@@ -298,14 +299,30 @@
 
                                     <!-- 주문 등록 버튼 -->
                                     <div class="form-group row justify-content-center">
-                                        <button type="submit" class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;">
+                                        {#                                        <button type="submit" class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;">#}
+                                        {#                                            주문 등록#}
+                                        {#                                        </button>#}
+                                        <button type="submit" class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;"
+                                                onclick="javascript:document.getElementById('create-order').submit();">
                                             주문 등록
                                         </button>
-                                        {#                                        <button type="submit" class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;"#}
-                                        {#                                        onclick="javascript:document.getElementById('create-order').submit();">#}
-                                        {#                                                주문 등록#}
-                                        {#                                        </button>#}
                                     </div>
+
+                                    <!-- 옵션 값 (Hidden) -->
+                                    <input type="text" hidden="hidden" name="size-result" id="size-result">
+                                    <input type="text" hidden="hidden" name="filling-result" id="filling-result">
+                                    <input type="text" hidden="hidden" name="sheet-result" id="sheet-result">
+                                    <input type="text" hidden="hidden" name="boxing-result" id="boxing-result">
+                                    <input type="text" hidden="hidden" name="phrase-result" id="phrase-result">
+
+                                    <!-- 상태 -->
+                                    <input name="state" type="text" hidden="hidden" value="주문완료">
+
+                                    <!--
+                                        1. 주문완료 : order-completed
+                                        2. 제작완료 : production-completed
+                                        3. 출고완료 : release-completed
+                                    -->
                                 </form>
                             </div>
                         </div>
@@ -398,11 +415,6 @@
                                                 <div style="margin: 5px 0;" id="div-boxing-result"></div>
                                                 <div style="margin: 5px 0;" id="div-phrase-result"></div>
 
-                                                <input type="text" hidden="hidden" name="size-result" id="size-result">
-                                                <input type="text" hidden="hidden" name="filling-result" id="filling-result">
-                                                <input type="text" hidden="hidden" name="sheet-result" id="sheet-result">
-                                                <input type="text" hidden="hidden" name="boxing-result" id="boxing-result">
-                                                <input type="text" hidden="hidden" name="phrase-result" id="phrase-result">
                                             </div>
                                         </div>
                                     </div>
@@ -412,15 +424,6 @@
 
                             </div>
 
-
-                            <!-- 상태 -->
-                            <input name="state" type="text" hidden="hidden" value="order-completed">
-
-                            <!--
-                                1. 주문완료 : order-completed
-                                2. 제작완료 : production-completed
-                                3. 출고완료 : release-completed
-                            -->
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -580,7 +583,6 @@
 
         // ** status Default 값 표시 (주문완료 상태)
 
-
     </script>
 
 
@@ -628,6 +630,17 @@
                 )
             })
 
+            // Radio Button Test
+            $(function () {
+                $('input[name="pay_check"]').on('click', function () {
+                    var radio_checked = $('input[name="pay_check"]:checked').val();
+                    console.log("라디오1 = " + radio_checked);
+                    $('#radio-result').val(radio_checked);
+                })
+            })
+
+
+
 
             // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
             $(function () {
@@ -674,7 +687,6 @@
                 // $phraseOptionResult = document.getElementById('phrase-result').innerHTML;
 
                 $sizeOptionResult = $('#size-result').val();
-                console.log($sizeOptionResult)
                 $fillingOptionResult = $('#filling-result').val();
                 $sheetOptionResult = $('#sheet-result').val();
                 $boxingOptionResult = $('#boxing-result').val();
@@ -693,12 +705,6 @@
                         $('input[id=input-option-result]').attr('value', finalOptionResult);
                     }
                 }
-
-                {#$finalResult = $sizeOptionResult + " / " + $fillingOptionResult + " / "#}
-                {#    + $sheetOptionResult + " / " + $boxingOptionResult#}
-                {#    + " / " + $phraseOptionResult;#}
-                {##}
-                {#$('input[name=input-option-result]').attr('value', $finalResult);#}
                 $('#sizedModalLg').modal('hide');
             })
 
