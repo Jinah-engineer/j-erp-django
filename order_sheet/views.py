@@ -1,4 +1,6 @@
 # ---------- 박진아 작업 ----------
+import datetime
+
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 
@@ -79,7 +81,6 @@ def new_order(request):
     # 주문 접수자 - employee_name (자동입력)
     # 주문 No. _ order_no (자동입력)
     # 주문일자 - order_date (default: 오늘날짜)
-
     products = Product.objects.all()
     categories = Category.objects.all()
 
@@ -93,15 +94,30 @@ def new_order(request):
         "categories": categories
     }
 
+    print('='*20, 'order_date', '='*20)
+    current_date = datetime.date.today()
+    print(current_date)
+
+    four_digits = 0
+
+    '''
+        만약 이게 오늘(today)의 첫번째 주문이면, 
+        = orderlist 에서 주문번호(order_no) 앞 8자리가 20211011 로 시작하는 주문이 없다면
+            
+            0000 -> 0001
+            1로 시작
+            20211011_A_001
+            %04d' % num
+        
+        근데 이게 1번째가 아닌 주문이라면, 
+            1) 직전 주문의 주문번호를 확인 (orderlist 에 있는 가장 마지막 주문 번호를 확인)
+            2) 마지막 주문의 주문번호 끝자리에 + 1
+        
+        
+            
+    '''
+
     return render(request, 'sheet.html', context)
-
-
-# ====================== 품목 등록 / 자동 완성
-def product_autocomplete(request):
-    pass
-
-
-
 
 
 # ====================== 품목 추가
@@ -116,11 +132,26 @@ def product_autocomplete(request):
     
 '''
 
+# ====================== 금액 계산
+'''
+    1. 품목 금액
+        1) 품목 이름에 해당하는 금액 value 가져오기 (product.product_price) 
+        2) 해당 value X 수량(count)
+    
+    2. 옵션 금액 
+        1) 옵션별로 해당 옵션에 해당하는 금액 value 가져오기
+        2) size 옵션
+'''
+
+
 
 
 # ====================== 새로운 주문서 작성
 @csrf_exempt
 def create_order(request):
+
+    # order_no
+    order_no = '20211011-A-001'
 
     employee_name = request.POST.get('employee_name')
     order_date = request.POST.get('order_date')
@@ -130,7 +161,6 @@ def create_order(request):
     delivery_option_name = request.POST.get('delivery_option_name') ### default: 일반택배
     receipt_date = request.POST.get('receipt_date')
     receipt_hour = request.POST.get('receipt_hour')
-    product_name = request.POST.get('product_name')
     size_option_name = request.POST.get('size-result')
     filling_option_name = request.POST.get('filling-result')
     sheet_option_name = request.POST.get('sheet-result')
@@ -138,7 +168,7 @@ def create_order(request):
     phrase = request.POST.get('phrase-result')
     count = request.POST.get('count')
     total_price = request.POST.get('total_price')
-    pay_check = request.POST.getlist('pay_check')
+    pay_check = request.POST.get('radio-result')
     pay_type_name = request.POST.get('pay_type_name') ### default: 카드
     recipient = request.POST.get('recipient')
     recipient_phone = request.POST.get('recipient_phone')
@@ -146,49 +176,76 @@ def create_order(request):
     address2 = request.POST.get('address2')
     memo = request.POST.get('memo')
     state = request.POST.get('state')
+    product_name = request.POST.get('product_name')
 
-
-
+    ### 상품마다 조건이 달라져야 할 수도 있음
     if employee_name and order_date and order_type_name and customer and customer_phone \
             and delivery_option_name and receipt_date and receipt_hour and product_name \
-            and size_option_name and filling_option_name and sheet_option_name and boxing_option_name \
-            and phrase and count and total_price and pay_check and pay_type_name and recipient and recipient_phone \
-            and address1 and state != "":
+            and count and total_price and pay_check and pay_type_name and recipient and recipient_phone \
+            and address1 and state and product_name != "":
 
-        rows = Order.objects.create(
-            employee_name=employee_name,
-            order_date=order_date,
-            order_type_name=order_type_name,
-            customer=customer,
-            customer_phone=customer_phone,
-            delivery_option_name=delivery_option_name,
-            receipt_date=receipt_date,
-            receipt_hour=receipt_hour,
-            product_name=product_name,
-            size_option_name=size_option_name,
-            filling_option_name=filling_option_name,
-            sheet_option_name=sheet_option_name,
-            boxing_option_name=boxing_option_name,
-            phrase=phrase,
-            count=count,
-            total_price=total_price,
-            pay_check=pay_check,
-            pay_type_name=pay_type_name,
-            recipient=recipient,
-            recipient_phone=recipient_phone,
-            address1=address1,
-            address2=address2,
-            memo=memo,
-            state=state
-        )
+        print(employee_name)
+        print(order_date)
+        print(order_type_name)
+        print(customer)
+        print(customer_phone)
+        print(delivery_option_name)
+        print(receipt_date)
+        print(receipt_hour)
+        print(product_name)
+        print(size_option_name)
+        print(sheet_option_name)
+        print(filling_option_name)
+        print(boxing_option_name)
+        print(phrase)
+        print(count)
+        print(total_price)
+        print(pay_check)
+        print(type(pay_check))
+        print(pay_check[0])
+        print(pay_type_name)
+        print(recipient)
+        print(recipient_phone)
+        print(address1)
+        print(address2)
+        print(memo)
+        print(order_no)
 
-        # 만약 사용자에게서 받아오는 product_name 과 DB 에서의 product_name 이 일치하면,
-        #
+        try:
+            rows = Order.objects.create(
+                employee_name=employee_name,
+                order_date=order_date,
+                order_type_name=order_type_name,
+                customer=customer,
+                customer_phone=customer_phone,
+                delivery_option_name=delivery_option_name,
+                receipt_date=receipt_date,
+                receipt_hour=receipt_hour,
+                product_name=product_name,
+                size_option_name=size_option_name,
+                filling_option_name=filling_option_name,
+                sheet_option_name=sheet_option_name,
+                boxing_option_name=boxing_option_name,
+                phrase=phrase,
+                count=count,
+                total_price=total_price,
+                pay_check=pay_check,
+                pay_type_name=pay_type_name,
+                recipient=recipient,
+                recipient_phone=recipient_phone,
+                address1=address1,
+                address2=address2,
+                memo=memo,
+                state=state,
+                order_no=order_no
 
-        return redirect('list:orderlist')
+                # order_no - 'current date' + '-' + 'order type value(A/B/C/D)' + '-' + '순서(for문?)'
 
+            )
+            return redirect('list:orderlist')
+
+        except Exception as exc:
+            print("문제가 생겼다..", exc)
 
     else:
         return redirect('sheet:order_sheet')
-
-

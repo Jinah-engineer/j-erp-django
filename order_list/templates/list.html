@@ -187,10 +187,11 @@
                                     <table class="table table-bordered table-responsive table-sm"
                                            id="bootstrap-table">
                                         <thead>
-                                        <tr style="font-family: 'NanumSquareL'">
+                                        <tr style="font-family: 'NanumSquareL'" onmousedown="return false" onselect="return false">
+                                            <th hidden="hidden">pno</th>
                                             <th style="width:40%;">
                                                 주문 No.
-{#                                                <i class="align-middle mr-2 fas fa-fw fa-sort-down"></i>#}
+                                                {#                                                <i class="align-middle mr-2 fas fa-fw fa-sort-down"></i>#}
                                             </th>
                                             <th style="width:25%">주문일자</th>
                                             <th class="d-none d-md-table-cell" style="width:25%">진행상태</th>
@@ -210,356 +211,42 @@
                                             <th>연락처</th>
                                             <th>수령방법</th>
                                             <th>수령주소</th>
+                                            <th>상세주소</th>
                                             <th>납품일자</th>
+                                            <th>납품시간</th>
                                             <th>주문메모</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>20210902_B_010</td>
-                                            <td>2021-09-02</td>
-                                            <td><span class="badge badge-success">제작완료</span></td>
-                                            <td>고기우</td>
-                                            <td>흑임자알떡</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>X</td>
-                                            <td>2</td>
-                                            <td>37800</td>
-                                            <td>카페24</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>고기우</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 관악구 봉천동 1690-149</td>
-                                            <td>2021-09-10</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_B_010</td>
-                                            <td>2021-09-02</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>고기우</td>
-                                            <td>모듬돔형 앙금플라워 떡케이크</td>
-                                            <td>2호</td>
-                                            <td>자색고구마설기</td>
-                                            <td>꿀+견과류</td>
-                                            <td>보자기</td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>73000</td>
-                                            <td>카페24</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>고기우</td>
-                                            <td>01012341234</td>
-                                            <td>퀵</td>
-                                            <td>서울특별시 관악구 봉천동 1690-149</td>
-                                            <td>2021-09-19</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_009</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-success">제작완료</span></td>
-                                            <td>유지영</td>
-                                            <td>오색 알송편</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>X</td>
-                                            <td>1</td>
-                                            <td>38000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>유지영</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_008</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>장민수</td>
-                                            <td>포토 떡 케이크 미니</td>
-                                            <td>2호</td>
-                                            <td>백설기</td>
-                                            <td>꿀+견과류</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>45000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>장민수</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-warning">주문완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-primary">출고완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-primary">출고완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>20210902_A_007</td>
-                                            <td>2021-09-01</td>
-                                            <td><span class="badge badge-primary">출고완료</span></td>
-                                            <td>이지현</td>
-                                            <td>모듬 돔형 앙금플라워 떡케이크</td>
-                                            <td>3호</td>
-                                            <td>흑임자</td>
-                                            <td>흑임자</td>
-                                            <td></td>
-                                            <td>O</td>
-                                            <td>1</td>
-                                            <td>90000</td>
-                                            <td>스마트스토어</td>
-                                            <td>카드</td>
-                                            <td>O</td>
-                                            <td>박필순</td>
-                                            <td>01012341234</td>
-                                            <td>택배</td>
-                                            <td>서울특별시 마포구 포은로 42 203호</td>
-                                            <td>2021-09-10</td>
-                                            <td>맛있게 해주세요.</td>
-                                        </tr>
+                                        {% for order in orderDetail %}
+                                            <tr id="order{{ order.order_no }}">
+                                                {#                                                <td hidden="hidden" name="pno">{{ order.pno }}</td>#}
+                                                <td hidden="hidden"><input hidden="hidden" name="pno" type="text" value="{{ order.pno }}"></td>
+                                                <td><a href="https://www.naver.com/">{{ order.order_no }}</a></td>
+                                                <td>{{ order.order_date }}</td>
+                                                <td><span class="badge badge-success">{{ order.state }}</span></td>
+                                                <td>{{ order.customer }}</td>
+                                                <td>{{ order.product_name }}</td>
+                                                <td>{{ order.size_option_name }}</td>
+                                                <td>{{ order.sheet_option_name }}</td>
+                                                <td>{{ order.filling_option_name }}</td>
+                                                <td>{{ order.boxing_option_name }}</td>
+                                                <td>{{ order.phrase }}</td>
+                                                <td>{{ order.count }}</td>
+                                                <td>{{ order.total_price }}</td>
+                                                <td>{{ order.order_type_name }}</td>
+                                                <td>{{ order.pay_type_name }}</td>
+                                                <td>{{ order.pay_check }}</td>
+                                                <td>{{ order.recipient }}</td>
+                                                <td>{{ order.recipient_phone }}</td>
+                                                <td>{{ order.delivery_option_name }}</td>
+                                                <td>{{ order.address1 }}</td>
+                                                <td>{{ order.address2 }}</td>
+                                                <td>{{ order.receipt_date }}</td>
+                                                <td>{{ order.receipt_hour }}</td>
+                                                <td>{{ order.memo }}</td>
+                                            </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -586,10 +273,9 @@
         <!--    </div>-->
 
 
-
         <!-- 주문 상세/수정 modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sizedModalLg">
-            주문 상세/수정 모달 테스트 중!!!
+            주문 상세 테스트 Modal
         </button>
         <div class="modal fade" id="sizedModalLg" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -607,233 +293,233 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <form action="" method="post">
-                                                <!-- 1번째 줄 -->
-                                                <div class="form-row">
-                                                    {#                                                    <input hidden="hidden" type="text" value="{{ order.pno }}">#}
-                                                    <div class="form-group col-md-3">
-                                                        <label for="inputCity">주문 접수자</label>
-                                                        <button style="border: none; background-color: transparent" id="accounts-user">
-                                                            <i class="align-middle mr-2 fas fa-fw fa-user-friends"></i>
-                                                        </button>
-                                                        <input type="text" class="form-control" id="inputCity1" value="하민채">
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="inputCity">주문 No.</label>
-                                                        <input type="text" class="form-control" id="inputCity2" value="{{ order.order_no }}">
-                                                    </div>
-                                                    <div class="form-group col-md-4">
-                                                        <label for="inputCity">주문일자</label>
-                                                        <button style="border: none; background-color: transparent" id="select-order-person2">
-                                                            <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
-                                                        </button>
-                                                        <input type="text" class="form-control" id="inputCity4" value="{{ order.order_date }}">
-                                                    </div>
-                                                    <div class="form-group col-md-2">
-                                                        <label for="order-root">주문 경로</label>
-                                                        <input type="text" class="form-control" id="inputCity4" value="{{ order.order_type }}">
-                                                    </div>
+                                            <!-- 1번째 줄 -->
+                                            <div class="form-row">
+                                                {#                                                    <input hidden="hidden" type="text" value="{{ order.pno }}">#}
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputCity">주문 접수자</label>
+                                                    <button style="border: none; background-color: transparent" id="accounts-user">
+                                                        <i class="align-middle mr-2 fas fa-fw fa-user-friends"></i>
+                                                    </button>
+                                                    <input type="text" class="form-control" id="inputCity1" value="하민채">
                                                 </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputCitcy">주문 No.</label>
+                                                    <input type="text" class="form-control" id="inputCity2" value="{{ order.order_no }}">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputCity">주문일자</label>
+                                                    <button style="border: none; background-color: transparent" id="select-order-person2">
+                                                        <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
+                                                    </button>
+                                                    <input type="text" class="form-control" id="inputCity4" value="{{ order.order_date }}">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="order-root">주문 경로</label>
+                                                    <input type="text" class="form-control" id="inputCity4" value="{{ order.order_type }}">
+                                                </div>
+                                            </div>
 
-                                                <!-- 2번째 줄 -->
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-2">
-                                                        <label for="inputCity">고객명</label>
-                                                        <input type="text" class="form-control" name="" value="{{ order.customer }}">
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="inputCity">연락처</label>
-                                                        <input type="text" class="form-control" value="{{ order.customer_phone }}">
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="order-root">수령 방법</label>
-                                                        <select class="form-control select1" data-toggle="select1"
-                                                                style="" id="order-root">
-                                                            <option value="AK">일반택배</option>
-                                                            <option value="HI">메세나 픽업</option>
-                                                            <option value="HI">작업장 픽업</option>
-                                                            <option value="HI">퀵</option>
-                                                            <option value="HI">지하철 택배</option>
-                                                            </optgroup>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-md-2">
-                                                        <label for="inputCity">납품일자</label>
-                                                        <button style="border: none; background-color: transparent" id="select-order-person">
-                                                            <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
-                                                        </button>
-                                                        <input type="text" class="form-control" id="inputCity" value="2021-10-01">
-                                                    </div>
-                                                    <div class="form-group col-md-2">
-                                                        <label for="inputCity">도착시간</label>
-                                                        <button style="border: none; background-color: transparent" id="select-order-person">
-                                                            <i class="align-middle mr-2 far fa-fw fa-clock"></i>
-                                                        </button>
-                                                        <input type="text" class="form-control" id="inputCity" value="13:00">
-                                                    </div>
+                                            <!-- 2번째 줄 -->
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <label for="inputCity">고객명</label>
+                                                    <input type="text" class="form-control" name="" value="{{ order.customer }}">
                                                 </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputCity">연락처</label>
+                                                    <input type="text" class="form-control" value="{{ order.customer_phone }}">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="order-root">수령 방법</label>
+                                                    <select class="form-control select1" data-toggle="select1"
+                                                            style="" id="order-root">
+                                                        <option value="AK">일반택배</option>
+                                                        <option value="HI">메세나 픽업</option>
+                                                        <option value="HI">작업장 픽업</option>
+                                                        <option value="HI">퀵</option>
+                                                        <option value="HI">지하철 택배</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="inputCity">납품일자</label>
+                                                    <button style="border: none; background-color: transparent" id="select-order-person">
+                                                        <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
+                                                    </button>
+                                                    <input type="text" class="form-control" id="inputCity" value="2021-10-01">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="inputCity">도착시간</label>
+                                                    <button style="border: none; background-color: transparent" id="select-order-person">
+                                                        <i class="align-middle mr-2 far fa-fw fa-clock"></i>
+                                                    </button>
+                                                    <input type="text" class="form-control" id="inputCity" value="13:00">
+                                                </div>
+                                            </div>
 
-                                                <!-- 3번째 줄 -->
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-3">
-                                                        <span>품목명</span>
-                                                    </div>
+                                            <!-- 3번째 줄 -->
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3">
+                                                    <span>품목명</span>
                                                 </div>
-                                                <div class="card" id="item-card">
-                                                    <div class="card-body">
-                                                        <!-- 1번째 품목 -->
-                                                        <div class="form-group row">
-                                                            <button class="item-button" style="margin-left: 5px; border-color: white;
+                                            </div>
+                                            <div class="card" id="item-card">
+                                                <div class="card-body">
+                                                    <!-- 1번째 품목 -->
+                                                    <div class="form-group row">
+                                                        <button class="item-button" style="margin-left: 5px; border-color: white;
                                                 background-color: #153d77; color: white">1</button>
-                                                            <div class="col-md-4">
-                                                                <input type="email" class="form-control" placeholder="품목이름">
-                                                            </div>
-                                                            <button type="button" class="btn item-button"
-                                                                    style="border-color: white;
+                                                        <div class="col-md-4">
+                                                            <input type="email" class="form-control" placeholder="품목이름">
+                                                        </div>
+                                                        <button type="button" class="btn item-button"
+                                                                style="border-color: white;
                                                 background-color: #153d77; color: white"
-                                                                    data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
-                                                            <div class="col-md-4">
-                                                                <input type="email" class="form-control" placeholder="옵션이름">
-                                                            </div>
-                                                            <div class="col-md-1" style="padding-left: 0">
-                                                                <input type="email" class="form-control" placeholder="수량">
-                                                            </div>
-                                                            <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
-                                                            <button class="item-button"
-                                                                    style="border-color: white;
+                                                                data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
+                                                        <div class="col-md-4">
+                                                            <input type="email" class="form-control" placeholder="옵션이름">
+                                                        </div>
+                                                        <div class="col-md-1" style="padding-left: 0">
+                                                            <input type="email" class="form-control" placeholder="수량">
+                                                        </div>
+                                                        <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
+                                                        <button class="item-button"
+                                                                style="border-color: white;
                                                 background-color: darkred; color: white">X</button>
+                                                    </div>
+                                                    <div class="form-group row justify-content-end">
+                                                        <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
+                                                        <div class="col-md-4">
+                                                            <input type="email" class="form-control" placeholder="금액">
                                                         </div>
-                                                        <div class="form-group row justify-content-end">
-                                                            <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
-                                                            <div class="col-md-4">
-                                                                <input type="email" class="form-control" placeholder="금액">
-                                                            </div>
-                                                        </div>
-                                                        <!-- 2번째 품목 -->
-                                                        <div class="form-group row">
-                                                            <button class="item-button" style="margin-left: 5px; border-color: white;
+                                                    </div>
+                                                    <!-- 2번째 품목 -->
+                                                    <div class="form-group row">
+                                                        <button class="item-button" style="margin-left: 5px; border-color: white;
                                                 background-color: #153d77; color: white">1</button>
-                                                            <div class="col-md-4">
-                                                                <input type="email" class="form-control" placeholder="품목이름">
-                                                            </div>
-                                                            <button type="button" class="btn item-button"
-                                                                    style="border-color: white;
+                                                        <div class="col-md-4">
+                                                            <input type="email" class="form-control" placeholder="품목이름">
+                                                        </div>
+                                                        <button type="button" class="btn item-button"
+                                                                style="border-color: white;
                                                 background-color: #153d77; color: white"
-                                                                    data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
-                                                            <div class="col-md-4">
-                                                                <input type="email" class="form-control" placeholder="옵션이름">
-                                                            </div>
-                                                            <div class="col-md-1" style="padding-left: 0">
-                                                                <input type="email" class="form-control" placeholder="수량">
-                                                            </div>
-                                                            <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
-                                                            <button class="item-button"
-                                                                    style="border-color: white;
+                                                                data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
+                                                        <div class="col-md-4">
+                                                            <input type="email" class="form-control" placeholder="옵션이름">
+                                                        </div>
+                                                        <div class="col-md-1" style="padding-left: 0">
+                                                            <input type="email" class="form-control" placeholder="수량">
+                                                        </div>
+                                                        <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
+                                                        <button class="item-button"
+                                                                style="border-color: white;
                                                 background-color: darkred; color: white">X</button>
+                                                    </div>
+                                                    <div class="form-group row justify-content-end">
+                                                        <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
+                                                        <div class="col-md-4">
+                                                            <input type="email" class="form-control" placeholder="금액">
                                                         </div>
-                                                        <div class="form-group row justify-content-end">
-                                                            <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
-                                                            <div class="col-md-4">
-                                                                <input type="email" class="form-control" placeholder="금액">
-                                                            </div>
-                                                        </div>
+                                                    </div>
 
-                                                        <!-- 상품 추가 버튼 -->
-                                                        <div class="form-group row">
-                                                            <button class="btn btn-block" style="margin-left: 50px; margin-top: 30px;
+                                                    <!-- 상품 추가 버튼 -->
+                                                    <div class="form-group row">
+                                                        <button class="btn btn-block" style="margin-left: 50px; margin-top: 30px;
                                                  background-color: #153d77; color: white; width: 30%;">
-                                                                + 상품 추가
-                                                            </button>
-                                                        </div>
-                                                        <!-- 총 금액 표시 -->
-                                                        <div class="form-group row" style="float: right; clear: both;">
-                                                            <label style="padding-left: 20px;" class="col-form-label" for="">총</label>
-                                                            <div class="col-md-10">
-                                                                <input type="email" class="form-control" placeholder="금액">
-                                                            </div>
-                                                        </div>
-
+                                                            + 상품 추가
+                                                        </button>
                                                     </div>
+                                                    <!-- 총 금액 표시 -->
+                                                    <div class="form-group row" style="float: right; clear: both;">
+                                                        <label style="padding-left: 20px;" class="col-form-label" for="">총</label>
+                                                        <div class="col-md-10">
+                                                            <input type="email" class="form-control" placeholder="금액">
+                                                        </div>
+                                                    </div>
+
                                                 </div>
+                                            </div>
 
-                                                <!-- 4번째 줄 -->
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-2">
-                                                        <label for="inputCity">결제금액</label>
-                                                        <input type="text" class="form-control" id="inputCity">
-                                                    </div>
-                                                    <div class="col-md-6" style="margin-bottom: 16px;">
-                                                        <label for="inputCity">결제여부</label>
-                                                        <div class="col-md-6" style="align-items: center;">
-                                                            <label class="form-check form-check-inline" style="margin-top: 8px; margin-right: 30px;">
-                                                                <input class="form-check-input" type="radio" name="inline-radios-example" value="option1">
-                                                                <span class="form-check-label">
+                                            <!-- 4번째 줄 -->
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <label for="inputCity">결제금액</label>
+                                                    <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="col-md-6" style="margin-bottom: 16px;">
+                                                    <label for="inputCity">결제여부</label>
+                                                    <div class="col-md-6" style="align-items: center;">
+                                                        <label class="form-check form-check-inline" style="margin-top: 8px; margin-right: 30px;">
+                                                            <input class="form-check-input" type="radio" name="inline-radios-example" value="option1">
+                                                            <span class="form-check-label">
 												완료
 											</span>
-                                                            </label>
-                                                            <label class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="radio" name="inline-radios-example" value="option2">
-                                                                <span class="form-check-label">
+                                                        </label>
+                                                        <label class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inline-radios-example" value="option2">
+                                                            <span class="form-check-label">
 												미완료
 											</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group col-md-4" style="margin-left: -200px;">
-                                                        <label for="order-root">결제 방법</label>
-                                                        <select class="form-control select1" data-toggle="select1"
-                                                                style="" id="order-root">
-                                                            <option value="AK">카드</option>
-                                                            <option value="HI">계좌이체</option>
-                                                            <option value="HI">직접 결제</option>
-                                                            <option value="HI">그리고?</option>
-                                                            </optgroup>
-                                                        </select>
+                                                        </label>
                                                     </div>
                                                 </div>
-                                                <!-- 5번째 줄 (동일인 체크) -->
-                                                <div class="form-row" style="margin-top: 20px;">
-                                                    <div class="form-inline">
-                                                        <div class="custom-control custom-checkbox mb-1 mr-sm-2">
-                                                            <input type="checkbox" class="custom-control-input" id="customControlInline">
-                                                            <label class="custom-control-label" for="customControlInline"
-                                                                   style="color: darkgray; font-size: 13px;">주문 고객과 동일인</label>
-                                                        </div>
+                                                <div class="form-group col-md-4" style="margin-left: -200px;">
+                                                    <label for="order-root">결제 방법</label>
+                                                    <select class="form-control select1" data-toggle="select1"
+                                                            style="" id="order-root">
+                                                        <option value="AK">카드</option>
+                                                        <option value="HI">계좌이체</option>
+                                                        <option value="HI">직접 결제</option>
+                                                        <option value="HI">그리고?</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- 5번째 줄 (동일인 체크) -->
+                                            <div class="form-row" style="margin-top: 20px;">
+                                                <div class="form-inline">
+                                                    <div class="custom-control custom-checkbox mb-1 mr-sm-2">
+                                                        <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                                        <label class="custom-control-label" for="customControlInline"
+                                                               style="color: darkgray; font-size: 13px;">주문 고객과 동일인</label>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <!-- 6번째 줄 -->
-                                                <div class="form-row" style="margin-top: 10px;">
-                                                    <div class="form-group col-md-3">
-                                                        <label for="inputCity">수령인명</label>
-                                                        <input type="text" class="form-control" id="inputCity">
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        <label for="inputCity">수령인 연락처</label>
-                                                        <input type="text" class="form-control" id="inputCity">
-                                                    </div>
+                                            <!-- 6번째 줄 -->
+                                            <div class="form-row" style="margin-top: 10px;">
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputCity">수령인명</label>
+                                                    <input type="text" class="form-control" id="inputCity">
                                                 </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputCity">수령인 연락처</label>
+                                                    <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                            </div>
 
-                                                <!-- 7번째 줄 -->
-                                                <div class="form-group row">
-                                                    <label style="padding-left: 12px;padding-right: 10px;"
-                                                           class="col-form-label" for="">수령인 주소</label>
-                                                    <button style="border-color: white;
+                                            <!-- 7번째 줄 -->
+                                            <div class="form-group row">
+                                                <label style="padding-left: 12px;padding-right: 10px;"
+                                                       class="col-form-label" for="">수령인 주소</label>
+                                                <button style="border-color: white;
                                                 background-color: #0d8ddc; color: white">우편번호 검색</button>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control" id="inputCity">
-                                                    </div>
-                                                    <div class="col-md-4" style="padding-left: 0;">
-                                                        <input type="text" class="form-control" id="inputCity">
-                                                    </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" id="inputCity">
                                                 </div>
+                                                <div class="col-md-4" style="padding-left: 0;">
+                                                    <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                            </div>
 
-                                                <!-- 8번째 줄 -->
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-12">
-                                                        <label class="form-label">주문메모</label>
-                                                        <textarea style="width: 100%;" class="form-control" placeholder="Textarea" rows="5" cols=""></textarea>
-                                                    </div>
+                                            <!-- 8번째 줄 -->
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label class="form-label">주문메모</label>
+                                                    <textarea style="width: 100%;" class="form-control" placeholder="Textarea" rows="5" cols=""></textarea>
                                                 </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -886,7 +572,12 @@
             .sorting, .sorting_asc {
                 font-family: 'NanumSquareB';
             }
-
+            body {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
         </style>
     {% endblock stylesheets %}
 {% endblock %}
@@ -934,11 +625,6 @@
 
                 var table = $('#bootstrap-table').DataTable();
 
-                // $('#bootstrap-table tbody').on( 'click', 'tr', function () {
-                //     console.log('#bootstrap-table tbody');
-                //     $(this).toggleClass('selected').css("background-color", "#F5E6C4");
-                // });
-
                 // 데이터 row 선택하기 (multiple rows selected)
                 $('#bootstrap-table tbody').on('click', 'tr', function () {
                     if ($(this).hasClass('selected')) {
@@ -952,12 +638,7 @@
                         $(this).toggleClass('selected');
                         $(this).css("background-color", "transparent");
                     }
-
-
                 });
-
-                // #f4f7fc #F5E6C4
-
             });
 
             // DateTimePicker 원본 API
@@ -1008,12 +689,19 @@
                     format: 'L'
                 });
             });
-
-
-            // Select Data row (테이블 데이터 선택하기)
-
         }
+    </script>
 
+    <script>
+        $(function () {
+            // 해당 주문번호를 클릭하면, modal open (해당 주문번호에 맞는 상세화면이 뜬다)
+            // 해당 주문번호의 id -> order + pno
+            $('tr[id^="order{{ order.pno }}"] a').on('click', function () {
+                alert('click!!!!!')
+
+            });
+
+        })
     </script>
 
 {% endblock javascript %}
