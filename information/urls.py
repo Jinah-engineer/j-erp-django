@@ -11,7 +11,6 @@ urlpatterns = [
     path('category_delete', product_views.category_delete, name='category_delete'),
     # 제품
     path('product', product_views.product_view, name='product_view'),
-    path('product_get', product_views.product_get, name='product_get'),
     path('product_insert', product_views.product_insert, name='product_insert'),
     path('product_update', product_views.product_update, name='product_update'),
     path('product_delete', product_views.product_delete, name='product_delete'),

@@ -171,13 +171,26 @@
                                                                         {% if i.category_id == j.category_id_id %}
                                                                         <tr id="databox_{{ j.product_id }}">
                                                                             <td class="d-none d-md-table-cell" style="text-align: center">{{ j.product_id }} </td>
-                                                                            <td class="d-none d-md-table-cell">{{ i.category_mid }} </td>
-                                                                            <td class="d-none d-md-table-cell">{{ j.product_name }} </td>
-                                                                            <td class="d-none d-md-table-cell">{{ j.product_price }} </td>
+                                                                            <td class="d-none d-md-table-cell">
+                                                                                <select id="updateCate_{{ j.product_id }}">
+                                                                                    {% for k in category_table %}
+                                                                                        {% if k.category_id == j.category_id_id %}
+                                                                                            <option value="{{ k.category_id }}" selected>{{ k.category_mid }}</option>
+                                                                                        {% else %}
+                                                                                            <option value="{{ k.category_id }}">{{ k.category_mid }}</option>
+                                                                                        {% endif %}
+                                                                                    {% endfor %}
+                                                                                </select>
+                                                                            </td>
+                                                                            <td class="d-none d-md-table-cell">
+                                                                                <input type="text" id="updateName_{{ j.product_id }}" value="{{ j.product_name }}"/>
+                                                                            </td>
+                                                                            <td class="d-none d-md-table-cell">
+                                                                                <input type="text" id="updatePrice_{{ j.product_id }}" value="{{ j.product_price }}"/>
+                                                                            </td>
                                                                             <td class="" style="text-align: center;">
-                                                                                <button class="btn mb-1 btn-danger" id="changeBtn_{{ j.product_id }}" data-toggle="modal" data-target="#sizedModalLg"
-                                                                                        onclick="paging({{ j.product_id }})">수정
-                                                                                </button>
+                                                                                <button class="btn mb-1 btn-primary" onclick="product_updateBtn({{ j.product_id }})">수정</button>
+                                                                                <button class="btn mb-1 btn-danger" onclick="product_deleteBtn({{ j.product_id }})">삭제</button>
                                                                             </td>
                                                                         </tr>
                                                                         {% endif %}
@@ -203,62 +216,6 @@
                 </div>
             </div>
         </main>
-
-        <!-- update, delete modal -->
-        <div class="modal fade" id="sizedModalLg" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 style="font-family: 'NanumSquareB;" class="modal-title">상품 정보 수정</h2>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i class='fas fa-times'></i>
-                        </button>
-                    </div>
-                    <div class="modal-body m-3">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label class="form-label">번호</label>
-                                                <div class="update_area">
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">분류</label>
-                                                <div class="update_area">
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">이름</label>
-                                                <div class="update_area">
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label">가격</label>
-                                                <div class="update_area">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div style="margin: 0 auto;">
-                                    <button id='updBtn' type="button" class="btn btn-success" onclick="product_updateBtn();">저장</button>
-                                    <button id='delBtn' type="button" class="btn btn-danger" onclick="product_deleteBtn();">삭제</button>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- END  modal -->
 
         {% include "footer.html" %}
     </div>
@@ -392,49 +349,22 @@
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
             xhr.send(null);
         }
-        function paging(id){
 
-            var strurl = "product_get?product_id=" + id;
-            xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState == 4) {
-                    <!-- 비동기 요청으로 돌려받은 응답을 data에 저장 -->
-                    var data = xhr.responseText;
-                    <!-- JSON 형태로 파싱 -->
-                    var obj = JSON.parse(data);
-                    <!-- 불러온 data를 넣을 영역 특정 -->
-                    var canvas = document.querySelectorAll(".update_area");
-
-                    var modal_id = canvas[0];
-                    var modal_category = canvas[1];
-                    var modal_name = canvas[2];
-                    var modal_price = canvas[3];
-                    <!-- 수정할 수 있도록 input 태그로 변환 -->
-                    modal_id.innerHTML = "<input type='text' value='" + obj.product_id + "' readonly/>";
-                    modal_category.innerHTML = "<input type='text' value='" + obj.category_id + "'/>";
-                    modal_name.innerHTML = "<input type='text' value='" + obj.product_name + "'/>";
-                    modal_price.innerHTML = "<input type='date' value='" + obj.product_price + "'/>";
-                    <!-- 삭제를 위한 인자 생성 -->
-                    var del = document.getElementById("delBtn");
-                    var delete_id = obj.product_id;
-                    del.setAttribute("data-id", delete_id);
-                }
-            }
-            xhr.open("GET", strurl);
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            xhr.send(null);
-        }
-
-        function product_updateBtn(id, category_id) {
-            event.preventDefault();
-            var mid_category = document.getElementById(id);
-            var mid_value = mid_category.value;
-            if(mid_value == '') {
-                alert('정보를 입력하세요');
-                mid_category.focus();
+        function product_updateBtn(id) {
+            var category_id = document.getElementById("updateCate_" + id).value;
+            var product_name = document.getElementById("updateName_" + id);
+            var product_price = document.getElementById("updatePrice_" + id);
+            if(product_name.value == '') {
+                alert('상품을 입력하세요');
+                product_name.focus();
+                return false;
+            } else if(product_price.value == '') {
+                alert('가격을 입력하세요');
+                product_price.focus();
                 return false;
             }
-            var strurl = "category_update?category_id=" + category_id + "&mid_category=" + mid_value;
+            var strurl = "product_update?product_id=" + id + "&category_id=" + category_id + "&product_name="
+                        + product_name.value + "&product_price=" + product_price.value;
             xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if(xhr.readyState == 4) {
@@ -444,28 +374,29 @@
                     alert(obj.result_msg);
                 }
             };
-            xhr.open("GET", strurl);
+            xhr.open("POST", strurl);
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
             xhr.send(null);
         }
         function product_deleteBtn(id) {
-            event.preventDefault();
-            var strurl = "category_delete?category_id=" + id;
-            xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState == 4) {
-                    var data = xhr.responseText;
+            if(confirm('삭제하시겠습니까?')) {
+                var strurl = "product_delete?product_id=" + id;
+                xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4) {
+                        var data = xhr.responseText;
 
-                    var obj = JSON.parse(data);
-                    alert(obj.result_msg);
+                        var obj = JSON.parse(data);
+                        alert(obj.result_msg);
 
-                    document.getElementById('delbox_' + id).remove();
+                        document.getElementById('databox_' + id).remove();
 
-                }
-            };
-            xhr.open("GET", strurl);
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            xhr.send(null);
+                    }
+                };
+                xhr.open("GET", strurl);
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.send(null);
+            }
         }
     </script>
 {% endblock javascript %}
