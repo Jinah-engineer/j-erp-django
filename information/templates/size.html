@@ -42,7 +42,7 @@
                                     제품 옵션 - 사이즈
                                 </a>
                                 <a class="list-group-item list-group-item-action"
-                                   href="sheets"
+                                   href="sheet"
                                    role="tab">
                                     제품 옵션 - 시트
                                 </a>
@@ -82,7 +82,7 @@
                             <div class="tab-pane fade show active" id="product-size" role="tabpanel">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Size info</h5>
+                                        <h5 class="card-title">사이즈</h5>
 
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6">
@@ -109,7 +109,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <h1>sizetable</h1>
+                                        <h1>사이즈</h1>
                                         <div class="card">
                                             <!-- size form -->
                                             <form name="insertForm" action="{% url 'information:size_insert' %}" method="GET">
@@ -129,7 +129,7 @@
                                                     <td style="text-align: center;">{{ last_id }}</td>
                                                     <td>
                                                         <div class="">
-                                                            <select class="form-control select2" data-toggle="select2" id="select-search">
+                                                            <select class="form-control select2" data-toggle="select2" name="size_product">
                                                                 <option value="0">상품선택</option>
                                                                 {% for i in product_dict %}
                                                                     <optgroup label="{{ i.category_mid }}">
@@ -153,14 +153,15 @@
                                                     </td>
                                                 </tr>
                                                 <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
-                                                {% for i in filling_table %}
-                                                    <tr id="databox_{{ i.filling_id }}">
-                                                        <td class="d-none d-md-table-cell" style="text-align: center">{{ i.filling_id }} </td>
-                                                        <td class="d-none d-md-table-cell">{{ i.filling_name }} </td>
-                                                        <td class="d-none d-md-table-cell">{{ i.filling_price }} </td>
+                                                {% for i in size_table %}
+                                                    <tr id="databox_{{ i.size_id }}">
+                                                        <td class="d-none d-md-table-cell" style="text-align: center">{{ i.size_id }} </td>
+                                                        <td class="d-none d-md-table-cell">{{ i.product_id.product_name }} </td>
+                                                        <td class="d-none d-md-table-cell">{{ i.size_name }} </td>
+                                                        <td class="d-none d-md-table-cell">{{ i.size_price }} </td>
                                                         <td class="" style="text-align: center;">
-                                                            <button class="btn mb-1 btn-danger" id="changeBtn_{{ i.filling_id }}" data-toggle="modal" data-target="#sizedModalLg"
-                                                                    onclick="paging({{ i.filling_id }})">수정
+                                                            <button class="btn mb-1 btn-danger" id="changeBtn_{{ i.size_id }}" data-toggle="modal" data-target="#sizedModalLg"
+                                                                    onclick="paging({{ i.size_id }})">수정
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -183,13 +184,13 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 style="font-family: 'NanumSquareB;" class="modal-title">배송 정보 수정</h2>
+                        <h2 style="font-family: 'NanumSquareB;" class="modal-title">사이즈 정보 수정</h2>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <i class='fas fa-times'></i>
                         </button>
                     </div>
                     <div class="modal-body m-3">
-                        <form action="{% url 'information:filling_update' %}" method="get">
+                        <form action="{% url 'information:size_update' %}" method="get">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
@@ -201,7 +202,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label">종류</label>
+                                                <label class="form-label">품목</label>
+                                                <div class="update_area">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">사이즈</label>
                                                 <div class="update_area">
 
                                                 </div>
@@ -241,38 +248,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
     <script>
-        <!-- 상품목록 검색 -->
-        function listUp() {
-            var select = document.getElementById("select-search");
-            {% for i in product_dict %}
-                var optgroup = document.createElement("optgroup");
-                optgroup.setAttribute("label", "{{ i.category_mid }}");
-                optgroup.setAttribute("name", "{{ i.category_id }}");
-                select.appendChild(optgroup);
-                {% for j in product_dict.values %}
-                    {% for k in j %}
-                        {% if k.category_id_id == i.category_id %}
-                            var opt = document.createElement("option");
-                            opt.setAttribute("value", "{{ k.product_id }}");
-                            var opt_content = document.createTextNode("{{ k.product_name }}");
-                            opt.appendChild(opt_content);
-                            optgroup.appendChild(opt);
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-            {% endfor %}
-
-
-        }
-
         <!-- 폼 검증 -->
         function checkBtn() {
             var insertForm = document.insertForm;
-            var name = insertForm.filling_name.value;
-            var price = insertForm.filling_price.value;
-            if (!name) {
-                alert("정보를 입력하세요");
-            } else if (!price) {
+            var product = insertForm.size_product.value;
+            var name = insertForm.size_name.value;
+            var price = insertForm.size_price.value;
+            if (!product) {
+                alert("제품을 선택하세요");
+            } else if (!name) {
+                alert("사이즈를 입력하세요");
+            } else if(!price) {
                 alert("가격을 입력하세요");
             } else {
                 insertForm.submit();
@@ -307,7 +293,7 @@
             <!-- 버튼에 걸린 이벤트 제거 -->
             event.preventDefault();
             <!-- view요청경로 -->
-            var strurl = "filling_get?filling_id=" + id;
+            var strurl = "size_get?size_id=" + id;
             xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if(xhr.readyState == 4) {
@@ -319,28 +305,57 @@
                     var canvas = document.querySelectorAll(".update_area");
 
                     var modal_id = canvas[0];
-                    var modal_name = canvas[1];
-                    var modal_price = canvas[2];
+                    var modal_product = canvas[1];
+                    var modal_name = canvas[2];
+                    var modal_price = canvas[3];
                     <!-- 수정할 수 있도록 input 태그로 변환 -->
-                    modal_id.innerHTML = "<input type='text' name='filling_id' value='" + obj.filling_id + "' readonly/>";
-                    modal_name.innerHTML = "<input type='text' name='filling_name' value='" + obj.filling_name + "'/>";
-                    modal_price.innerHTML = "<input type='text' name='filling_price' value='" + obj.filling_price + "'/>";
+                    modal_id.innerHTML = "<input type='text' name='size_id' value='" + obj.size_id + "' readonly/>";
+                    var str = "";
+                    str += "<select class='form-control select2' data-toggle='select2' name='size_product' id='modal-select'>";
+                    str += "<option value='0'>상품선택</option>";
+                    {% for i in product_dict %}
+                        str += "<optgroup label='{{ i.category_mid }}'>";
+                        {% for j in product_dict.values %}
+                            {% for k in j %}
+                                {% if k.category_id_id == i.category_id %}
+                                    if(obj.product_id == "{{ k.product_id }}") {
+                                        str += "<option value='{{ k.product_id }}' selected>{{ k.product_name }}</option>";
+                                    } else {
+                                        str += "<option value='{{ k.product_id }}'>{{ k.product_name }}</option>";
+                                    }
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endfor %}
+                    modal_product.innerHTML = str;
+                    modal_name.innerHTML = "<input type='text' name='size_name' value='" + obj.size_name + "'/>";
+                    modal_price.innerHTML = "<input type='text' name='size_price' value='" + obj.size_price + "'/>";
                     <!-- 삭제를 위한 인자 생성 -->
                     var del = document.getElementById("delBtn");
-                    var delete_id = obj.filling_id;
+                    var delete_id = obj.size_id;
                     del.setAttribute("data-id", delete_id);
                 }
+                <!-- 검색어 자동완성 -->
+                $("#modal-select").each(function() {
+                    $(this)
+                        .wrap("<div class=\"position-relative\"></div>")
+                        .select2({
+                            placeholder: "Select value",
+                            dropdownParent: $(this).parent()
+                        });
+                });
             }
             xhr.open("GET", strurl);
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
             xhr.send(null);
+
         }
 
         <!-- delete -->
         function deleteBtn() {
-            var filling_id = event.currentTarget.dataset.id;
+            var size_id = event.currentTarget.dataset.id;
             if(confirm('삭제하시겠습니까?')) {
-                location.href = '/information/filling_delete?filling_id=' + filling_id;
+                location.href = '/information/size_delete?size_id=' + size_id;
             }
         }
         $(function() {

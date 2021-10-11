@@ -6,7 +6,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
-from rest_framework.utils import json
 
 from information.models import Product, Category
 from order_list.models import Order

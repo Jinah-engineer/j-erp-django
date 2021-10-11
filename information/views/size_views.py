@@ -34,7 +34,6 @@ def size_view(request):
     for i in category:
         # 카테고리 id가 일치하는 product
         product = Product.objects.filter(category_id=i.category_id)
-        print(product)
         product_list = list()
         for j in product:
             # 카테고리에 해당하는 '상품이름' 리스트 생성
@@ -42,8 +41,6 @@ def size_view(request):
         # i -> 카테고리, product_list -> 해당하는 품목 리스트
         # {i[0]:product_list, i[1]:product_list...i[n]:product_list} dictionary
         product_dict[i] = product_list
-
-    print(product_dict)
 
     if Size.objects.first() is not None:
         last_id = Size.objects.last().size_id + 1
@@ -61,10 +58,12 @@ def size_view(request):
 
 # size insert
 def size_insert(request):
+    size_product = request.GET['size_product']
+    print(size_product)
     size_name = request.GET['size_name']
     size_price = request.GET['size_price']
-    if size_name and size_price != "":
-        rows = Size.objects.create(size_name=size_name, size_price=size_price)
+    if size_product and size_name and size_price != "":
+        rows = Size.objects.create(product_id_id=size_product, size_name=size_name, size_price=size_price)
         return redirect('information:size_view')
     else:
         return redirect('information:size_view')
@@ -73,11 +72,14 @@ def size_insert(request):
 # size update
 def size_update(request):
     size_id = request.GET['size_id']
+    size_product = request.GET['size_product']
     size_name = request.GET['size_name']
     size_price = request.GET['size_price']
 
     try:
         size = Size.objects.get(size_id = size_id)
+        if size_product != "":
+            size.product_id = size_product
         if size_name != "":
             size.size_name = size_name
         if size_price != "":

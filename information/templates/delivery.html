@@ -42,7 +42,7 @@
                                 제품 옵션 - 사이즈
                             </a>
                             <a class="list-group-item list-group-item-action"
-                               href="sheets"
+                               href="sheet"
                                role="tab">
                                 제품 옵션 - 시트
                             </a>
@@ -123,8 +123,17 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
+                                                <!-- 새로운 정보를 입력받을 공란 -->
                                                 <tr>
+                                                    <td style="text-align: center";>{{ last_id }}</td>
+                                                    <td><input type="text" placeholder="입력" name="delivery_name"></td>
+                                                    <td><input type="text" placeholder="입력" name="delivery_price"></td>
+                                                    <td class="table-action" style="text-align: center;">
+                                                        <button class="btn mb-1 btn-primary" type="button" onclick="checkBtn();">등록
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <!-- DB에서 조회할 정보 / 내림차순 정렬 -->
                                                 {% for i in delivery_table %}
                                                     <tr id="databox_{{ i.delivery_id }}">
                                                         <td class="d-none d-md-table-cell" style="text-align: center">{{ i.delivery_id }} </td>
@@ -137,7 +146,6 @@
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
-                                                </tr>
                                                 </tbody>
                                             </table>
                                             </form>
