@@ -21,14 +21,15 @@ def login_view(request):
 
     return render(request, "login.html")
 
+
 def logout_view(request):
 
     logout(request)
 
     return redirect("accounts:login")
 
-def regist_view(request):
-    if request.method == "POST":
-        user_id = request.POST["user_id"]
 
-    return render(request, "regist.html")
+def signUp_view(request):
+
+
+    return render(request, "signup.html")
