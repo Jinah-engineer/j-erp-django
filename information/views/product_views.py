@@ -12,17 +12,6 @@ from ..models import Category, Product
 
 # product
 
-# modal view
-@csrf_exempt
-def product_get(request):
-    product_id = request.GET['product_id']
-    product = Product.objects.get(product_id = product_id)
-    data = model_to_dict(product)
-    print(data)
-
-    return JsonResponse(data, content_type="application/json")
-
-
 # page view
 def product_view(request):
     category = Category.objects.all().order_by('category_big')
@@ -34,7 +23,6 @@ def product_view(request):
                "product_table": product}
 
     return render(request, 'product.html', context)
-
 
 
 @csrf_exempt
@@ -102,31 +90,37 @@ def product_insert(request):
 
 
 # product update
+@csrf_exempt
 def product_update(request):
+    context = {}
     product_id = request.GET['product_id']
+    category_id = request.GET['category_id']
     product_name = request.GET['product_name']
     product_price = request.GET['product_price']
 
-    try:
-        product = Product.objects.get(product_id = product_id)
-        if product_name != "":
-            product.product_name = product_name
-        if product_price != "":
-            product.product_price = product_price
+    if Product.objects.filter(product_name=product_name).exists():
+        context["flag"] = "1"
+        context["result_msg"] = "이미 존재하는 상품입니다"
+        return JsonResponse(context, content_type="application/json")
 
-        try:
-            product.save()
-            return redirect('information:product_view')
-        except ValueError:
-            return HttpResponse({"success": False, "msg":"에러가 발생했습니다"})
+    product = Product.objects.get(product_id=product_id)
+    product.category_id_id = category_id
+    product.product_name = product_name
+    product.product_price = product_price
+    product.save()
 
-    except ObjectDoesNotExist:
-        return HttpResponse({"success": False, "msg": "정보가 존재하지 않습니다"})
+    context["flag"] = "0"
+    context["result_msg"] = "수정되었습니다"
+    return JsonResponse(context, content_type="application/json")
 
 
 # product delete
+@csrf_exempt
 def product_delete(request):
+    context = {}
     product_id = request.GET['product_id']
-    rows = Product.objects.get(product_id=product_id).delete()
 
-    return redirect('information:product_view')
+    Product.objects.get(product_id=product_id).delete()
+
+    context["result_msg"] = "삭제되었습니다"
+    return JsonResponse(context, content_type="application/json")
