@@ -75,3 +75,16 @@ def order_list_view(request):
     return render(request, "list.html", context)
 
 
+
+# ====================== 주문 상세
+def order_detail(request):
+    pno = request.GET.get('pno')
+    print("pno ----" + pno)
+
+    orderDetail = Order.objects.get(pno=pno)
+
+    context = {
+        "orderDetail": orderDetail
+    }
+
+    return render(request, 'orderlist:detail.html', context)
