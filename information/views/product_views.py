@@ -98,11 +98,6 @@ def product_update(request):
     product_name = request.GET['product_name']
     product_price = request.GET['product_price']
 
-    if Product.objects.filter(product_name=product_name).exists():
-        context["flag"] = "1"
-        context["result_msg"] = "이미 존재하는 상품입니다"
-        return JsonResponse(context, content_type="application/json")
-
     product = Product.objects.get(product_id=product_id)
     product.category_id_id = category_id
     product.product_name = product_name

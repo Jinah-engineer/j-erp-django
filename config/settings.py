@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'meehong_dev',
         'USER': 'dev',
         'PASSWORD': 'aibiz12#$',
-        'HOST': '118.33.32.227',
+        'HOST': '121.162.51.106',
         'PORT': '3306',
     },
 }
