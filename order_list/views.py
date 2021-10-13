@@ -1,10 +1,15 @@
 # ---------- 박진아 작업 ----------
+import json
+
+from django.forms import model_to_dict
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils import timezone
 
 # from order_list.forms import ListCreationOrderForm
+from information.models import Product
 from order_list.models import Order
 
 
@@ -31,60 +36,50 @@ from order_list.models import Order
             1) 10개씩
             2) 50개씩
             3) 100개씩
-        10. 주문 목록 보여주기 (ReadOrderList)
-            1) 주문 No. (model - order_id)
-            2) 주문일자
-            3) 진행상태
-            4) 고객명
-            5) 품목
-            6) 사이즈
-            7) 시트
-            8) 필링
-            9) 문구
-            10) 수량
-            11) 금액
-            12) 주문경로
-            13) 결제방법
-            14) 결제여부
-            15) 수령인
-            16) 연락처
-            17) 수령방법
-            18) 수령주소
-            19) 납품일자
-            20) 주문메모
         11. 페이지네이션 (pagination)
 '''
 
 
 # ====================== 전체 주문 목록
 def order_list_view(request):
-    # pno = request.GET['pno']
+
     orderDetail = Order.objects.all().order_by('-pno')
 
     context = {
-        "orderDetail": orderDetail
+        "orderDetail": orderDetail,
     }
 
-    if request.is_ajax():
-        data = {
-
-            }
-
-        return JsonResponse(data)
+    # print('---------here---------')
+    #
+    # pno = request.GET['pno']
+    # print(pno)
+    # print(type(pno))
+    #
+    # if request.is_ajax():
+    #
+    #     data = {
+    #
+    #         }
+    #     print(data)
+    #     print(type(data))
+    #
+    #     return JsonResponse(data)
 
     return render(request, "list.html", context)
 
 
 
 # ====================== 주문 상세
-def order_detail(request):
-    pno = request.GET.get('pno')
-    print("pno ----" + pno)
+def order_detail_view(request):
+    if request.method == 'GET':
+        pno = request.GET['pno']
+        print(pno)
+        print(type(pno))
+        # db_pno = Order.objects.filter(pno=pno)
+        data = {
+            "pno": pno
+        }
+        print(data)
+        print(type(data))
 
-    orderDetail = Order.objects.get(pno=pno)
-
-    context = {
-        "orderDetail": orderDetail
-    }
-
-    return render(request, 'orderlist:detail.html', context)
+        return JsonResponse(data, content_type="application/json")

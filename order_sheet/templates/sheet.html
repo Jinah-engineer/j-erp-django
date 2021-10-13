@@ -66,11 +66,11 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-2">
                                             <label for="customer">고객명</label>
-                                            <input type="text" class="form-control" id="" name="customer">
+                                            <input type="text" class="form-control" id="" name="customer" autocomplete="off">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="customer_phone">연락처</label>
-                                            <input type="text" class="form-control" id="" name="customer_phone">
+                                            <input type="text" class="form-control" id="" name="customer_phone" autocomplete="off">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="delivery_option_name">수령 방법</label>
@@ -154,7 +154,7 @@
                                                         data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control" placeholder="옵션이름"
-                                                           id="input-option-result">
+                                                           id="input-option-result" autocomplete="off">
                                                 </div>
                                                 <div class="col-md-1" style="padding-left: 0">
                                                     <input type="number" class="form-control" name="count" placeholder="수량" min="1">
@@ -174,10 +174,6 @@
                                                 {#                                                <input type="text" id="first-products-list" name="product_name" value="{{ product }}">#}
                                                 <li hidden="hidden" id="first-products-list">{{ product.product_name }}</li>
                                             {% endfor %}
-
-
-
-
 
 
                                             <!-- 2번째 품목 -->
@@ -205,7 +201,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
                                             <label for="inputCity">결제금액</label>
-                                            <input type="text" name="total_price" class="form-control" id="">
+                                            <input type="text" name="total_price" class="form-control" id="" autocomplete="off">
                                         </div>
                                         <div class="col-md-4" style="margin-bottom: 16px;">
                                             <label for="inputCity">결제여부</label>
@@ -234,9 +230,7 @@
                                                     style="" name="pay_type_name" id="order-root">
                                                 <option value="카드">카드</option>
                                                 <option value="계좌이체" selected>계좌이체</option>
-                                                <option value="직접 결제">직접 결제</option>
-                                                <option value="D">그리고?</option>
-                                                </optgroup>
+                                                <option value="직접결제">직접결제</option>
                                             </select>
                                         </div>
                                     </div>
@@ -255,11 +249,11 @@
                                     <div class="form-row" style="margin-top: 10px;">
                                         <div class="form-group col-md-3">
                                             <label for="inputCity">수령인명</label>
-                                            <input type="text" name="recipient" class="form-control" id="inputCity">
+                                            <input type="text" name="recipient" class="form-control" id="" autocomplete="off">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputCity">수령인 연락처</label>
-                                            <input type="tel" name="recipient_phone" class="form-control" id="inputCity">
+                                            <input type="tel" name="recipient_phone" class="form-control" id="" autocomplete="off">
                                         </div>
                                     </div>
 
@@ -270,10 +264,10 @@
                                         <button style="border-color: white;
                                                 background-color: #0d8ddc; color: white">우편번호 검색</button>
                                         <div class="col-md-4">
-                                            <input type="text" name="address1" class="form-control" id="inputCity">
+                                            <input type="text" name="address1" class="form-control" id="" autocomplete="off">
                                         </div>
                                         <div class="col-md-4" style="padding-left: 0;">
-                                            <input type="text" name="address2" class="form-control" id="inputCity">
+                                            <input type="text" name="address2" class="form-control" id="" autocomplete="off">
                                         </div>
                                     </div>
 
@@ -281,7 +275,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label class="form-label">주문메모</label>
-                                            <textarea style="width: 100%;" class="form-control" name="memo" placeholder="Textarea" rows="5" cols=""></textarea>
+                                            <textarea style="width: 100%;" class="form-control" name="memo" placeholder="메모 입력" rows="5" cols=""></textarea>
                                         </div>
                                     </div>
 
@@ -306,11 +300,6 @@
                                     <!-- 상태 -->
                                     <input name="state" type="text" hidden="hidden" value="주문완료">
 
-                                    <!--
-                                        1. 주문완료 : order-completed
-                                        2. 제작완료 : production-completed
-                                        3. 출고완료 : release-completed
-                                    -->
                                 </form>
                             </div>
                         </div>
@@ -407,9 +396,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                {#                                <button type="submit" id="test-option-submit" class="btn btn-primary">옵션 등록하기(test)</button>#}
-
                             </div>
 
 
@@ -695,25 +681,6 @@
                 }
                 $('#sizedModalLg').modal('hide');
             })
-
-            // ajax
-            {#$(function () {#}
-            {#    const $optionFinalResult = $('#final-option-result');#}
-            {#    $optionFinalResult.click(function () {#}
-            {#        $.ajax({#}
-            {#            type: "get",#}
-            {#            url: {% url 'sheet:order_sheet' %},#}
-            {#            success: function () {#}
-            {#            },#}
-            {#            error: function (xhr, status) {#}
-            {#                console.log("error!!!");#}
-            {#                alert("그만,,,");#}
-            {#                $('#sizedModalLg').modal('hide');#}
-            {#            }#}
-            {#        })#}
-            {#    });#}
-            {# });#}
-
         });
 
     </script>
