@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 # from order_list.forms import ListCreationOrderForm
-from information.models import Product
+from information.models import Product, Delivery, Pay_type
 from order_list.models import Order
 
 
@@ -39,16 +39,6 @@ from order_list.models import Order
         11. 페이지네이션 (pagination)
 '''
 
-
-# ====================== 전체 주문 목록
-def order_list_view(request):
-
-    orderDetail = Order.objects.all().order_by('-pno')
-
-    context = {
-        "orderDetail": orderDetail,
-    }
-
     # print('---------here---------')
     #
     # pno = request.GET['pno']
@@ -65,6 +55,20 @@ def order_list_view(request):
     #
     #     return JsonResponse(data)
 
+
+# ====================== 전체 주문 목록
+def order_list_view(request):
+
+    orderDetail = Order.objects.all().order_by('-pno')
+    delivery_table = Delivery.objects.all()
+    pay_table = Pay_type.objects.all()
+
+    context = {
+        "orderDetail": orderDetail,
+        "delivery_table": delivery_table,
+        "pay_table": pay_table,
+
+    }
     return render(request, "list.html", context)
 
 
@@ -75,7 +79,6 @@ def order_detail_view(request):
         pno = request.GET['pno']
         print(pno)
         print(type(pno))
-        # db_pno = Order.objects.filter(pno=pno)
         data = {
             "pno": pno
         }

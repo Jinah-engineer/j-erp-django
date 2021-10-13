@@ -308,7 +308,16 @@
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <label for="order-root">수령방법</label>
-                                                        <input type="text" class="form-control" value="{{ order.delivery_option_name }}" readonly>
+                                                        {#                                                        <input type="text" class="form-control" value="{{ order.delivery_option_name }}" readonly>#}
+                                                        <select id="">
+                                                            {% for delivery in delivery_table %}
+                                                                {% if delivery.delivery_name == order.delivery_option_name %}
+                                                                    <option value="{{ delivery.delivery_name }}" selected>{{ order.delivery_option_name }}</option>
+                                                                {% else %}
+                                                                    <option value="{{ delivery.delivery_name}}">{{ delivery.delivery_name }}</option>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </select>
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <label for="inputCity">납품일자</label>
@@ -409,14 +418,12 @@
                                                     </div>
                                                     <div class="form-group col-md-4" style="margin-left: -200px;">
                                                         <label for="order-root">결제 방법</label>
-                                                        <input type="text" class="form-control" id="" value="{{ order.pay_type_name }}" readonly>
-
-                                                        {#                                                        <select class="form-control select1" data-toggle="select1"#}
-                                                        {#                                                                style="" id="order-root">#}
-                                                        {#                                                            <option value="카드">카드</option>#}
-                                                        {#                                                            <option value="계좌이체">계좌이체</option>#}
-                                                        {#                                                            <option value="직접 결제">직접 결제</option>#}
-                                                        {#                                                        </select>#}
+                                                        <select class="form-control select1" data-toggle="select1"
+                                                                style="" id="order-root">
+                                                            <option value="카드">카드</option>
+                                                            <option value="계좌이체">계좌이체</option>
+                                                            <option value="직접 결제">직접 결제</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <!-- 동일인 체크 버튼 -->
@@ -671,12 +678,6 @@
                         })
                     })
                     console.log('Bye! this is modal end!')
-
-
-                    // Select Tag Value (order_type_name)
-
-
-
 
                 {% endfor %}
             });
