@@ -21,9 +21,8 @@
                             <div class="card-body">
                                 <div class="m-sm-4">
                                     <div class="text-center mt-4">
-                                        <h1 class="h2">로그인테스트</h1>
+                                        <h1 class="h2">로그인</h1>
                                         <p class="lead">
-                                            {{ member_no }}
                                         </p>
                                     </div>
                                     <div class="text-center">
@@ -34,19 +33,13 @@
                                         <input class="form-control form-control-lg" type="text" id="user_id" name="user_id" placeholder="아이디"
                                     </div>
                                     <div class="form-group">
+
+                                    </div>
+                                    <div class="form-group">
                                         <label>비밀번호</label>
                                         <input class="form-control form-control-lg" type="password" id="user_pw" name="user_pw" placeholder="비밀번호"
-                                        <small>
-                                            <a href="pages-reset-password.html">비밀번호 찾기</a>
-                                        </small>
                                     </div>
-                                    <div>
-                                        <div class="custom-control custom-checkbox align-items-center">
-                                            <input id="customControlInline" type="checkbox" class="custom-control-input" value="remember-me"
-                                                   name="remember-me" checked>
-                                            <label class="custom-control-label text-small" for="customControlInline">아이디 기억하기</label>
-                                        </div>
-                                    </div>
+
                                     <div class="text-center mt-3">
                                         <button type="button" class="btn btn-lg btn-primary" onclick="member_login();">로그인</button>
                                         <button type="button" class="btn btn-lg btn-secondary" onclick="location.href='{% url 'accounts:member_register' %}'" >

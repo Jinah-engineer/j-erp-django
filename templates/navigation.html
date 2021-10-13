@@ -17,7 +17,7 @@
 			<li class="sidebar-header">
 				Main
 			</li>
-			<li class="sidebar-item {% if request.path == '/list/orderlist/' %}active{% endif %}">
+			<li class="sidebar-item {% if request.path == '/list/orderlist/' or request.path == '/' %}active{% endif %}">
 				<a href="/list/orderlist" class="sidebar-link">
 					<i class="align-middle mr-2 fas fa-fw fa-list"></i> <span class="align-middle">전체 주문 목록</span>
 				</a>
