@@ -8,11 +8,6 @@ from django.shortcuts import redirect
 # Create your views here.
 
 
-def signup_view(request):
-
-    return render(request, "signup.html")
-
-
 def member_register(request):
 
     return render(request, "signup.html")
@@ -47,7 +42,7 @@ def member_insert(request):
                                member_name=member_name,
                                member_email=member_email,
                                usage_flag='1',
-                               registdate=datetime.now()
+                               register_date=datetime.now()
                                )
 
     context['result_msg'] = '회원가입이 완료되었습니다.'
@@ -55,5 +50,58 @@ def member_insert(request):
     return JsonResponse(context, content_type="application/json")
 
 
-def login_view(request):
+# 로그인 뷰
+def signin_view(request):
+
     return render(request, "login.html")
+
+
+@csrf_exempt
+def member_login(request):
+    context = {}
+    member_id = request.GET['member_id']
+    member_pw = request.GET['member_pw']
+
+    if 'member_no' in request.session:
+        context['flag'] = '1'
+        context['result_msg'] = '로그인 중복 에러'
+
+    else:
+        rs = Member.objects.filter(member_id=member_id, member_pw=member_pw)
+
+        if(len(rs)) == 0:
+            context['flag'] = '1'
+            context['result_msg'] = '등록되지 않은 사용자입니다.'
+
+        else:
+            member = Member.objects.get(member_id=member_id, member_pw=member_pw)
+            member_no = member.member_no
+            member_name = member.member_name
+            member_auth = member.member_auth
+            member.access_latest = datetime.now()
+            member.save()
+
+            request.session['member_no'] = member_no
+            request.session['member_name'] = member_name
+            request.session['member_auth'] = member_auth
+
+            context['flag'] = '0'
+            context['result_msg'] = '로그인 되었습니다.'
+
+    return JsonResponse(context, content_type="application/json")
+
+
+def member_logout(request):
+
+    # 로그아웃하는 시간 저장
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+
+    member = Member.objects.get(member_no=memberno)
+    member.access_latest = datetime.now()
+    member.save()
+    
+    # 세션 만료
+    request.session.flush()
+
+    return redirect('accounts:signin')

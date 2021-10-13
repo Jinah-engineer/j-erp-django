@@ -1,6 +1,6 @@
 {% load static %}
 <nav id="sidebar" class="sidebar">
-	<a class="sidebar-brand" href="index.html">
+	<a class="sidebar-brand" href="{% url 'list:orderlist' %}">
 		<svg>
 			<use xlink:href="#ion-ios-pulse-strong"></use>
 		</svg>
@@ -8,9 +8,9 @@
 	</a>
 	<div class="sidebar-content">
 		<div class="sidebar-user">
-			<img src="{% static 'dist/img/brands/mee.png' %}" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
-			<div class="font-weight-bold">미 홍</div>
-			<small>administrator</small>
+			<img src="{% static 'dist/img/brands/mee.png' %}" class="img-fluid rounded-circle mb-2" alt="" />
+			<div class="font-weight-bold">{{ member_name }}</div>
+			<small>{{ member_no }}</small>
 		</div>
 
 		<ul class="sidebar-nav">

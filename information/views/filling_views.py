@@ -25,6 +25,13 @@ def filling_get(request):
 # page view
 def filling_view(request):
 
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+    else:
+        memberno = None
+        membername = None
+
     rsBoard = Filling.objects.all().order_by('-filling_id')
 
     if Filling.objects.first() is not None:
@@ -32,7 +39,7 @@ def filling_view(request):
     else:
         last_id = 1
 
-    context = {"last_id": last_id, "filling_table": rsBoard}
+    context = {"last_id": last_id, "filling_table": rsBoard, "member_no": memberno, "member_name": membername}
 
     return render(request, 'filling.html', context)
 

@@ -25,6 +25,14 @@ def delivery_get(request):
 # page view
 def delivery_view(request):
 
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+    else:
+        memberno = None
+        membername = None
+
+
     rsBoard = Delivery.objects.all().order_by('-delivery_id')
 
     if Delivery.objects.first() is not None:
@@ -32,7 +40,7 @@ def delivery_view(request):
     else:
         last_id = 1
 
-    context = {"last_id": last_id, "delivery_table": rsBoard}
+    context = {"last_id": last_id, "delivery_table": rsBoard, "member_no": memberno, "member_name": membername}
 
     return render(request, 'delivery.html', context)
 

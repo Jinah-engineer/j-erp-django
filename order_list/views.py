@@ -58,6 +58,7 @@ from order_list.models import Order
 
 # ====================== 전체 주문 목록
 def order_list_view(request):
+
     # pno = request.GET['pno']
     orderDetail = Order.objects.all().order_by('-pno')
 

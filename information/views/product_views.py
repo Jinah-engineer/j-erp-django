@@ -14,13 +14,21 @@ from ..models import Category, Product
 
 # page view
 def product_view(request):
+
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+    else:
+        memberno = None
+        membername = None
+
     category = Category.objects.all().order_by('category_big')
     category_big = category.values("category_big").distinct()
 
     product = Product.objects.all().order_by('category_id__category_big')
 
     context = {"category_big": category_big, "category_table": category,
-               "product_table": product}
+               "product_table": product, "member_no": memberno, "member_name": membername}
 
     return render(request, 'product.html', context)
 
