@@ -9,8 +9,9 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 
-from information.models import Product, Category
+from information.models import Product, Category, Order_type, Pay_type, Delivery, Size, Sheet, Filling, Boxing
 from order_list.models import Order
+from accounts.models import Member
 
 '''
     1. 주문 접수자
@@ -77,47 +78,77 @@ from order_list.models import Order
         3. order_date - current date
 '''
 def new_order(request):
-    # 주문 접수자 - employee_name (자동입력)
-    # 주문 No. _ order_no (자동입력)
-    # 주문일자 - order_date (default: 오늘날짜)
-    products = Product.objects.all()
-    categories = Category.objects.all()
 
-    # products_name = Product.objects.values('product_name', 'product_name')
-    # category_mid_Set = Category.objects.values('category_mid')
-    # category_mid_Set_pick = Category.objects.values('category_mid').filter(category_mid='앙금플라워')
-    # print(products_name)
+    context = {}
+    #  ///////////////////////마감전에 주석해제
+    # # 사용자 권한 제어==========================================
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+        memberauth = request.session['member_auth']
+    else:
+        # return redirect('accounts:signin')
+        memberno = None
+        membername = None
+        memberauth = None
 
-    context = {
-        "products": products,
-        "categories": categories
-    }
-
-    print('='*20, 'order_date', '='*20)
-    current_date = datetime.date.today()
-    print(current_date)
-
-    four_digits = 0
-
+    context["member_no"] = memberno
+    context["member_name"] = membername
+    context["member_auth"] = memberauth
+    # =============================================================
     '''
         만약 이게 오늘(today)의 첫번째 주문이면, 
         = orderlist 에서 주문번호(order_no) 앞 8자리가 20211011 로 시작하는 주문이 없다면
-            
+
             0000 -> 0001
             1로 시작
             20211011_A_001
             %04d' % num
-        
+
         근데 이게 1번째가 아닌 주문이라면, 
             1) 직전 주문의 주문번호를 확인 (orderlist 에 있는 가장 마지막 주문 번호를 확인)
             2) 마지막 주문의 주문번호 끝자리에 + 1
-        
-        
-            
+
     '''
+
+    member = Member.objects.all() # 주문접수자 조회
+    order_type = Order_type.objects.all() # 주문 경로 조회
+    delivery = Delivery.objects.all() # 배송정보
+    products = Product.objects.all() # 상품
+    categories = Category.objects.all() # 상품분류
+    sheet = Sheet.objects.all() #시트
+    filling = Filling.objects.all()
+    boxing = Boxing.objects.all()
+    pay_type = Pay_type.objects.all()
+
+
+    context["member_table"] = member
+    context["order_type_table"] = order_type
+    context["delivery_table"] = delivery
+    context["products_table"] = products
+    context["categories_table"] = categories
+    context["sheet_table"] = sheet
+    context["filling_table"] = filling
+    context["boxing_table"] = boxing
+    context["pay_type_table"] = pay_type
 
     return render(request, 'sheet.html', context)
 
+
+@csrf_exempt
+def option_view(request):
+    context = {}
+    product_name = request.GET['product_name']
+
+    # 옵션테이블 조회
+    product = Product.objects.get(product_name=product_name)
+    size = Size.objects.filter(product_id_id=product.product_id)
+    if size.exists():
+        context["size"] = list(size.values())
+    else:
+        context["size"] = ''
+
+    return JsonResponse(context, content_type="application/json")
 
 # ====================== 품목 추가
 

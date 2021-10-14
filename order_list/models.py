@@ -14,7 +14,7 @@ class Order(models.Model):
     order_type_name = models.CharField(db_column='order_type', max_length=50)
     pay_type_name = models.CharField( db_column='pay_type', max_length=50)
     pay_check = models.CharField(db_column='pay_check', max_length=1)
-    product_name = models.CharField(db_column='product_name', max_length=50)
+    product_name = models.CharField(db_column=' product_name', max_length=50)
     state = models.CharField(db_column='state', max_length=20)
     receipt_date = models.DateField(db_column='receipt_date', )
     receipt_hour = models.IntegerField(db_column='receipt_hour',)

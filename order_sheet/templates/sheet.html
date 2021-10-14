@@ -3,9 +3,6 @@
 {% load static %}
 
 {% block body %}
-    {#    <div class="splash active">#}
-    {#        <div class="splash-icon"></div>#}
-    {#    </div>#}
     <!-- side navbar -->
     {% include "navigation.html" %}
     <div class="main">
@@ -19,7 +16,6 @@
                     <h1 class="header-title">
                         주문서 작성
                     </h1>
-                    <p class="header-subtitle">경로 작성하기</p>
                 </div>
 
                 <!-- 주문서 작성 시작 -->
@@ -35,29 +31,32 @@
                                             <button style="border: none; background-color: transparent" id="">
                                                 <i class="align-middle mr-2 fas fa-fw fa-user-friends"></i>
                                             </button>
-                                            <input type="text" class="form-control" id="" name="employee_name" value="박진아">
+                                            <select class="form-control select1" data-toggle="select1"
+                                                    id="employee" name="employee">
+                                                {% for employee in member_table %}
+                                                    {% if member_name == employee.member_name %}
+                                                        <option selected>{{ employee.member_name }}</option>
+                                                    {% else %}
+                                                        <option>{{ employee.member_name }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
                                         </div>
-                                        {#                                        <div class="form-group col-md-3">#}
-                                        {#                                            <label for="order_no">주문 No.</label>#}
-                                        <input hidden="hidden" type="text" class="form-control" id="" value="20211008_A_001" name="order_no">
-                                        {#                                        </div>#}
+{#                                        <div class="form-group col-md-3">#}
+{#                                            <label for="order_no">주문 No.</label>#}
+{#                                            <input hidden="hidden" type="text" class="form-control" id="" value="20211008_A_001" name="order_no">#}
+{#                                        </div>#}
                                         <div class="form-group col-md-4">
                                             <label for="order_date">주문일자</label>
-                                            {#                                            <button style="border: none; background-color: transparent" id="select-order-person2">#}
-                                            {#                                                <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>#}
-                                            {#                                            </button>#}
-                                            <input type="date" class="form-control" id="currentDate1" name="order_date">
+                                            <input type="date" class="form-control" id="order_date" name="order_date">
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="order_type_name">주문 경로</label>
+                                            <label for="order_type_name">주문경로</label>
                                             <select class="form-control select1" data-toggle="select1"
-                                                    style="" id="" name="order_type_name">
-                                                <optgroup label="주문 경로를 선택해주세요.">
-                                                    <option value="전화" selected>전화</option>
-                                                    <option value="메세나폴리스 매장">메세나폴리스 매장</option>
-                                                    <option value="스마트스토어">스마트스토어</option>
-                                                    <option value="카페24">카페24</option>
-                                                </optgroup>
+                                                    id="order_type" name="order_type">
+                                                {% for order_type in order_type_table %}
+                                                    <option>{{ order_type.order_type_name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
@@ -66,25 +65,22 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-2">
                                             <label for="customer">고객명</label>
-                                            <input type="text" class="form-control" id="" name="customer" autocomplete="off">
+                                            <input type="text" class="form-control" id="customer" name="customer" autocomplete="off">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="customer_phone">연락처</label>
-                                            <input type="text" class="form-control" id="" name="customer_phone" autocomplete="off">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="delivery_option_name">수령 방법</label>
-                                            <select class="form-control select1" data-toggle="select1"
-                                                    style="" id="order_type" name="delivery_option_name">
-                                                <option value="일반택배" selected>일반택배</option>
-                                                <option value="메세나 픽업">메세나 픽업</option>
-                                                <option value="작업장 픽업">작업장 픽업</option>
-                                                <option value="퀵">퀵</option>
-                                                <option value="지하철 택배">지하철 택배</option>
-                                                </optgroup>
-                                            </select>
+                                            <input type="text" class="form-control" id="customer_phone" name="customer_phone" autocomplete="off" oninput="phone(this)">
                                         </div>
                                         <div class="form-group col-md-2">
+                                            <label for="delivery_option_name">수령 방법</label>
+                                            <select class="form-control select1" data-toggle="select1"
+                                                    id="delivery" name="delivery">
+                                                {% for delivery in delivery_table %}
+                                                    <option>{{ delivery.delivery_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
                                             <label for="receipt_date">납품일자</label>
                                             <button style="border: none; background-color: transparent" id="select-order-person">
                                                 <i class="align-middle mr-2 far fa-fw fa-calendar-alt"></i>
@@ -97,7 +93,7 @@
                                                 <i class="align-middle mr-2 far fa-fw fa-clock"></i>
                                             </button>
                                             <select class="form-control select1" data-toggle="select2"
-                                                    style="" id="" name="receipt_hour">
+                                                    style="" id="receipt_hour" name="receipt_hour">
                                                 <optgroup label="도착시간을 선택해주세요.">
                                                     <option value="1">1:00</option>
                                                     <option value="2">2:00</option>
@@ -143,14 +139,14 @@
                                                 background-color: #153d77; color: white">1</button>
                                                 <div class="col-md-3">
                                                     <div class="ui-widget">
-                                                        <input id="products" type="text" class="form-control" name="product_name"
+                                                        <input id="product1" type="text" class="form-control products" name="product_name"
                                                                style="font-family: 'NanumSquareR';" placeholder="품목이름">
                                                     </div>
                                                 </div>
 
-                                                <button type="button" class="btn item-button"
+                                                <button type="button" class="btn item-button modalbtn"
                                                         style="border-color: white;
-                                                background-color: #153d77; color: white"
+                                                background-color: #153d77; color: white" data-id="product1"
                                                         data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control" placeholder="옵션이름"
@@ -160,8 +156,7 @@
                                                     <input type="number" class="form-control" name="count" placeholder="수량" min="1">
                                                 </div>
                                                 <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
-                                                <button class="item-button"
-                                                        style="border-color: white;
+                                                <button class="item-button" style="border-color: white;
                                                 background-color: darkred; color: white">X</button>
                                                 <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
                                                 <div class="col-md-2">
@@ -208,29 +203,24 @@
                                             <div class="col-md-6" style="align-items: center;">
                                                 <label class="form-check form-check-inline" style="margin-top: 8px; margin-right: 30px;">
                                                     <input class="form-check-input" type="radio" name="pay_check" value="O" data-value="O">
-                                                    <span class="form-check-label">
-												완료
-											</span>
+                                                    <span class="form-check-label">완료</span>
                                                 </label>
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="pay_check" value="X" data-value="X">
-                                                    <span class="form-check-label">
-												미완료
-											</span>
+                                                    <span class="form-check-label">미완료</span>
                                                 </label>
                                             </div>
                                         </div>
-
                                         <!-- Radio Button result -->
                                         <input type="text" hidden="hidden" id="radio-result" name="radio-result">
 
-                                        <div class="form-group col-md-4" style="margin-left: -200px;">
+                                        <div class="form-group col-md-4" style="margin-left: -150px;">
                                             <label for="order-root">결제 방법</label>
                                             <select class="form-control select1" data-toggle="select1"
-                                                    style="" name="pay_type_name" id="order-root">
-                                                <option value="카드">카드</option>
-                                                <option value="계좌이체" selected>계좌이체</option>
-                                                <option value="직접결제">직접결제</option>
+                                                    id="pay_type" name="pay_type">
+                                                {% for pay in pay_type_table %}
+                                                    <option>{{ pay.pay_type_name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
@@ -240,7 +230,7 @@
                                             <div class="custom-control custom-checkbox mb-1 mr-sm-2">
                                                 <input type="checkbox" class="custom-control-input" id="customControlInline">
                                                 <label class="custom-control-label" for="customControlInline"
-                                                       style="color: darkgray; font-size: 13px;">주문 고객과 동일인</label>
+                                                       style="color: darkgray; font-size: 13px;">주문 고객과 동일</label>
                                             </div>
                                         </div>
                                     </div>
@@ -249,11 +239,11 @@
                                     <div class="form-row" style="margin-top: 10px;">
                                         <div class="form-group col-md-3">
                                             <label for="inputCity">수령인명</label>
-                                            <input type="text" name="recipient" class="form-control" id="" autocomplete="off">
+                                            <input type="text" name="recipient" class="form-control" id="recipient" autocomplete="off">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputCity">수령인 연락처</label>
-                                            <input type="tel" name="recipient_phone" class="form-control" id="" autocomplete="off">
+                                            <input type="tel" name="recipient_phone" class="form-control" id="recipient_phone" autocomplete="off">
                                         </div>
                                     </div>
 
@@ -281,11 +271,8 @@
 
                                     <!-- 주문 등록 버튼 -->
                                     <div class="form-group row justify-content-center">
-                                        {#                                        <button type="submit" class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;">#}
-                                        {#                                            주문 등록#}
-                                        {#                                        </button>#}
                                         <button type="submit" class="btn btn-lg" style="background-color: darkslategrey; color: white; width: 10%;"
-                                                onclick="javascript:document.getElementById('create-order').submit();">
+                                                onclick="create_order();">
                                             주문 등록
                                         </button>
                                     </div>
@@ -298,7 +285,7 @@
                                     <input type="text" hidden="hidden" name="phrase-result" id="phrase-result">
 
                                     <!-- 상태 -->
-                                    <input name="state" type="text" hidden="hidden" value="주문완료">
+                                    <input name="state" type="text" hidden="hidden" id="status" value="주문완료">
 
                                 </form>
                             </div>
@@ -308,9 +295,6 @@
 
 
                 <!-- BEGIN  modal -->
-                {#                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sizedModalLg">#}
-                {#                    Large#}
-                {#                </button>#}
                 <div class="modal fade" id="sizedModalLg" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -327,46 +311,33 @@
                                     <div class="form-floating">
                                         <label for="inputCity">사이즈 옵션</label>
                                         <select id="size-option" class="form-control mb-3">
-                                            <option>1호</option>
-                                            <option>2호</option>
-                                            <option>3호</option>
-                                            <option>4호</option>
-                                            <option>미니</option>
-                                            <option>1 + 3호 (2단)</option>
-                                            <option>미니 + 2호 + 4호 (3단)</option>
-                                            <option>한송이, 꽃다발</option>
                                         </select>
                                     </div>
 
                                     <div class="form-floating">
                                         <label for="inputCity">필링 옵션</label>
                                         <select id="filling-option" class="form-control mb-3">
-                                            <option selected>선택없음</option>
-                                            <option>꿀 + 견과류</option>
-                                            <option>흑임자</option>
-                                            <option>단호박</option>
-                                            <option>자색고구마</option>
-                                            <option>블루베리</option>
+                                            {% for filling in filling_table %}
+                                            <option>{{ filling.filling_name }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
 
                                     <div class="form-floating">
                                         <label for="inputCity">시트 옵션</label>
                                         <select id="sheet-option" class="form-control mb-3">
-                                            <option selected>백설기</option>
-                                            <option>흑임자설기</option>
-                                            <option>단호박설기</option>
-                                            <option>자색고구마설기</option>
-                                            <option>블루베리설기</option>
+                                            {% for sheet in sheet_table %}
+                                            <option>{{ sheet.sheet_name }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
 
                                     <div class="form-floating">
                                         <label for="inputCity">포장 옵션</label>
                                         <select id="boxing-option" class="form-control mb-3">
-                                            <option selected>포장없음</option>
-                                            <option>보자기</option>
-                                            <option>선물박스</option>
+                                            {% for boxing in boxing_table %}
+                                            <option>{{ boxing.boxing_name }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
 
@@ -374,6 +345,7 @@
                                         <label for="inputCity">문구 옵션</label>
                                         <input id="phrase-option" type="email" class="form-control" placeholder="문구를 입력해주세요.">
                                     </div>
+                                    <input type="hidden" id="product_price" />
                                 </div>
 
                                 <div class="card" id="item-card">
@@ -387,9 +359,9 @@
                                                 </div>
 
                                                 <div style="margin: 5px 0;" id="div-size-result"></div>
-                                                <div style="margin: 5px 0;" id="div-filling-result"></div>
-                                                <div style="margin: 5px 0;" id="div-sheet-result"></div>
-                                                <div style="margin: 5px 0;" id="div-boxing-result"></div>
+                                                <div style="margin: 5px 0;" id="div-filling-result">선택없음</div>
+                                                <div style="margin: 5px 0;" id="div-sheet-result">선택없음</div>
+                                                <div style="margin: 5px 0;" id="div-boxing-result">선택없음</div>
                                                 <div style="margin: 5px 0;" id="div-phrase-result"></div>
 
                                             </div>
@@ -454,15 +426,13 @@
 
     <script type="text/javascript">
         // *** 품목 자동완성
-        //<![CDATA[
         $(function() {
 
             // 품목 리스트
             var productList = [];
-            {% for product in products %}
+            {% for product in products_table %}
                 productList.push('{{ product.product_name }}')
             {% endfor %}
-            console.log(productList);
 
             // 카테고리 리스트
             var categoryMidList = [];
@@ -470,60 +440,9 @@
                 categoryMidList.push('{{ category.category_mid }}')
             {% endfor %}
 
-            var products = [
-                '모듬돔형 앙금플라워 케이크',
-                '카네이션 모듬돔형 앙금플라워 케이크',
-                '크레센트형 앙금플라워 케이크',
-                '2단 앙금플라워 케이크',
-                '3단 앙금플라워 케이크',
-                '미니 앙금플라워 케이크',
-                '미니 앙금플라워 컵케이크',
-                '앙금꽃 망개떡 케이크',
-                '망개떡 케이크',
-                '장미포인트 망개떡 케이크',
-                '포토 앙금플라워 케이크',
-                '포토 미니 떡케이크',
-                '2단 포토 앙금플라워 케이크',
-                '행사용 주문제작 행사떡 케이크',
-                '행사용 주문 제작 예단떡',
-                '행사용 주문제작 생화케이크',
-                '흑임자알떡',
-                '무지개알떡',
-                '쑥 가래떡',
-                '들깨 가래떡',
-                '흑임자 가래떡',
-                '가래떡 3종세트',
-                '무지개 떡국떡 1KG',
-                '무지개 떡국떡 2KG',
-                '약식 반반 세트',
-                '흑임자 듬뿍 수제약식',
-                '대추고 듬뿍 수제약식',
-                '망개떡 10개',
-                '흑임자꿀찰떡 10개',
-                '쑥영양찰떡 10개',
-                '현미영양찰떡 10개',
-                '유자찰떡 10개',
-                '단호박 찰떡 10개',
-                '쇠머리떡 10개',
-                '앙치즈 찹쌀떡 15개 세트',
-                '팥쑥절미 15개',
-                '카스텔라 두텁떡 15개 세트',
-                '까마쿤 흑임자 15개 세트',
-                '백설기 10개 묶음',
-                '흑임자꿀설기 10개 묶음',
-                '기피단호박설기 10개',
-                '보리떡 10개',
-                '선물세트 답례떡',
-                '선물세트 오색 알 송편',
-                '선물세트',
-                '선물세트 효자떡 샘플러 6종',
-                '선물세트 찹쌀떡 샘플러 6종'
-            ];
-
-            $("#products").autocomplete({
+            $(".products").autocomplete({
                 source: productList,
                 select: function(event, ui) {
-                    console.log(ui.item);
                 },
                 focus: function(event, ui) {
                     return false;
@@ -531,160 +450,197 @@
                 }
             });
         });
-        //]]>
 
     </script>
 
     <script>
+
+        <!-- 비동기 처리를 위한 사전 처리 -->
+        function getCookie(name) {
+            console.log(1);
+            var cookieValue = null;
+            if(document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for(var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if(cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+
+        var xhr;
+
         // *** 주문날짜 Default 값 표시 - order_date (default: currentDate)
-        document.getElementById('currentDate1').value = new Date().toISOString().substring(0, 10);
+        document.getElementById('order_date').value = new Date().toISOString().substring(0, 10);
 
+        // *** 고객 연락처 값 검증 - customer_phone
+        function phone(number) {
+            number.value = number.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+        }
 
-        // *** 주문번호 만들기
-        // *** order_no (default: yyyymmdd-A/B/C/D-00)
-        let $order_date = document.getElementById('currentDate1').value;
-        console.log($order_date);
-
-        let $orderNo_date = $order_date.replaceAll("-", "");
-        console.log($orderNo_date);
-
-        let $order_type = document.getElementById('order_type');
-        let $order_type_option = $order_type.options[$order_type.selectedIndex].value;
-        console.log($order_type_option)
-
-        let $option_value = $order_type.options[$order_type.selectedIndex].value;
-        console.log($option_value);
-
-        // ** status Default 값 표시 (주문완료 상태)
-
-    </script>
-
-
-    <script>
-        $(function() {
-            // *** Select2
-            $(".select2").each(function() {
-                $(this)
-                    .wrap("<div class=\"position-relative\"></div>")
-                    .select2({
-                        placeholder: "Select value",
-                        dropdownParent: $(this).parent()
-                    });
-            })
-            // *** Select Orderer
-            $('#select-order-person').on('click', function () {
-                console.log('working right!')
-                alert("주문자를 선택해yo ");
-            });
-
-            // *** Test Option Value
-            $('#test-option-submit').on('click', function () {
-                $sizeOption = document.getElementById('size-option');
-                $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
-
-                $fillingOption = document.getElementById('filling-option');
-                $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
-
-                $sheetOption = document.getElementById('sheet-option');
-                $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
-
-                $boxingOption = document.getElementById('boxing-option');
-                $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
-
-                $phraseOptionValue = document.getElementById('phrase-option').value;
-
-                //alert($sizeOptionValue)
-
-                alert(
-                    'sizeOptionValue = ' + $sizeOptionValue + '\n'
-                    + 'fillingOptionValue = ' + $fillingOptionValue + '\n'
-                    + 'sheetOptionValue = ' + $sheetOptionValue + '\n'
-                    + 'boxingOptionValue = ' + $boxingOptionValue + '\n'
-                    + 'phraseOption = ' + $phraseOptionValue
-                )
-            })
-
-            // Radio Button Test
-            $(function () {
-                $('input[name="pay_check"]').on('click', function () {
-                    var radio_checked = $('input[name="pay_check"]:checked').val();
-                    console.log("라디오1 = " + radio_checked);
-                    $('#radio-result').val(radio_checked);
-                })
-            })
+        // *** 주문고객 수령일 경우 체크
+        var check = document.getElementById("customControlInline");
+        check.addEventListener("click", function() {
+            if(check.checked) {
+                var customer = document.getElementById("customer").value;
+                var phone = document.getElementById("customer_phone").value;
+                document.getElementById("recipient").value = customer;
+                document.getElementById("recipient_phone").value = phone;
+            } else {
+                document.getElementById("recipient").value = '';
+                document.getElementById("recipient_phone").value = '';
+            }
+        });
 
 
 
+        // *** 모달창에 사이즈 데이터 전달
+        $(".modalbtn").click(function() {
+           var data_id = $(this).data('id');
 
-            // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
-            $(function () {
-                $('#size-option').on('change', function () {
+           var product_name = document.getElementById(data_id).value;
+
+           if(product_name == '') {
+               alert('상품을 입력해주세요');
+               document.getElementById(data_id).focus();
+               return false;
+           }
+            var strurl = "option_view?product_name=" + product_name;
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    var data = xhr.responseText;
+
+                    var obj = JSON.parse(data);
+                    console.log(obj.size.length);
+
+                    //size
+                    var size_option = document.getElementById("size-option");
+                    var opt = "";
+                    if(obj.size.length != 0) {
+                        for(var i = 0; i < obj.size.length; i++) {
+                            opt += "<option>" + obj.size[i].size_name + "</option>";
+                        }
+                        document.getElementById('div-size-result').innerText = obj.size[0].size_name;
+                    } else {
+                        opt = "";
+                        document.getElementById('div-size-result').innerText = "";
+                    }
+                    size_option.innerHTML = opt;
+                    $('#size-option').on('change', function () {
                     $sizeOption = document.getElementById('size-option');
                     $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
                     document.getElementById('div-size-result').innerText = $sizeOptionValue;
                     $('#size-result').val($sizeOptionValue);
                 })
-                $('#filling-option').on('change', function () {
-                    $fillingOption = document.getElementById('filling-option');
-                    $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
-                    document.getElementById('div-filling-result').innerText = $fillingOptionValue;
-                    $('#filling-result').val($fillingOptionValue);
-
-                })
-                $('#sheet-option').on('change', function () {
-                    $sheetOption = document.getElementById('sheet-option');
-                    $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
-                    document.getElementById('div-sheet-result').innerText = $sheetOptionValue;
-                    $('#sheet-result').val($sheetOptionValue);
-
-                })
-                $('#boxing-option').on('change', function () {
-                    $boxingOption = document.getElementById('boxing-option');
-                    $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
-                    document.getElementById('div-boxing-result').innerText = $boxingOptionValue;
-                    $('#boxing-result').val($boxingOptionValue);
-
-                })
-                $('#phrase-option').on('change', function () {
-                    $phraseOptionValue = document.getElementById('phrase-option').value;
-                    document.getElementById('div-phrase-result').innerText = $phraseOptionValue;
-                    $('#phrase-result').val($phraseOptionValue);
-
-                })
-            })
-
-            $('#final-option-result').on('click', function () {
-                //$sizeOptionResult = document.getElementById('size-result').innerHTML;
-                // $fillingOptionResult = document.getElementById('filling-result').innerHTML;
-                // $sheetOptionResult = document.getElementById('sheet-result').innerHTML;
-                // $boxingOptionResult = document.getElementById('boxing-result').innerHTML;
-                // $phraseOptionResult = document.getElementById('phrase-result').innerHTML;
-
-                $sizeOptionResult = $('#size-result').val();
-                $fillingOptionResult = $('#filling-result').val();
-                $sheetOptionResult = $('#sheet-result').val();
-                $boxingOptionResult = $('#boxing-result').val();
-                $phraseOptionResult = $('#phrase-result').val();
-
-                var list = [$sizeOptionResult, $fillingOptionResult, $sheetOptionResult, $boxingOptionResult, $phraseOptionResult];
-                console.log(list);
-
-                var finalOptionResult = "";
-
-                for (let optionlist of list) {
-                    if (optionlist != null) {
-                        console.log(optionlist)
-                        finalOptionResult += optionlist + " "
-                        console.log(finalOptionResult)
-                        $('input[id=input-option-result]').attr('value', finalOptionResult);
-                    }
                 }
-                $('#sizedModalLg').modal('hide');
-            })
+            };
+            xhr.open("POST", strurl);
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.send(null);
         });
 
-    </script>
 
-    <script>
+
+        // *** 주문번호 만들기
+        // *** order_no (default: yyyymmdd-A/B/C/D-00)
+        {#let $order_date = document.getElementById('currentDate1').value;#}
+        {#console.log($order_date);#}
+        {##}
+        {#let $orderNo_date = $order_date.replaceAll("-", "");#}
+        {#console.log($orderNo_date);#}
+        {##}
+        {#let $order_type = document.getElementById('order_type');#}
+        {#let $order_type_option = $order_type.options[$order_type.selectedIndex].value;#}
+        {#console.log($order_type_option)#}
+        {##}
+        {#let $option_value = $order_type.options[$order_type.selectedIndex].value;#}
+        {#console.log($option_value);#}
+
+        // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
+        $(function () {
+
+            $('#filling-option').on('change', function () {
+                $fillingOption = document.getElementById('filling-option');
+                $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
+                document.getElementById('div-filling-result').innerText = $fillingOptionValue;
+                $('#filling-result').val($fillingOptionValue);
+
+            })
+            $('#sheet-option').on('change', function () {
+                $sheetOption = document.getElementById('sheet-option');
+                $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
+                document.getElementById('div-sheet-result').innerText = $sheetOptionValue;
+                $('#sheet-result').val($sheetOptionValue);
+
+            })
+            $('#boxing-option').on('change', function () {
+                $boxingOption = document.getElementById('boxing-option');
+                $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
+                document.getElementById('div-boxing-result').innerText = $boxingOptionValue;
+                $('#boxing-result').val($boxingOptionValue);
+
+            })
+            $('#phrase-option').on('change', function () {
+                $phraseOptionValue = document.getElementById('phrase-option').value;
+                document.getElementById('div-phrase-result').innerText = $phraseOptionValue;
+                $('#phrase-result').val($phraseOptionValue);
+
+            })
+        });
+        // 옵션 최종 등록, 주문 등록에 필요한 태그 세팅, 모달종료
+        $('#final-option-result').on('click', function () {
+            //$sizeOptionResult = document.getElementById('size-result').innerHTML;
+            // $fillingOptionResult = document.getElementById('filling-result').innerHTML;
+            // $sheetOptionResult = document.getElementById('sheet-result').innerHTML;
+            // $boxingOptionResult = document.getElementById('boxing-result').innerHTML;
+            // $phraseOptionResult = document.getElementById('phrase-result').innerHTML;
+
+            $sizeOptionResult = $('#size-result').val();
+            $fillingOptionResult = $('#filling-result').val();
+            $sheetOptionResult = $('#sheet-result').val();
+            $boxingOptionResult = $('#boxing-result').val();
+            $phraseOptionResult = $('#phrase-result').val();
+
+            var list = [$sizeOptionResult, $fillingOptionResult, $sheetOptionResult, $boxingOptionResult, $phraseOptionResult];
+            console.log(list);
+
+            var finalOptionResult = "";
+
+            for (let optionlist of list) {
+                if (optionlist != null) {
+                    console.log(optionlist)
+                    finalOptionResult += optionlist + " "
+                    console.log(finalOptionResult)
+                    $('input[id=input-option-result]').attr('value', finalOptionResult);
+                }
+            }
+            $('#sizedModalLg').modal('hide');
+        });
+
+        function create_order() {
+            event.preventDefault();
+            var size = document.getElementById("size-result");
+            var filling = document.getElementById("filling-result");
+            var sheet = document.getElementById("sheet-result");
+            var boxing = document.getElementById("boxing-result");
+            var phrase = document.getElementById("phrase-result");
+            var status = document.getElementById("status");
+
+            console.log("size : " + size.value)
+            console.log("filling : " + filling.value)
+            console.log("sheet : " + sheet.value)
+            console.log("boxing : " + boxing.value)
+            console.log("phrase : " + phrase.value)
+            console.log("status : " + status.value)
+        }
+
+
     </script>
 {% endblock javascript %}
