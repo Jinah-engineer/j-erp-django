@@ -533,12 +533,7 @@
                         document.getElementById('div-size-result').innerText = "";
                     }
                     size_option.innerHTML = opt;
-                    $('#size-option').on('change', function () {
-                    $sizeOption = document.getElementById('size-option');
-                    $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
-                    document.getElementById('div-size-result').innerText = $sizeOptionValue;
-                    $('#size-result').val($sizeOptionValue);
-                })
+
                 }
             };
             xhr.open("POST", strurl);
@@ -565,6 +560,13 @@
 
         // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
         $(function () {
+            $('#size-option').on('change', function () {
+                $sizeOption = document.getElementById('size-option');
+                $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
+                document.getElementById('div-size-result').innerText = $sizeOptionValue;
+                $('#size-result').val($sizeOptionValue);
+                console.log($sizeOptionValue);
+            });
 
             $('#filling-option').on('change', function () {
                 $fillingOption = document.getElementById('filling-option');
@@ -639,6 +641,23 @@
             console.log("boxing : " + boxing.value)
             console.log("phrase : " + phrase.value)
             console.log("status : " + status.value)
+
+            var data = {"size":size.value};
+            var datastr = JSON.stringify(data);
+
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    var data = xhr.responseText;
+                    var obj = JSON.parse(data);
+
+                    console.log(obj);
+                    console.log(obj.size);
+                }
+            }
+            xhr.open("POST", 'post_create');
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.send(datastr);
         }
 
 

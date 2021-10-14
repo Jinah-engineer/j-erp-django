@@ -1,7 +1,7 @@
 # ---------- 박진아 작업 ----------
 import datetime
-
 from django.http import JsonResponse, HttpResponse
+import json
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -70,6 +70,23 @@ from accounts.models import Member
         - list up 된 모든 value들 database 및 화면으로 최종적으로 넘겨주는 역할을 함
 '''
 
+
+# ====================== POST TEST
+@csrf_exempt
+def post_create(request):
+    context = {}
+
+    if request.method == "POST":
+        bodydata = request.body.decode('utf-8')
+        bodyjson = json.loads(bodydata)
+        size = bodyjson['size']
+
+    print(size)
+    context['size'] = size
+    context['result_msg'] = '통신성공'
+
+    return JsonResponse(context, content_type="application/json")
+
 # ====================== 주문서 페이지 출력
 '''
     자동입력값 js 처리
@@ -77,6 +94,8 @@ from accounts.models import Member
         2. order_no - 'current date' + '-' + 'order type value(A/B/C/D)' + '-' + '순서(for문?)'
         3. order_date - current date
 '''
+
+
 def new_order(request):
 
     context = {}
