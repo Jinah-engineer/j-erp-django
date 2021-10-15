@@ -162,12 +162,39 @@ def option_view(request):
     # 옵션테이블 조회
     product = Product.objects.get(product_name=product_name)
     size = Size.objects.filter(product_id_id=product.product_id)
+    context["product_price"] = int(product.product_price)
     if size.exists():
         context["size"] = list(size.values())
     else:
         context["size"] = ''
 
     return JsonResponse(context, content_type="application/json")
+
+
+# ====================== 금액 계산
+'''
+    1. 품목 금액
+        1) 품목 이름에 해당하는 금액 value 가져오기 (product.product_price) 
+        2) 해당 value X 수량(count)
+    
+    2. 옵션 금액 
+        1) 옵션별로 해당 옵션에 해당하는 금액 value 가져오기
+        2) size 옵션
+'''
+
+
+@csrf_exempt
+def product_price(request):
+    context = {}
+
+    if request.method == "POST":
+        bodydata = request.body.decode('utf-8')
+        bodyjson = json.loads(bodydata)
+        size = bodyjson['size']
+
+
+    return JsonResponse(context, content_type="application/json")
+
 
 # ====================== 품목 추가
 
@@ -181,16 +208,6 @@ def option_view(request):
     
 '''
 
-# ====================== 금액 계산
-'''
-    1. 품목 금액
-        1) 품목 이름에 해당하는 금액 value 가져오기 (product.product_price) 
-        2) 해당 value X 수량(count)
-    
-    2. 옵션 금액 
-        1) 옵션별로 해당 옵션에 해당하는 금액 value 가져오기
-        2) size 옵션
-'''
 
 
 

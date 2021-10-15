@@ -130,53 +130,58 @@
                                             <span>품목명</span>
                                         </div>
                                     </div>
+
+                                    <!-- ============================================= -->
                                     <div class="card" id="item-card">
                                         <div class="card-body">
 
                                             <!-- 1번째 품목 -->
                                             <div class="form-group row">
-                                                <button class="item-button" style="margin-left: 50px; border-color: white;
-                                                background-color: #153d77; color: white">1</button>
+                                                <button class="item-button addnumber" style="margin-left: 50px; border-color: white;
+                                                background-color: #153d77; color: white" disabled>1</button>
                                                 <div class="col-md-3">
                                                     <div class="ui-widget">
-                                                        <input id="product1" type="text" class="form-control products" name="product_name"
+                                                        <input data-no="1" type="text" class="form-control products" name="product_name"
                                                                style="font-family: 'NanumSquareR';" placeholder="품목이름">
                                                     </div>
                                                 </div>
 
                                                 <button type="button" class="btn item-button modalbtn"
                                                         style="border-color: white;
-                                                background-color: #153d77; color: white" data-id="product1"
+                                                background-color: #153d77; color: white" data-no="1"
                                                         data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control" placeholder="옵션이름"
-                                                           id="input-option-result" autocomplete="off">
+                                                           id="input-option-result" disabled>
+                                                    <!-- 옵션 값 (Hidden) -->
+                                                    <input type="text" hidden="hidden" id="size-result">
+                                                    <input type="text" hidden="hidden" id="filling-result">
+                                                    <input type="text" hidden="hidden" id="sheet-result">
+                                                    <input type="text" hidden="hidden" id="boxing-result">
+                                                    <input type="text" hidden="hidden" id="phrase-result">
                                                 </div>
                                                 <div class="col-md-1" style="padding-left: 0">
-                                                    <input type="number" class="form-control" name="count" placeholder="수량" min="1">
+                                                    <input type="number" class="form-control count_product" data-id="1" id="count_1" placeholder="수량" min="1">
                                                 </div>
                                                 <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
                                                 <button class="item-button" style="border-color: white;
                                                 background-color: darkred; color: white">X</button>
                                                 <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
                                                 <div class="col-md-2">
-                                                    <input type="text" name="" class="form-control" placeholder="금액">
+                                                    <input type="text" data-price="0" id="price_1" class="form-control price1" placeholder="금액">
                                                 </div>
                                             </div>
 
-                                            <!-- For Loop 품목 -->
-                                            {% for product in products %}
-                                                {#                                                <input type="text" id="first-products-list" name="product_name" value="{{ product }}">#}
-                                                <li hidden="hidden" id="first-products-list">{{ product.product_name }}</li>
-                                            {% endfor %}
 
+
+                                    <!-- ============================================= -->
 
                                             <!-- 2번째 품목 -->
 
                                             <!-- 상품 추가 버튼 -->
                                             <div class="form-group row">
                                                 <button class="btn btn-block" style="margin-left: 50px; margin-top: 30px;
-                                                 background-color: #153d77; color: white; width: 30%;">
+                                                 background-color: #153d77; color: white; width: 30%;" onclick="addProduct();">
                                                     + 상품 추가
                                                 </button>
                                             </div>
@@ -277,13 +282,6 @@
                                         </button>
                                     </div>
 
-                                    <!-- 옵션 값 (Hidden) -->
-                                    <input type="text" hidden="hidden" name="size-result" id="size-result">
-                                    <input type="text" hidden="hidden" name="filling-result" id="filling-result">
-                                    <input type="text" hidden="hidden" name="sheet-result" id="sheet-result">
-                                    <input type="text" hidden="hidden" name="boxing-result" id="boxing-result">
-                                    <input type="text" hidden="hidden" name="phrase-result" id="phrase-result">
-
                                     <!-- 상태 -->
                                     <input name="state" type="text" hidden="hidden" id="status" value="주문완료">
 
@@ -318,7 +316,7 @@
                                         <label for="inputCity">필링 옵션</label>
                                         <select id="filling-option" class="form-control mb-3">
                                             {% for filling in filling_table %}
-                                            <option>{{ filling.filling_name }}</option>
+                                            <option data-price="{{ filling.filling_price }}" value="{{ filling.filling_name }}">{{ filling.filling_name }} : +{{ filling.filling_price }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -327,7 +325,7 @@
                                         <label for="inputCity">시트 옵션</label>
                                         <select id="sheet-option" class="form-control mb-3">
                                             {% for sheet in sheet_table %}
-                                            <option>{{ sheet.sheet_name }}</option>
+                                            <option data-price="{{ sheet.sheet_price }}" value="{{ sheet.sheet_name }}">{{ sheet.sheet_name }} : +{{ sheet.sheet_price }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -336,16 +334,16 @@
                                         <label for="inputCity">포장 옵션</label>
                                         <select id="boxing-option" class="form-control mb-3">
                                             {% for boxing in boxing_table %}
-                                            <option>{{ boxing.boxing_name }}</option>
+                                            <option data-price="{{ boxing.boxing_price }}" value="{{ boxing.boxing_name }}">{{ boxing.boxing_name }} : +{{ boxing.boxing_price }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
 
                                     <div class="form-floating">
                                         <label for="inputCity">문구 옵션</label>
-                                        <input id="phrase-option" type="email" class="form-control" placeholder="문구를 입력해주세요.">
+                                        <input id="phrase-option" type="email" class="form-control" placeholder="문구없음">
+                                        <input type="hidden" id="phrase_price" value="5000">
                                     </div>
-                                    <input type="hidden" id="product_price" />
                                 </div>
 
                                 <div class="card" id="item-card">
@@ -357,12 +355,12 @@
                                                 {#                                                       value="" readonly>#}
                                                 <div style="font-family: 'NanumSquareEB'; font-size: 15px;" id="option-result">
                                                 </div>
-
-                                                <div style="margin: 5px 0;" id="div-size-result"></div>
-                                                <div style="margin: 5px 0;" id="div-filling-result">선택없음</div>
-                                                <div style="margin: 5px 0;" id="div-sheet-result">선택없음</div>
-                                                <div style="margin: 5px 0;" id="div-boxing-result">선택없음</div>
-                                                <div style="margin: 5px 0;" id="div-phrase-result"></div>
+                                                <input type="hidden" data-price="0" id="product-price"/>
+                                                <div style="margin: 5px 0;" id="div-size-result" data-price="">선택없음</div>
+                                                <div style="margin: 5px 0;" id="div-filling-result" data-price="">선택없음</div>
+                                                <div style="margin: 5px 0;" id="div-sheet-result" data-price="">선택없음</div>
+                                                <div style="margin: 5px 0;" id="div-boxing-result" data-price="">선택없음</div>
+                                                <div style="margin: 5px 0;" id="div-phrase-result" data-price="0">문구없음</div>
 
                                             </div>
                                         </div>
@@ -502,13 +500,70 @@
 
         // *** 모달창에 사이즈 데이터 전달
         $(".modalbtn").click(function() {
-           var data_id = $(this).data('id');
 
-           var product_name = document.getElementById(data_id).value;
+            // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
+
+            $('#size-option').on('change', function () {
+                $sizeOption = document.getElementById('size-option');
+                $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
+                document.getElementById('div-size-result').innerText = $sizeOptionValue;
+                document.getElementById('div-size-result').dataset.price = $sizeOption.options[$sizeOption.selectedIndex].dataset.price;
+                $('#size-result').val($sizeOptionValue);
+                console.log(document.getElementById('div-size-result').dataset.price);
+
+            });
+
+            $('#filling-option').on('change', function () {
+                $fillingOption = document.getElementById('filling-option');
+                $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
+                document.getElementById('div-filling-result').innerText = $fillingOptionValue;
+                document.getElementById('div-filling-result').dataset.price = $fillingOption.options[$fillingOption.selectedIndex].dataset.price;
+                $('#filling-result').val($fillingOptionValue);
+                console.log(document.getElementById('div-filling-result').dataset.price);
+            });
+            $('#sheet-option').on('change', function () {
+                $sheetOption = document.getElementById('sheet-option');
+                $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
+                document.getElementById('div-sheet-result').innerText = $sheetOptionValue;
+                document.getElementById('div-sheet-result').dataset.price = $sheetOption.options[$sheetOption.selectedIndex].dataset.price;
+                $('#sheet-result').val($sheetOptionValue);
+                console.log(document.getElementById('div-sheet-result').dataset.price);
+            });
+            $('#boxing-option').on('change', function () {
+                $boxingOption = document.getElementById('boxing-option');
+                $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
+                document.getElementById('div-boxing-result').innerText = $boxingOptionValue;
+                document.getElementById('div-boxing-result').dataset.price = $boxingOption.options[$boxingOption.selectedIndex].dataset.price;
+                $('#boxing-result').val($boxingOptionValue);
+                console.log(document.getElementById('div-boxing-result').dataset.price);
+            });
+            $('#phrase-option').on('change', function () {
+                var phraseOption = document.getElementById('phrase-option');
+                $phraseOptionValue = document.getElementById('phrase-option').value;
+                document.getElementById('div-phrase-result').innerText = $phraseOptionValue;
+                $('#phrase-result').val($phraseOptionValue);
+
+                if($phraseOptionValue == '') {
+                    phraseOption.dataset.price = 0;
+                } else {
+                    phraseOption.dataset.price = 5000;
+                }
+            });
+
+
+           var data_no = $(this).data('no');
+           console.log(data_no);
+
+           var product_btn = document.getElementsByClassName("products");
+           for(var i = 0; i < product_btn.length; i++) {
+               if(product_btn[i].dataset.no == data_no) {
+                   product_name = product_btn[i].value;
+               }
+           }
 
            if(product_name == '') {
                alert('상품을 입력해주세요');
-               document.getElementById(data_id).focus();
+               document.getElementById().focus();
                return false;
            }
             var strurl = "option_view?product_name=" + product_name;
@@ -520,14 +575,19 @@
                     var obj = JSON.parse(data);
                     console.log(obj.size.length);
 
+                    //product price
+                    document.getElementById('product-price').dataset.price = obj.product_price;
                     //size
                     var size_option = document.getElementById("size-option");
-                    var opt = "";
+                    var opt = "<option>선택없음</option>";
+                    var size_price = document.getElementById('size-price');
+                    var pri = "";
                     if(obj.size.length != 0) {
                         for(var i = 0; i < obj.size.length; i++) {
-                            opt += "<option>" + obj.size[i].size_name + "</option>";
+                            opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
                         }
-                        document.getElementById('div-size-result').innerText = obj.size[0].size_name;
+                        document.getElementById('div-size-result').innerText = "선택없음";
+
                     } else {
                         opt = "";
                         document.getElementById('div-size-result').innerText = "";
@@ -539,6 +599,8 @@
             xhr.open("POST", strurl);
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
             xhr.send(null);
+
+
         });
 
 
@@ -558,44 +620,7 @@
         {#let $option_value = $order_type.options[$order_type.selectedIndex].value;#}
         {#console.log($option_value);#}
 
-        // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
-        $(function () {
-            $('#size-option').on('change', function () {
-                $sizeOption = document.getElementById('size-option');
-                $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
-                document.getElementById('div-size-result').innerText = $sizeOptionValue;
-                $('#size-result').val($sizeOptionValue);
-                console.log($sizeOptionValue);
-            });
 
-            $('#filling-option').on('change', function () {
-                $fillingOption = document.getElementById('filling-option');
-                $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
-                document.getElementById('div-filling-result').innerText = $fillingOptionValue;
-                $('#filling-result').val($fillingOptionValue);
-
-            })
-            $('#sheet-option').on('change', function () {
-                $sheetOption = document.getElementById('sheet-option');
-                $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
-                document.getElementById('div-sheet-result').innerText = $sheetOptionValue;
-                $('#sheet-result').val($sheetOptionValue);
-
-            })
-            $('#boxing-option').on('change', function () {
-                $boxingOption = document.getElementById('boxing-option');
-                $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
-                document.getElementById('div-boxing-result').innerText = $boxingOptionValue;
-                $('#boxing-result').val($boxingOptionValue);
-
-            })
-            $('#phrase-option').on('change', function () {
-                $phraseOptionValue = document.getElementById('phrase-option').value;
-                document.getElementById('div-phrase-result').innerText = $phraseOptionValue;
-                $('#phrase-result').val($phraseOptionValue);
-
-            })
-        });
         // 옵션 최종 등록, 주문 등록에 필요한 태그 세팅, 모달종료
         $('#final-option-result').on('click', function () {
             //$sizeOptionResult = document.getElementById('size-result').innerHTML;
@@ -604,13 +629,14 @@
             // $boxingOptionResult = document.getElementById('boxing-result').innerHTML;
             // $phraseOptionResult = document.getElementById('phrase-result').innerHTML;
 
-            $sizeOptionResult = $('#size-result').val();
-            $fillingOptionResult = $('#filling-result').val();
-            $sheetOptionResult = $('#sheet-result').val();
-            $boxingOptionResult = $('#boxing-result').val();
-            $phraseOptionResult = $('#phrase-result').val();
+            var size = $('#size-result').val();
+            var filling = $('#filling-result').val();
+            var sheet = $('#sheet-result').val();
+            var boxing = $('#boxing-result').val();
+            var phrase = $('#phrase-result').val();
+            var price = $('#price-result').val();
 
-            var list = [$sizeOptionResult, $fillingOptionResult, $sheetOptionResult, $boxingOptionResult, $phraseOptionResult];
+            var list = [size, filling, sheet, boxing, phrase];
             console.log(list);
 
             var finalOptionResult = "";
@@ -618,13 +644,52 @@
             for (let optionlist of list) {
                 if (optionlist != null) {
                     console.log(optionlist)
-                    finalOptionResult += optionlist + " "
+                    finalOptionResult += optionlist + " / "
                     console.log(finalOptionResult)
                     $('input[id=input-option-result]').attr('value', finalOptionResult);
                 }
             }
+
+            console.log('===========================');
+            var product_price = document.getElementById('product-price').dataset.price;
+            console.log(product_price);
+            var size_price = document.getElementById('div-size-result').dataset.price;
+            console.log(size_price);
+            var sheet_price = document.getElementById('div-sheet-result').dataset.price;
+            console.log(sheet_price);
+            var boxing_price = document.getElementById('div-boxing-result').dataset.price;
+            console.log(boxing_price);
+            var filling_price = document.getElementById('div-filling-result').dataset.price;
+            console.log(filling_price);
+            var phrase_price = document.getElementById('phrase-option').dataset.price;
+            console.log(phrase_price);
+
+            // 상품1건에 대한 가격 합산
+            var price1 = document.getElementById('price_1');
+            price1.dataset.price = parseInt(product_price) + parseInt(size_price) + parseInt(sheet_price) + parseInt(filling_price) + parseInt(boxing_price) + parseInt(phrase_price);
+
+            // 옵션 확정시 수량이 비어있다면 자동입력
+            var count1 = document.getElementById('count_1');
+            if(count1.value == '') {
+                count1.value = 1;
+                price1.value = price1.dataset.price;
+            }
             $('#sizedModalLg').modal('hide');
+
+
         });
+        // 수량 변경시 가격 계산
+        $('.count_product').on('change', function () {
+            console.log(event.currentTarget.dataset.id);
+            var dataid = event.currentTarget.dataset.id;
+
+            var counttag = document.getElementById('count_' + dataid);
+            var pricetag = document.getElementById('price_' + dataid);
+            var saleprice = pricetag.dataset.price;
+            pricetag.value = saleprice * counttag.value;
+        });
+
+
 
         function create_order() {
             event.preventDefault();
