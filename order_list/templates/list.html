@@ -594,7 +594,8 @@
                         css: {
                             backgroundColor: 'pink'
                         }
-                    }
+                    },
+                    language: lang_kor,
                     // columnDefs: {
                     //     className: "dt-center", targets: "_all"
                     // },
@@ -650,10 +651,6 @@
 
 
 
-
-
-
-
                 // -------------------------------------------------------
                 // Datatable 에서 선택한 row 의 data 가져오기
                 // -------------------------------------------------------
@@ -665,16 +662,16 @@
 
                 var table =  $('#bootstrap-table').DataTable();
 
-                $('#bootstrap-table tbody').on('click', 'tr', function () {
+                $('#bootstrap-table tbody').on('click', 'tr.selected', function () {
                     let this_row = table.row(this).data();
                     let tst = $('#bootstrap-table').DataTable().rows('.selected').data();
 
                     console.log('---------------look at test6 ----------------------');
                     $('#test6').html( "모든 데이터 : "
                         + table.row( this ).data()
-                        + "<br> pno :" + tst[0]
-                        + "<br> 주문번호 :" + tst[1]
-                        + "<br> 주문일자 :" + tst[2]
+                        + "<br> pno :" + this_row[0]
+                        + "<br> 주문번호 :" + this_row[1]
+                        + "<br> 주문일자 :" + this_row[2]
                         + "<br> 진행상태 :" + this_row[3]
                         + "<br> 고객명 :" + this_row[4]
                         + "<br> 품목 :" + this_row[5]
@@ -707,11 +704,16 @@
                     // -------------------------------------------------------
                     console.log('---------------string formatting testing!!!! ----------------------');
 
-                    var testString = this_row[2];	// 원래 문자열
+                    var test_date = this_row[2];	// 원래 문자열
                     var regex = /[^0-9]/g;				// 숫자가 아닌 문자열을 매칭하는 정규식
-                    var result = testString.replace(regex, "");	// 원래 문자열에서 숫자가 아닌 모든 문자열을 빈 문자로 변경
+                    var result = test_date.replace(regex, "");	// 원래 문자열에서 숫자가 아닌 모든 문자열을 빈 문자로 변경
                     var final_result = result.substring(0,4) + '-' + result.substring(4,6) + '-' + result.substring(6,8);
                     console.log(final_result);
+
+
+                    var test_orderno = this_row[1];
+                    var test_orderno_html = test_orderno.innerText;
+                    console.log('test_orderno ====='+ test_orderno_html);
 
                     console.log('---------------string formatting testing!!!!----------------------');
 
