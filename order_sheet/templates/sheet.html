@@ -141,14 +141,14 @@
                                                 background-color: #153d77; color: white" disabled>1</button>
                                                 <div class="col-md-3">
                                                     <div class="ui-widget">
-                                                        <input data-no="1" type="text" class="form-control products" name="product_name"
+                                                        <input data-id="1" type="text" id="products_1" class="form-control products" name="product_name"
                                                                style="font-family: 'NanumSquareR';" placeholder="품목이름">
                                                     </div>
                                                 </div>
 
                                                 <button type="button" class="btn item-button modalbtn"
                                                         style="border-color: white;
-                                                background-color: #153d77; color: white" data-no="1"
+                                                background-color: #153d77; color: white" data-id="1"
                                                         data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control" placeholder="옵션이름"
@@ -496,6 +496,35 @@
             }
         });
 
+        // *** 상품 입력시 떡or케이크 구분 및 가격조회
+        $(".products").on('change', function() {
+            var data_id = event.currentTarget.dataset.id;
+            var product_name = document.getElementById('product_' + data_id).value;
+            var strurl = "option_view?product_name=" + product_name;
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    var data = xhr.responseText;
+
+                    var obj = JSON.parse(data);
+
+                    //product price - DB조회
+                    document.getElementById('price_' + data_id).dataset.price = obj.product_price;
+                    //size - DB조회
+                    if(obj.size.length == 0) {
+
+                    } else {
+                        return false;
+                    }
+                    size_option.innerHTML = opt;
+
+                }
+            };
+            xhr.open("POST", strurl);
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.send(null);
+        });
+
 
 
         // *** 모달창에 사이즈 데이터 전달
@@ -551,12 +580,12 @@
             });
 
 
-           var data_no = $(this).data('no');
-           console.log(data_no);
+           var data_id = $(this).data('id');
+           console.log(data_id);
 
            var product_btn = document.getElementsByClassName("products");
            for(var i = 0; i < product_btn.length; i++) {
-               if(product_btn[i].dataset.no == data_no) {
+               if(product_btn[i].dataset.id == data_id) {
                    product_name = product_btn[i].value;
                }
            }
@@ -575,9 +604,9 @@
                     var obj = JSON.parse(data);
                     console.log(obj.size.length);
 
-                    //product price
+                    //product price - DB조회
                     document.getElementById('product-price').dataset.price = obj.product_price;
-                    //size
+                    //size - DB조회
                     var size_option = document.getElementById("size-option");
                     var opt = "<option>선택없음</option>";
                     var size_price = document.getElementById('size-price');
@@ -591,6 +620,10 @@
                     } else {
                         opt = "";
                         document.getElementById('div-size-result').innerText = "";
+                        document.getElementById('size-option').innerHTML = "";
+                        document.getElementById('filling-option').innerHTML = "";
+                        document.getElementById('sheet-option').innerHTML = "";
+                        document.getElementById('boxing-option').innerHTML = "";
                     }
                     size_option.innerHTML = opt;
 
