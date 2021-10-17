@@ -5,11 +5,12 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Member
 from datetime import datetime
 from django.shortcuts import redirect
+
+
 # Create your views here.
 
 
 def member_register(request):
-
     return render(request, "signup.html")
 
 
@@ -19,7 +20,7 @@ def member_idcheck(request):
     mid = request.GET['member_id']
 
     rs = Member.objects.filter(member_id=mid)
-    if (len(rs)) > 0 :
+    if (len(rs)) > 0:
         context['flag'] = 1
         context['result_msg'] = '중복된 아이디입니다.'
     else:
@@ -36,11 +37,20 @@ def member_insert(request):
     member_pw = request.GET['member_pw']
     member_name = request.GET['member_name']
     member_email = request.GET['member_email']
+    member_rank = request.GET['rank']
+    member_auth = request.GET['auth']
+    # 자러 가고 싶다
+    if member_auth != '0812':
+        member_auth = '사원'
+    else:
+        member_auth = '관리자'
 
     rs = Member.objects.create(member_id=member_id,
                                member_pw=member_pw,
                                member_name=member_name,
                                member_email=member_email,
+                               member_rank=member_rank,
+                               member_auth=member_auth,
                                usage_flag='1',
                                register_date=datetime.now()
                                )
@@ -52,7 +62,6 @@ def member_insert(request):
 
 # 로그인 뷰
 def signin_view(request):
-
     return render(request, "login.html")
 
 
@@ -69,7 +78,7 @@ def member_login(request):
     else:
         rs = Member.objects.filter(member_id=member_id, member_pw=member_pw)
 
-        if(len(rs)) == 0:
+        if (len(rs)) == 0:
             context['flag'] = '1'
             context['result_msg'] = '등록되지 않은 사용자입니다.'
 
@@ -92,7 +101,6 @@ def member_login(request):
 
 
 def member_logout(request):
-
     # 로그아웃하는 시간 저장
     if request.session.has_key('member_no'):
         memberno = request.session['member_no']
@@ -100,7 +108,7 @@ def member_logout(request):
     member = Member.objects.get(member_no=memberno)
     member.access_latest = datetime.now()
     member.save()
-    
+
     # 세션 만료
     request.session.flush()
 
