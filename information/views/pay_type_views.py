@@ -25,6 +25,13 @@ def pay_type_get(request):
 # page view
 def pay_type_view(request):
 
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+    else:
+        memberno = None
+        membername = None
+
     rsBoard = Pay_type.objects.all().order_by('-pay_type_id')
 
     if Pay_type.objects.first() is not None:
@@ -32,7 +39,7 @@ def pay_type_view(request):
     else:
         last_id = 1
 
-    context = {"last_id": last_id, "pay_type_table": rsBoard}
+    context = {"last_id": last_id, "pay_type_table": rsBoard, "member_no": memberno, "member_name": membername}
 
     return render(request, 'pay_type.html', context)
 

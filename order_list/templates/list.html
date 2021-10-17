@@ -485,6 +485,22 @@
         {% endfor %}
         <!-- END  modal -->
 
+        <!-- Test Buttons -->
+        <div class="row">
+            <div class="col-12">
+                <button type="button" id="test1" class="btn btn-primary" data-dismiss="modal">Date Range 테스트</button>
+                <button type="button" id="test2" class="btn btn-primary" data-dismiss="modal">DataTable 테스트</button>
+                <button type="button" id="test3" class="btn btn-primary" data-dismiss="modal">주문 수정 테스트</button>
+                <button type="button" id="test4" class="btn btn-primary" data-dismiss="modal">주문 삭제 테스트</button>
+                <button type="button" id="test5" class="btn btn-primary" data-dismiss="modal">미등록된 테스트</button>
+
+                <div id='test6' style="border:1px solid black;margin:20px 0 0 0 ;padding:10px;"></div>
+
+            </div>
+        </div>
+
+
+
         <!-- *** footer *** -->
         {% include 'footer.html' %}
 
@@ -517,6 +533,16 @@
     <!-- *** 자바스크립트 *** -->
     <script>
         window.onload = function() {
+            // ==============================================================================================================================================
+            // TEST SCRIPT!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // ==============================================================================================================================================
+
+
+
+
+
+
+
             // ==============================================================================================================================================
             // 데이터테이블 API
             // ==============================================================================================================================================
@@ -570,6 +596,21 @@
                         }
                     },
                     language: lang_kor,
+                    // columnDefs: {
+                    //     className: "dt-center", targets: "_all"
+                    // },
+                    // lengthChange: false,
+                    {#bFilter: true,#}
+                    // autoWidth: true,
+                    // autoAdjustHeight: true;
+                    // autoplay: true,
+                    // lengthAdjust: false,
+                    // scrollY: "60vh",
+                    // sScrollX: "100%",
+                    // sScrollXInner: "50%",
+                    // scrollCollapse: false,
+                    // paging: true,
+                    // responsive: true,
                 });
 
                 // -------------------------------------------------------
@@ -583,6 +624,31 @@
                 // 엑셀 다운로드 버튼 위치 변경
                 // -------------------------------------------------------
                 $('#bootstrap-table_wrapper > .dt-buttons').appendTo('.btn-group.btn-group.mb-4.align-items-center.get-excel');
+
+
+                //$('#bootstrap-table').DataTable().draw();
+
+
+
+
+                // 데이터 row 선택하기 (multiple rows selected)
+                /*
+                $('#bootstrap-table tbody').on('click', 'tr', function () {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                        // $(this).toggleClass('selected');
+                        $(this).css("background-color", "#F5E6C4");
+
+                    }
+                    else {
+                        // table.$('tr.selected').removeClass('selected');
+                        // $(this).addClass('selected');
+                        $(this).toggleClass('selected');
+                        $(this).css("background-color", "transparent");
+                    }
+                });
+                 */
+
 
 
                 // -------------------------------------------------------
@@ -652,6 +718,10 @@
                     console.log('---------------string formatting testing!!!!----------------------');
 
 
+
+
+
+
                     // -------------------------------------------------------
                     // ****** row index 얻기
                     // -------------------------------------------------------
@@ -662,6 +732,7 @@
 
                     var row_data = table.row(row_index).data();
                     console.log('row data =====' + row_data);
+
 
 
                     var ids = $.map(table.rows('.selected').data(), function (item) {
@@ -836,6 +907,22 @@
                         }
                     })
 
+                    /*
+                    $.ajax({
+                        type: 'GET',
+                        url: '/list/ordermodify?pno=' + real_pno,
+                        data: {
+                            pno: real_pno,
+                        },
+                        success: function (data) {
+                        },
+                        error: function (data, error) {
+                            console.log(data)
+                            console.log(error)
+                            alert('got an error!')
+                        }
+                    });
+                     */
                     console.log('------------여기까지 주문 수정 모달 입니다---------');
                 {% endfor %}
             })

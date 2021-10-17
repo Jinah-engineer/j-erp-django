@@ -24,6 +24,14 @@ def size_get(request):
 
 # page view
 def size_view(request):
+
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+    else:
+        memberno = None
+        membername = None
+
     # size table 조회
     rsBoard = Size.objects.all().order_by('-size_id')
     # category table 조회
@@ -52,6 +60,8 @@ def size_view(request):
     context["last_id"] = last_id
     context["size_table"] = rsBoard
     context["product_dict"] = product_dict
+    context["member_no"] = memberno
+    context["member_name"] = membername
 
     return render(request, 'size.html', context)
 

@@ -25,6 +25,13 @@ def boxing_get(request):
 # page view
 def boxing_view(request):
 
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+    else:
+        memberno = None
+        membername = None
+
     rsBoard = Boxing.objects.all().order_by('-boxing_id')
 
     if Boxing.objects.first() is not None:
@@ -32,7 +39,7 @@ def boxing_view(request):
     else:
         last_id = 1
 
-    context = {"last_id": last_id, "boxing_table": rsBoard}
+    context = {"last_id": last_id, "boxing_table": rsBoard, "member_no": memberno, "member_name": membername}
 
     return render(request, 'boxing.html', context)
 

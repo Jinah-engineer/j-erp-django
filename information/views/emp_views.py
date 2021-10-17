@@ -6,86 +6,62 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
-from ..models import Employee
+from accounts.models import Member
 
 
 # employee
-
-# modal view
-@csrf_exempt
-def emp_get(request):
-    emp_id = request.GET['employee_id']
-    emp = Employee.objects.get(employee_id = emp_id)
-    data = model_to_dict(emp)
-    print(data)
-
-    return JsonResponse(data, content_type="application/json")
 
 
 # page view
 def employee_view(request):
 
-    rsBoard = Employee.objects.all().order_by('-employee_id')
-
-    if Employee.objects.first() is not None:
-        last_id = Employee.objects.last().employee_id + 1
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+        memberauth = request.session['member_auth']
     else:
-        last_id = 1
+        # return redirect('accounts:signin')
+        memberno = None
+        membername = None
+        memberauth = None
 
-    context = {"last_id": last_id, "employee_table": rsBoard, "test": "스크립트에서도 되나?"}
+    rsBoard = Member.objects.all().order_by('-member_no')
+
+    context = {"member_table": rsBoard, "member_no": memberno, "member_name": membername, "member_auth": memberauth}
 
     return render(request, 'employee.html', context)
 
 
-# employee insert
-def emp_insert(request):
-    emp_name = request.GET['emp_name']
-    emp_rank = request.GET['emp_rank']
-    emp_hire = request.GET['emp_hire']
-    emp_auth = request.GET['emp_auth']
-    if emp_name and emp_rank and emp_hire != "" and emp_auth != '==선택==':
-        rows = Employee.objects.create(employee_name=emp_name, employee_rank=emp_rank, employee_auth=emp_auth,
-                                       hiredate=emp_hire)
-        return redirect('information:emp_view')
-    else:
-        return redirect('information:emp_view')
-
-
 # employee update
+@csrf_exempt
 def emp_update(request):
-    emp_id = request.GET['employee_id']
-    emp_name = request.GET['employee_name']
-    emp_rank = request.GET['employee_rank']
-    emp_hire = request.GET['employee_hire']
-    emp_fire = request.GET['employee_fire']
-    emp_auth = request.GET['employee_auth']
+    context = {}
+    # 전달받은 인자
+    member_no = request.GET['member_no']
+    member_rank = request.GET['member_rank']
+    hiredate = request.GET['hiredate']
+    resignationdate = request.GET['resignationdate']
+    member_auth = request.GET['member_auth']
+    # DB 수정
+    member = Member.objects.get(member_no=member_no)
+    member.member_rank = member_rank
+    member.hiredate = hiredate
+    member.resignationdate = resignationdate
+    member.member_auth = member_auth
+    # 수정사항 저장
+    member.save()
 
-    try:
-        emp = Employee.objects.get(employee_id = emp_id)
-        if emp_name != "":
-            emp.employee_name = emp_name
-        if emp_rank != "":
-            emp.employee_rank = emp_rank
-        if emp_hire != "":
-            emp.hiredate = emp_hire
-        if emp_fire != "":
-            emp.firedate = emp_fire
-        if emp_auth != "" and emp_auth != "==선택==":
-            emp.employee_auth = emp_auth
-
-        try:
-            emp.save()
-            return redirect('information:emp_view')
-        except ValueError:
-            return HttpResponse({"success": False, "msg":"에러가 발생했습니다"})
-
-    except ObjectDoesNotExist:
-        return HttpResponse({"success": False, "msg": "직원 정보가 존재하지 않습니다"})
+    context['flag'] = '0'
+    context['result_msg'] = '수정되었습니다'
+    return JsonResponse(context, content_type="application/json")
 
 
 # employee delete
+@csrf_exempt
 def emp_delete(request):
-    emp_id = request.GET['employee_id']
-    rows = Employee.objects.get(employee_id=emp_id).delete()
+    context = {}
+    member_no = request.GET['member_no']
+    rows = Member.objects.get(member_no=member_no).delete()
 
-    return redirect('information:emp_view')
+    context["result_msg"] = "삭제되었습니다"
+    return JsonResponse(context, content_type="application/json")

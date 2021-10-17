@@ -25,6 +25,13 @@ def sheet_get(request):
 # page view
 def sheet_view(request):
 
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+    else:
+        memberno = None
+        membername = None
+
     rsBoard = Sheet.objects.all().order_by('-sheet_id')
 
     if Sheet.objects.first() is not None:
@@ -32,7 +39,7 @@ def sheet_view(request):
     else:
         last_id = 1
 
-    context = {"last_id": last_id, "sheet_table": rsBoard}
+    context = {"last_id": last_id, "sheet_table": rsBoard, "member_no": memberno, "member_name": membername}
 
     return render(request, 'sheets.html', context)
 

@@ -1,6 +1,6 @@
 # ---------- 고기우 작업 ----------
 from django.urls import path
-from information.views import views, emp_views, boxing_views, delivery_views, filling_views, size_views, sheet_views, pay_type_views, order_type_views, product_views
+from information.views import emp_views, boxing_views, delivery_views, filling_views, size_views, sheet_views, pay_type_views, order_type_views, product_views
 
 app_name = "information"
 
@@ -58,8 +58,6 @@ urlpatterns = [
     path('delivery_delete', delivery_views.delivery_delete, name='delivery_delete'),
     # 직원관리
     path('emp', emp_views.employee_view, name='emp_view'),
-    path('emp_get', emp_views.emp_get, name='emp_get'),
-    path('emp_insert', emp_views.emp_insert, name='emp_insert'),
     path('emp_update', emp_views.emp_update, name='emp_update'),
     path('emp_delete', emp_views.emp_delete, name='emp_delete'),
 
