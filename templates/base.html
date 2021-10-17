@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
     <meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
     <meta name="author" content="Bootlab">
 
@@ -18,6 +18,8 @@
     <!-- CSS -->
     <link href="{% static 'dist/css/modern.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css">
+    <link href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css" rel="stylesheet">
+
 
     <!-- jquery UI -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -132,11 +134,9 @@
 </head>
 
 <body>
-<div class="splash">
-    <div class="splash-icon"></div>
-</div>
+
 <div>
-    <a href="{% url 'accounts:login' %}">로그인</a>
+    <a href="{% url 'accounts:signin' %}">로그인</a>
 </div>
 <div class="wrapper">
     {% block body %}
