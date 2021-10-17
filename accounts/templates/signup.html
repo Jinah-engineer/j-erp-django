@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>권한</label>
-                                        <input class="form-control form-control-lg" type="text" id="auth" placeholder="예)사원, 관리자" value="사원" />
+                                        <input class="form-control form-control-lg" type="text" id="auth" placeholder="예)사원, 관리자" />
                                     </div>
                                     <div class="form-group">
                                         <label>입사일</label>
@@ -132,18 +132,6 @@
                 document.getElementById("password2").focus();
                 return false;
             }
-            var rank = document.getElementById("rank").value;
-            if(rank == '') {
-                alert('직급을 입력하세요');
-                document.getElementById('rank').focus();
-                return false;
-            }
-            var auth = document.getElementById("auth").value;
-            if(auth == '') {
-                alert('직급을 입력하세요');
-                document.getElementById("auth").focus();
-                return false;
-            }
             // 패스워드 암호화
             var encpwd = hex_sha1(member_pw);
 
@@ -157,7 +145,7 @@
             }
 
 
-            var strurl = "member_insert?member_id=" + member_id + "&member_pw=" + encpwd + "&member_name=" + member_name + "&member_email=" + member_email + "&rank=" + rank + "&auth=" + auth;
+            var strurl = "member_insert?member_id=" + member_id + "&member_pw=" + encpwd + "&member_name=" + member_name + "&member_email=" + member_email;
             xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if(xhr.readyState == 4) {

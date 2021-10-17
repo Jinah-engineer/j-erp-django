@@ -36,19 +36,11 @@ def member_insert(request):
     member_pw = request.GET['member_pw']
     member_name = request.GET['member_name']
     member_email = request.GET['member_email']
-    member_rank = request.GET['rank']
-    member_auth = request.GET['auth']
-    if member_auth != '0812':
-        member_auth = '사원'
-    else:
-        member_auth = '관리자'
 
     rs = Member.objects.create(member_id=member_id,
                                member_pw=member_pw,
                                member_name=member_name,
                                member_email=member_email,
-                               member_rank=member_rank,
-                               member_auth=member_auth,
                                usage_flag='1',
                                register_date=datetime.now()
                                )
