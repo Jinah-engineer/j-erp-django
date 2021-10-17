@@ -534,16 +534,6 @@
     <script>
         window.onload = function() {
             // ==============================================================================================================================================
-            // TEST SCRIPT!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // ==============================================================================================================================================
-
-
-
-
-
-
-
-            // ==============================================================================================================================================
             // 데이터테이블 API
             // ==============================================================================================================================================
             $(function() {
@@ -596,21 +586,6 @@
                         }
                     },
                     language: lang_kor,
-                    // columnDefs: {
-                    //     className: "dt-center", targets: "_all"
-                    // },
-                    // lengthChange: false,
-                    {#bFilter: true,#}
-                    // autoWidth: true,
-                    // autoAdjustHeight: true;
-                    // autoplay: true,
-                    // lengthAdjust: false,
-                    // scrollY: "60vh",
-                    // sScrollX: "100%",
-                    // sScrollXInner: "50%",
-                    // scrollCollapse: false,
-                    // paging: true,
-                    // responsive: true,
                 });
 
                 // -------------------------------------------------------
@@ -624,31 +599,6 @@
                 // 엑셀 다운로드 버튼 위치 변경
                 // -------------------------------------------------------
                 $('#bootstrap-table_wrapper > .dt-buttons').appendTo('.btn-group.btn-group.mb-4.align-items-center.get-excel');
-
-
-                //$('#bootstrap-table').DataTable().draw();
-
-
-
-
-                // 데이터 row 선택하기 (multiple rows selected)
-                /*
-                $('#bootstrap-table tbody').on('click', 'tr', function () {
-                    if ($(this).hasClass('selected')) {
-                        $(this).removeClass('selected');
-                        // $(this).toggleClass('selected');
-                        $(this).css("background-color", "#F5E6C4");
-
-                    }
-                    else {
-                        // table.$('tr.selected').removeClass('selected');
-                        // $(this).addClass('selected');
-                        $(this).toggleClass('selected');
-                        $(this).css("background-color", "transparent");
-                    }
-                });
-                 */
-
 
 
                 // -------------------------------------------------------
@@ -907,22 +857,6 @@
                         }
                     })
 
-                    /*
-                    $.ajax({
-                        type: 'GET',
-                        url: '/list/ordermodify?pno=' + real_pno,
-                        data: {
-                            pno: real_pno,
-                        },
-                        success: function (data) {
-                        },
-                        error: function (data, error) {
-                            console.log(data)
-                            console.log(error)
-                            alert('got an error!')
-                        }
-                    });
-                     */
                     console.log('------------여기까지 주문 수정 모달 입니다---------');
                 {% endfor %}
             })

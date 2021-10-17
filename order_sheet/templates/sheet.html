@@ -406,9 +406,6 @@
     }
     #item-card {
         box-shadow: 0 2px 4px 0 rgba(126 142 177 12)
-        /*
-         * 안먹힘
-         */
     }
     button.item-button {
         border-color: white;
@@ -646,30 +643,8 @@
         });
 
 
-
-        // *** 주문번호 만들기
-        // *** order_no (default: yyyymmdd-A/B/C/D-00)
-        {#let $order_date = document.getElementById('currentDate1').value;#}
-        {#console.log($order_date);#}
-        {##}
-        {#let $orderNo_date = $order_date.replaceAll("-", "");#}
-        {#console.log($orderNo_date);#}
-        {##}
-        {#let $order_type = document.getElementById('order_type');#}
-        {#let $order_type_option = $order_type.options[$order_type.selectedIndex].value;#}
-        {#console.log($order_type_option)#}
-        {##}
-        {#let $option_value = $order_type.options[$order_type.selectedIndex].value;#}
-        {#console.log($option_value);#}
-
-
         // 옵션 최종 등록, 주문 등록에 필요한 태그 세팅, 모달종료
         $('#final-option-result').on('click', function () {
-            //$sizeOptionResult = document.getElementById('size-result').innerHTML;
-            // $fillingOptionResult = document.getElementById('filling-result').innerHTML;
-            // $sheetOptionResult = document.getElementById('sheet-result').innerHTML;
-            // $boxingOptionResult = document.getElementById('boxing-result').innerHTML;
-            // $phraseOptionResult = document.getElementById('phrase-result').innerHTML;
             var numbering = document.getElementById("numbering").value;
             var size = $('#size-result_' + numbering).val();
             var filling = $('#filling-result_' + numbering).val();
