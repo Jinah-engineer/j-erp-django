@@ -59,6 +59,13 @@ from order_list.models import Order
 # ====================== 전체 주문 목록
 def order_list_view(request):
 
+    if request.session.has_key('member_no'):
+        memberno = request.session['member_no']
+        membername = request.session['member_name']
+        memberauth = request.session['member_auth']
+    else:
+        return redirect('accounts:signin')
+
     orderDetail = Order.objects.all().order_by('-pno')
     delivery_table = Delivery.objects.all()
     pay_table = Pay_type.objects.all()
@@ -66,6 +73,9 @@ def order_list_view(request):
 
 
     context = {
+        "member_no" : memberno,
+        "member_name" : membername,
+        "member_auth" : memberauth,
         "orderDetail": orderDetail,
         "delivery_table": delivery_table,
         "pay_table": pay_table,

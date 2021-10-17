@@ -106,10 +106,7 @@ def new_order(request):
         membername = request.session['member_name']
         memberauth = request.session['member_auth']
     else:
-        # return redirect('accounts:signin')
-        memberno = None
-        membername = None
-        memberauth = None
+        return redirect('accounts:signin')
 
     context["member_no"] = memberno
     context["member_name"] = membername

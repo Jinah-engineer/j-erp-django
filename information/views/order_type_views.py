@@ -28,9 +28,9 @@ def order_type_view(request):
     if request.session.has_key('member_no'):
         memberno = request.session['member_no']
         membername = request.session['member_name']
+        memberauth = request.session['member_auth']
     else:
-        memberno = None
-        membername = None
+        return redirect('accounts:signin')
 
     rsBoard = Order_type.objects.all().order_by('-order_type_id')
 
