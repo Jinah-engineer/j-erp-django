@@ -39,7 +39,6 @@ def member_insert(request):
     member_email = request.GET['member_email']
     member_rank = request.GET['rank']
     member_auth = request.GET['auth']
-    # 자러 가고 싶다
     if member_auth != '0812':
         member_auth = '사원'
     else:
