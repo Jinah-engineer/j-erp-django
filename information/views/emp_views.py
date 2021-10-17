@@ -19,11 +19,10 @@ def employee_view(request):
         memberno = request.session['member_no']
         membername = request.session['member_name']
         memberauth = request.session['member_auth']
+        if memberauth != '관리자':
+            return redirect('information:product_view')
     else:
-        # return redirect('accounts:signin')
-        memberno = None
-        membername = None
-        memberauth = None
+        return redirect('accounts:signin')
 
     rsBoard = Member.objects.all().order_by('-member_no')
 

@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'order_list',
     'order_sheet',
     'information',
-    'test_jinah',
 ]
 
 MIDDLEWARE = [

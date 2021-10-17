@@ -28,9 +28,14 @@ def size_view(request):
     if request.session.has_key('member_no'):
         memberno = request.session['member_no']
         membername = request.session['member_name']
+        memberauth = request.session['member_auth']
     else:
-        memberno = None
-        membername = None
+        return redirect('accounts:signin')
+
+    context = {}
+    context["member_no"] = memberno
+    context["member_name"] = membername
+    context["member_auth"] = memberauth
 
     # size table 조회
     rsBoard = Size.objects.all().order_by('-size_id')
@@ -54,8 +59,6 @@ def size_view(request):
         last_id = Size.objects.last().size_id + 1
     else:
         last_id = 1
-
-    context = {}
 
     context["last_id"] = last_id
     context["size_table"] = rsBoard
