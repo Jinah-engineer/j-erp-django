@@ -136,41 +136,45 @@
                                         <div class="card-body">
 
                                             <!-- 1번째 품목 -->
-                                            <div class="form-group row">
-                                                <button class="item-button addnumber" style="margin-left: 50px; border-color: white;
+                                            <div id="addproduct">
+                                                <div class="form-group row">
+                                                    <button class="item-button addnumber" style="margin-left: 50px; border-color: white;
                                                 background-color: #153d77; color: white" disabled>1</button>
-                                                <div class="col-md-3">
-                                                    <div class="ui-widget">
-                                                        <input data-id="1" type="text" id="products_1" class="form-control products" name="product_name"
-                                                               style="font-family: 'NanumSquareR';" placeholder="품목이름">
+                                                    <div class="col-md-3">
+                                                        <div class="ui-widget">
+                                                            <input data-id="1" type="text" id="products_1" class="form-control products" name="product_name"
+                                                                   style="font-family: 'NanumSquareR';" placeholder="품목이름">
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="button" class="btn item-button modalbtn"
+                                                            style="border-color: white;
+                                                background-color: #153d77; color: white" data-id="1"
+                                                            data-toggle="modal" data-target="#sizedModalLg_1">+ 옵션추가</button>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" placeholder="옵션이름"
+                                                               id="input-option-result_1" disabled>
+                                                        <!-- 옵션 값 (Hidden) -->
+                                                        <input type="text" hidden="hidden" id="size-result_1">
+                                                        <input type="text" hidden="hidden" id="filling-result_1">
+                                                        <input type="text" hidden="hidden" id="sheet-result_1">
+                                                        <input type="text" hidden="hidden" id="boxing-result_1">
+                                                        <input type="text" hidden="hidden" id="phrase-result_1">
+                                                    </div>
+                                                    <div class="col-md-1" style="padding-left: 0">
+                                                        <input type="number" class="form-control count_product" data-id="1" id="count_1" placeholder="수량" min="1">
+                                                    </div>
+                                                    <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
+                                                    <button class="item-button" type="button" style="border-color: white;
+                                                background-color: darkred; color: white" data-id="1" onclick="deleteproduct();">X</button>
+                                                    <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
+                                                    <div class="col-md-2">
+                                                        <input type="text" data-price="0" id="price_1" class="form-control price1" placeholder="금액">
                                                     </div>
                                                 </div>
-
-                                                <button type="button" class="btn item-button modalbtn"
-                                                        style="border-color: white;
-                                                background-color: #153d77; color: white" data-id="1"
-                                                        data-toggle="modal" data-target="#sizedModalLg">+ 옵션추가</button>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control" placeholder="옵션이름"
-                                                           id="input-option-result_1" disabled>
-                                                    <!-- 옵션 값 (Hidden) -->
-                                                    <input type="text" hidden="hidden" id="size-result_1">
-                                                    <input type="text" hidden="hidden" id="filling-result_1">
-                                                    <input type="text" hidden="hidden" id="sheet-result_1">
-                                                    <input type="text" hidden="hidden" id="boxing-result_1">
-                                                    <input type="text" hidden="hidden" id="phrase-result_1">
-                                                </div>
-                                                <div class="col-md-1" style="padding-left: 0">
-                                                    <input type="number" class="form-control count_product" data-id="1" id="count_1" placeholder="수량" min="1">
-                                                </div>
-                                                <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
-                                                <button class="item-button" style="border-color: white;
-                                                background-color: darkred; color: white">X</button>
-                                                <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
-                                                <div class="col-md-2">
-                                                    <input type="text" data-price="0" id="price_1" class="form-control price1" placeholder="금액">
-                                                </div>
                                             </div>
+
+
 
 
 
@@ -180,7 +184,7 @@
 
                                             <!-- 상품 추가 버튼 -->
                                             <div class="form-group row">
-                                                <button class="btn btn-block" style="margin-left: 50px; margin-top: 30px;
+                                                <button type="button" class="btn btn-block" style="margin-left: 50px; margin-top: 30px;
                                                  background-color: #153d77; color: white; width: 30%;" onclick="addProduct();">
                                                     + 상품 추가
                                                 </button>
@@ -292,93 +296,93 @@
                 </div>
 
 
-                <!-- BEGIN  modal -->
-                <div class="modal fade" id="sizedModalLg" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2 style="font-family: 'NanumSquareB;" class="modal-title">옵션 선택</h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="option-modal">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body m-3">
-                                <div class="form-group">
-
-
-                                    <div class="form-floating">
-                                        <label for="inputCity">사이즈 옵션</label>
-                                        <select id="size-option" class="form-control mb-3">
-                                        </select>
-                                    </div>
-
-                                    <div class="form-floating">
-                                        <label for="inputCity">필링 옵션</label>
-                                        <select id="filling-option" class="form-control mb-3">
-                                            {% for filling in filling_table %}
-                                            <option data-price="{{ filling.filling_price }}" value="{{ filling.filling_name }}">{{ filling.filling_name }} : +{{ filling.filling_price }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-                                    <div class="form-floating">
-                                        <label for="inputCity">시트 옵션</label>
-                                        <select id="sheet-option" class="form-control mb-3">
-                                            {% for sheet in sheet_table %}
-                                            <option data-price="{{ sheet.sheet_price }}" value="{{ sheet.sheet_name }}">{{ sheet.sheet_name }} : +{{ sheet.sheet_price }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-                                    <div class="form-floating">
-                                        <label for="inputCity">포장 옵션</label>
-                                        <select id="boxing-option" class="form-control mb-3">
-                                            {% for boxing in boxing_table %}
-                                            <option data-price="{{ boxing.boxing_price }}" value="{{ boxing.boxing_name }}">{{ boxing.boxing_name }} : +{{ boxing.boxing_price }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-                                    <div class="form-floating">
-                                        <label for="inputCity">문구 옵션</label>
-                                        <input id="phrase-option" type="email" class="form-control" placeholder="문구없음">
-                                        <input type="hidden" id="phrase_price" value="5000">
-                                    </div>
+                <div id="addmodal">
+                    <div>
+                    <!-- BEGIN  modal -->
+                    <div class="modal fade" id="sizedModalLg_1" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 style="font-family: 'NanumSquareB;" class="modal-title">옵션 선택</h2>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
+                                <div class="modal-body m-3">
+                                    <div class="form-group">
 
-                                <div class="card" id="item-card">
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12" style="margin-top: 16px;">
-                                                {#                                                <input type="text" class="input-lg form-control"#}
-                                                {#                                                       style="font-family: 'NanumSquareEB'; font-size: 15px;" id=""#}
-                                                {#                                                       value="" readonly>#}
-                                                <div style="font-family: 'NanumSquareEB'; font-size: 15px;" id="option-result">
+
+                                        <div class="form-floating">
+                                            <label for="inputCity">사이즈 옵션</label>
+                                            <select id="size-option_1" class="form-control mb-3">
+                                            </select>
+                                        </div>
+
+                                        <div class="form-floating">
+                                            <label for="inputCity">필링 옵션</label>
+                                            <select id="filling-option_1" class="form-control mb-3">
+                                                {% for filling in filling_table %}
+                                                    <option data-price="{{ filling.filling_price }}" value="{{ filling.filling_name }}">{{ filling.filling_name }} : +{{ filling.filling_price }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-floating">
+                                            <label for="inputCity">시트 옵션</label>
+                                            <select id="sheet-option_1" class="form-control mb-3">
+                                                {% for sheet in sheet_table %}
+                                                    <option data-price="{{ sheet.sheet_price }}" value="{{ sheet.sheet_name }}">{{ sheet.sheet_name }} : +{{ sheet.sheet_price }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-floating">
+                                            <label for="inputCity">포장 옵션</label>
+                                            <select id="boxing-option_1" class="form-control mb-3">
+                                                {% for boxing in boxing_table %}
+                                                    <option data-price="{{ boxing.boxing_price }}" value="{{ boxing.boxing_name }}">{{ boxing.boxing_name }} : +{{ boxing.boxing_price }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-floating">
+                                            <label for="inputCity">문구 옵션</label>
+                                            <input id="phrase-option_1" type="email" class="form-control" placeholder="문구없음">
+                                            <input type="hidden" id="phrase_price_1" value="5000">
+                                        </div>
+                                    </div>
+
+                                    <div class="card" id="item-card">
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12" style="margin-top: 16px;">
+                                                    <div style="font-family: 'NanumSquareEB'; font-size: 15px;" id="option-result_1">
+                                                    </div>
+                                                    <input type="hidden" id="numbering_1" value=""/>
+                                                    <input type="hidden" data-price="0" id="product-price_1"/>
+                                                    <div style="margin: 5px 0;" id="div-size-result_1" data-price="">선택없음</div>
+                                                    <div style="margin: 5px 0;" id="div-filling-result_1" data-price="">선택없음</div>
+                                                    <div style="margin: 5px 0;" id="div-sheet-result_1" data-price="">선택없음</div>
+                                                    <div style="margin: 5px 0;" id="div-boxing-result_1" data-price="">선택없음</div>
+                                                    <div style="margin: 5px 0;" id="div-phrase-result_1" data-price="0">문구없음</div>
+
                                                 </div>
-                                                <input type="hidden" id="numbering" value=""/>
-                                                <input type="hidden" data-price="0" id="product-price"/>
-                                                <div style="margin: 5px 0;" id="div-size-result" data-price="">선택없음</div>
-                                                <div style="margin: 5px 0;" id="div-filling-result" data-price="">선택없음</div>
-                                                <div style="margin: 5px 0;" id="div-sheet-result" data-price="">선택없음</div>
-                                                <div style="margin: 5px 0;" id="div-boxing-result" data-price="">선택없음</div>
-                                                <div style="margin: 5px 0;" id="div-phrase-result" data-price="0">문구없음</div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                <button type="submit" class="btn btn-primary" id="final-option-result">옵션 등록하기</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                    <button type="submit" class="btn btn-primary" id="final-option-result_1">옵션 등록하기</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- END  modal -->
-
+                </div>
 
 
             </div>
@@ -496,14 +500,13 @@
 
         // *** 모달창 데이터 전달
         $(".modalbtn").click(function() {
-            // 모달창은 페이지 내에 단 1개 존재 - 다른 상품에서 사용할경우 값 초기화 필요
             // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
 
             // 몇번 상품의 옵션을 호출할 것인지 식별자 - data-id = ''
             var data_id = event.currentTarget.dataset.id;
             console.log('data-id = ' + data_id);
             // data-id 값을 모달창 내부의 numbering태그에 저장, 출력시 식별자로 활용
-            var numbering = document.getElementById("numbering");
+            var numbering = document.getElementById("numbering_" + data_id);
             numbering.value = data_id;
 
             // 옵션 선택 결과값을 div-option-result에 저장
@@ -712,6 +715,131 @@
             var saleprice = pricetag.dataset.price;
             pricetag.value = saleprice * counttag.value;
         });
+
+        // 품목 입력받는 영역 개수 파악
+        var slot_count = 2;
+
+        function addProduct() {
+            console.log("slot_count : " + slot_count);
+
+            // 상품 영역
+            var str = '';
+            str +=      '<button class="item-button addnumber" style="margin-left: 50px; border-color: white; background-color: #153d77; color: white" disabled>' + slot_count + '</button>';
+            str +=      '<div class="col-md-3">';
+            str +=              '<div class="ui-widget">';
+            str +=                  '<input data-id="' + slot_count + '" type="text" id="products_' + slot_count + '" class="form-control products" name="product_name" style="font-family: \'NanumSquareR\';" placeholder="품목이름">';
+            str +=           '</div>';
+            str +=      '</div>';
+            str +=      '<button type="button" class="btn item-button modalbtn"style="border-color: white;background-color: #153d77; color: white" data-id="' + slot_count + '"data-toggle="modal" data-target="#sizedModalLg_' + slot_count + '">+ 옵션추가</button>';
+            str +=      '<div class="col-md-3">';
+            str +=          '<input type="text" class="form-control" placeholder="옵션이름" id="input-option-result_' + slot_count + '" disabled>';
+            str +=          '<input type="text" hidden="hidden" id="size-result_' + slot_count + '">';
+            str +=          '<input type="text" hidden="hidden" id="filling-result_' + slot_count + '">';
+            str +=          '<input type="text" hidden="hidden" id="sheet-result_' + slot_count + '">';
+            str +=          '<input type="text" hidden="hidden" id="boxing-result_' + slot_count + '">';
+            str +=          '<input type="text" hidden="hidden" id="phrase-result_' + slot_count + '">';
+            str +=      '</div>';
+            str +=      '<div class="col-md-1" style="padding-left: 0">';
+            str +=          '<input type="number" class="form-control count_product" data-id="' + slot_count + '" id="count_' + slot_count + '" placeholder="수량" min="1">';
+            str +=      '</div>';
+            str +=      '<label style="padding-right: 20px;" class="col-form-label" for="">개</label>';
+            str +=      '<button class="item-button" type="button" style="border-color: white; background-color: darkred; color: white" data-id="' + slot_count + '" onclick="deleteproduct();">X</button>';
+            str +=      '<label style="padding-left: 20px;" class="col-form-label" for="">금액</label>';
+            str +=      '<div class="col-md-2">';
+            str +=          '<input type="text" data-price="0" id="price_' + slot_count + '" class="form-control price1" placeholder="금액">';
+            str +=      '</div>';
+
+            // 추가된 상품영역을 넣을 부모태그
+            var addproduct = document.getElementById('addproduct');
+            // 상품영역 생성
+            var newdiv = document.createElement("div");
+            newdiv.setAttribute("class", "form-group row");
+            newdiv.innerHTML = str;
+            // 부모태그 종속
+            addproduct.appendChild(newdiv);
+
+            // 모달 생성
+            var modal = "";
+            modal += '<div class="modal fade" id="sizedModalLg_' + slot_count + '" tabindex="-1" role="dialog" aria-hidden="true">';
+            modal += '<div class="modal-dialog modal-lg" role="document">';
+            modal += '<div class="modal-content">';
+            modal += '<div class="modal-header">';
+            modal += '<h2 style="font-family: \'NanumSquareB\';" class="modal-title">옵션 선택</h2>';
+            modal += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+            modal += '<span aria-hidden="true">&times;</span>';
+            modal += '</button>';
+            modal += '</div>';
+            modal += '<div class="modal-body m-3">';
+            modal += '<div class="form-group">';
+            modal += '<div class="form-floating">';
+            modal += '<label for="inputCity">사이즈 옵션</label>';
+            modal += '<select id="size-option_' + slot_count + '" class="form-control mb-3"></select>';
+            modal += '</div>';
+            modal += '<div class="form-floating">';
+            modal += '<label for="inputCity">필링 옵션</label>';
+            modal += '<select id="filling-option_' + slot_count + '" class="form-control mb-3">';
+            {% for filling in filling_table %}
+                modal += '<option data-price="{{ filling.filling_price }}" value="{{ filling.filling_name }}">{{ filling.filling_name }} : +{{ filling.filling_price }}</option>';
+            {% endfor %}
+            modal += '</select>';
+            modal += '</div>';
+            modal += '<div class="form-floating">';
+            modal += '<label for="inputCity">시트 옵션</label>';
+            modal += '<select id="sheet-option_' + slot_count + '" class="form-control mb-3">';
+            {% for sheet in sheet_table %}
+                modal += '<option data-price="{{ sheet.sheet_price }}" value="{{ sheet.sheet_name }}">{{ sheet.sheet_name }} : +{{ sheet.sheet_price }}</option>';
+            {% endfor %}
+            modal += '</select>';
+            modal += '</div>';
+            modal += '<div class="form-floating">';
+            modal += '<label for="inputCity">포장 옵션</label>';
+            modal += '<select id="boxing-option_' + slot_count + '" class="form-control mb-3">';
+            {% for boxing in boxing_table %}
+                modal += '<option data-price="{{ boxing.boxing_price }}" value="{{ boxing.boxing_name }}">{{ boxing.boxing_name }} : +{{ boxing.boxing_price }}</option>';
+            {% endfor %}
+            modal += '</select>';
+            modal += '</div>';
+            modal += '<div class="form-floating">';
+            modal += '<label for="inputCity">문구 옵션</label>';
+            modal += '<input id="phrase-option" type="email" class="form-control" placeholder="문구없음">';
+            modal += '<input type="hidden" id="phrase_price_' + slot_count + '" value="5000">';
+            modal += '</div>';
+            modal += '</div>';
+            modal += '<div class="card" id="item-card">';
+            modal += '<div class="card-body">';
+            modal += '<div class="form-row">';
+            modal += '<div class="form-group col-md-12" style="margin-top: 16px;">';
+            modal += '<div style="font-family: \'NanumSquareEB\'; font-size: 15px;" id="option-result_' + slot_count + '"></div>';
+            modal += '<input type="hidden" id="numbering_' + slot_count + '" value=""/>';
+            modal += '<input type="hidden" data-price="0" id="product-price_' + slot_count + '"/>';
+            modal += '<div style="margin: 5px 0;" id="div-size-result_' + slot_count + '" data-price="">선택없음</div>';
+            modal += '<div style="margin: 5px 0;" id="div-filling-result_' + slot_count + '" data-price="">선택없음</div>';
+            modal += '<div style="margin: 5px 0;" id="div-sheet-result_' + slot_count + '" data-price="">선택없음</div>';
+            modal += '<div style="margin: 5px 0;" id="div-boxing-result_' + slot_count + '" data-price="">선택없음</div>';
+            modal += '<div style="margin: 5px 0;" id="div-phrase-result_' + slot_count + '" data-price="0">문구없음</div>';
+            modal += '</div>';
+            modal += '</div>';
+            modal += '</div>';
+            modal += '</div>';
+            modal += '</div>';
+            modal += '<div class="modal-footer">';
+            modal += '<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>';
+            modal += '<button type="submit" class="btn btn-primary" id="final-option-result_' + slot_count + '">옵션 등록하기</button>';
+            modal += '</div>';
+            modal += '</div>';
+            modal += '</div>';
+            modal += '</div>';
+
+            var addmodal = document.getElementById('addmodal');
+            var newmodal = document.createElement("div");
+            newmodal.innerHTML = modal;
+            addmodal.appendChild(newmodal);
+
+
+            slot_count++;
+        }
+
+
 
 
 
