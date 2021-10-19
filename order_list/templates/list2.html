@@ -64,10 +64,10 @@
             <div class="container-fluid">
 
                 <div class="header">
-                    <h1 class="header-title">
+                    <h1 class="header-title" style="font-family: 'NanumSquareEB'">
                         주문 목록
                     </h1>
-                    <p class="header-subtitle">경로 작성하기</p>
+                    <p class="header-subtitle" style="font-family: 'NanumSquareR'; font-size: 15px;">main</p>
                 </div>
 
                 <!-- *** 검색 바 *** -->
@@ -149,55 +149,58 @@
                             </div>
 
                             <!-- *** Bootstrap 테이블 *** -->
+
                             <div class="col-12" style="padding: 0">
                                 <div class="card w-100" style="">
-                                    <table class="table table-bordered table-responsive"
-                                           id="bootstrap-table" style="table-layout: fixed; width: 100%">
-                                        <thead class="filters">
-                                        <tr style="font-family: 'NanumSquareL'" onmousedown="return false" onselect="return true" onmouseup="return true">
-                                            <th hidden="hidden">pno</th>
-                                            <th style="width:40%;">
+                                    <table class="table table-bordered table-intel"
+                                           id="bootstrap-table"
+                                           style="table-layout: fixed; width: 100%; height: 500px;">
+                                        <thead>
+                                        <tr style="font-family: 'NanumSquareL';"
+                                            onmousedown="return false" onselect="return true" onmouseup="return true">
+                                            <th class="filters" data-sortable="true" id="th-pno" hidden="hidden">pno</th>
+                                            <th class="filters" data-sortable="true" id="th-order_no" style="width:40%;">
                                                 주문 No.
                                                 {#                                                <i class="align-middle mr-2 fas fa-fw fa-sort-down"></i>#}
                                             </th>
-                                            <th style="width:25%">주문일자</th>
-                                            <th class="d-none d-md-table-cell" style="width:25%">진행상태</th>
-                                            <th>고객명</th>
-                                            <th>품목</th>
-                                            <th>사이즈</th>
-                                            <th>시트</th>
-                                            <th>필링</th>
-                                            <th>포장</th>
-                                            <th>문구</th>
-                                            <th>수량</th>
-                                            <th>금액</th>
-                                            <th>주문경로</th>
-                                            <th>결제방법</th>
-                                            <th>결제여부</th>
-                                            <th>수령인</th>
-                                            <th>연락처</th>
-                                            <th>수령방법</th>
-                                            <th>수령주소</th>
-                                            <th>상세주소</th>
-                                            <th>납품일자</th>
-                                            <th>납품시간</th>
-                                            <th>주문메모</th>
+                                            <th class="filters" data-sortable="true" id="th-order_date" style="width:25%">주문일자</th>
+                                            <th id="th-state" class="filters" data-sortable="true" style="width:25%">진행상태</th>
+                                            <th class="filters" data-sortable="true" id="th-customer">고객명</th>
+                                            <th class="filters" data-sortable="true" id="th-product_name">품목</th>
+                                            <th class="filters" data-sortable="true" id="th-size_option_name">사이즈</th>
+                                            <th class="filters" data-sortable="true" id="th-sheet_option_name">시트</th>
+                                            <th class="filters" data-sortable="true" id="th-filling_option_name">필링</th>
+                                            <th class="filters" data-sortable="true" id="th-boxing_option_name">포장</th>
+                                            <th class="filters" data-sortable="true" id="th-phrase_option_name">문구</th>
+                                            <th class="filters" data-sortable="true" id="th-count">수량</th>
+                                            <th class="filters" data-sortable="true" id="th-total_price">금액</th>
+                                            <th class="filters" data-sortable="true" id="th-order_type_name">주문경로</th>
+                                            <th class="filters" data-sortable="true" id="th-pay_type_name">결제방법</th>
+                                            <th class="filters" data-sortable="true" id="th-pay_check">결제여부</th>
+                                            <th class="filters" data-sortable="true" id="th-recipient">수령인</th>
+                                            <th class="filters" data-sortable="true" id="th-recipient_phone">연락처</th>
+                                            <th class="filters" data-sortable="true" id="th-delivery_option_name">수령방법</th>
+                                            <th class="filters" data-sortable="true" id="th-address1">수령주소</th>
+                                            <th class="filters" data-sortable="true" id="th-address2">상세주소</th>
+                                            <th class="filters" data-sortable="true" id="th-recipient_date">납품일자</th>
+                                            <th class="filters" data-sortable="true" id="th-recipient_hour">납품시간</th>
+                                            <th class="filters" data-sortable="true" id="th-memo">주문메모</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {% for order in orderDetail %}
                                             <!-- *** 주문 목록 테이블 상세 *** -->
-                                            <tr id="order{{ order.order_no }}">
+                                            <tr style="display: table-row; border-color: darkgrey" id="order{{ order.order_no }}">
                                                 <td hidden="hidden"><input hidden="hidden" name="pno" id="pno{{ order.pno }}" type="text" value="{{ order.pno }}"></td>
                                                 <td>
                                                     <button type="button" id="modal{{ order.pno }}"
-                                                            class="btn btn-primary" data-toggle="modal" data-target="#sizedModalLg{{ order.pno }}"
-                                                            style="color: dodgerblue; background-color: white; border-color: white">
+                                                            class="btn btn-primary order_no" data-toggle="modal" data-target="#sizedModalLg{{ order.pno }}"
+                                                            style="color: dodgerblue; background-color: white; border-color: white" value="{{ order.order_no }}">
                                                         {{ order.order_no }}
                                                     </button>
                                                 </td>
                                                 <td>{{ order.order_date }}</td>
-                                                <td><span class="badge badge-success">{{ order.state }}</span></td>
+                                                <td><span id="order_state" class="badge badge-success">{{ order.state }}</span></td>
                                                 <td>{{ order.customer }}</td>
                                                 <td>{{ order.product_name }}</td>
                                                 <td>{{ order.size_option_name }}</td>
@@ -485,6 +488,20 @@
         {% endfor %}
         <!-- END  modal -->
 
+        <!-- Test Buttons -->
+        <div class="row">
+            <div class="col-12">
+                <button type="button" id="test1" class="btn btn-primary" data-dismiss="modal">Date Range 테스트</button>
+                <button type="button" id="test2" class="btn btn-primary" data-dismiss="modal">DataTable 테스트</button>
+                <button type="button" id="test3" class="btn btn-primary" data-dismiss="modal">주문 수정 테스트</button>
+                <button type="button" id="test4" class="btn btn-primary" data-dismiss="modal">주문 삭제 테스트</button>
+                <button type="button" id="test5" class="btn btn-primary" data-dismiss="modal">미등록된 테스트</button>
+
+                <div id='test6' style="border:1px solid black;margin:20px 0 0 0 ;padding:10px;"></div>
+
+            </div>
+        </div>
+
 
 
         <!-- *** footer *** -->
@@ -513,48 +530,105 @@
     <script src="{% static 'dist/js/settings.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.1/js/dataTables.select.min.js"></script>
+    <script src="{% static 'dist/js/table_filter.js' %}"></script>
+
+    <!--script src="https://www.jqueryscript.net/demo/Excel-like-Bootstrap-Table-Sorting-Filtering-Plugin/excel-bootstrap-table-filter-bundle.js"-->
 
 
-
-    <!-- *** 페이지네이션 *** -->
+    <!-- *** 자바스크립트 *** -->
     <script>
         window.onload = function() {
+            // ==============================================================================================================================================
+            // TEST SCRIPT!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // ==============================================================================================================================================
+
+
+            // ==============================================================================================================================================
+            // 데이터테이블 API
+            // ==============================================================================================================================================
             $(function() {
+
+
+                // 데이터 row 선택하기 (multiple rows selected)
+                $('#bootstrap-table tbody tr').on('click', function () {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                        // $(this).toggleClass('selected');
+                        //$(this).css("background-color", "#F5E6C4");
+
+                    }
+                    else {
+                        // table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                        // $(this).toggleClass('selected');
+                        //$(this).css("background-color", "transparent");
+                    }
+                });
+
+
+                // -------------------------------------------------------
+                // 엑셀 필터
+                // -------------------------------------------------------
+                $('#bootstrap-table').excelTableFilter({
+                    search: true
+                });
 
             });
 
-            // DateTimePicker 원본 API
+
+
+            // ==============================================================================================================================================
+            // 날짜 검색 (DateRangePicker)
+            // ==============================================================================================================================================
             $(function() {
 
+                // Connection
+
+                // -------------------------------------------------------
                 // 날짜 검색 (2)
+                // -------------------------------------------------------
                 $("input[name='date_range2']").daterangepicker({
-                        opens: "right",
-                        locale: {
-                            format: "YYYY년 MM월 DD일",
-                            separator: " ~ ",
-                            applyLabel: "확인",
-                            cancelLabel: "취소",
-                            fromLabel: "From",
-                            toLabel: "To",
-                            customRangeLabel: "사용자 지정",
-                            weekLabel: "W",
-                            daysOfWeek: ["월", "화", "수", "목", "금", "토", "일"],
-                            monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-                            firstDay: 1
-                        },
-                        ranges: {
-                            "오늘": [moment(), moment()],
-                            "어제": [moment().subtract(1, "days"), moment().subtract(1, "days")],
-                            "7일 전": [moment().subtract(6, "days"), moment()],
-                            "30일 전": [moment().subtract(29, "days"), moment()],
-                            "이번달": [moment().startOf("month"), moment().endOf("month")],
-                            "지난달": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
-                        }
-                    });
+                    opens: "right",
+                    locale: {
+                        format: "YYYY년 MM월 DD일",
+                        separator: " ~ ",
+                        applyLabel: "확인",
+                        cancelLabel: "취소",
+                        fromLabel: "From",
+                        toLabel: "To",
+                        customRangeLabel: "사용자 지정",
+                        weekLabel: "W",
+                        daysOfWeek: ["월", "화", "수", "목", "금", "토", "일"],
+                        monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                        firstDay: 1
+                    },
+                    ranges: {
+                        "오늘": [moment(), moment()],
+                        "어제": [moment().subtract(1, "days"), moment().subtract(1, "days")],
+                        "7일 전": [moment().subtract(6, "days"), moment()],
+                        "30일 전": [moment().subtract(29, "days"), moment()],
+                        "이번달": [moment().startOf("month"), moment().endOf("month")],
+                        "지난달": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+                    }
+                });
+
+                // -------------------------------------------------------
+                // Daterangepicker 테스트 ******
+                // -------------------------------------------------------
+                $('#test1').on('click', function () {
+                    var alpha = $('#date_range2').data('daterangepicker').startDate.format('YYYY-MM-DD');
+                    var beta = $('#date_range2').data('daterangepicker').endDate.format('YYYY-MM-DD');
+
+                    alert(alpha);
+                    alert(beta);
+
+                })
 
             });
 
-
+            // ==============================================================================================================================================
+            // 주문 상세 모달
+            // ==============================================================================================================================================
             $(function () {
 
                 // CSS Work
@@ -574,7 +648,9 @@
 
                     var option_ordertype = $("#selectbox_ordertype option:selected").val();
 
-                    // pay_check radio selected
+                    // -------------------------------------------------------
+                    // 결제여부 (radio button) value 가져오기
+                    // -------------------------------------------------------
                     if (pay_check_value == "O") {
                         $('input[name="radio_pay_check_yes"]').attr("checked", "checked");
                     } else if (pay_check_value == "X") {
@@ -593,7 +669,9 @@
                     });
 
 
-
+                    // ==============================================================================================================================================
+                    // 주문 수정 모달
+                    // ==============================================================================================================================================
                     $('#modal' + real_pno).on('click', function () {
                         $("#sizedModalLg{{ order.pno }}").modal({show:true});
                         $.ajax({
@@ -615,6 +693,9 @@
                     });
                     console.log('------------여기까지 주문 상세 모달 입니다---------');
 
+                    // -------------------------------------------------------
+                    // 주문 수정 모달
+                    // -------------------------------------------------------
                     console.log('------------여기서부터 주문 수정 모달 입니다---------');
                     $('#modify-order-btn' + real_pno).on('click', function () {
                         // 수정 버튼 클릭 시,
@@ -627,20 +708,20 @@
 
                     /*
                     $.ajax({
-                        type: 'GET',
-                        url: '/list/ordermodify?pno=' + real_pno,
-                        data: {
-                            pno: real_pno,
-                        },
-                        success: function (data) {
-                        },
-                        error: function (data, error) {
-                            console.log(data)
-                            console.log(error)
-                            alert('got an error!')
-                        }
+                    type: 'GET',
+                    url: '/list/ordermodify?pno=' + real_pno,
+                    data: {
+                    pno: real_pno,
+                    },
+                    success: function (data) {
+                    },
+                    error: function (data, error) {
+                    console.log(data)
+                    console.log(error)
+                    alert('got an error!')
+                    }
                     });
-                     */
+                    */
                     console.log('------------여기까지 주문 수정 모달 입니다---------');
                 {% endfor %}
             })
