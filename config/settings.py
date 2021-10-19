@@ -84,9 +84,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'meehong_dev',
-        'USER': 'dev',
-        'PASSWORD': 'aibiz12#$',
-        'HOST': '121.162.51.106',
+        # 'USER': 'dev',
+        # 'PASSWORD': 'aibiz12#$',
+        # 'HOST': '121.162.51.106',
+        'USER': 'root',
+        'PASSWORD': '000000',
+        'HOST': '172.30.1.10',
         'PORT': '3306',
     },
 }

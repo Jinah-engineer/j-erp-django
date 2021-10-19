@@ -150,7 +150,7 @@
                                                     <button type="button" class="btn item-button modalbtn"
                                                             style="border-color: white;
                                                 background-color: #153d77; color: white" data-id="1"
-                                                            data-toggle="modal" data-target="#sizedModalLg_1">+ 옵션추가</button>
+                                                            data-toggle="modal" data-target="#sizedModalLg_1" id="modalbtn_1">+ 옵션추가</button>
                                                     <div class="col-md-3">
                                                         <input type="text" class="form-control" placeholder="옵션이름"
                                                                id="input-option-result_1" disabled>
@@ -185,7 +185,7 @@
                                             <!-- 상품 추가 버튼 -->
                                             <div class="form-group row">
                                                 <button type="button" class="btn btn-block" style="margin-left: 50px; margin-top: 30px;
-                                                 background-color: #153d77; color: white; width: 30%;" onclick="addProduct();">
+                                                 background-color: #153d77; color: white; width: 30%;" onclick="addProduct(slot_count);">
                                                     + 상품 추가
                                                 </button>
                                             </div>
@@ -314,13 +314,13 @@
 
                                         <div class="form-floating">
                                             <label for="inputCity">사이즈 옵션</label>
-                                            <select id="size-option_1" class="form-control mb-3">
+                                            <select id="size-option_1" class="form-control mb-3 sizeoption" data-id="1" onchange="resize(this)">
                                             </select>
                                         </div>
 
                                         <div class="form-floating">
                                             <label for="inputCity">필링 옵션</label>
-                                            <select id="filling-option_1" class="form-control mb-3">
+                                            <select id="filling-option_1" class="form-control mb-3 fillingoption" data-id="1" onchange="refilling(this)">
                                                 {% for filling in filling_table %}
                                                     <option data-price="{{ filling.filling_price }}" value="{{ filling.filling_name }}">{{ filling.filling_name }} : +{{ filling.filling_price }}</option>
                                                 {% endfor %}
@@ -329,7 +329,7 @@
 
                                         <div class="form-floating">
                                             <label for="inputCity">시트 옵션</label>
-                                            <select id="sheet-option_1" class="form-control mb-3">
+                                            <select id="sheet-option_1" class="form-control mb-3 sheetoption" data-id="1" onchange="resheet(this)">
                                                 {% for sheet in sheet_table %}
                                                     <option data-price="{{ sheet.sheet_price }}" value="{{ sheet.sheet_name }}">{{ sheet.sheet_name }} : +{{ sheet.sheet_price }}</option>
                                                 {% endfor %}
@@ -338,7 +338,7 @@
 
                                         <div class="form-floating">
                                             <label for="inputCity">포장 옵션</label>
-                                            <select id="boxing-option_1" class="form-control mb-3">
+                                            <select id="boxing-option_1" class="form-control mb-3 boxingoption" data-id="1" onchange="reboxing(this)">
                                                 {% for boxing in boxing_table %}
                                                     <option data-price="{{ boxing.boxing_price }}" value="{{ boxing.boxing_name }}">{{ boxing.boxing_name }} : +{{ boxing.boxing_price }}</option>
                                                 {% endfor %}
@@ -347,7 +347,7 @@
 
                                         <div class="form-floating">
                                             <label for="inputCity">문구 옵션</label>
-                                            <input id="phrase-option_1" type="email" class="form-control" placeholder="문구없음">
+                                            <input id="phrase-option_1" type="email" class="form-control phraseoption" placeholder="문구없음" data-id="1" onchange="rephrase(this)">
                                             <input type="hidden" id="phrase_price_1" value="5000">
                                         </div>
                                     </div>
@@ -360,10 +360,16 @@
                                                     </div>
                                                     <input type="hidden" id="numbering_1" value=""/>
                                                     <input type="hidden" data-price="0" id="product-price_1"/>
-                                                    <div style="margin: 5px 0;" id="div-size-result_1" data-price="">선택없음</div>
-                                                    <div style="margin: 5px 0;" id="div-filling-result_1" data-price="">선택없음</div>
-                                                    <div style="margin: 5px 0;" id="div-sheet-result_1" data-price="">선택없음</div>
-                                                    <div style="margin: 5px 0;" id="div-boxing-result_1" data-price="">선택없음</div>
+                                                    <div style="margin: 5px 0;" id="div-size-result_1" data-price=""></div>
+                                                    <div style="margin: 5px 0;" id="div-filling-result_1" data-price="{{ filling_first.filling_price }}">
+                                                        {{ filling_first.filling_name }}
+                                                    </div>
+                                                    <div style="margin: 5px 0;" id="div-sheet-result_1" data-price="{{ sheet_first.sheet_price }}">
+                                                        {{ sheet_first.sheet_name }}
+                                                    </div>
+                                                    <div style="margin: 5px 0;" id="div-boxing-result_1" data-price="{{ boxing_first.boxing_price }}">
+                                                        {{ boxing_first.boxing_name }}
+                                                    </div>
                                                     <div style="margin: 5px 0;" id="div-phrase-result_1" data-price="0">문구없음</div>
 
                                                 </div>
@@ -375,7 +381,7 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                    <button type="submit" class="btn btn-primary" id="final-option-result_1">옵션 등록하기</button>
+                                    <button type="button" class="btn btn-primary final" id="final-option-result_1" data-id="1">옵션 등록하기</button>
                                 </div>
                             </div>
                         </div>
@@ -426,7 +432,8 @@
 
     <script type="text/javascript">
         // *** 품목 자동완성
-        $(function() {
+        productList();
+        function productList() {
 
             // 품목 리스트
             var productList = [];
@@ -446,14 +453,10 @@
                 },
                 focus: function(event, ui) {
                     return false;
-                    //event.preventDefault();
                 }
             });
-        });
+        }
 
-    </script>
-
-    <script>
 
         <!-- 비동기 처리를 위한 사전 처리 -->
         function getCookie(name) {
@@ -498,228 +501,65 @@
             }
         });
 
-        // *** 모달창 데이터 전달
-        $(".modalbtn").click(function() {
-            // *** 옵션 Modal 창 (옵션 선택 시 onchange event 발생)
 
-            // 몇번 상품의 옵션을 호출할 것인지 식별자 - data-id = ''
-            var data_id = event.currentTarget.dataset.id;
-            console.log('data-id = ' + data_id);
-            // data-id 값을 모달창 내부의 numbering태그에 저장, 출력시 식별자로 활용
+
+    </script>
+
+    <script>
+        $('#modalbtn_1').on('click', function addEvent() {
+            var data_id = document.getElementById('modalbtn_1').dataset.id;
             var numbering = document.getElementById("numbering_" + data_id);
             numbering.value = data_id;
-
-            // 옵션 선택 결과값을 div-option-result에 저장
-            // 옵션 선택 추가 금액을 div-option-result data-price에 저장
-            $('#size-option').on('change', function () {
-                $sizeOption = document.getElementById('size-option');
-                $sizeOptionValue = $sizeOption.options[$sizeOption.selectedIndex].value;
-                document.getElementById('div-size-result').innerText = $sizeOptionValue;
-                document.getElementById('div-size-result').dataset.price = $sizeOption.options[$sizeOption.selectedIndex].dataset.price;
-                $('#size-result_' + data_id).val($sizeOptionValue);
-                console.log(document.getElementById('div-size-result').dataset.price);
-
-            });
-
-            $('#filling-option').on('change', function () {
-                $fillingOption = document.getElementById('filling-option');
-                $fillingOptionValue = $fillingOption.options[$fillingOption.selectedIndex].value;
-                document.getElementById('div-filling-result').innerText = $fillingOptionValue;
-                document.getElementById('div-filling-result').dataset.price = $fillingOption.options[$fillingOption.selectedIndex].dataset.price;
-                $('#filling-result_' + data_id).val($fillingOptionValue);
-                console.log(document.getElementById('div-filling-result').dataset.price);
-            });
-            $('#sheet-option').on('change', function () {
-                $sheetOption = document.getElementById('sheet-option');
-                $sheetOptionValue = $sheetOption.options[$sheetOption.selectedIndex].value;
-                document.getElementById('div-sheet-result').innerText = $sheetOptionValue;
-                document.getElementById('div-sheet-result').dataset.price = $sheetOption.options[$sheetOption.selectedIndex].dataset.price;
-                $('#sheet-result_' + data_id).val($sheetOptionValue);
-                console.log(document.getElementById('div-sheet-result').dataset.price);
-            });
-            $('#boxing-option').on('change', function () {
-                $boxingOption = document.getElementById('boxing-option');
-                $boxingOptionValue = $boxingOption.options[$boxingOption.selectedIndex].value;
-                document.getElementById('div-boxing-result').innerText = $boxingOptionValue;
-                document.getElementById('div-boxing-result').dataset.price = $boxingOption.options[$boxingOption.selectedIndex].dataset.price;
-                $('#boxing-result_' + data_id).val($boxingOptionValue);
-                console.log(document.getElementById('div-boxing-result').dataset.price);
-            });
-            $('#phrase-option').on('change', function () {
-                var phraseOption = document.getElementById('phrase-option');
-                $phraseOptionValue = phraseOption.value;
-                document.getElementById('div-phrase-result').innerText = $phraseOptionValue;
-                $('#phrase-result_' + data_id).val($phraseOptionValue);
-
-                if($phraseOptionValue == '') {
-                    phraseOption.dataset.price = 0;
-                    $('#phrase-result_' + data_id).val($phraseOptionValue);
-                } else {
-                    phraseOption.dataset.price = 5000;
-                }
-            });
-
-
             var product_btn = document.getElementById("products_" + data_id);
 
             var product_name = product_btn.value;
             console.log('product_name = ' + product_name);
-            // 상품 입력 검증
-            if(product_name == '') {
+            if (product_name == '') {
                 alert('상품을 입력해주세요');
                 product_btn.focus();
                 return false;
             }
-            // 새로운 목록이면 모달 초기화
-            var price_confirm = document.getElementById("price_" + data_id);
-            var size_option = document.getElementById("size-option");
-            var filling_option = document.getElementById("filling-option");
-            var sheet_option = document.getElementById("sheet-option");
-            var phrase_option = document.getElementById("phrase-option");
-            var boxing_option = document.getElementById("boxing-option");
-            size_option.disabled = false;
-            phrase_option.disabled = false;
-            sheet_option.disabled = false;
-            filling_option.disabled = false;
-            if(price_confirm.value == '') {
-                var size_result = document.getElementById("div-size-result");
-                var filling_result = document.getElementById("div-filling-result");
-                var sheet_result = document.getElementById("div-sheet-result");
-                var phrase_result = document.getElementById("div-phrase-result");
-                var boxing_result = document.getElementById("div-boxing-result");
-                // 사용자 view
-                size_result.innerText = "선택없음";
-                filling_result.innerText = "선택없음";
-                sheet_result.innerText = "선택없음";
-                phrase_result.innerText = "문구없음";
-                boxing_result.innerText = "선택없음";
-                // 가격 정보
-                size_result.dataset.price = 0;
-                filling_result.dataset.price = 0;
-                sheet_result.dataset.price = 0;
-                phrase_result.dataset.price = 0;
-                boxing_result.dataset.price = 0;
-
-            }
-            // 전달받은 상품명으로 DB에서 조회
-            var strurl = "option_view?product_name=" + product_name;
-            xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState == 4) {
-                    var data = xhr.responseText;
-
-                    var obj = JSON.parse(data);
-
-                    // 가격 조회
-                    document.getElementById('product-price').dataset.price = obj.product_price;
-
-                    var size_option = document.getElementById("size-option");
-                    var filling_option = document.getElementById("filling-option");
-                    var sheet_option = document.getElementById("sheet-option");
-                    var phrase_option = document.getElementById("phrase-option");
-                    var boxing_option = document.getElementById("boxing-option");
-
-                    // 조회결과 size테이블에 없다면 비활성화
-                    if(obj.size.length == 0) {
-                        size_option.disabled = true;
-                        phrase_option.disabled = true;
-                        sheet_option.disabled = true;
-                        filling_option.disabled = true;
-                    } else {
-                        // 있으면 활성화 & size옵션에 value추가
-                        var opt = "";
-                        for(var i = 0; i < obj.size.length; i++) {
-                            opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
-                        }
-                        size_option.innerHTML = opt;
-                        var default_size = document.getElementById('div-size-result');
-                        default_size.innerText = obj.size[0].size_name;
-                        default_size.dataset.price = obj.size[0].size_price;
-                        document.getElementById("size-result_" + data_id).value = default_size.innerText;
-                    }
-
-                }
-            };
-            xhr.open("POST", strurl);
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            xhr.send(null);
         });
 
+        function resize(option) {
+            const id = option.dataset.id;
+            document.getElementById('div-size-result_' + id).innerText = option.value;
+            document.getElementById('div-size-result_' + id).dataset.price = option.value;
+            document.getElementById('size-result_' + id).value = option.value;
+            console.log(option);
+            console.log(option.value);
+            console.log(option.value);
+        }
 
-        // 옵션 최종 등록, 주문 등록에 필요한 태그 세팅, 모달종료
-        $('#final-option-result').on('click', function () {
-            var numbering = document.getElementById("numbering").value;
-            var size = $('#size-result_' + numbering).val();
-            var filling = $('#filling-result_' + numbering).val();
-            var sheet = $('#sheet-result_' + numbering).val();
-            var boxing = $('#boxing-result_' + numbering).val();
-            var phrase = $('#phrase-result_' + numbering).val();
-            var price = $('#price-result_' + numbering).val();
+        function refilling(option) {
+            alert(option.value);
 
-            var list = [size, filling, sheet, boxing, phrase];
-            console.log(list);
+        }
 
-            var finalOptionResult = "";
+        function reboxing(option) {
+            alert(option.value);
 
-            for(var i = 0; i < list.length; i++) {
-                if(list[i] == '') {
-                    continue;
-                } else if(list[i] != '') {
-                    finalOptionResult += list[i];
-                    finalOptionResult += " / ";
-                }
-            }
+        }
 
-            var option_result = document.getElementById("input-option-result_" + numbering);
-            option_result.value = finalOptionResult
-            console.log(option_result.value);
+        function resheet(option) {
+            alert(option.value);
 
-            console.log('===========================');
-            var product_price = document.getElementById('product-price').dataset.price;
-            console.log(product_price);
-            var size_price = document.getElementById('div-size-result').dataset.price;
-            console.log(size_price);
-            var sheet_price = document.getElementById('div-sheet-result').dataset.price;
-            console.log(sheet_price);
-            var boxing_price = document.getElementById('div-boxing-result').dataset.price;
-            console.log(boxing_price);
-            var filling_price = document.getElementById('div-filling-result').dataset.price;
-            console.log(filling_price);
-            var phrase_price = document.getElementById('div-phrase-result').dataset.price;
-            console.log(phrase_price);
+        }
 
-            // 상품1건에 대한 가격 합산
-            var price1 = document.getElementById('price_' + numbering);
-            price1.dataset.price = parseInt(product_price) + parseInt(size_price) + parseInt(sheet_price) + parseInt(filling_price) + parseInt(boxing_price) + parseInt(phrase_price);
+        function rephrase(option) {
+            alert(option.value);
 
-            // 옵션 확정시 수량이 비어있다면 자동입력
-            var count1 = document.getElementById('count_' + numbering);
-            if(count1.value == '') {
-                count1.value = 1;
-            }
-            price1.value = price1.dataset.price;
-            $('#sizedModalLg').modal('hide');
-
-            var product_tag = document.getElementById("products_" + numbering);
-            product_tag.disabled = true;
+        }
 
 
-        });
-        // 수량 변경시 가격 계산
-        $('.count_product').on('change', function () {
-            console.log(event.currentTarget.dataset.id);
-            var dataid = event.currentTarget.dataset.id;
-
-            var counttag = document.getElementById('count_' + dataid);
-            var pricetag = document.getElementById('price_' + dataid);
-            var saleprice = pricetag.dataset.price;
-            pricetag.value = saleprice * counttag.value;
-        });
 
         // 품목 입력받는 영역 개수 파악
-        var slot_count = 2;
+        var slot_count = 1;
 
-        function addProduct() {
+        // 상품추가 + 이벤트 위임
+        function addProduct(a) {
+
+            slot_count++;
             console.log("slot_count : " + slot_count);
 
             // 상품 영역
@@ -730,7 +570,7 @@
             str +=                  '<input data-id="' + slot_count + '" type="text" id="products_' + slot_count + '" class="form-control products" name="product_name" style="font-family: \'NanumSquareR\';" placeholder="품목이름">';
             str +=           '</div>';
             str +=      '</div>';
-            str +=      '<button type="button" class="btn item-button modalbtn"style="border-color: white;background-color: #153d77; color: white" data-id="' + slot_count + '"data-toggle="modal" data-target="#sizedModalLg_' + slot_count + '">+ 옵션추가</button>';
+            str +=      '<button type="button" class="btn item-button modalbtn"style="border-color: white;background-color: #153d77; color: white" data-id="' + slot_count + '"data-toggle="modal" data-target="#sizedModalLg_' + slot_count + '" id="modalbtn_' + slot_count + '">+ 옵션추가</button>';
             str +=      '<div class="col-md-3">';
             str +=          '<input type="text" class="form-control" placeholder="옵션이름" id="input-option-result_' + slot_count + '" disabled>';
             str +=          '<input type="text" hidden="hidden" id="size-result_' + slot_count + '">';
@@ -773,11 +613,11 @@
             modal += '<div class="form-group">';
             modal += '<div class="form-floating">';
             modal += '<label for="inputCity">사이즈 옵션</label>';
-            modal += '<select id="size-option_' + slot_count + '" class="form-control mb-3"></select>';
+            modal += '<select id="size-option_' + slot_count + '" class="form-control mb-3 sizeoption" data-id="' + slot_count + '" onchange="resize(this)"></select>';
             modal += '</div>';
             modal += '<div class="form-floating">';
             modal += '<label for="inputCity">필링 옵션</label>';
-            modal += '<select id="filling-option_' + slot_count + '" class="form-control mb-3">';
+            modal += '<select id="filling-option_' + slot_count + '" class="form-control mb-3 fillingoption" data-id="' + slot_count + '" onchange="refilling(this)">';
             {% for filling in filling_table %}
                 modal += '<option data-price="{{ filling.filling_price }}" value="{{ filling.filling_name }}">{{ filling.filling_name }} : +{{ filling.filling_price }}</option>';
             {% endfor %}
@@ -785,7 +625,7 @@
             modal += '</div>';
             modal += '<div class="form-floating">';
             modal += '<label for="inputCity">시트 옵션</label>';
-            modal += '<select id="sheet-option_' + slot_count + '" class="form-control mb-3">';
+            modal += '<select id="sheet-option_' + slot_count + '" class="form-control mb-3 sheetoption" data-id="' + slot_count + '" onchange="resheet(this)">';
             {% for sheet in sheet_table %}
                 modal += '<option data-price="{{ sheet.sheet_price }}" value="{{ sheet.sheet_name }}">{{ sheet.sheet_name }} : +{{ sheet.sheet_price }}</option>';
             {% endfor %}
@@ -793,7 +633,7 @@
             modal += '</div>';
             modal += '<div class="form-floating">';
             modal += '<label for="inputCity">포장 옵션</label>';
-            modal += '<select id="boxing-option_' + slot_count + '" class="form-control mb-3">';
+            modal += '<select id="boxing-option_' + slot_count + '" class="form-control mb-3 boxingoption" data-id="' + slot_count + '" onchange="reboxing(this)">';
             {% for boxing in boxing_table %}
                 modal += '<option data-price="{{ boxing.boxing_price }}" value="{{ boxing.boxing_name }}">{{ boxing.boxing_name }} : +{{ boxing.boxing_price }}</option>';
             {% endfor %}
@@ -801,7 +641,7 @@
             modal += '</div>';
             modal += '<div class="form-floating">';
             modal += '<label for="inputCity">문구 옵션</label>';
-            modal += '<input id="phrase-option" type="email" class="form-control" placeholder="문구없음">';
+            modal += '<input id="phrase-option" type="email" class="form-control phraseoption" placeholder="문구없음" data-id="' + slot_count + '" onchange="rephrase(this)">';
             modal += '<input type="hidden" id="phrase_price_' + slot_count + '" value="5000">';
             modal += '</div>';
             modal += '</div>';
@@ -813,9 +653,9 @@
             modal += '<input type="hidden" id="numbering_' + slot_count + '" value=""/>';
             modal += '<input type="hidden" data-price="0" id="product-price_' + slot_count + '"/>';
             modal += '<div style="margin: 5px 0;" id="div-size-result_' + slot_count + '" data-price="">선택없음</div>';
-            modal += '<div style="margin: 5px 0;" id="div-filling-result_' + slot_count + '" data-price="">선택없음</div>';
-            modal += '<div style="margin: 5px 0;" id="div-sheet-result_' + slot_count + '" data-price="">선택없음</div>';
-            modal += '<div style="margin: 5px 0;" id="div-boxing-result_' + slot_count + '" data-price="">선택없음</div>';
+            modal += '<div style="margin: 5px 0;" id="div-filling-result_' + slot_count + '" data-price="{{ filling_first.filling_price }}">{{filling_first.filling_name}}</div>';
+            modal += '<div style="margin: 5px 0;" id="div-sheet-result_' + slot_count + '" data-price="{{ sheet_first.sheet_price }}">{{ sheet_first.sheet_name }}</div>';
+            modal += '<div style="margin: 5px 0;" id="div-boxing-result_' + slot_count + '" data-price="{{ boxing_first.boxing_price }}">{{ boxing_first.boxing_name }}</div>';
             modal += '<div style="margin: 5px 0;" id="div-phrase-result_' + slot_count + '" data-price="0">문구없음</div>';
             modal += '</div>';
             modal += '</div>';
@@ -824,19 +664,81 @@
             modal += '</div>';
             modal += '<div class="modal-footer">';
             modal += '<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>';
-            modal += '<button type="submit" class="btn btn-primary" id="final-option-result_' + slot_count + '">옵션 등록하기</button>';
+            modal += '<button type="button" class="btn btn-primary final" id="final-option-result_' + slot_count + '">옵션 등록하기</button>';
             modal += '</div>';
             modal += '</div>';
             modal += '</div>';
             modal += '</div>';
 
             var addmodal = document.getElementById('addmodal');
-            var newmodal = document.createElement("div");
+            var newmodal = document.createElement('div');
             newmodal.innerHTML = modal;
             addmodal.appendChild(newmodal);
 
+            productList();
 
-            slot_count++;
+
+            <!--
+             {#동적 생성된 태그는 일반적인 click이벤트가 걸리지 않음.#}
+             {#document를 대상으로 걸면 가능하지만, 모달창 제어가 안되어서#}
+             {#생성후 직접 이벤트를 걸어주는 로직#}
+             -->
+            $('#modalbtn_' + slot_count).on('click', function() {
+                var data_id = document.getElementById('modalbtn_' + slot_count).dataset.id;
+                var numbering = document.getElementById("numbering_" + data_id);
+                numbering.value = data_id;
+                var product_btn = document.getElementById("products_" + data_id);
+
+                var product_name = product_btn.value;
+                console.log('product_name = ' + product_name);
+                if (product_name == '') {
+                    alert('상품을 입력해주세요');
+                    product_btn.focus();
+                    return false;
+                }
+                var strurl = "option_view?product_name=" + product_name;
+                xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4) {
+                        var data = xhr.responseText;
+
+                        var obj = JSON.parse(data);
+
+                        // 가격 조회
+                        document.getElementById('product-price_' + data_id).dataset.price = obj.product_price;
+
+                        var size_option = document.getElementById("size-option_" + data_id);
+                        var filling_option = document.getElementById("filling-option_" + data_id);
+                        var sheet_option = document.getElementById("sheet-option_" + data_id);
+                        var phrase_option = document.getElementById("phrase-option_" + data_id);
+                        var boxing_option = document.getElementById("boxing-option_" + data_id);
+
+                        // 조회결과 size테이블에 없다면 비활성화
+                        if(obj.size.length == 0) {
+                            size_option.disabled = true;
+                            phrase_option.disabled = true;
+                            sheet_option.disabled = true;
+                            filling_option.disabled = true;
+                        } else {
+                            // 있으면 활성화 & size옵션에 value추가
+                            var opt = "";
+                            for(var i = 0; i < obj.size.length; i++) {
+                                opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
+                            }
+                            size_option.innerHTML = opt;
+                            var default_size = document.getElementById('div-size-result_' + data_id);
+                            default_size.innerText = obj.size[0].size_name;
+                            default_size.dataset.price = obj.size[0].size_price;
+                            document.getElementById("size-result_" + data_id).value = default_size.innerText;
+                        }
+
+                    }
+                };
+                xhr.open("POST", strurl);
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.send(null);
+            });
+
         }
 
 

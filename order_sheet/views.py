@@ -137,16 +137,22 @@ def new_order(request):
     boxing = Boxing.objects.all()
     pay_type = Pay_type.objects.all()
 
-
     context["member_table"] = member
     context["order_type_table"] = order_type
     context["delivery_table"] = delivery
     context["products_table"] = products
     context["categories_table"] = categories
     context["sheet_table"] = sheet
+    context["sheet_first"] = sheet.first()
     context["filling_table"] = filling
+    context["filling_first"] = filling.first()
     context["boxing_table"] = boxing
+    context["boxing_first"] = boxing.first()
     context["pay_type_table"] = pay_type
+
+    print(sheet.first().sheet_name)
+    print(filling.first().filling_price)
+    print(boxing.first())
 
     return render(request, 'sheet.html', context)
 
