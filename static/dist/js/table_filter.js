@@ -26,6 +26,7 @@
             var $menu = $(this.menu);
             // trigger 를 클릭하면 content 가 토글된다
             $trigger.click(function () {
+                console.log('trigger is working!')
                 return $content.toggle();
             });
 
@@ -121,17 +122,20 @@
         FilterMenu.prototype.dropdownFilterSearch = function () {
             var dropdownFilterItem = document.createElement('div');
             dropdownFilterItem.className = 'dropdown-filter-search';
-            // dropdownFilterItem.className = 'dropdown-filter-content';
 
-            var input = document.createElement('input');
-            input.type = 'text';
-            input.className = 'dropdown-filter-menu-search form-control';
-            input.setAttribute('data-column', this.column.toString());
-            input.setAttribute('data-index', this.index.toString());
-            input.setAttribute('placeholder', this.options.captions.search);
-            input.setAttribute('id', "search_input");
-            //input.setAttribute('onkeyup', "return true;");
-            dropdownFilterItem.appendChild(input);
+            // var div = document.createElement('span');
+            //
+            // var input = document.createElement('input');
+            // input.type = 'text';
+            // input.className = 'dropdown-filter-menu-search form-control';
+            // input.setAttribute('data-column', this.column.toString());
+            // input.setAttribute('data-index', this.index.toString());
+            // //input.setAttribute('placeholder', this.options.captions.search);
+            // input.setAttribute('id', "search_input");
+            // input.setAttribute('style', "padding: 0;");
+            // //input.setAttribute('onkeyup', "return true;");
+            // //div.appendChild(input);
+            // dropdownFilterItem.appendChild(input);
             console.log('dropdownFilterItem === ' + dropdownFilterItem);
             return dropdownFilterItem;
         };
@@ -216,7 +220,7 @@
             // icon 변수 선언
             var icon = document.createElement('i');
             // 'i.arrow-down'
-            icon.className = 'arrow-down';
+            icon.className = 'fas fa-fw fa-sort-down';
             // arrow html 요소에 icon을 붙이기
             arrow.appendChild(icon);
             // dropdownFilterDropdown 변수에 arrow html 붙이기
@@ -315,6 +319,7 @@
             var ths = this.ths;
             var updateRowVisibility = this.updateRowVisibility;
             this.target.find('.dropdown-filter-search').keyup(function () {
+                console.log('dropdown seaching is working!')
                 var $input = $(this).find('input');
                 var index = $input.data('index');
                 var value = $input.val();
@@ -398,8 +403,8 @@
         if (typeof options.sort === 'undefined') options.sort = true;
         if (typeof options.search === 'undefined') options.search = true;
         if (typeof options.captions === 'undefined') options.captions = {
-            a_to_z: 'A to Z',
-            z_to_a: 'Z to A',
+            a_to_z: '오름차순',
+            z_to_a: '내림차순',
             search: '검색',
             select_all: '모두 선택'
         };

@@ -71,6 +71,10 @@ def order_list_view(request):
     pay_table = Pay_type.objects.all()
     order_type_table = Order_type.objects.all()
 
+    order_completed = "주문완료"
+    production_completed = "제작완료"
+    release_completed = "출고완료"
+
 
     context = {
         "member_no" : memberno,
@@ -80,9 +84,11 @@ def order_list_view(request):
         "delivery_table": delivery_table,
         "pay_table": pay_table,
         "order_type_table": order_type_table,
+        "order_completed": order_completed,
+        "production_completed": production_completed,
+        "release_completed": release_completed,
     }
     return render(request, "list.html", context)
-
 
 
 # ====================== 주문 상세
