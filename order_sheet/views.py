@@ -163,13 +163,17 @@ def option_view(request):
     product_name = request.GET['product_name']
 
     # 옵션테이블 조회
-    product = Product.objects.get(product_name=product_name)
-    size = Size.objects.filter(product_id_id=product.product_id)
-    context["product_price"] = int(product.product_price)
-    if size.exists():
-        context["size"] = list(size.values())
+    if Product.objects.filter(product_name=product_name).exists():
+        product = Product.objects.get(product_name=product_name)
+        size = Size.objects.filter(product_id_id=product.product_id)
+        context["product_price"] = int(product.product_price)
+        context["flag"] = 1
+        if size.exists():
+            context["size"] = list(size.values())
+        else:
+            context["size"] = ''
     else:
-        context["size"] = ''
+        context["flag"] = 0
 
     return JsonResponse(context, content_type="application/json")
 

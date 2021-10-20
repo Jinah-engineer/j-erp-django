@@ -150,7 +150,7 @@
                                                     <button type="button" class="btn item-button modalbtn"
                                                             style="border-color: white;
                                                 background-color: #153d77; color: white" data-id="1"
-                                                            data-toggle="modal" data-target="#sizedModalLg_1" id="modalbtn_1">+ 옵션추가</button>
+                                                            data-toggle="modal" data-target="" id="modalbtn_1">+ 옵션추가</button>
                                                     <div class="col-md-3">
                                                         <input type="text" class="form-control" placeholder="옵션이름"
                                                                id="input-option-result_1" disabled>
@@ -162,7 +162,7 @@
                                                         <input type="text" hidden="hidden" id="phrase-result_1">
                                                     </div>
                                                     <div class="col-md-1" style="padding-left: 0">
-                                                        <input type="number" class="form-control count_product" data-id="1" id="count_1" placeholder="수량" min="1">
+                                                        <input type="number" class="form-control count_product" data-id="1" id="count_1" placeholder="수량" min="1" onchange="count(this)">
                                                     </div>
                                                     <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
                                                     <button class="item-button" type="button" style="border-color: white;
@@ -173,9 +173,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
 
 
                                     <!-- ============================================= -->
@@ -381,7 +378,7 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                    <button type="button" class="btn btn-primary final" id="final-option-result_1" data-id="1">옵션 등록하기</button>
+                                    <button type="button" class="btn btn-primary final" id="final-option-result_1" data-id="1" onclick="confirm(this);">옵션 등록하기</button>
                                 </div>
                             </div>
                         </div>
@@ -506,52 +503,134 @@
     </script>
 
     <script>
-        $('#modalbtn_1').on('click', function addEvent() {
+        $('#modalbtn_1').on('click', function() {
             var data_id = document.getElementById('modalbtn_1').dataset.id;
             var numbering = document.getElementById("numbering_" + data_id);
             numbering.value = data_id;
             var product_btn = document.getElementById("products_" + data_id);
 
             var product_name = product_btn.value;
-            console.log('product_name = ' + product_name);
             if (product_name == '') {
                 alert('상품을 입력해주세요');
                 product_btn.focus();
                 return false;
             }
         });
+        $('#products_1').on('change', function addEvent() {
+            var data_id = document.getElementById('modalbtn_1').dataset.id;
+            var numbering = document.getElementById("numbering_" + data_id);
+            numbering.value = data_id;
+            var product_btn = document.getElementById("products_" + data_id);
+
+            var product_name = product_btn.value;
+
+            var strurl = "option_view?product_name=" + product_name;
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    var data = xhr.responseText;
+
+                    var obj = JSON.parse(data);
+
+                    if(obj.flag == '1') {
+                        document.getElementById('modalbtn_1').dataset.target = "#sizedModalLg_" + data_id;
+                        // 가격 조회
+                        document.getElementById('product-price_' + data_id).dataset.price = obj.product_price;
+
+                        var size_option = document.getElementById("size-option_" + data_id);
+                        var filling_option = document.getElementById("filling-option_" + data_id);
+                        var sheet_option = document.getElementById("sheet-option_" + data_id);
+                        var phrase_option = document.getElementById("phrase-option_" + data_id);
+                        var boxing_option = document.getElementById("boxing-option_" + data_id);
+
+                        var default_size = document.getElementById('div-size-result_' + data_id);
+                        // 조회결과 size테이블에 없다면 비활성화
+                        if(obj.size.length == 0) {
+                            size_option.disabled = true;
+                            phrase_option.disabled = true;
+                            sheet_option.disabled = true;
+                            filling_option.disabled = true;
+
+                            default_size.innerText = '선택없음';
+                            default_size.dataset.price = '0';
+                            document.getElementById('size-result_' + data_id).value = default_size.innerText;
+                        } else {
+                            // 있으면 활성화 & size옵션에 value추가
+                            var opt = "";
+                            for(var i = 0; i < obj.size.length; i++) {
+                                opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
+                            }
+                            size_option.innerHTML = opt;
+                            default_size.innerText = obj.size[0].size_name;
+                            default_size.dataset.price = obj.size[0].size_price;
+                            document.getElementById("size-result_" + data_id).value = default_size.innerText;
+                        }
+                    } else if(obj.flag == '0') {
+                        alert('존재하지 않는 상품입니다');
+                        document.getElementById('modalbtn_1').dataset.target = "";
+                        return false;
+                    }
+
+                }
+            };
+            xhr.open("POST", strurl);
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.send(null);
+        });
 
         function resize(option) {
             const id = option.dataset.id;
-            document.getElementById('div-size-result_' + id).innerText = option.value;
-            document.getElementById('div-size-result_' + id).dataset.price = option.value;
-            document.getElementById('size-result_' + id).value = option.value;
-            console.log(option);
-            console.log(option.value);
-            console.log(option.value);
+            var sizeOption = document.getElementById('size-option_' + id);
+            var sizeOptionValue = sizeOption.options[sizeOption.selectedIndex].value;
+            document.getElementById('div-size-result_' + id).innerText = sizeOptionValue;
+            document.getElementById('div-size-result_' + id).dataset.price = sizeOption.options[sizeOption.selectedIndex].dataset.price;
+            document.getElementById('size-result_' + id).value = sizeOptionValue;
         }
 
         function refilling(option) {
-            alert(option.value);
-
+            const id = option.dataset.id;
+            var fillOption = document.getElementById('filling-option_' + id);
+            var fillOptionValue = fillOption.options[fillOption.selectedIndex].value;
+            document.getElementById('div-filling-result_' + id).innerText = fillOptionValue;
+            document.getElementById('div-filling-result_' + id).dataset.price = fillOption.options[fillOption.selectedIndex].dataset.price;
+            document.getElementById('filling-result_' + id).value = fillOptionValue;
         }
 
         function reboxing(option) {
-            alert(option.value);
-
+            const id = option.dataset.id;
+            var boxOption = document.getElementById('boxing-option_' + id);
+            var boxOptionValue = boxOption.options[boxOption.selectedIndex].value;
+            document.getElementById('div-boxing-result_' + id).innerText = boxOptionValue;
+            document.getElementById('div-boxing-result_' + id).dataset.price = boxOption.options[boxOption.selectedIndex].dataset.price;
+            document.getElementById('boxing-result_' + id).value = boxOptionValue;
         }
 
         function resheet(option) {
-            alert(option.value);
-
+            const id = option.dataset.id;
+            var sheetOption = document.getElementById('sheet-option_' + id);
+            var sheetOptionValue = sheetOption.options[sheetOption.selectedIndex].value;
+            document.getElementById('div-sheet-result_' + id).innerText = sheetOptionValue;
+            document.getElementById('div-sheet-result_' + id).dataset.price = sheetOption.options[sheetOption.selectedIndex].dataset.price;
+            document.getElementById('sheet-result_' + id).value = sheetOptionValue;
         }
 
         function rephrase(option) {
-            alert(option.value);
+            const id = option.dataset.id;
+            var phraseOption = document.getElementById('phrase-option_' + id);
+            var phraseOptionValue = phraseOption.value;
 
+            if(phraseOptionValue == '') {
+                document.getElementById('div-phrase-result_' + id).innerText = "문구없음";
+                document.getElementById('div-phrase-result_' + id).value = "문구없음";
+                document.getElementById('div-phrase-result_' + id).dataset.price = 0;
+                document.getElementById('phrase-result_' + id).value = "";
+            } else {
+                document.getElementById('div-phrase-result_' + id).innerText = phraseOptionValue;
+                document.getElementById('div-phrase-result_' + id).value = phraseOptionValue;
+                document.getElementById('div-phrase-result_' + id).dataset.price = document.getElementById('phrase_price_' + id).value;
+                document.getElementById('phrase-result_' + id).value = phraseOptionValue;
+            }
         }
-
-
 
         // 품목 입력받는 영역 개수 파악
         var slot_count = 1;
@@ -641,7 +720,7 @@
             modal += '</div>';
             modal += '<div class="form-floating">';
             modal += '<label for="inputCity">문구 옵션</label>';
-            modal += '<input id="phrase-option" type="email" class="form-control phraseoption" placeholder="문구없음" data-id="' + slot_count + '" onchange="rephrase(this)">';
+            modal += '<input id="phrase-option_' + slot_count + '" type="text" class="form-control phraseoption" placeholder="문구없음" data-id="' + slot_count + '" onchange="rephrase(this)">';
             modal += '<input type="hidden" id="phrase_price_' + slot_count + '" value="5000">';
             modal += '</div>';
             modal += '</div>';
@@ -664,7 +743,7 @@
             modal += '</div>';
             modal += '<div class="modal-footer">';
             modal += '<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>';
-            modal += '<button type="button" class="btn btn-primary final" id="final-option-result_' + slot_count + '">옵션 등록하기</button>';
+            modal += '<button type="button" class="btn btn-primary final" data-id="' + slot_count + '" id="final-option-result_' + slot_count + '" onclick="confirm(this);">옵션 등록하기</button>';
             modal += '</div>';
             modal += '</div>';
             modal += '</div>';
@@ -704,32 +783,42 @@
 
                         var obj = JSON.parse(data);
 
-                        // 가격 조회
-                        document.getElementById('product-price_' + data_id).dataset.price = obj.product_price;
+                        if(obj.flag == '1') {
+                            // 가격 조회
+                            document.getElementById('product-price_' + data_id).dataset.price = obj.product_price;
 
-                        var size_option = document.getElementById("size-option_" + data_id);
-                        var filling_option = document.getElementById("filling-option_" + data_id);
-                        var sheet_option = document.getElementById("sheet-option_" + data_id);
-                        var phrase_option = document.getElementById("phrase-option_" + data_id);
-                        var boxing_option = document.getElementById("boxing-option_" + data_id);
+                            var size_option = document.getElementById("size-option_" + data_id);
+                            var filling_option = document.getElementById("filling-option_" + data_id);
+                            var sheet_option = document.getElementById("sheet-option_" + data_id);
+                            var phrase_option = document.getElementById("phrase-option_" + data_id);
+                            var boxing_option = document.getElementById("boxing-option_" + data_id);
 
-                        // 조회결과 size테이블에 없다면 비활성화
-                        if(obj.size.length == 0) {
-                            size_option.disabled = true;
-                            phrase_option.disabled = true;
-                            sheet_option.disabled = true;
-                            filling_option.disabled = true;
-                        } else {
-                            // 있으면 활성화 & size옵션에 value추가
-                            var opt = "";
-                            for(var i = 0; i < obj.size.length; i++) {
-                                opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
-                            }
-                            size_option.innerHTML = opt;
                             var default_size = document.getElementById('div-size-result_' + data_id);
-                            default_size.innerText = obj.size[0].size_name;
-                            default_size.dataset.price = obj.size[0].size_price;
-                            document.getElementById("size-result_" + data_id).value = default_size.innerText;
+                            // 조회결과 size테이블에 없다면 비활성화
+                            if(obj.size.length == 0) {
+                                size_option.disabled = true;
+                                phrase_option.disabled = true;
+                                sheet_option.disabled = true;
+                                filling_option.disabled = true;
+
+                                default_size.innerText = '선택없음';
+                                default_size.dataset.price = '0';
+                                document.getElementById('size-result_' + data_id).value = default_size.innerText;
+                            } else {
+                                // 있으면 활성화 & size옵션에 value추가
+                                var opt = "";
+                                for(var i = 0; i < obj.size.length; i++) {
+                                    opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
+                                }
+                                size_option.innerHTML = opt;
+                                default_size.innerText = obj.size[0].size_name;
+                                default_size.dataset.price = obj.size[0].size_price;
+                                document.getElementById("size-result_" + data_id).value = default_size.innerText;
+                            }
+                        } else if(flag == '0') {
+                            alert('존재하지 않는 상품입니다');
+                            $('#sizedModalLg_' + data_id).modal('hide');
+                            return false;
                         }
 
                     }
@@ -741,7 +830,63 @@
 
         }
 
+        //옵션 확정
+        function confirm(e) {
+            console.log('옵션 등록');
+            console.log(e.dataset.id);
+            var id = e.dataset.id;
 
+            var size = document.getElementById('div-size-result_' + id);
+            var fill = document.getElementById('div-filling-result_' + id);
+            var sheet = document.getElementById('div-sheet-result_' + id);
+            var box = document.getElementById('div-boxing-result_' + id);
+            var phrase = document.getElementById('div-phrase-result_' + id);
+            var product = document.getElementById('product-price_' + id);
+
+            var count = document.getElementById('count_' + id);
+            count.value = 1;
+            var priceall = document.getElementById('price_' + id);
+            priceall.dataset.price = parseInt(size.dataset.price) + parseInt(fill.dataset.price) + parseInt(sheet.dataset.price) + parseInt(box.dataset.price) + parseInt(phrase.dataset.price) + parseInt(product.dataset.price);
+            {#priceall.dataset.price = size.dataset.price + fill.dataset.price + sheet.dataset.price + box.dataset.price + phrase.dataset.price + product.dataset.price;#}
+            console.log(priceall);
+            priceall.value = priceall.dataset.price;
+
+            $('#sizedModalLg_' + id).modal('hide');
+
+            var size_result = document.getElementById('size-result_' + id).value;
+            var fill_result = document.getElementById('filling-result_' + id).value;
+            var sheet_result = document.getElementById('sheet-result_' + id).value;
+            var box_result = document.getElementById('boxing-result_' + id).value;
+            var phrase_result = document.getElementById('phrase-result_' + id).value;
+            var price_result = document.getElementById('product-price_' + id).value;
+
+            var list = [size_result, fill_result, sheet_result, box_result, phrase_result, price_result];
+            var finalresult = '';
+            for(var i = 0; i < list.length; i++) {
+                if(list[i] == '') {
+                    continue;
+                } else if(list[i] != '') {
+                    finalresult += list[i] + "/";
+                }
+            }
+
+            var option_result = document.getElementById('input-option-result_' + id);
+            option_result.value = finalresult;
+
+            var products = document.getElementById('products_' + id);
+            products.disabled = true;
+        }
+
+        // 수량 조절
+        function count(e) {
+            var id = e.dataset.id;
+
+            var counttag = document.getElementById('count_' + id);
+            var pricetag = document.getElementById('price_' + id);
+            var oneprice = pricetag.dataset.price;
+
+            pricetag.value = oneprice * counttag.value;
+        }
 
 
 
