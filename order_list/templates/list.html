@@ -9,21 +9,22 @@
             overflow-y: scroll;
             display: block;
             white-space: nowrap;
+            table-layout:fixed;
+
         {#width: auto;#}
+        }
+        tbody {
+            overflow-y: auto;
         }
         th, td{ text-align: center; }
 
         th {
             font-weight: bold;
         }
-
-        tbody {
-            overflow-y: auto;
+        td{
+            overflow:hidden;
+            text-overflow: ellipsis;
         }
-        .sorting, .sorting_asc {
-            font-family: 'NanumSquareB';
-        }
-
         table.dataTable tbody tr.selected {
             color: white;
             background-color: cornflowerblue;
@@ -35,7 +36,10 @@
             -ms-user-select: none;
             user-select: none;
         }
-
+        .badge{
+            font-size: 1rem;
+            margin: 0;
+        }
         .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
             background-image:none !important;
         }
@@ -103,12 +107,12 @@
                                             상태변경
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">제작완료</a>
-                                            <a class="dropdown-item" href="#">출고완료</a>
+                                            <a type="button" class="dropdown-item" href="#">제작완료</a>
+                                            <a type="button" class="dropdown-item" href="#">출고완료</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">출고보류</a>
-                                            <a class="dropdown-item" href="#">출고취소</a>
-                                            <a class="dropdown-item" href="#">기타</a>
+                                            <a type="button" class="dropdown-item" href="#">출고보류</a>
+                                            <a type="button" class="dropdown-item" href="#">출고취소</a>
+                                            <a type="button" class="dropdown-item" href="#">기타</a>
                                         </div>
                                     </div>
                                     <div class="btn-group btn-group mb-4 align-items-center" role="group" style="padding: 0 2px;">
@@ -152,19 +156,18 @@
 
                             <div class="col-12" style="padding: 0">
                                 <div class="card w-100" style="">
-                                    <table class="table table-bordered table-intel"
+                                    <table class="table table-bordered table-intel table-md cell-border"
                                            id="bootstrap-table"
-                                           style="table-layout: fixed; width: 100%; height: 500px;">
+                                           style="table-layout: fixed; width: 100%; height: auto; min-height: 400px;">
                                         <thead>
                                         <tr style="font-family: 'NanumSquareL';"
                                             onmousedown="return false" onselect="return true" onmouseup="return true">
                                             <th class="filters" data-sortable="true" id="th-pno" hidden="hidden">pno</th>
-                                            <th class="filters" data-sortable="true" id="th-order_no" style="width:40%;">
+                                            <th class="filters" data-sortable="true" id="th-order_no" style="">
                                                 주문 No.
-                                                {#                                                <i class="align-middle mr-2 fas fa-fw fa-sort-down"></i>#}
                                             </th>
-                                            <th class="filters" data-sortable="true" id="th-order_date" style="width:25%">주문일자</th>
-                                            <th id="th-state" class="filters" data-sortable="true" style="width:25%">진행상태</th>
+                                            <th class="filters" data-sortable="true" id="th-order_date" style="">주문일자</th>
+                                            <th id="th-state" class="filters" data-sortable="true" style="">진행상태</th>
                                             <th class="filters" data-sortable="true" id="th-customer">고객명</th>
                                             <th class="filters" data-sortable="true" id="th-product_name">품목</th>
                                             <th class="filters" data-sortable="true" id="th-size_option_name">사이즈</th>
@@ -200,7 +203,15 @@
                                                     </button>
                                                 </td>
                                                 <td>{{ order.order_date }}</td>
-                                                <td><span id="order_state" class="badge badge-success">{{ order.state }}</span></td>
+                                                {% if order.state == order_completed  %}
+                                                    <td><span id="order_state" class="badge badge-warning">{{ order.state }}</span></td>
+                                                {% endif %}
+                                                {% if order.state == production_completed  %}
+                                                    <td><span id="order_state" class="badge badge-success">{{ order.state }}</span></td>
+                                                {% endif %}
+                                                {% if order.state == release_completed  %}
+                                                    <td><span id="order_state" class="badge badge-primary">{{ order.state }}</span></td>
+                                                {% endif %}
                                                 <td>{{ order.customer }}</td>
                                                 <td>{{ order.product_name }}</td>
                                                 <td>{{ order.size_option_name }}</td>
@@ -546,33 +557,33 @@
             // ==============================================================================================================================================
             // 데이터테이블 API
             // ==============================================================================================================================================
-            $(function() {
+            $(function () {
 
                 // -------------------------------------------------------
                 // 한국어로 변환 (Datatable)
                 // -------------------------------------------------------
                 var lang_kor = {
-                    "decimal" : "",
-                    "emptyTable" : "데이터가 없습니다.",
-                    "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
-                    "infoEmpty" : "0명",
-                    "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
-                    "infoPostFix" : "",
-                    "thousands" : ",",
-                    "lengthMenu" : "_MENU_ 개씩 보기",
-                    "loadingRecords" : "로딩중...",
-                    "processing" : "처리중...",
-                    "search" : "검색 : ",
-                    "zeroRecords" : "검색된 데이터가 없습니다.",
-                    "paginate" : {
-                        "first" : "첫 페이지",
-                        "last" : "마지막 페이지",
-                        "next" : "다음",
-                        "previous" : "이전"
+                    "decimal": "",
+                    "emptyTable": "데이터가 없습니다.",
+                    "info": "_START_ - _END_ (총 _TOTAL_ 명)",
+                    "infoEmpty": "0명",
+                    "infoFiltered": "(전체 _MAX_ 명 중 검색결과)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "_MENU_ 개씩 보기",
+                    "loadingRecords": "로딩중...",
+                    "processing": "처리중...",
+                    "search": "검색 : ",
+                    "zeroRecords": "검색된 데이터가 없습니다.",
+                    "paginate": {
+                        "first": "첫 페이지",
+                        "last": "마지막 페이지",
+                        "next": "다음",
+                        "previous": "이전"
                     },
-                    "aria" : {
-                        "sortAscending" : " :  오름차순 정렬",
-                        "sortDescending" : " :  내림차순 정렬"
+                    "aria": {
+                        "sortAscending": " :  오름차순 정렬",
+                        "sortDescending": " :  내림차순 정렬"
                     }
                 };
 
@@ -599,9 +610,6 @@
                     language: lang_kor,
                     sorting: true,
                     bFilter: false,
-                    // columnDefs: {
-                    //     className: "dt-center", targets: "_all"
-                    // },
                     // lengthChange: false,
                     // autoWidth: true,
                     // autoAdjustHeight: true;
@@ -628,11 +636,6 @@
                 $('#bootstrap-table_wrapper > .dt-buttons').appendTo('.btn-group.btn-group.mb-4.align-items-center.get-excel');
 
 
-                //$('#bootstrap-table').DataTable().draw();
-
-
-
-
                 // -------------------------------------------------------
                 // 데이터 row 선택하기 (multiple rows selected)
                 // -------------------------------------------------------
@@ -642,8 +645,7 @@
                         // $(this).toggleClass('selected');
                         //$(this).css("background-color", "#F5E6C4");
 
-                    }
-                    else {
+                    } else {
                         // table.$('tr.selected').removeClass('selected');
                         $(this).addClass('selected');
                         // $(this).toggleClass('selected');
@@ -652,18 +654,20 @@
                 });
 
 
-
                 // -------------------------------------------------------
                 // Datatable 에서 선택한 row(행) 의 data 가져오기
                 // -------------------------------------------------------
                 var tst = $('#bootstrap-table').DataTable().rows('.selected').data();
+                /*
                 $('#test2').on('click', function () {
                     console.log(tst);
                     alert(tst);
                 })
+                 */
 
                 // table 변수 선언
-                var table =  $('#bootstrap-table').DataTable();
+                var table = $('#bootstrap-table').DataTable();
+                var table_row = $('#bootstrap-table tbody tr.selected');
 
                 $('#bootstrap-table tbody tr').on('click', function () {
                     if ($(this).hasClass('selected')) {
@@ -671,7 +675,32 @@
                         let this_row = table.row(this).data();
                         let tst = $('#bootstrap-table').DataTable().rows('.selected').data();
 
+                        let format_pno = pno_formatting(this_row[0])
+                        let format_order_num = ordernumber_formatting(this_row[1])
+                        let format_date_format = date_formatting(this_row[2])
+                        let format_state = order_state_formatting(this_row[3])
+
                         console.log('---------------look at test6 ----------------------');
+                        console.log(
+                            format_pno + '\n'
+                            + format_order_num + '\n'
+                            + format_date_format + '\n' + format_state + '\n'
+                            + this_row[4] + '\n' + this_row[5] + '\n'
+                            + this_row[6] + '\n' + this_row[7] + '\n' + this_row[8] + '\n'
+                            + this_row[9] + '\n' + this_row[10] + '\n' + this_row[11] + '\n'
+                            + this_row[12] + '\n' + this_row[13] + '\n' + this_row[14] + '\n'
+                            + this_row[15] + '\n' + this_row[16] + '\n' + this_row[17] + '\n'
+                            + this_row[18] + '\n' + this_row[19] + '\n' + this_row[20] + '\n'
+                            + this_row[21] + '\n' + this_row[22] + '\n' + this_row[23] + '\n');
+
+
+                        $('#test2').on('click', function () {
+                            alert(order_state_formatting(this_row[3]));
+                        })
+
+
+
+
                         $('#test6').html("모든 데이터 : "
                             + table.row(this).data()
                             + "<br> pno :" + this_row[0]
@@ -698,7 +727,6 @@
                             + "<br> 납품일자 :" + this_row[21]
                             + "<br> 납품시간 :" + this_row[22]
                             + "<br> 주문메모 :" + this_row[23]
-
                         );
 
 
@@ -706,37 +734,39 @@
                         // Datatable 에서 선택한 Column(열) 의 data 가져오기
                         // -------------------------------------------------------
                         var test_column = table.column(this).data();
-                        var test_column_value = table.column(2, {page:'current'}).data();
+                        var test_column_value = table.column(2, {page: 'current'}).data();
                         var column_data1 = test_column_value[0];
                         var column_data2 = test_column_value[1];
-
-                        console.log('---------------Excel Filter testing!!!!!!!! ----------------------');
-                        console.log('test_column ===== ' + test_column);
-                        console.log('test_column_value ===== ' + test_column_value);
-                        console.log('column_data1 ===== ' + column_data1);
-                        console.log('column_data2 ===== ' + column_data2);
-                        console.log('---------------Excel Filter testing!!!!!!!! ----------------------');
-
                         console.log('---------------look at test6 ----------------------');
 
 
                         // -------------------------------------------------------
-                        // String Formatting *** Test
+                        // *** 주문 날짜 포매팅
                         // -------------------------------------------------------
                         console.log('---------------string formatting testing!!!! ----------------------');
 
-                        // *** 주문 날짜 포매팅
                         var test_date = this_row[2];	// 원래 문자열
                         var regex = /[^0-9]/g;				// 숫자가 아닌 문자열을 매칭하는 정규식
                         var result = test_date.replace(regex, "");	// 원래 문자열에서 숫자가 아닌 모든 문자열을 빈 문자로 변경
                         var final_result = result.substring(0, 4) + '-' + result.substring(4, 6) + '-' + result.substring(6, 8);
                         console.log("formatted - order_date ==============" + final_result);
 
+                        // 날짜 포매팅 함수
+                        function date_formatting(d) {
+                            var regex = /[^0-9]/g;
+                            var temp_date = d.replace(regex, "");
+                            var format_date = temp_date.substring(0, 4) + '-' + temp_date.substring(4, 6) + '-' + temp_date.substring(6, 8);
+
+                            return format_date;
+                        }
+
+                        // -------------------------------------------------------
                         // *** 주문 번호 포매팅
+                        // -------------------------------------------------------
                         var test_orderno = this_row[1];
                         var test_orderno_html = document.getElementsByClassName("order_no");
 
-                        string = [].map.call( test_orderno_html, function(node){
+                        string = [].map.call(test_orderno_html, function (node) {
                             return node.textContent || node.innerText || "";
                         }).join("");
                         var a = Array.prototype.slice.call(document.getElementsByClassName('order_no'));
@@ -746,58 +776,71 @@
 
                         console.log("formatted - order_no ==============" + formatted_order_no);
 
+                        // 주문 번호 포매팅 함수
+                        function ordernumber_formatting(n) {
+                            var format_order_number = n.substring(195, 209);
+                            return format_order_number;
+                        }
 
+
+
+                        // -------------------------------------------------------
                         // *** 주문 상태 포매팅
+                        // -------------------------------------------------------
                         var formatted_order_state = $('#order_state').text();
                         console.log("formatted_order_state ===== " + formatted_order_state);
+
+                        // 주문 상태 포매팅 함수
+                        function order_state_formatting(state) {
+                            var format_state = state.substring(51, 55);
+                            return format_state;
+                        }
+
+                        // -------------------------------------------------------
+                        // *** pno 포매팅
+                        var a = this_row[0].substring(63);
+                        var regex = /[^0-9]/g;
+                        var b = a.replace(regex, "");
+
+                        // pno 포매팅 함수
+                        function pno_formatting(p) {
+                            var start = p.substring(63);
+                            var regex = /[^0-9]/g;
+                            var format_pno = start.replace(regex, "");
+                            return format_pno;
+                        }
+
+
                     }
                     console.log('---------------string formatting testing!!!!----------------------');
 
-
-                    // -------------------------------------------------------
-                    // ****** Filtering test 2
-                    // -------------------------------------------------------
-                    console.log('---------------Filtering testing 20211019----------------------');
-
-                    //var table_th = table.thead.th;
-                    console.log('---------------Filtering testing 20211019----------------------');
-
-
-
-                    // -------------------------------------------------------
-                    // ****** row index 얻기
-                    // -------------------------------------------------------
-                    console.log('---------------row index start ----------------------');
-                    var row_index = table.row(this).index();
-
-                    //console.log('row index ======' + row_index);
-
-                    var row_data = table.row(row_index).data();
-                    //.log('row data =====' + row_data);
-
-
-
-                    var ids = $.map(table.rows('.selected').data(), function (item) {
-                        return item[row_index];
-                    });
-
-                    //console.log(ids);
-                    console.log('---------------row index end ----------------------');
-
-                    console.log('---------------each row data start ----------------------');
-
-                    // -------------------------------------------------------
-                    // ****** each row data 얻기
-                    // -------------------------------------------------------
-                    var data = table.data().toArray();
-
-                    data.forEach(function(row, i) {
-                        row.forEach(function(column, j) {
-                            console.log('row ' + i + ' column ' + j + ' value ' + column);
-                        });
-                    });
-
                 });
+
+
+                // -------------------------------------------------------
+                // ****** row index 얻기
+                // -------------------------------------------------------
+                var row_index = table.row(this).index();
+                var row_data = table.row(row_index).data();
+
+                var ids = $.map(table.rows('.selected').data(), function (item) {
+                    return item[row_index];
+                });
+
+
+                console.log('---------------each row data start ----------------------');
+
+                // -------------------------------------------------------
+                // ****** each row data 얻기
+                // -------------------------------------------------------
+                var data = table.data().toArray();
+
+                data.forEach(function (row, i) {
+                    row.forEach(function (column, j) {
+                        //console.log('row ' + i + ' column ' + j + ' value ' + column);
+                    });
+                });
+
                 console.log('---------------each row data end ----------------------');
 
                 $('#bootstrap-table tbody').on('click', 'td', function () {
@@ -806,35 +849,24 @@
 
                     var selectedrows = $('#bootstrap-table').DataTable().rows($(this).closest("tr")).data();
                     var particular = $("#bootstrap-table").DataTable().cells($(this).closest("td").siblings().eq(0)).data()
-
-
-                    //console.log('cell data ===== ' + cell);
-                    //console.log('cell_info ===== ' + cell_info);
-                    //console.log('particular info ===== ' + particular);
-
-                    for (let rows in selectedrows) {
-                        //console.log('selectedrows info ===== ' + JSON.stringify(rows));
-                    }
                 })
-
-
-
-                // -------------------------------------------------------
-                // 엑셀 필터
-                // -------------------------------------------------------
-                $('#bootstrap-table').excelTableFilter({
-                    search: true
-                });
-
-                // -------------------------------------------------------
-                // 필터링 검색 기능 on
-                // -------------------------------------------------------
-                $('#search_input').on( 'keyup', function () {
-                    $('#bootstrap-table').search( this.value ).draw();
-                } );
-
-
             });
+
+
+            // -------------------------------------------------------
+            // 엑셀 필터
+            // -------------------------------------------------------
+            $('#bootstrap-table').excelTableFilter({
+                search: true
+            });
+
+            // -------------------------------------------------------
+            // 필터링 검색 기능 on
+            // -------------------------------------------------------
+            $('#search_input').on('keyup', function () {
+                $('#bootstrap-table').search(this.value).draw();
+            });
+
 
 
             // ==============================================================================================================================================
@@ -843,7 +875,6 @@
             $(function() {
 
                 // Connection
-
                 // -------------------------------------------------------
                 // 날짜 검색 (2)
                 // -------------------------------------------------------
