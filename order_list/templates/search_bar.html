@@ -5,7 +5,7 @@
         <button type="button" class="btn btn-facebook">주문일</button>
         <button type="button" class="btn btn-twitter">납품일</button>
     </div>
-    <div class="btn-group md-1" role="group" style="">
+    <div class="btn-group md-2" role="group" style="">
         <i class="align-middle m-2 ml-2 far fa-fw fa-lg fa-calendar-alt"></i>
     </div>
     {#    <div class="btn-group m-2" role="group" style="">#}
@@ -33,15 +33,24 @@
             <button class="btn btn-dribbble my-2 my-sm-0" type="submit">검색</button>
         </form>
     </div>
+    <div class="btn-group md-4" role="group" style="padding-left: 0.5rem;">
+        <button class="btn btn-twitter form-control col-md-5" type="button">목록</button>
+        <select id="state-change" class="form-control col-md-7" style="">
+                <option value="all">전체주문목록</option>
+                <option value="주문완료">제작대상목록</option>
+                <option value="제작완료">출고대상목록</option>
+                <option value="출고완료">출고완료목록</option>
+        </select>
+    </div>
 
-    <div class="btn-group md-2" role="group" style="padding-inline: 0.2rem">
-        <button class="btn btn-primary">제작 대상 목록</button>
-    </div>
-    <div class="btn-group md-2" role="group" style="padding-inline: 0.2rem">
-        <button class="btn btn-secondary">출고 대상 목록</button>
-    </div>
-    <div class="btn-group md-2" role="group" style="padding-inline: 0.2rem">
-        <button class="btn btn-secondary">출고 완료 목록</button>
-    </div>
+    {#    <div class="btn-group md-2" role="group" style="padding-inline: 0.2rem">#}
+    {#        <button class="btn btn-flickr" id="order_completed-btn" value="주문완료">제작 대상 목록</button>#}
+    {#    </div>#}
+    {#    <div class="btn-group md-2" role="group" style="padding-inline: 0.2rem">#}
+    {#        <button class="btn btn-flickr" id="production_completed-btn" value="제작완료">출고 대상 목록</button>#}
+    {#    </div>#}
+    {#    <div class="btn-group md-2" role="group" style="padding-inline: 0.2rem">#}
+    {#        <button class="btn btn-flickr" id="release_completed-btn" value="출고완료">출고 완료 목록</button>#}
+    {#    </div>#}
 </nav>
 
