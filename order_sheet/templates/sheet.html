@@ -166,7 +166,7 @@
                                                     </div>
                                                     <label style="padding-right: 20px;" class="col-form-label" for="">개</label>
                                                     <button class="item-button" type="button" style="border-color: white;
-                                                background-color: darkred; color: white" data-id="1" onclick="deleteproduct();">X</button>
+                                                background-color: darkred; color: white" data-id="1" onclick="deleteproduct(this);">X</button>
                                                     <label style="padding-left: 20px;" class="col-form-label" for="">금액</label>
                                                     <div class="col-md-2">
                                                         <input type="text" data-price="0" id="price_1" class="form-control price1" placeholder="금액">
@@ -378,7 +378,7 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                    <button type="button" class="btn btn-primary final" id="final-option-result_1" data-id="1" onclick="confirm(this);">옵션 등록하기</button>
+                                    <button type="button" class="btn btn-primary final" id="final-option-result_1" data-id="1" onclick="confirmFix(this);">옵션 등록하기</button>
                                 </div>
                             </div>
                         </div>
@@ -498,90 +498,11 @@
             }
         });
 
-
-
-    </script>
-
-    <script>
-        $('#modalbtn_1').on('click', function() {
-            var data_id = document.getElementById('modalbtn_1').dataset.id;
-            var numbering = document.getElementById("numbering_" + data_id);
-            numbering.value = data_id;
-            var product_btn = document.getElementById("products_" + data_id);
-
-            var product_name = product_btn.value;
-            if (product_name == '') {
-                alert('상품을 입력해주세요');
-                product_btn.focus();
-                return false;
-            }
-        });
-        $('#products_1').on('change', function addEvent() {
-            var data_id = document.getElementById('modalbtn_1').dataset.id;
-            var numbering = document.getElementById("numbering_" + data_id);
-            numbering.value = data_id;
-            var product_btn = document.getElementById("products_" + data_id);
-
-            var product_name = product_btn.value;
-
-            var strurl = "option_view?product_name=" + product_name;
-            xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState == 4) {
-                    var data = xhr.responseText;
-
-                    var obj = JSON.parse(data);
-
-                    if(obj.flag == '1') {
-                        document.getElementById('modalbtn_1').dataset.target = "#sizedModalLg_" + data_id;
-                        // 가격 조회
-                        document.getElementById('product-price_' + data_id).dataset.price = obj.product_price;
-
-                        var size_option = document.getElementById("size-option_" + data_id);
-                        var filling_option = document.getElementById("filling-option_" + data_id);
-                        var sheet_option = document.getElementById("sheet-option_" + data_id);
-                        var phrase_option = document.getElementById("phrase-option_" + data_id);
-                        var boxing_option = document.getElementById("boxing-option_" + data_id);
-
-                        var default_size = document.getElementById('div-size-result_' + data_id);
-                        // 조회결과 size테이블에 없다면 비활성화
-                        if(obj.size.length == 0) {
-                            size_option.disabled = true;
-                            phrase_option.disabled = true;
-                            sheet_option.disabled = true;
-                            filling_option.disabled = true;
-
-                            default_size.innerText = '선택없음';
-                            default_size.dataset.price = '0';
-                            document.getElementById('size-result_' + data_id).value = default_size.innerText;
-                        } else {
-                            // 있으면 활성화 & size옵션에 value추가
-                            var opt = "";
-                            for(var i = 0; i < obj.size.length; i++) {
-                                opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
-                            }
-                            size_option.innerHTML = opt;
-                            default_size.innerText = obj.size[0].size_name;
-                            default_size.dataset.price = obj.size[0].size_price;
-                            document.getElementById("size-result_" + data_id).value = default_size.innerText;
-                        }
-                    } else if(obj.flag == '0') {
-                        alert('존재하지 않는 상품입니다');
-                        document.getElementById('modalbtn_1').dataset.target = "";
-                        return false;
-                    }
-
-                }
-            };
-            xhr.open("POST", strurl);
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            xhr.send(null);
-        });
-
+        // *** 옵션 변경시 데이터입출력 함수
         function resize(option) {
             const id = option.dataset.id;
-            var sizeOption = document.getElementById('size-option_' + id);
-            var sizeOptionValue = sizeOption.options[sizeOption.selectedIndex].value;
+            let sizeOption = document.getElementById('size-option_' + id);
+            let sizeOptionValue = sizeOption.options[sizeOption.selectedIndex].value;
             document.getElementById('div-size-result_' + id).innerText = sizeOptionValue;
             document.getElementById('div-size-result_' + id).dataset.price = sizeOption.options[sizeOption.selectedIndex].dataset.price;
             document.getElementById('size-result_' + id).value = sizeOptionValue;
@@ -589,8 +510,8 @@
 
         function refilling(option) {
             const id = option.dataset.id;
-            var fillOption = document.getElementById('filling-option_' + id);
-            var fillOptionValue = fillOption.options[fillOption.selectedIndex].value;
+            let fillOption = document.getElementById('filling-option_' + id);
+            let fillOptionValue = fillOption.options[fillOption.selectedIndex].value;
             document.getElementById('div-filling-result_' + id).innerText = fillOptionValue;
             document.getElementById('div-filling-result_' + id).dataset.price = fillOption.options[fillOption.selectedIndex].dataset.price;
             document.getElementById('filling-result_' + id).value = fillOptionValue;
@@ -598,8 +519,8 @@
 
         function reboxing(option) {
             const id = option.dataset.id;
-            var boxOption = document.getElementById('boxing-option_' + id);
-            var boxOptionValue = boxOption.options[boxOption.selectedIndex].value;
+            let boxOption = document.getElementById('boxing-option_' + id);
+            let boxOptionValue = boxOption.options[boxOption.selectedIndex].value;
             document.getElementById('div-boxing-result_' + id).innerText = boxOptionValue;
             document.getElementById('div-boxing-result_' + id).dataset.price = boxOption.options[boxOption.selectedIndex].dataset.price;
             document.getElementById('boxing-result_' + id).value = boxOptionValue;
@@ -607,8 +528,8 @@
 
         function resheet(option) {
             const id = option.dataset.id;
-            var sheetOption = document.getElementById('sheet-option_' + id);
-            var sheetOptionValue = sheetOption.options[sheetOption.selectedIndex].value;
+            let sheetOption = document.getElementById('sheet-option_' + id);
+            let sheetOptionValue = sheetOption.options[sheetOption.selectedIndex].value;
             document.getElementById('div-sheet-result_' + id).innerText = sheetOptionValue;
             document.getElementById('div-sheet-result_' + id).dataset.price = sheetOption.options[sheetOption.selectedIndex].dataset.price;
             document.getElementById('sheet-result_' + id).value = sheetOptionValue;
@@ -616,8 +537,8 @@
 
         function rephrase(option) {
             const id = option.dataset.id;
-            var phraseOption = document.getElementById('phrase-option_' + id);
-            var phraseOptionValue = phraseOption.value;
+            let phraseOption = document.getElementById('phrase-option_' + id);
+            let phraseOptionValue = phraseOption.value;
 
             if(phraseOptionValue == '') {
                 document.getElementById('div-phrase-result_' + id).innerText = "문구없음";
@@ -632,8 +553,112 @@
             }
         }
 
+
+    </script>
+
+    <script>
+        // *** 상품1번 이벤트(상품유무, 정보조회)
+        // 상품이름 입력시 - DB에서 상품의 유무를 조회, 지정되어 있지 않은 정보 입력시 에러출력
+        $('#products_1').on('propertychange change keyup paste input', function () {
+            let data_id = document.getElementById('modalbtn_1').dataset.id;
+            let numbering = document.getElementById("numbering_" + data_id);
+            numbering.value = data_id;
+            let product_btn = document.getElementById("products_" + data_id);
+
+            let product_name = product_btn.value;
+
+            let strurl = "option_view?product_name=" + product_name;
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    let data = xhr.responseText;
+
+                    let obj = JSON.parse(data);
+
+                    if(obj.flag == '1') {
+                        document.getElementById('modalbtn_1').dataset.target = "#sizedModalLg_" + data_id;
+                    } else if(obj.flag == '0') {
+                        document.getElementById('modalbtn_1').dataset.target = "";
+                    }
+                }
+            };
+            xhr.open("POST", strurl);
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.send(null);
+        });
+        // 옵션추가 클릭시 - 입력된 상품의 정보를 DB에서 조회, 지정된 영역에 삽입
+        $('#modalbtn_1').on('click', function() {
+            let modalbtn = document.getElementById('modalbtn_1');
+            let data_id = modalbtn.dataset.id;
+            let numbering = document.getElementById("numbering_" + data_id);
+            numbering.value = data_id;
+            let product_btn = document.getElementById("products_" + data_id);
+
+            let product_name = product_btn.value;
+            if (product_name == '') {
+                alert('상품을 입력해주세요');
+                product_btn.focus();
+                return false;
+            }
+            if(modalbtn.dataset.target == '#sizedModalLg_1') {
+                let strurl = "option_view?product_name=" + product_name;
+                xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4) {
+                        let data = xhr.responseText;
+
+                        let obj = JSON.parse(data);
+
+                        if(obj.flag == '1') {
+                            document.getElementById('modalbtn_1').dataset.target = "#sizedModalLg_" + data_id;
+                            // 가격 조회
+                            document.getElementById('product-price_' + data_id).dataset.price = obj.product_price;
+
+                            let size_option = document.getElementById("size-option_" + data_id);
+                            let filling_option = document.getElementById("filling-option_" + data_id);
+                            let sheet_option = document.getElementById("sheet-option_" + data_id);
+                            let phrase_option = document.getElementById("phrase-option_" + data_id);
+                            let boxing_option = document.getElementById("boxing-option_" + data_id);
+
+                            let default_size = document.getElementById('div-size-result_' + data_id);
+                            // 조회결과 size테이블에 없다면 비활성화
+                            if(obj.size.length === 0) {
+                                size_option.disabled = true;
+                                phrase_option.disabled = true;
+                                sheet_option.disabled = true;
+                                filling_option.disabled = true;
+
+                                default_size.innerText = '선택없음';
+                                default_size.dataset.price = '0';
+                                document.getElementById('size-result_' + data_id).value = default_size.innerText;
+                            } else {
+                                // 있으면 활성화 & size옵션에 value추가
+                                let opt = "";
+                                for(let i = 0; i < obj.size.length; i++) {
+                                    opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
+                                }
+                                size_option.innerHTML = opt;
+                                default_size.innerText = obj.size[0].size_name;
+                                default_size.dataset.price = obj.size[0].size_price;
+                                document.getElementById("size-result_" + data_id).value = default_size.innerText;
+                            }
+                        }
+                    }
+                };
+                xhr.open("POST", strurl);
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                xhr.send(null);
+            } else {
+                alert('존재하지 않는 상품입니다');
+            }
+        });
+
+
+
+
+
         // 품목 입력받는 영역 개수 파악
-        var slot_count = 1;
+        let slot_count = 1;
 
         // 상품추가 + 이벤트 위임
         function addProduct(a) {
@@ -642,7 +667,7 @@
             console.log("slot_count : " + slot_count);
 
             // 상품 영역
-            var str = '';
+            let str = '';
             str +=      '<button class="item-button addnumber" style="margin-left: 50px; border-color: white; background-color: #153d77; color: white" disabled>' + slot_count + '</button>';
             str +=      '<div class="col-md-3">';
             str +=              '<div class="ui-widget">';
@@ -659,26 +684,26 @@
             str +=          '<input type="text" hidden="hidden" id="phrase-result_' + slot_count + '">';
             str +=      '</div>';
             str +=      '<div class="col-md-1" style="padding-left: 0">';
-            str +=          '<input type="number" class="form-control count_product" data-id="' + slot_count + '" id="count_' + slot_count + '" placeholder="수량" min="1">';
+            str +=          '<input type="number" class="form-control count_product" data-id="' + slot_count + '" id="count_' + slot_count + '" placeholder="수량" min="1" onchange="count(this)">';
             str +=      '</div>';
             str +=      '<label style="padding-right: 20px;" class="col-form-label" for="">개</label>';
-            str +=      '<button class="item-button" type="button" style="border-color: white; background-color: darkred; color: white" data-id="' + slot_count + '" onclick="deleteproduct();">X</button>';
+            str +=      '<button class="item-button" type="button" style="border-color: white; background-color: darkred; color: white" data-id="' + slot_count + '" onclick="deleteproduct(this);">X</button>';
             str +=      '<label style="padding-left: 20px;" class="col-form-label" for="">금액</label>';
             str +=      '<div class="col-md-2">';
             str +=          '<input type="text" data-price="0" id="price_' + slot_count + '" class="form-control price1" placeholder="금액">';
             str +=      '</div>';
 
             // 추가된 상품영역을 넣을 부모태그
-            var addproduct = document.getElementById('addproduct');
+            let addproduct = document.getElementById('addproduct');
             // 상품영역 생성
-            var newdiv = document.createElement("div");
+            let newdiv = document.createElement("div");
             newdiv.setAttribute("class", "form-group row");
             newdiv.innerHTML = str;
             // 부모태그 종속
             addproduct.appendChild(newdiv);
 
             // 모달 생성
-            var modal = "";
+            let modal = "";
             modal += '<div class="modal fade" id="sizedModalLg_' + slot_count + '" tabindex="-1" role="dialog" aria-hidden="true">';
             modal += '<div class="modal-dialog modal-lg" role="document">';
             modal += '<div class="modal-content">';
@@ -743,14 +768,14 @@
             modal += '</div>';
             modal += '<div class="modal-footer">';
             modal += '<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>';
-            modal += '<button type="button" class="btn btn-primary final" data-id="' + slot_count + '" id="final-option-result_' + slot_count + '" onclick="confirm(this);">옵션 등록하기</button>';
+            modal += '<button type="button" class="btn btn-primary final" data-id="' + slot_count + '" id="final-option-result_' + slot_count + '" onclick="confirmFix(this);">옵션 등록하기</button>';
             modal += '</div>';
             modal += '</div>';
             modal += '</div>';
             modal += '</div>';
 
-            var addmodal = document.getElementById('addmodal');
-            var newmodal = document.createElement('div');
+            let addmodal = document.getElementById('addmodal');
+            let newmodal = document.createElement('div');
             newmodal.innerHTML = modal;
             addmodal.appendChild(newmodal);
 
@@ -762,90 +787,120 @@
              {#document를 대상으로 걸면 가능하지만, 모달창 제어가 안되어서#}
              {#생성후 직접 이벤트를 걸어주는 로직#}
              -->
-            $('#modalbtn_' + slot_count).on('click', function() {
-                var data_id = document.getElementById('modalbtn_' + slot_count).dataset.id;
-                var numbering = document.getElementById("numbering_" + data_id);
+            // *** 추가된 상품 이벤트(상품유무, 정보조회)
+            // 상품이름 입력시 - DB에서 상품의 유무를 조회, 지정되어 있지 않은 정보 입력시 에러출력
+            $('#products_' + slot_count).on('propertychange change keyup paste input', function () {
+                let data_id = document.getElementById('modalbtn_' + slot_count).dataset.id;
+                let numbering = document.getElementById("numbering_" + data_id);
                 numbering.value = data_id;
-                var product_btn = document.getElementById("products_" + data_id);
+                let product_btn = document.getElementById("products_" + data_id);
 
-                var product_name = product_btn.value;
-                console.log('product_name = ' + product_name);
-                if (product_name == '') {
-                    alert('상품을 입력해주세요');
-                    product_btn.focus();
-                    return false;
-                }
-                var strurl = "option_view?product_name=" + product_name;
+                let product_name = product_btn.value;
+
+                let strurl = "option_view?product_name=" + product_name;
                 xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
                     if(xhr.readyState == 4) {
-                        var data = xhr.responseText;
+                        let data = xhr.responseText;
 
-                        var obj = JSON.parse(data);
+                        let obj = JSON.parse(data);
 
                         if(obj.flag == '1') {
-                            // 가격 조회
-                            document.getElementById('product-price_' + data_id).dataset.price = obj.product_price;
-
-                            var size_option = document.getElementById("size-option_" + data_id);
-                            var filling_option = document.getElementById("filling-option_" + data_id);
-                            var sheet_option = document.getElementById("sheet-option_" + data_id);
-                            var phrase_option = document.getElementById("phrase-option_" + data_id);
-                            var boxing_option = document.getElementById("boxing-option_" + data_id);
-
-                            var default_size = document.getElementById('div-size-result_' + data_id);
-                            // 조회결과 size테이블에 없다면 비활성화
-                            if(obj.size.length == 0) {
-                                size_option.disabled = true;
-                                phrase_option.disabled = true;
-                                sheet_option.disabled = true;
-                                filling_option.disabled = true;
-
-                                default_size.innerText = '선택없음';
-                                default_size.dataset.price = '0';
-                                document.getElementById('size-result_' + data_id).value = default_size.innerText;
-                            } else {
-                                // 있으면 활성화 & size옵션에 value추가
-                                var opt = "";
-                                for(var i = 0; i < obj.size.length; i++) {
-                                    opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
-                                }
-                                size_option.innerHTML = opt;
-                                default_size.innerText = obj.size[0].size_name;
-                                default_size.dataset.price = obj.size[0].size_price;
-                                document.getElementById("size-result_" + data_id).value = default_size.innerText;
-                            }
-                        } else if(flag == '0') {
-                            alert('존재하지 않는 상품입니다');
-                            $('#sizedModalLg_' + data_id).modal('hide');
-                            return false;
+                            document.getElementById('modalbtn_' + slot_count).dataset.target = "#sizedModalLg_" + data_id;
+                        } else if(obj.flag == '0') {
+                            document.getElementById('modalbtn_' + slot_count).dataset.target = "";
                         }
-
                     }
                 };
                 xhr.open("POST", strurl);
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
                 xhr.send(null);
             });
+            $('#modalbtn_' + slot_count).on('click', function() {
+                let modalbtn = document.getElementById('modalbtn_' + slot_count);
+                let data_id = document.getElementById('modalbtn_' + slot_count).dataset.id;
+                let numbering = document.getElementById("numbering_" + data_id);
+                numbering.value = data_id;
+                let product_btn = document.getElementById("products_" + data_id);
+
+                let product_name = product_btn.value;
+                console.log('product_name = ' + product_name);
+                if (product_name == '') {
+                    alert('상품을 입력해주세요');
+                    product_btn.focus();
+                    return false;
+                }
+                if(modalbtn.dataset.target == '#sizedModalLg_' + slot_count) {
+                    let strurl = "option_view?product_name=" + product_name;
+                    xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if(xhr.readyState == 4) {
+                            let data = xhr.responseText;
+
+                            let obj = JSON.parse(data);
+
+                            if(obj.flag == '1') {
+                                modalbtn.dataset.target = "#sizedModalLg_" + data_id;
+                                // 가격 조회
+                                document.getElementById('product-price_' + data_id).dataset.price = obj.product_price;
+
+                                let size_option = document.getElementById("size-option_" + data_id);
+                                let filling_option = document.getElementById("filling-option_" + data_id);
+                                let sheet_option = document.getElementById("sheet-option_" + data_id);
+                                let phrase_option = document.getElementById("phrase-option_" + data_id);
+                                let boxing_option = document.getElementById("boxing-option_" + data_id);
+
+                                let default_size = document.getElementById('div-size-result_' + data_id);
+                                // 조회결과 size테이블에 없다면 비활성화
+                                if(obj.size.length === 0) {
+                                    size_option.disabled = true;
+                                    phrase_option.disabled = true;
+                                    sheet_option.disabled = true;
+                                    filling_option.disabled = true;
+
+                                    default_size.innerText = '선택없음';
+                                    default_size.dataset.price = '0';
+                                    document.getElementById('size-result_' + data_id).value = default_size.innerText;
+                                } else {
+                                    // 있으면 활성화 & size옵션에 value추가
+                                    let opt = "";
+                                    for(let i = 0; i < obj.size.length; i++) {
+                                        opt += "<option data-price='" + obj.size[i].size_price + "' value=" + obj.size[i].size_name + ">" + obj.size[i].size_name + " : +" + obj.size[i].size_price + "</option>";
+                                    }
+                                    size_option.innerHTML = opt;
+                                    default_size.innerText = obj.size[0].size_name;
+                                    default_size.dataset.price = obj.size[0].size_price;
+                                    document.getElementById("size-result_" + data_id).value = default_size.innerText;
+                                }
+                            }
+                        }
+                    };
+                    xhr.open("POST", strurl);
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    xhr.send(null);
+                } else {
+                    alert('존재하지 않는 상품입니다');
+                }
+            });
 
         }
 
         //옵션 확정
-        function confirm(e) {
+        function confirmFix(e) {
             console.log('옵션 등록');
             console.log(e.dataset.id);
-            var id = e.dataset.id;
+            let id = e.dataset.id;
 
-            var size = document.getElementById('div-size-result_' + id);
-            var fill = document.getElementById('div-filling-result_' + id);
-            var sheet = document.getElementById('div-sheet-result_' + id);
-            var box = document.getElementById('div-boxing-result_' + id);
-            var phrase = document.getElementById('div-phrase-result_' + id);
-            var product = document.getElementById('product-price_' + id);
+            let size = document.getElementById('div-size-result_' + id);
+            let fill = document.getElementById('div-filling-result_' + id);
+            let sheet = document.getElementById('div-sheet-result_' + id);
+            let box = document.getElementById('div-boxing-result_' + id);
+            let phrase = document.getElementById('div-phrase-result_' + id);
+            let product = document.getElementById('product-price_' + id);
 
-            var count = document.getElementById('count_' + id);
+            let count = document.getElementById('count_' + id);
             count.value = 1;
-            var priceall = document.getElementById('price_' + id);
+            let priceall = document.getElementById('price_' + id);
             priceall.dataset.price = parseInt(size.dataset.price) + parseInt(fill.dataset.price) + parseInt(sheet.dataset.price) + parseInt(box.dataset.price) + parseInt(phrase.dataset.price) + parseInt(product.dataset.price);
             {#priceall.dataset.price = size.dataset.price + fill.dataset.price + sheet.dataset.price + box.dataset.price + phrase.dataset.price + product.dataset.price;#}
             console.log(priceall);
@@ -853,16 +908,16 @@
 
             $('#sizedModalLg_' + id).modal('hide');
 
-            var size_result = document.getElementById('size-result_' + id).value;
-            var fill_result = document.getElementById('filling-result_' + id).value;
-            var sheet_result = document.getElementById('sheet-result_' + id).value;
-            var box_result = document.getElementById('boxing-result_' + id).value;
-            var phrase_result = document.getElementById('phrase-result_' + id).value;
-            var price_result = document.getElementById('product-price_' + id).value;
+            let size_result = document.getElementById('size-result_' + id).value;
+            let fill_result = document.getElementById('filling-result_' + id).value;
+            let sheet_result = document.getElementById('sheet-result_' + id).value;
+            let box_result = document.getElementById('boxing-result_' + id).value;
+            let phrase_result = document.getElementById('phrase-result_' + id).value;
+            let price_result = document.getElementById('product-price_' + id).value;
 
-            var list = [size_result, fill_result, sheet_result, box_result, phrase_result, price_result];
-            var finalresult = '';
-            for(var i = 0; i < list.length; i++) {
+            let list = [size_result, fill_result, sheet_result, box_result, phrase_result, price_result];
+            let finalresult = '';
+            for(let i = 0; i < list.length; i++) {
                 if(list[i] == '') {
                     continue;
                 } else if(list[i] != '') {
@@ -870,34 +925,99 @@
                 }
             }
 
-            var option_result = document.getElementById('input-option-result_' + id);
+            let option_result = document.getElementById('input-option-result_' + id);
             option_result.value = finalresult;
 
-            var products = document.getElementById('products_' + id);
+            let products = document.getElementById('products_' + id);
             products.disabled = true;
         }
 
         // 수량 조절
         function count(e) {
-            var id = e.dataset.id;
+            let id = e.dataset.id;
 
-            var counttag = document.getElementById('count_' + id);
-            var pricetag = document.getElementById('price_' + id);
-            var oneprice = pricetag.dataset.price;
+            let counttag = document.getElementById('count_' + id);
+            let pricetag = document.getElementById('price_' + id);
+            let oneprice = pricetag.dataset.price;
 
             pricetag.value = oneprice * counttag.value;
+        }
+
+        // 옵션 및 상품 삭제
+        function deleteproduct(e) {
+            let id = e.dataset.id;
+
+            if(!confirm('삭제하시겠습니까')) {
+                return false;
+            }
+
+            if (id == 1) {
+
+                let product_name = document.getElementById('products_' + id);
+                product_name.disabled = false;
+                product_name.value = "";
+
+                let size_option = document.getElementById('size-option_' + id);
+                let fill_option = document.getElementById('filling-option_' + id);
+                let sheet_option = document.getElementById('sheet-option_' + id);
+                let box_option = document.getElementById('boxing-option_' + id);
+                let phrase_option = document.getElementById('phrase-option_' + id);
+
+                // 들어가있는 옵션삭제할 차례
+                size_option.disabled = false;
+                fill_option.disabled = false;
+                sheet_option.disabled = false;
+                box_option.disabled = false;
+                phrase_option.disabled = false;
+
+                let size_result = document.getElementById('size-result_' + id);
+                let filling_result = document.getElementById('filling-result_' + id);
+                let sheet_result = document.getElementById('sheet-result_' + id);
+                let boxing_result = document.getElementById('boxing-result_' + id);
+                let phrase_result = document.getElementById('phrase-result_' + id);
+                let option_result = document.getElementById('input-option-result_' + id);
+                let count = document.getElementById('count_' + id);
+                let price = document.getElementById('price_' +id);
+
+                size_result.value = "";
+                filling_result.value = "";
+                sheet_result.value = "";
+                boxing_result.value = "";
+                phrase_result.value = "";
+                option_result.value = "";
+                count.value = 0;
+                price.value = 0;
+
+                let product_price = document.getElementById('product-price_' + id);
+                let modal_size = document.getElementById('div-size-result_' + id);
+                let modal_fill = document.getElementById('div-filling-result_' + id);
+                let modal_sheet = document.getElementById('div-sheet-result_' + id);
+                let modal_box = document.getElementById('div-boxing-result_' + id);
+                let modal_phrase = document.getElementById('div-phrase-result_' + id);
+
+                product_price.dataset.price = '0';
+                modal_size.dataset.price = '0';
+                modal_fill.dataset.price = '0';
+                modal_sheet.dataset.price = '0';
+                modal_box.dataset.price = '0';
+                modal_phrase.dataset.price = '0';
+
+                console.log('초기화 성공');
+            }
+
+
         }
 
 
 
         function create_order() {
             event.preventDefault();
-            var size = document.getElementById("size-result");
-            var filling = document.getElementById("filling-result");
-            var sheet = document.getElementById("sheet-result");
-            var boxing = document.getElementById("boxing-result");
-            var phrase = document.getElementById("phrase-result");
-            var status = document.getElementById("status");
+            let size = document.getElementById("size-result");
+            let filling = document.getElementById("filling-result");
+            let sheet = document.getElementById("sheet-result");
+            let boxing = document.getElementById("boxing-result");
+            let phrase = document.getElementById("phrase-result");
+            let status = document.getElementById("status");
 
             console.log("size : " + size.value)
             console.log("filling : " + filling.value)
@@ -906,14 +1026,14 @@
             console.log("phrase : " + phrase.value)
             console.log("status : " + status.value)
 
-            var data = {"size":size.value};
-            var datastr = JSON.stringify(data);
+            let data = {"size":size.value};
+            let datastr = JSON.stringify(data);
 
             xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if(xhr.readyState == 4) {
-                    var data = xhr.responseText;
-                    var obj = JSON.parse(data);
+                    let data = xhr.responseText;
+                    let obj = JSON.parse(data);
 
                     console.log(obj);
                     console.log(obj.size);

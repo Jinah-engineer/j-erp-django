@@ -8,7 +8,7 @@ class Order(models.Model):
     pno = models.AutoField(db_column='pno', primary_key=True)
     order_no = models.CharField(db_column='order_no', max_length=14)
     employee_name = models.CharField(db_column='employee_name', max_length=50)
-    order_date = models.DateTimeField(db_column='order_date', auto_now=True)
+    order_date = models.DateField(db_column='order_date', auto_now=True)
     customer = models.CharField(db_column='customer', max_length=50)
     customer_phone = models.CharField(db_column='customer_phone', max_length=11)
     order_type_name = models.CharField(db_column='order_type', max_length=50)
