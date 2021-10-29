@@ -53,7 +53,7 @@ def order_list_view(request):
         return JsonResponse(context)
 
 
-    return render(request, "list.html", context)
+    return render(request, "list_test.html", context)
 
 
 # ====================== 주문 상세

@@ -554,8 +554,13 @@
     <script>
         window.onload = function() {
             // ==============================================================================================================================================
-            // TEST SCRIPT!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            // === : 상위 주석
+            // --- : 하위 주석
+            // test code 관련해서는 'tst', 'test' 등으로 명시해놓았습니다
+
             // ==============================================================================================================================================
+
 
             // ==============================================================================================================================================
             // 데이터테이블 API
@@ -563,7 +568,7 @@
             $(function () {
 
                 // -------------------------------------------------------
-                // 한국어로 변환 (Datatable)
+                // 한국어로 변환하는 변수 선언 (Datatable)
                 // -------------------------------------------------------
                 var lang_kor = {
                     "decimal": "",
@@ -592,9 +597,14 @@
 
                 // -------------------------------------------------------
                 // Datatable 설정 및 옵션
+                //
+                // : 지금 설정되어 있는 옵션들은 아마 건들지 않는 것이 좋을 것 같습니다. (이래저래 바꾸다가 겹쳐져서 error 날 수 있어요)
+                //   혹시 추가해야 할 부분이 있다면, 아래쪽에 추가만 하면 될 것 같습니다.
                 // -------------------------------------------------------
                 $('#bootstrap-table').DataTable({
+                    // 한 페이지당 몇 개의 row 를 보여줄 것인지
                     pageLength: 25,
+                    // excel download 버튼 관련 옵션
                     dom: 'Bfrtip',
                     buttons: [
                         {
@@ -603,28 +613,18 @@
                             titleAttr: 'Excel',
                         }
                     ],
+                    // 기본 default sorting option 관련
                     ordering: false,
+                    // row 선택에 대한 옵션
+                    // 현재 multi 이기 때문에 다중 선택이 가능합니다.
                     select: {
                         style: 'multi',
-                        css: {
-                            backgroundColor: 'pink'
-                        }
                     },
                     language: lang_kor,
                     sorting: true,
+                    // 검색 기능
                     bFilter: false,
                     autoWidth: false,
-                    // lengthChange: false,
-                    // autoWidth: true,
-                    // autoAdjustHeight: true;
-                    // autoplay: true,
-                    // lengthAdjust: false,
-                    // scrollY: "60vh",
-                    // sScrollX: "100%",
-                    // sScrollXInner: "50%",
-                    // scrollCollapse: false,
-                    // paging: true,
-                    // responsive: true,
                 });
 
                 // -------------------------------------------------------
@@ -679,6 +679,7 @@
                         let this_row = table.row(this).data();
                         let tst = $('#bootstrap-table').DataTable().rows('.selected').data();
 
+                        // formatted variables
                         let format_pno = pno_formatting(this_row[0])
                         let format_order_num = ordernumber_formatting(this_row[1])
                         let format_date_format = date_formatting(this_row[2])
@@ -697,13 +698,13 @@
                             + this_row[18] + '\n' + this_row[19] + '\n' + this_row[20] + '\n'
                             + this_row[21] + '\n' + this_row[22] + '\n' + this_row[23] + '\n');
 
-
+                        // Test for test2 button
                         $('#test2').on('click', function () {
                             alert(order_state_formatting(this_row[3]));
                         })
 
 
-                        console.log('order_no ==== ' + this_row[1].substring(180, 210))
+                        console.log('order_no ==== ' + this_row[1].substring(244, 258))
 
                         $('#test6').html("모든 데이터 : "
                             + table.row(this).data()
@@ -782,7 +783,7 @@
 
                         // 주문 번호 포매팅 함수
                         function ordernumber_formatting(n) {
-                            var format_order_number = n.substring(195, 209);
+                            var format_order_number = n.substring(244, 258);
                             return format_order_number;
                         }
 
@@ -857,25 +858,6 @@
 
                 console.log("---------------------today's test--------------------------------")
 
-                $('#state-change').on('change', function(e){
-                    var status = $(this).val();
-                    $('#state-change').val(status)
-                    console.log(status)
-                    //table.column(3).search(status).draw();
-
-                    var target_all = table.column(3).data();
-                    //var target_one = table.column(3, {order: 'index'}).data();
-                    //var target_test = table.rows( { filter: 'applied' } ).select() // 전체 선택 가능
-                    var target_test = table.rows( { filter: 'applied' } ) // 전체 선택 가능
-                    console.log(target_all)
-
-
-                    var td_order_date = table.column(2).data();
-                    console.log(td_order_date);
-
-
-                })
-
 
                 console.log("---------------------today's test--------------------------------")
 
@@ -903,7 +885,6 @@
             // ==============================================================================================================================================
             $(function() {
 
-                // Connection
                 // -------------------------------------------------------
                 // 날짜 검색 (2)
                 // -------------------------------------------------------
@@ -939,7 +920,10 @@
                     var alpha = $('#date_range2').data('daterangepicker').startDate.format('YYYY-MM-DD');
                     var beta = $('#date_range2').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
+                    // get start date
                     alert(alpha);
+
+                    // get end date
                     alert(beta);
 
                 })
